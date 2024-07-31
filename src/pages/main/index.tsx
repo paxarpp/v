@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { getInfo } from "../../api";
 
 export const loaderInfo = async () => {
@@ -6,6 +7,9 @@ export const loaderInfo = async () => {
 }
 
 export const Main = () => {
+  useEffect(() => {
+    loaderInfo();
+  }, [])
   return (
     <div>
 
