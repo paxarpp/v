@@ -1,18 +1,35 @@
-import { useEffect } from "react";
-import { getInfo } from "../../api";
+import { getMediaAll } from "../../api";
+import {
+  useLoaderData,
+} from "react-router-dom";
 
-export const loaderInfo = async () => {
-  const info = await getInfo();
-  return { info };
+interface IMedia {
+  contentType: string,
+  id: string,
+  name: string,
+  size: number,
+  url: string,
 }
 
+export const loaderMedia = async () => {
+  const all = await getMediaAll<IMedia>();
+  return { all };
+}
+
+
 export const Main = () => {
-  useEffect(() => {
-    loaderInfo();
-  }, [])
+  const { all } = useLoaderData() as { all: { data: { result: IMedia[] }}};
+
   return (
     <div>
-
+      {all.data.result.map((item) => {
+        return (
+          <div key={item.id}>
+            <img src={item.url} alt={item.name} />
+            <p>{item.name}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
