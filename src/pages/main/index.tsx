@@ -1,4 +1,4 @@
-import { getMediaAll } from "../../api";
+import { getMediaAll, getCampsAll, getCoachesAll } from "../../api";
 import {
   useLoaderData,
 } from "react-router-dom";
@@ -12,20 +12,47 @@ interface IMedia {
 }
 
 export const loaderMedia = async () => {
-  const all = await getMediaAll<IMedia>();
-  return { all };
+  const { data: { result }} = await getMediaAll<IMedia>();
+  return { medias: result };
+}
+export const loaderCamps = async () => {
+  const { data: { result }} = await getCampsAll<unknown>();
+  return { camps: result };
+}
+export const loaderCoaches = async () => {
+  const { data: { result }} = await getCoachesAll<unknown>();
+  return { coaches: result };
 }
 
 
 export const Main = () => {
-  const { all } = useLoaderData() as { all: { data: { result: IMedia[] }}};
+  const { main } = useLoaderData() as { main: { medias: IMedia[], camps: unknown[], coaches: unknown[] }};
 
   return (
     <div>
-      {all.data.result.map((item) => {
+      {main.medias.length ? 'медиа:' : null}
+      {main.medias.map((item) => {
         return (
           <div key={item.id}>
             <img src={item.url} alt={item.name} />
+            <p>{item.name}</p>
+          </div>
+        );
+      })}
+
+      {main.camps.length ? 'лагеря:' : null}
+      {main.camps.map((item) => {
+        return (
+          <div key={item.id}>
+            <p>{item.name}</p>
+          </div>
+        );
+      })}
+
+      {main.coaches.length ? 'тренеры:' : null}
+      {main.coaches.map((item) => {
+        return (
+          <div key={item.id}>
             <p>{item.name}</p>
           </div>
         );

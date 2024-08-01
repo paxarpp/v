@@ -7,7 +7,9 @@ export default defineConfig({
   plugins: [react(), svgr()],
   server: {
     proxy: {
-      '/media': 'http://localhost:8081'
+      '/media': 'http://localhost:8081',
+      '/coaches': 'http://localhost:8081',
+      '/camps': 'http://localhost:8081',
     },
   },
 })
