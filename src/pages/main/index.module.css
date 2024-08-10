@@ -17,3 +17,38 @@
   border: 1px solid gray;
   background-color: #2e2e2e;
 }
+
+.block_icon {
+  width: 570px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.icon_title {
+  height: 60px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 150%;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.icon_sub_title {
+  height: 30px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.block_icons {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  margin: 150px 0;
+}

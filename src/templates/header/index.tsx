@@ -1,4 +1,4 @@
-import ReactLogo from '../../assets/logo.svg?react'
+import Logo from '../../assets/logo.svg?react'
 import Vk from '../../assets/vk.svg?react'
 import T from '../../assets/t.svg?react'
 import Inst from '../../assets/inst.svg?react'
@@ -9,7 +9,7 @@ export const Header = () => {
     <div className={styles.header}>
       <ul className={styles.menu}>
         <li>
-          <a href="/"> <ReactLogo /></a>
+          <a href="/"><Logo /></a>
         </li>
         <li>
           <a href="/weekendCamps">Кемпы на выходные</a>

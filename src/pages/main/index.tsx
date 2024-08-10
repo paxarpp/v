@@ -2,6 +2,7 @@ import { getMediaAll, getCampsAll, getCoachesAll } from "../../api";
 import {
   useLoaderData,
 } from "react-router-dom";
+import { BlockIcons } from './blockIcons';
 import styles from './index.module.css'
 
 interface IMediaBase {
@@ -67,7 +68,9 @@ export const Main = () => {
 
   return (
     <div>
-      {main.medias.length ? 'медиа:' : null}
+
+      <BlockIcons />
+
       {main.medias.map((item) => {
         return (
           <div key={item.id}>
