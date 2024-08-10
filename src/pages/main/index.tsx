@@ -1,14 +1,49 @@
+import { useEffect, setState, useState } from "react";
 import { getMediaAll, getCampsAll, getCoachesAll } from "../../api";
 import {
   useLoaderData,
 } from "react-router-dom";
 
-interface IMedia {
+interface IMediaBase {
   contentType: string,
   id: string,
   name: string,
   size: number,
+}
+
+interface IMedia extends IMediaBase {
   url: string,
+}
+
+interface IMainImg extends IMediaBase {
+  "typeEntity": ITypeEntity,
+  "data": string
+  "updateAt": null | string
+}
+
+type ITypeEntity = 'COACH';
+
+interface ICoach {
+  "id": string,
+  "surename": string,
+  "infos": string[],
+  "mainImage": IMainImg,
+}
+
+interface ICoachExt extends ICoach {
+  "name": string,
+}
+
+interface ICamp {
+          "id": string,
+          "name": string,
+          "info": string,
+          "price": number,
+          "dateStart": string,
+          "dateEnd": string,
+          "countAll": number,
+          "countFree": number,
+          "coaches": ICoach[]
 }
 
 export const loaderMedia = async () => {
@@ -16,17 +51,19 @@ export const loaderMedia = async () => {
   return { medias: result };
 }
 export const loaderCamps = async () => {
-  const { data: { result }} = await getCampsAll<unknown>();
+  const { data: { result }} = await getCampsAll<ICamp>();
   return { camps: result };
 }
 export const loaderCoaches = async () => {
-  const { data: { result }} = await getCoachesAll<unknown>();
+  const { data: { result }} = await getCoachesAll<ICoachExt>();
   return { coaches: result };
 }
 
+const baseSrc = 'data:image/jpeg;base64,';
 
 export const Main = () => {
-  const { main } = useLoaderData() as { main: { medias: IMedia[], camps: unknown[], coaches: unknown[] }};
+  const { main } = useLoaderData() as { main: { medias: IMedia[], camps: ICamp[], coaches: ICoachExt[] }};
+
 
   return (
     <div>
@@ -45,6 +82,16 @@ export const Main = () => {
         return (
           <div key={item.id}>
             <p>{item.name}</p>
+            <p>{item.info}</p>
+            {item.coaches.map((item) => {
+
+              return (
+               <div key={item.id}>
+                 <img src={`${baseSrc}${item.mainImage.data}`}  width={'100px'} height={'100px'} />
+                 <p>{item.surename}</p>
+               </div>
+             );
+})}
           </div>
         );
       })}
@@ -54,6 +101,8 @@ export const Main = () => {
         return (
           <div key={item.id}>
             <p>{item.name}</p>
+            <p>{item.infos.join(' ')}</p>
+            <img src={`${baseSrc}${item.mainImage.data}`} width={'100px'} height={'100px'} />
           </div>
         );
       })}
