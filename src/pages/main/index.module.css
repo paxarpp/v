@@ -1,0 +1,19 @@
+.camp_coaches {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.camp_coach_card + .camp_coach_card {
+  margin-left: 24px;
+}
+
+.camp_card {
+  width: 500px;
+  border: 1px solid gray;
+}
+
+.coach_card {
+  width: 500px;
+  border: 1px solid gray;
+  background-color: #2e2e2e;
+}

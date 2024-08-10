@@ -2,6 +2,7 @@ import { getMediaAll, getCampsAll, getCoachesAll } from "../../api";
 import {
   useLoaderData,
 } from "react-router-dom";
+import styles from './index.module.css'
 
 interface IMediaBase {
   contentType: string,
@@ -76,29 +77,30 @@ export const Main = () => {
         );
       })}
 
-      {main.camps.length ? 'лагеря:' : null}
       {main.camps.map((item) => {
         return (
-          <div key={item.id}>
+          <div key={item.id} className={styles.camp_card}>
             <p>{item.name}</p>
             <p>{item.info}</p>
-            {item.coaches.map((item) => {
+            <div className={styles.camp_coaches}>
+              {item.coaches.map((item) => {
 
-              return (
-               <div key={item.id}>
-                 <img src={`${baseSrc}${item.mainImage.data}`}  width={'100px'} height={'100px'} />
-                 <p>{item.surename}</p>
-               </div>
-             );
-})}
+                return (
+                <div key={item.id} className={styles.camp_coach_card}>
+                  <img src={`${baseSrc}${item.mainImage.data}`}  width={'100px'} height={'100px'} />
+                  <p>{item.surename}</p>
+                </div>
+              );
+              })}
+            </div>
           </div>
         );
       })}
 
-      {main.coaches.length ? 'тренеры:' : null}
+
       {main.coaches.map((item) => {
         return (
-          <div key={item.id}>
+          <div key={item.id} className={styles.coach_card}>
             <p>{item.name}</p>
             <p>{item.infos.join(' ')}</p>
             <img src={`${baseSrc}${item.mainImage.data}`} width={'100px'} height={'100px'} />
