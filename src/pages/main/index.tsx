@@ -1,4 +1,3 @@
-import { useEffect, setState, useState } from "react";
 import { getMediaAll, getCampsAll, getCoachesAll } from "../../api";
 import {
   useLoaderData,
