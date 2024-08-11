@@ -3,7 +3,8 @@ import {
   useLoaderData,
 } from "react-router-dom";
 import { BlockIcons } from './blockIcons';
-import styles from './index.module.css'
+import styles from './index.module.css';
+import { Collapsed } from "./collapsed";
 
 interface IMediaBase {
   contentType: string,
@@ -74,35 +75,37 @@ export const Main = () => {
 
       <BlockIcons />
 
-      {main.medias.map((item) => {
-        return (
-          <div key={item.id}>
-            <img src={item.url} alt={item.name} />
-            <p>{item.name}</p>
-          </div>
-        );
-      })}
+      <h2 className={styles.camps_header}>Ближайшие кемпы</h2>
+      <div className={styles.camps_wrap}>
+        {main.camps.map((item) => {
+          return (
+            <div key={item.id} className={styles.camp_card}>
+              <p>{item.name}</p>
+              <p>{item.dateStart}-{item.dateEnd}</p>
+              <div className={styles.camp_img_wrap}>
+                <img src={'/'} alt="картинка кэмпа" className={styles.camp_img} />
+              </div>
+              {/* <p>{item.info}</p> */}
+              {/* <div className={styles.camp_coaches}>
+                {item.coaches.map((item) => {
 
-      {main.camps.map((item) => {
-        return (
-          <div key={item.id} className={styles.camp_card}>
-            <p>{item.name}</p>
-            <p>{item.info}</p>
-            <div className={styles.camp_coaches}>
-              {item.coaches.map((item) => {
-
-                return (
-                <div key={item.id} className={styles.camp_coach_card}>
-                  <img src={`${baseSrc}${item.mainImage.data}`}  width={'100px'} height={'100px'} />
-                  <p>{item.surename}</p>
-                </div>
-              );
-              })}
+                  return (
+                  <div key={item.id} className={styles.camp_coach_card}>
+                    <img src={`${baseSrc}${item.mainImage.data}`}  width={'100px'} height={'100px'} />
+                    <p>{item.surename}</p>
+                  </div>
+                );
+                })}
+              </div> */}
+              <div className={styles.camp_info}>
+                <button className={styles.button_camp}>Подробнее</button>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
+      <Collapsed />
 
       {main.coaches.map((item) => {
         return (
@@ -110,6 +113,15 @@ export const Main = () => {
             <p>{item.name}</p>
             <p>{item.infos.join(' ')}</p>
             <img src={`${baseSrc}${item.mainImage.data}`} width={'100px'} height={'100px'} />
+          </div>
+        );
+      })}
+
+      {main.medias.map((item) => {
+        return (
+          <div key={item.id}>
+            <img src={item.url} alt={item.name} />
+            <p>{item.name}</p>
           </div>
         );
       })}
