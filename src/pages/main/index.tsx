@@ -68,6 +68,9 @@ export const Main = () => {
 
   return (
     <div>
+      <div>
+        <img src={'src/assets/main foto.jpg'} style={{ width: '100vw' }} />
+      </div>
 
       <BlockIcons />
 
