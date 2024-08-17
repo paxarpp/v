@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   RouterProvider,
   createBrowserRouter,
@@ -5,7 +6,7 @@ import {
 import { Main, loaderMedia, loaderCoaches, loaderCamps } from "./pages/main";
 import { ErrorPage } from "./error-page";
 import { Header } from "./templates/header";
-import styles from './app.module.css';
+import { Auth } from "./auth";
 
 const router = createBrowserRouter([
   {
@@ -29,9 +30,16 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
+  const [authOpen, setOpen] = useState(false);
+
+  const toggleAuthOpen = () => {
+    setOpen(!authOpen)
+  }
+
   return (
     <>
-      <Header />
+      <Header toggleAuthOpen={toggleAuthOpen} />
+      {authOpen ? <Auth toggleAuthOpen={toggleAuthOpen} /> : null}
       <RouterProvider router={router} />
     </>
   )

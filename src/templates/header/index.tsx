@@ -4,7 +4,7 @@ import T from '../../assets/t.svg?react'
 import Inst from '../../assets/inst.svg?react'
 import styles from './index.module.css'
 
-export const Header = () => {
+export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen }) => {
   return (
     <div className={styles.header}>
       <ul className={styles.menu}>
@@ -32,7 +32,7 @@ export const Header = () => {
         <T />
         <Inst />
       </div>
-      <button className={styles.button}>Войти</button>
+      <button className={styles.button} onClick={toggleAuthOpen}>Войти</button>
     </div>
   );
 
