@@ -3,8 +3,11 @@ import {
   useLoaderData,
 } from "react-router-dom";
 import { BlockIcons } from './blockIcons';
-import styles from './index.module.css';
 import { Collapsed } from "./collapsed";
+import { Contacts } from "./contacts";
+import { CallMe } from "../../callme";
+import { Footer } from "../../footer";
+import styles from './index.module.css';
 
 interface IMediaBase {
   contentType: string,
@@ -107,7 +110,7 @@ export const Main = () => {
 
       <Collapsed />
 
-      {main.coaches.map((item) => {
+      {/* {main.coaches.map((item) => {
         return (
           <div key={item.id} className={styles.coach_card}>
             <p>{item.name}</p>
@@ -124,7 +127,13 @@ export const Main = () => {
             <p>{item.name}</p>
           </div>
         );
-      })}
+      })} */}
+      <Contacts />
+
+      <CallMe />
+
+      <Footer />
+
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { Main, loaderMedia, loaderCoaches, loaderCamps } from "./pages/main";
 import { ErrorPage } from "./error-page";
 import { Header } from "./templates/header";
 import { Auth } from "./auth";
+import "./index.css";
 
 const router = createBrowserRouter([
   {

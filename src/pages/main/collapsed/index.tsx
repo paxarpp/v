@@ -12,13 +12,13 @@ export const Collapsed = () => {
   }
   return (
     <div className={styles.asked_questions}>
-      <h2>Часто задаваемые вопросы</h2>
+      <h2 className={styles.main_title}>Часто задаваемые вопросы</h2>
       <div onClick={onClick}>
-        <div>
-          <span data-id={'1'}>Есть ли у вас рассрочка на спорт-пакет?</span>
+        <div className={styles.question}>
+          <span data-id={'1'} className={styles.question_name}>Есть ли у вас рассрочка на спорт-пакет?</span>
           {openId === '1' ? <OpenedIcon /> : <ClosedIcon />}
           <div className={openId === '1' ? styles.info_open : styles.info_close}>
-            <span>
+            <span className={styles.question_message}>
               У нас к каждому участнику индивидуальный подход во всем - оплата не исключение!Если у тебя нет возможности до начала кемпа внести всю сумму спортпакета, то напиши нам и мы предложим тебе варианты оплаты!
             </span>
           </div>

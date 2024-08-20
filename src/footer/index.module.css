@@ -1,0 +1,42 @@
+.footer {
+  background: rgba(38, 38, 38, 1);
+  display: flex;
+  justify-content: space-between;
+  padding: 35px 75px;
+}
+
+.icon {
+  width: 30px;
+}
+
+.mlr_20 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.menu {
+  display: flex;
+  flex-flow: column;
+  list-style: none;
+  justify-content: center;
+  align-items: start;
+  padding-left: 0;
+}
+
+.menu > li {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: rgba(212, 212, 212, 1);
+}
+
+.menu a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu_title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+}
