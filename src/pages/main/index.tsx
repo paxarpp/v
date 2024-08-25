@@ -1,12 +1,12 @@
-import { getMediaAll, getCampsAll, getCoachesAll } from "../../api";
+import { getMediaAll, getCampsAll, getCoachesAll, getQuestionAll } from "../../api";
 import {
   useLoaderData,
 } from "react-router-dom";
 import { BlockIcons } from './blockIcons';
 import { Collapsed } from "./collapsed";
 import { Contacts } from "./contacts";
-import { CallMe } from "../../callme";
-import { Footer } from "../../footer";
+import { CallMe } from "../../templates/callme";
+import { Footer } from "../../templates/footer";
 import styles from './index.module.css';
 
 interface IMediaBase {
@@ -51,6 +51,12 @@ interface ICamp {
           "coaches": ICoach[]
 }
 
+export interface IQuestion {
+  id: string,
+  title: string,
+  message: string,
+}
+
 export const loaderMedia = async () => {
   const { data: { result }} = await getMediaAll<IMedia>();
   return { medias: result };
@@ -64,10 +70,21 @@ export const loaderCoaches = async () => {
   return { coaches: result };
 }
 
+export const loaderQuestions = async () => {
+  const { data: { result }} = await getQuestionAll<IQuestion>();
+  return { questions: result };
+}
+
 const baseSrc = 'data:image/jpeg;base64,';
 
 export const Main = () => {
-  const { main } = useLoaderData() as { main: { medias: IMedia[], camps: ICamp[], coaches: ICoachExt[] }};
+  const { main } = useLoaderData() as {
+    main: {
+      medias: IMedia[],
+      camps: ICamp[],
+      coaches: ICoachExt[],
+    }
+  };
 
 
   return (

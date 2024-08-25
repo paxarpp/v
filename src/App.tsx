@@ -3,7 +3,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { Main, loaderMedia, loaderCoaches, loaderCamps } from "./pages/main";
+import { Main, loaderMedia, loaderCoaches, loaderCamps, loaderQuestions } from "./pages/main";
 import { ErrorPage } from "./error-page";
 import { Header } from "./templates/header";
 import { Auth } from "./auth";
@@ -15,11 +15,13 @@ const router = createBrowserRouter([
     element: <Main />,
     errorElement: <ErrorPage />,
     loader: async () => {
-      const [medias, coches, camps] = await Promise.all([loaderMedia(), loaderCoaches(), loaderCamps()]);
+      const [medias, coches, camps, questions] =
+        await Promise.all([loaderMedia(), loaderCoaches(), loaderCamps(), loaderQuestions()]);
       const main = {
         ...medias,
         ...coches,
         ...camps,
+        ...questions,
       };
       return { main }
     },
