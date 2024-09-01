@@ -1,20 +1,32 @@
 import { getMediaAll, getCampsAll, getCoachesAll, getQuestionAll } from "../../api";
 import { IMedia, ICamp, ICoachExt, IQuestion } from "./interfaces";
 
-export const loaderMedia = async () => {
+const loaderMedia = async () => {
   const { data: { result }} = await getMediaAll<IMedia>();
   return { medias: result };
 }
-export const loaderCamps = async () => {
+const loaderCamps = async () => {
   const { data: { result }} = await getCampsAll<ICamp>();
   return { camps: result };
 }
-export const loaderCoaches = async () => {
+const loaderCoaches = async () => {
   const { data: { result }} = await getCoachesAll<ICoachExt>();
   return { coaches: result };
 }
 
-export const loaderQuestions = async () => {
+const loaderQuestions = async () => {
   const { data: { result }} = await getQuestionAll<IQuestion>();
   return { questions: result };
 }
+
+export const loaderPageMain = async () => {
+  const [medias, coches, camps, questions] =
+    await Promise.all([loaderMedia(), loaderCoaches(), loaderCamps(), loaderQuestions()]);
+  const main = {
+    ...medias,
+    ...coches,
+    ...camps,
+    ...questions,
+  };
+  return { main }
+};

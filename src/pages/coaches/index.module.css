@@ -1,0 +1,35 @@
+.title {
+  text-align: center;
+}
+
+.coach_img {
+  width: 393px;
+  height: 400px;
+}
+
+.coach_card {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 600px;
+  padding: 14px;
+  border-radius: 8px;
+  background: rgba(128, 128, 128, 0.2);
+
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  color: rgba(212, 212, 212, 1);
+  overflow: hidden;
+}
+
+.coaches_list {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  margin: 0 75px;
+}
+
+.coach_infos {
+  overflow: auto;
+  margin: 0;
+}

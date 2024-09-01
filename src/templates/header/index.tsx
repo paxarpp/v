@@ -15,7 +15,7 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpe
           <a href="/weekendCamps">Кемпы на выходные</a>
         </li>
         <li>
-          <a href="/campsLong">Кемпы длинные</a>
+          <a href="/longCamps">Кемпы длинные</a>
         </li>
         <li>
           <a href="/trainingSchedule">Расписание тренировок</a>
@@ -24,7 +24,7 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpe
           <a href="/about">О нас</a>
         </li>
         <li>
-          <a href="/coaches">Тренеры</a>
+          <a href="/allCoahes">Тренеры</a>
         </li>
       </ul>
       <div className={styles.icons}>
