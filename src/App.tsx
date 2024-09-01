@@ -3,7 +3,8 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { Main, loaderMedia, loaderCoaches, loaderCamps, loaderQuestions } from "./pages/main";
+import { Main } from "./pages/main";
+import { loaderMedia, loaderCoaches, loaderCamps, loaderQuestions } from "./pages/main/loades";
 import { ErrorPage } from "./error-page";
 import { Header } from "./templates/header";
 import { Auth } from "./auth";

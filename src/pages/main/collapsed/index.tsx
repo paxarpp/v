@@ -4,8 +4,8 @@ import {
 } from "react-router-dom";
 import ClosedIcon from '../../../assets/closed.svg?react';
 import OpenedIcon from '../../../assets/opened.svg?react';
+import { IQuestion } from '../interfaces';
 import styles from '../index.module.css';
-import { IQuestion } from '../index';
 
 export const Collapsed: React.FC = () => {
   const { main } = useLoaderData() as {
