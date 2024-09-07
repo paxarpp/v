@@ -2,6 +2,7 @@ export interface IMediaBase {
   contentType: string,
   id: string,
   name: string,
+  fileName: string,
   size: number,
 }
 
@@ -12,13 +13,15 @@ export interface IMedia extends IMediaBase {
 export interface IMainImg extends IMediaBase {
   "typeEntity": ITypeEntity,
   "data": string
-  "updateAt": null | string
+  "updateAt": null | string,
+  url: string,
 }
 
 export type ITypeEntity = 'COACH';
 
 export interface ICoach {
   "id": string,
+  "name": string,
   "surename": string,
   "infos": string[],
   "mainImage": IMainImg,
@@ -41,7 +44,7 @@ export interface ICamp {
 }
 
 export interface IQuestion {
-id: string,
-title: string,
-message: string,
+  id: string,
+  question: string,
+  answer: string,
 }

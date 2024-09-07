@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.css';
+import { Modal } from '../templates/modal';
 
 export const Auth: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen }) => {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [stylesM, setStylesM] = useState({ left: 0, top: 0});
   const [tel, setTel] = useState('');
   const [password, setPassword] = useState('');
   const [validationError, setValidationError] = useState('');
-
-  useEffect(() => {
-    if (ref?.current) {
-      const { height, width } = ref.current.getBoundingClientRect();
-      setStylesM({
-        left: (window.innerWidth - width) / 2,
-        top: (window.innerHeight - height) / 2,
-      })
-    }
-  }, [ref]);
 
   const onChangeTel = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value && /^\+?|[0-9]|[\(][0-9]|[0-9][|)]/g.test(e.target.value)) {
@@ -42,12 +31,12 @@ export const Auth: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen 
     }
   }
 
-
   return (
-    <div className={styles.modal_wrap} style={stylesM}>
-      <div className={styles.modal_back} />
-      <div className={styles.modal} ref={ref}>
-        <span className={styles.modal_title}>Вход в личный кабинет</span>
+    <Modal
+      isOpen={true}
+      title={'Вход в личный кабинет'}
+      footer={<button className={styles.auth_button} onClick={onEnter}>Войти</button>}
+    >
         <div className={styles.input_wrap}>
           <input
             type='tel'
@@ -64,8 +53,6 @@ export const Auth: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen 
           value={password}
           onChange={onChangePass}
         />
-        <button className={styles.auth_button} onClick={onEnter}>Войти</button>
-      </div>
-    </div>
+    </Modal>
   );
 }

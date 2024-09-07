@@ -1,0 +1,60 @@
+.modal_wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal {
+  border-radius: 8px;
+  background: rgba(25, 26, 38, 1);
+  z-index: 999;
+  position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  min-height: 200px;
+}
+
+.modal_back {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
+  background-color: #333333;
+  opacity: 0.8;
+}
+
+.header {
+  flex: 0;
+  padding: 20px;
+}
+.content {
+  flex: 1;
+  padding: 20px;
+}
+.footer {
+  flex: 0;
+  padding: 20px;
+}
+
+.title {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.close_icon {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  cursor: pointer;
+}

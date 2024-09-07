@@ -6,6 +6,7 @@ import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import styles from '../index.module.css';
 import { useState } from "react";
+import { baseSrc } from "../../../constants";
 
 export const CampsScroller: React.FC = () => {
   const { main } = useLoaderData() as {
@@ -41,30 +42,16 @@ export const CampsScroller: React.FC = () => {
           .filter((_, i) => i >= startIndex && i <= lastIndex)
           .map((item) => {
           return (
-            <>
               <div key={item.id} className={styles.camp_card}>
                 <p>{item.name}</p>
                 <p>{item.dateStart}-{item.dateEnd}</p>
                 <div className={styles.camp_img_wrap}>
-                  <img src={'/'} alt="картинка кэмпа" className={styles.camp_img} />
+                  <img src={'${baseSrc}${item.mainImage.data}'} alt="картинка кэмпа" className={styles.camp_img} />
                 </div>
-                {/* <p>{item.info}</p> */}
-                {/* <div className={styles.camp_coaches}>
-                  {item.coaches.map((item) => {
-
-                    return (
-                    <div key={item.id} className={styles.camp_coach_card}>
-                      <img src={`${baseSrc}${item.mainImage.data}`}  width={'100px'} height={'100px'} />
-                      <p>{item.surename}</p>
-                    </div>
-                  );
-                  })}
-                </div> */}
                 <div className={styles.camp_info}>
                   <button className={styles.button_camp}>Подробнее</button>
                 </div>
               </div>
-            </>
           );
         }) : (
           <>
