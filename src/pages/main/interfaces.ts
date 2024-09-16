@@ -40,7 +40,9 @@ export interface ICamp {
   "dateEnd": string,
   "countAll": number,
   "countFree": number,
-  "coaches": ICoach[]
+  "coaches": ICoach[],
+  "images": IMedia[],
+  mainImage: IMainImg,
 }
 
 export interface IQuestion {

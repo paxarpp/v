@@ -2,9 +2,17 @@ import Logo from '../../assets/logo.svg?react'
 import Vk from '../../assets/vk.svg?react'
 import T from '../../assets/t.svg?react'
 import Inst from '../../assets/inst.svg?react'
+import { getCookie } from '../../constants'
+import { logout } from '../../api'
 import styles from './index.module.css'
 
 export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen }) => {
+  const isAuth = getCookie('magicVolley');
+
+  const onLogout = () => { 
+    logout();
+    document.cookie = `magicVolley=;`;
+  }
   return (
     <div className={styles.header}>
       <ul className={styles.menu}>
@@ -32,7 +40,7 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpe
         <T />
         <Inst />
       </div>
-      <button className={styles.button} onClick={toggleAuthOpen}>Войти</button>
+      <button className={styles.button} onClick={isAuth ? onLogout : toggleAuthOpen}>{isAuth ? 'Выйти' : 'Войти'}</button>
     </div>
   );
 

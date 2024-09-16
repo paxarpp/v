@@ -39,6 +39,7 @@ export const Collapsed: React.FC = () => {
         setLoading(true);
         setQuestion({ id, answer: '', question: '' });
         const { question, error } = await getQuestion<IQuestion>(id);
+        debugger
         if (!error) {
           setQuestion(question);
         }
@@ -92,7 +93,7 @@ export const Collapsed: React.FC = () => {
               answer: target.value,
               id: question?.id || '',
             })} />
-            <button onSubmit={() => handleSubmit({
+            <button onClick={() => handleSubmit({
               question: question?.question || '',
               answer: question?.answer || '',
               id: question?.id,

@@ -55,17 +55,41 @@ export const deleteQuestion = async <T,>(id: string): Promise<T> => {
 };
 export const updateQuestion = async <T,>(body: {question: string; answer: string; id?: string }): Promise<{result:T; error: string}> => {
   try {
-   const result: T = await axios.put(BASE_URL + `/questions/${body.id ? body.id : ''}`, body);
-   return { result, error: '' };
+   if (body.id) {
+    const result: T = await axios.put(BASE_URL + `/questions/${body.id}`, body);
+    return { result, error: '' };
+   } else {
+    const result: T = await axios.post(BASE_URL + `/questions`, body);
+    return { result, error: '' };
+   }
+   
  } catch (e: { message: string }) {
     return { error: e.message, result: {} as T };
   }
 };
 export const getQuestion = async <T,>(id: string): Promise<{ question: T; error: string }> => {
   try {
-    const question: T = await axios.get(BASE_URL + `/questions/${id}`)
-    return { question, error: '' };
+    const { data: { result }} = await axios.get(BASE_URL + `/questions/${id}`)
+    return { question: result as T, error: '' };
  } catch (e: { message: string }) {
     return { error: e.message, question: {} as T };
+ }
+};
+
+export const login = async <T,>(email: string, password: string): Promise<T> => {
+  try {
+   return await axios.post(BASE_URL + '/auth/login', {
+    "username": email,
+    "password": password
+   })
+ } catch {
+   return {} as T;
+ }
+};
+export const logout = async <T,>(): Promise<T> => {
+  try {
+   return await axios.get(BASE_URL + '/auth/logout')
+ } catch {
+   return {} as T;
  }
 };
