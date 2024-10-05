@@ -10,16 +10,18 @@ import { ErrorLocal } from "../../../templates/errorLocal";
 export const SheduleTable = () => {
   const { shedule } = useLoaderData() as {
     shedule: {
-      trainingShedule: IShedule,
-      error?: string,
+      trainingShedule: {
+        result: IShedule,
+        error?: string
+      },
     }
   };
 
   return (
     <div>
       <Days />
-      {shedule.error ? (<ErrorLocal error={shedule.error} />) :
-        shedule.trainingShedule.map((group) => {
+      {shedule.trainingShedule.error ? (<ErrorLocal error={shedule.trainingShedule.error} />) :
+        shedule.trainingShedule.result.map((group) => {
           return (
             <div key={group.id} className={styles.group}>
               <div className={styles.group_name}>

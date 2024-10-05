@@ -85,6 +85,7 @@
 
 .price_title {
   color: rgba(212, 212, 212, 1);
+  text-align: center;
 }
 
 .price_item {

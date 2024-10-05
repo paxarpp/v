@@ -3,11 +3,11 @@ import { IPrice, IShedule } from "./interfaces";
 
 const loaderShedule = async () => {
   const { data: { result, error }} = await getShedule<IShedule>();
-  return { trainingShedule: result, error };
+  return { trainingShedule: { result, error } };
 }
 const loaderPrice = async () => {
   const { data: { result, error }} = await getPrice<IPrice>();
-  return { price: result, error };
+  return { price: { result, error } };
 }
 
 export const loaderPageShedule = async () => {
