@@ -2,21 +2,21 @@ import { getMediaAll, getCampsAll, getCoachesAll, getQuestionAll } from "../../a
 import { IMedia, ICamp, ICoachExt, IQuestion } from "./interfaces";
 
 const loaderMedia = async () => {
-  const { data: { result }} = await getMediaAll<IMedia>();
-  return { medias: result };
+  const { data: { result, error }} = await getMediaAll<IMedia>();
+  return { medias: result, error };
 }
 const loaderCamps = async () => {
-  const { data: { result }} = await getCampsAll<ICamp>();
-  return { camps: result };
+  const { data: { result, error }} = await getCampsAll<ICamp>();
+  return { camps: result, error };
 }
 const loaderCoaches = async () => {
-  const { data: { result }} = await getCoachesAll<ICoachExt>();
-  return { coaches: result };
+  const { data: { result, error }} = await getCoachesAll<ICoachExt>();
+  return { coaches: result, error };
 }
 
 const loaderQuestions = async () => {
-  const { data: { result }} = await getQuestionAll<IQuestion>();
-  return { questions: result };
+  const { data: { result, error }} = await getQuestionAll<IQuestion>();
+  return { questions: result, error };
 }
 
 export const loaderPageMain = async () => {

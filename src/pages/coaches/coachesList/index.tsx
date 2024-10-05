@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { ICoach } from "../interfaces";
 import { baseSrc } from "../../../constants";
+import { ErrorLocal } from "../../../templates/errorLocal";
 import styles from '../index.module.css';
 
 
@@ -8,9 +9,11 @@ export const CoachesList: React.FC = () => {
   const { main } = useLoaderData() as {
     main: {
       coaches: ICoach[]
+      error?: string;
     }
   };
-  return (
+
+  return main.error ? (<ErrorLocal error={main.error} />) : (
     <div className={styles.coaches_list}>
       {main.coaches.map((coach) => {
         return (

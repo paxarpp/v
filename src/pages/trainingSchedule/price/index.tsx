@@ -3,14 +3,16 @@ import {
 } from "react-router-dom";
 import { IPrice } from "../interfaces";
 import styles from '../index.module.css';
+import { ErrorLocal } from "../../../templates/errorLocal";
 
 export const Price = () => {
   const { shedule } = useLoaderData() as {
     shedule: {
       price: IPrice[],
+      error?: string,
     }
   };
-  return (
+  return shedule.error ? (<ErrorLocal error={shedule.error} />) : (
     <div className={styles.price_ball}>
       <h1 className={styles.price_title}>Стоимость тренировок</h1>
       <div className={styles.price_list}>

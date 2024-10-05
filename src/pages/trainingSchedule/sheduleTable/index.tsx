@@ -4,19 +4,21 @@ import {
 import { IShedule } from "../interfaces";
 import { Days } from "./days";
 import styles from '../index.module.css';
+import { ErrorLocal } from "../../../templates/errorLocal";
 
 
 export const SheduleTable = () => {
   const { shedule } = useLoaderData() as {
     shedule: {
-      trainingShedule: IShedule
+      trainingShedule: IShedule,
+      error?: string,
     }
   };
 
   return (
     <div>
       <Days />
-      {
+      {shedule.error ? (<ErrorLocal error={shedule.error} />) :
         shedule.trainingShedule.map((group) => {
           return (
             <div key={group.id} className={styles.group}>
