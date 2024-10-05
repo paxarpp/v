@@ -1,4 +1,5 @@
 import axios, { Axios } from "axios";
+import { IShedule } from "../pages/trainingSchedule/interfaces";
 
 const BASE_URL = '/magicvolley';
 
@@ -93,3 +94,19 @@ export const logout = async <T,>(): Promise<T> => {
    return {} as T;
  }
 };
+
+export const getShedule = async <T,>(): Promise<{ data: { result: T[]}}> => {
+  try {
+    return await axios.get(BASE_URL + '/shedule');
+  } catch {
+    return { data: { result: [] }};
+  }
+}
+
+export const getPrice = async <T,>(): Promise<{ data: { result: T[]}}> => {
+  try {
+    return await axios.get(BASE_URL + '/price');
+  } catch {
+    return { data: { result: [] }};
+  }
+}

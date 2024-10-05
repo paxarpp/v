@@ -5,7 +5,9 @@ import { ErrorPage } from "./error-page";
 import { Coaches } from "./pages/coaches";
 import { loaderPageCoaches } from "./pages/coaches/loaders";
 import { Main } from "./pages/main";
+import { Shedule } from "./pages/trainingSchedule";
 import { loaderPageMain } from "./pages/main/loaders";
+import { loaderPageShedule } from "./pages/trainingSchedule/loaders";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +36,8 @@ export const router = createBrowserRouter([
   },
   {
       path: '/trainingSchedule',
-      element: <h2>Расписание тренировок</h2>,
+      element: <Shedule />,
+      errorElement: <ErrorPage />,
+      loader: loaderPageShedule,
   }
 ]);

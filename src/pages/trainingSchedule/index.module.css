@@ -1,0 +1,139 @@
+.group {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.group_name {
+  min-width: 270px;
+  height: 116px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  border-bottom: 1px solid #99660A;
+  margin: 0 30px 30px 0;
+  color: rgba(212, 212, 212, 1);
+  font-family: Open Sans;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+}
+
+.group_day {
+  min-width: 240px;
+  height: 116px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 1);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  color: rgba(21, 35, 85, 1);
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.day_name + .day_name,
+.group_day + .group_day {
+  margin-left: 30px;
+}
+
+.empty_day {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: rgba(212, 212, 212, 1);
+}
+
+.title {
+  text-align: center;
+  color: rgba(212, 212, 212, 1);
+}
+
+.day_name {
+  min-width: 240px;
+  height: 80px;
+  border-radius: 8px;
+  border-bottom: 1px solid #99660A;
+  font-family: Open Sans;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  text-align: center;
+  color: rgba(212, 212, 212, 1);
+}
+
+.logo {
+  min-width: 270px;
+  height: 80px;
+  margin: 0 30px 16px 0;
+  padding: 0 10px;
+  text-align: center;
+}
+
+
+.price_ball {
+  margin-top: 150px;
+  background-image: url('src/assets/price_ball.jpg');
+  width: 100vw;
+  height: 660px;
+  overflow: hidden;
+}
+
+.price_title {
+  color: rgba(212, 212, 212, 1);
+}
+
+.price_item {
+  width: 570px;
+  height: 190px;
+  padding: 16px 0px;
+  border-radius: 8px;
+  background: rgba(128, 128, 128, 0.2);
+  font-family: Open Sans;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  text-align: center;
+}
+
+.price_item + .price_item {
+  margin-left: 30px;
+}
+
+.price_prices {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.price_card {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 250px;
+  align-items: center;
+  justify-content: center;
+}
+
+.price_list {
+  display: flex;
+  flex-flow: row;
+}
+
+.price_message {
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-bottom: 16px;
+}
+
+.price_message_empty {
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  margin-bottom: 16px;
+}

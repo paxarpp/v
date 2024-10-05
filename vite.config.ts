@@ -9,5 +9,6 @@ export default defineConfig({
     proxy: {
       '/magicvolley': 'http://localhost:8081',
     },
+    port: 3000,
   },
 })
