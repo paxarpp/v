@@ -70,8 +70,8 @@ export const getQuestion = async <T,>(id: string): Promise<{ question: T; error:
   try {
     const { data: { result }} = await axios.get(BASE_URL + `/questions/${id}`)
     return { question: result as T, error: '' };
- } catch (e: { message: string }) {
-    return { error: e.message, question: {} as T };
+ } catch (e: unknown) {
+    return { error: (e as { message: string }).message, question: {} as T };
  }
 };
 
