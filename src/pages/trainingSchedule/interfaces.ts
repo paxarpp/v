@@ -19,7 +19,7 @@ export interface IPrice {
   prices: {
     id: string;
     price: number;
-    name: string;
-    message?: string;
+    title: string;
+    subTitle?: string;
   }[]
 }

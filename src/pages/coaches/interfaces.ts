@@ -20,9 +20,9 @@ export interface IMainImg extends IMediaBase {
 export interface ICoach {
   "id": string,
   "name": string,
-  "surename": string,
   "infos": string[],
   "mainImage": IMainImg,
+  promo: string
 }
 
 export interface ICoachExt extends ICoach {

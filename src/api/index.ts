@@ -75,10 +75,10 @@ export const getQuestion = async <T,>(id: string): Promise<{ question: T; error:
  }
 };
 
-export const login = async <T,>(email: string, password: string): Promise<T> => {
+export const login = async <T,>(username: string, password: string): Promise<T> => {
   try {
    return await axios.post(BASE_URL + '/auth/login', {
-    "username": email,
+    "username": username,
     "password": password
    })
  } catch {

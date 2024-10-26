@@ -1,16 +1,18 @@
-import { useState } from'react';
+import { useContext, useState } from'react';
 import {
   useLoaderData,
 } from "react-router-dom";
 import ClosedIcon from '../../../assets/closed.svg?react';
 import OpenedIcon from '../../../assets/opened.svg?react';
 import { IQuestion } from '../interfaces';
-import styles from '../index.module.css';
 import { Modal } from '../../../templates/modal';
 import { deleteQuestion, updateQuestion, getQuestion } from '../../../api';
+import { AuthContext } from '../../../context';
+import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
-  const isAdmin = true;
+  const authCtx = useContext(AuthContext);
+  const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
   const { main } = useLoaderData() as {
     main: {
       questions: IQuestion[]
@@ -39,7 +41,6 @@ export const Collapsed: React.FC = () => {
         setLoading(true);
         setQuestion({ id, answer: '', question: '' });
         const { question, error } = await getQuestion<IQuestion>(id);
-        debugger
         if (!error) {
           setQuestion(question);
         }

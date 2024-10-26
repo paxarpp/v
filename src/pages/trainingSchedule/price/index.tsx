@@ -27,8 +27,8 @@ export const Price = () => {
                   {pr.prices.map((p) => {
                     return (
                       <div key={p.id} className={styles.price_card}>
-                        <span>{p.name}</span>
-                        {p.message ? (<span className={styles.price_message}>{p.message}</span>) : (
+                        <span>{p.title}</span>
+                        {p.subTitle ? (<span className={styles.price_message}>{p.subTitle}</span>) : (
                           <span className={styles.price_message_empty} />
                         )}
                         <span>{p.price}</span>

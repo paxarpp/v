@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Modal } from '../templates/modal';
-import { login } from '../api';
 
-export const Auth: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen }) => {
-  const [tel, setTel] = useState('');
+export const Auth: React.FC<
+  { authing: (l: string, p: string) => void }
+  > = ({ authing }) => {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
-      setTel(e.target.value);
+      setUsername(e.target.value);
     } else  if (!e.target.value) {
-      setTel('');
+      setUsername('');
     }
   };
 
@@ -20,9 +21,8 @@ export const Auth: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen 
   };
 
   const onEnter = () => {
-    if (tel && password) {
-      toggleAuthOpen();
-      login(tel, password)
+    if (username && password) {
+      authing(username, password);
     }
   }
 
@@ -35,7 +35,7 @@ export const Auth: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen 
         <div className={styles.input_wrap}>
           <input
             className={styles.modal_input}
-            value={tel}
+            value={username}
             onChange={onChange}
           />
         </div>
