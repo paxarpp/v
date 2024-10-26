@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { RouterProvider } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Header } from "./templates/header";
 import { Auth } from "./auth";
-import { router } from "./routes";
 import { AuthContext } from "./context";
 import { IUser } from "./auth/interface";
 import { login } from './api';
@@ -16,8 +15,8 @@ export const App = () => {
     setOpen(!authOpen)
   }
 
-  const auth = (l: string, p: string) => {
-    const authing = async () => {
+  const authing = (l: string, p: string) => {
+    const authLogin = async () => {
       const user = await login<{
         data?: IUser 
       }>(l, p);
@@ -26,14 +25,18 @@ export const App = () => {
         toggleAuthOpen();
       }
     };
-    authing();
+    authLogin();
   };
+
+  console.log(currentUser);
 
   return (
     <AuthContext.Provider value={{ user: currentUser, setUser }}>
       <Header toggleAuthOpen={toggleAuthOpen} />
-      {authOpen ? <Auth authing={auth} /> : null}
-      <RouterProvider router={router} />
+      {authOpen ? <Auth authing={authing} /> : null}
+      <div id="detail">
+        <Outlet />
+      </div>
     </AuthContext.Provider>
   )
 }
