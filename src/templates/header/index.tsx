@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from '../../assets/logo.svg?react'
 import Vk from '../../assets/vk.svg?react'
 import T from '../../assets/t.svg?react'
@@ -22,22 +23,22 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpe
     <div className={styles.header}>
       <ul className={styles.menu}>
         <li>
-          <a href="/"><Logo /></a>
+          <Link to="/"><Logo /></Link>
         </li>
         <li>
-          <a href="/weekendCamps">Кемпы на выходные</a>
+          <Link to="/weekendCamps">Кемпы на выходные</Link>
         </li>
         <li>
-          <a href="/longCamps">Кемпы длинные</a>
+          <Link to="/longCamps">Кемпы длинные</Link>
         </li>
         <li>
-          <a href="/trainingSchedule">Расписание тренировок</a>
+          <Link to="/trainingSchedule">Расписание тренировок</Link>
         </li>
         <li>
-          <a href="/about">О нас</a>
+          <Link to="/about">О нас</Link>
         </li>
         <li>
-          <a href="/allCoahes">Тренеры</a>
+          <Link to="/allCoahes">Тренеры</Link>
         </li>
       </ul>
       <div className={styles.icons}>
