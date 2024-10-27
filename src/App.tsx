@@ -5,7 +5,7 @@ import { Auth } from "./auth";
 import { AuthContext } from "./context";
 import { IUser } from "./auth/interface";
 import { login } from './api';
-import "./index.css";
+import styles from "./app.module.css";
 
 export const App = () => {
   const [authOpen, setOpen] = useState(false);
@@ -32,7 +32,7 @@ export const App = () => {
     <AuthContext.Provider value={{ user: currentUser, setUser }}>
       <Header toggleAuthOpen={toggleAuthOpen} />
       {authOpen ? <Auth authing={authing} /> : null}
-      <div id="detail">
+      <div id="detail" className={styles.outlet}>
         <Outlet />
       </div>
     </AuthContext.Provider>

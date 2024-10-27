@@ -12,3 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#root {
+  max-width: 1920px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}

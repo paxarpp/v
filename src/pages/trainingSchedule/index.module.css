@@ -78,9 +78,9 @@
 .price_ball {
   margin-top: 150px;
   background-image: url('src/assets/price_ball.jpg');
-  width: 100vw;
   height: 660px;
   overflow: hidden;
+  background-size: contain;
 }
 
 .price_title {

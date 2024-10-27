@@ -6,7 +6,7 @@ import styles from "./index.module.css";
 
 export const Shedule = () => {
   return (
-    <div>
+    <>
       <h1 className={styles.title}>Расписание тренировок</h1>
 
       <SheduleTable />
@@ -17,6 +17,6 @@ export const Shedule = () => {
 
       <Footer />
 
-    </div>
+    </>
   );
 }

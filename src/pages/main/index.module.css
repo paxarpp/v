@@ -1,3 +1,7 @@
+.w_100 {
+  width: 100%;
+}
+
 .camp_coaches {
   display: flex;
   flex-flow: row nowrap;
@@ -148,7 +152,6 @@
 .asked_questions {
   margin-top: 150px;
   background-image: url('src/assets/asked_questions.jpg');
-  width: 100vw;
   height: 660px;
   overflow: hidden;
 }
@@ -199,9 +202,14 @@
   color: #D4D4D4;
 }
 
+.contact_wrap {
+  margin-left: 75px;
+  min-width: 66%;
+}
+
 .contact {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .contact + .contact {
@@ -219,9 +227,31 @@
 
 .flex {
   display: flex;
+  justify-content: flex-start;
 }
 
 .form {
   display: flex;
   flex-flow: column;
+}
+
+.manager_wrap {
+  margin-right: 75px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+.img_wrap {
+  border-radius: 50%;
+  background-size: contain;
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.manager {
+  width: 200px;
+  margin-right: auto;
 }
