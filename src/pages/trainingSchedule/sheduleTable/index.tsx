@@ -3,8 +3,17 @@ import {
 } from "react-router-dom";
 import { IShedule } from "../interfaces";
 import { Days } from "./days";
-import styles from '../index.module.css';
 import { ErrorLocal } from "../../../templates/errorLocal";
+import styles from '../index.module.css';
+
+
+const weekDays = [
+  'MONDAY',
+  'TUESDAY',
+  'WEDNESDAY',
+  'THURSDAY' ,
+  'FRIDAY',
+] as const;
 
 
 export const SheduleTable = () => {
@@ -27,14 +36,15 @@ export const SheduleTable = () => {
               <div className={styles.group_name}>
                 {group.name}
               </div>
-              {group.days.map((day, indx) => {
+              {weekDays.map((dayName) => {
+                const day = group.days.find((d) => d.id === dayName);
                 return day ? (
-                  <div key={day.id} className={styles.group_day}>
+                  <div key={group.id + day.id} className={styles.group_day}>
                     <span>{day.time}</span>
                     <span>{day.address}</span>
                   </div>
                 ) : (
-                  <div key={group.id + indx} className={styles.group_day}>
+                  <div key={group.id + dayName} className={styles.group_day}>
                     <div className={styles.empty_day} />
                   </div>
                 );

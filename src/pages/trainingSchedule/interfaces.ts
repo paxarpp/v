@@ -5,9 +5,13 @@ export interface ISheduleItem {
 }
 
 export interface ISheduleGroup {
-  id: string;
+  id: 'MONDAY' |
+      'TUESDAY' |
+      'WEDNESDAY' |
+      'THURSDAY' |
+      'FRIDAY';
   name: string;
-  days: (ISheduleItem | null)[];
+  days: ISheduleItem[];
 }
 
 export type IShedule = ISheduleGroup[];

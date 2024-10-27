@@ -28,8 +28,6 @@ export const App = () => {
     authLogin();
   };
 
-  console.log(currentUser);
-
   return (
     <AuthContext.Provider value={{ user: currentUser, setUser }}>
       <Header toggleAuthOpen={toggleAuthOpen} />
