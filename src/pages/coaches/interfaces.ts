@@ -1,6 +1,6 @@
 export interface IMediaBase {
   contentType: string,
-  id: string,
+  id: string | null,
   name: string,
   size: number,
 }
@@ -20,9 +20,9 @@ export interface IMainImg extends IMediaBase {
 export interface ICoach {
   "id": string,
   "name": string,
-  "infos": string[],
-  "mainImage": IMainImg,
-  promo: string
+  "infos": string,
+  "mainImage": IMainImg | null,
+  promo: string;
 }
 
 export interface ICoachExt extends ICoach {

@@ -13,6 +13,7 @@
   flex-flow: column nowrap;
   height: 666px;
   min-width: 420px;
+  max-width: 420px;
   padding: 14px;
   border-radius: 8px;
   background: rgba(128, 128, 128, 0.2);
@@ -74,6 +75,8 @@
 .edit_coach_modal {
   display: flex;
   flex-flow: column nowrap;
+  width: 1000px;
+  height: 400px;
 }
 
 .upload_coach_img {

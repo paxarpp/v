@@ -1,9 +1,21 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../../../templates/modal";
 import BasketIcon from '../../../assets/basket.svg?react';
-import { getQuestion } from "../../../api";
-import { IQuestion } from "../../main/interfaces";
+import { getCoach, updateCoach } from "../../../api";
+import { ICoach } from "../interfaces";
 import styles from '../index.module.css';
+
+const readFile = (file): Promise<string> => {
+  return new Promise((resolve) => {
+    if (file.size) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        resolve(e.target.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
 
 
 export const CoachEdit: React.FC<{
@@ -12,45 +24,44 @@ export const CoachEdit: React.FC<{
   onClose: () => void;
 }> = ({ isOpen, coachId, onClose }) => {
 
+  const [currentCoach, setCoach] = useState<ICoach | null>(null);
+
   useEffect(() => {
     if (isOpen && coachId) {
       // edit
-      const getQ = async (id: string) => {
+      const getC = async (id: string) => {
         // setLoading(true);
-        // setQuestion({ id, answer: '', question: '' });
-        const { question, error } = await getQuestion<IQuestion>(id);
-        // if (!error) {
-        //   setQuestion(question);
-        // }
+        setCoach({ id, name: '', infos: '', promo: '', mainImage: null });
+        const resp: { data?: {
+          result: ICoach
+        }} = await getCoach<ICoach>(id);
+        if (resp.data) {
+          setCoach(resp.data.result);
+        }
         // setLoading(false);
         // setError(error);
       }
-      getQ(coachId);
+      getC(coachId);
     } else if (isOpen && !coachId) {
       // add
     }
   }, [isOpen, coachId]);
 
-  const [image, setImage] = useState<File | null>(null);
-  const [result, setResult] = useState("");
-
-  const useDisplayImage = () => {
-    const uploader = (e) => {
-      const imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.addEventListener("load", (event) => {
-        setResult(event.target.result as string);
-      });
-      reader.readAsDataURL(imageFile);
-    }
-    return { uploader };
+  const deleteImg = () => {
+    setCoach((prevCoach) => ({ ...(prevCoach as ICoach), mainImage: null }));
   }
 
-  const { uploader } = useDisplayImage();
+  const saveCoach= () => {
+    const saveC = async () => {
+      if (currentCoach) {
+        const { result, error } = await updateCoach<string>(currentCoach);
+        if (!error) {
+          onClose();
 
-  const deleteImg = () => {
-    setImage(null);
-    setResult("");
+        }
+      }
+    }
+    saveC();
   }
 
   return (
@@ -60,7 +71,7 @@ export const CoachEdit: React.FC<{
       close={onClose}
       footer={
         <div>
-          <button>{'Сохранить'}</button>
+          <button onClick={saveCoach}>{'Сохранить'}</button>
         </div>
       }
     >
@@ -69,22 +80,42 @@ export const CoachEdit: React.FC<{
         <input
           type="file"
           onChange={(e) => {
-            setImage(e.target.files?.[0] || null);
-            uploader(e);
+            const imageConverter = async () => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const base64: string = await readFile(file);
+                setCoach((prevCoach) => ({ ...(prevCoach as ICoach), mainImage: {
+                  data: base64,
+                  typeEntity: 'COACH' as const,
+                  updateAt: file.lastModified.toString(),
+                  name: file.name,
+                  contentType: file.type,
+                  size: file.size,
+                  id: null,
+                } }));
+              }
+            }
+            imageConverter();
           }}
         />
-       {result ? (
+       {currentCoach?.mainImage ? (
           <>
-            <img src={result} alt="" className={styles.upload_coach_img} />
+            <img src={currentCoach?.mainImage?.data} alt="" className={styles.upload_coach_img} />
             <BasketIcon onClick={deleteImg} />
           </>
         ) : null}
         <label>{'Имя и Фамилия'}</label>
-        <input />
+        <input value={currentCoach?.name} onChange={(e) => {
+          setCoach((prevCoach) => ({ ...(prevCoach as ICoach), name: e.target.value }));
+        }} />
         <label>{'О тренере'}</label>
-        <textarea />
+        <textarea  value={currentCoach?.infos} onChange={(e) => {
+          setCoach((prevCoach) => ({ ...(prevCoach as ICoach), infos: e.target.value }));
+        }} />
         <label>{'Поле профайла'}</label>
-        <input />  
+        <input value={currentCoach?.promo} onChange={(e) => {
+          setCoach((prevCoach) => ({ ...(prevCoach as ICoach), promo: e.target.value }));
+        }}  />  
       </div>
     </Modal>
   );

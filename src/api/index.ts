@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ICoach } from "../pages/coaches/interfaces";
 
 const BASE_URL = '/magicvolley';
 
@@ -108,3 +109,17 @@ export const getPrice = async <T,>(): Promise<{ data: { result: T[], error?: str
     return { data: { result: [], error: (e as Error).message } };
   }
 }
+
+export const updateCoach = async <T,>(body: ICoach): Promise<{result:T; error: string}> => {
+  try {
+   if (body.id) {
+    const result: T = await axios.put(BASE_URL + `/coaches/${body.id}`, body);
+    return { result, error: '' };
+   } else {
+    const result: T = await axios.post(BASE_URL + `/coaches`, body);
+    return { result, error: '' };
+   }
+ } catch (e: unknown) {
+    return { error: (e as { message: string }).message, result: {} as T };
+  }
+};

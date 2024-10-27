@@ -32,15 +32,15 @@
 
 .header {
   flex: 0;
-  padding: 20px;
+  padding: 50px;
 }
 .content {
   flex: 1;
-  padding: 20px;
+  padding: 50px;
 }
 .footer {
   flex: 0;
-  padding: 20px;
+  padding: 50px;
 }
 
 .title {

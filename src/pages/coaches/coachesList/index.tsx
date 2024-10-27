@@ -27,7 +27,7 @@ export const CoachesList: React.FC = () => {
   };
 
   const openEditCoach = (id: string) => {
-    setCoachId(id);
+    setEditCoachId(id);
     setIsOpen(true);
   };
 
@@ -49,14 +49,10 @@ export const CoachesList: React.FC = () => {
       {main.coaches.map((coach) => {
         return (
           <div key={coach.id} className={styles.coach_card}>
-            <img src={`${baseSrc}${coach.mainImage.data}`} alt={coach.name} className={styles.coach_img} />
+            <img src={`${baseSrc}${coach.mainImage?.data}`} alt={coach.name} className={styles.coach_img} />
             <h2>{coach.name}</h2>
             <ul className={styles.coach_infos}>
-              {coach.infos.map((info, i) => {
-                return (
-                  <li key={i}>{info}</li>
-                )
-              })}
+              {coach.infos}
             </ul>
             <div className={styles.coach_card_footer}>
               <button className={styles.button_profile} onClick={() => openProfile(coach.id)}>
