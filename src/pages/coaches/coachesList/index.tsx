@@ -52,7 +52,7 @@ export const CoachesList: React.FC = () => {
             <img src={`${baseSrc}${coach.mainImage?.data}`} alt={coach.name} className={styles.coach_img} />
             <h2>{coach.name}</h2>
             <ul className={styles.coach_infos}>
-              {coach.infos}
+              {coach.infos.map((info) => <li key={info}>{info}</li>)}
             </ul>
             <div className={styles.coach_card_footer}>
               <button className={styles.button_profile} onClick={() => openProfile(coach.id)}>

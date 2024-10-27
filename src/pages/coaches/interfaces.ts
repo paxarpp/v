@@ -14,13 +14,12 @@ export interface IMedia extends IMediaBase {
 export interface IMainImg extends IMediaBase {
   "typeEntity": ITypeEntity,
   "data": string
-  "updateAt": null | string
 }
 
 export interface ICoach {
   "id": string,
   "name": string,
-  "infos": string,
+  "infos": string[],
   "mainImage": IMainImg | null,
   promo: string;
 }

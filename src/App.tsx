@@ -15,6 +15,10 @@ export const App = () => {
     setOpen(!authOpen)
   }
 
+  const onCloseAuth = () => {
+    setOpen(false);
+  };
+
   const authing = (l: string, p: string) => {
     const authLogin = async () => {
       const user = await login<{
@@ -31,7 +35,7 @@ export const App = () => {
   return (
     <AuthContext.Provider value={{ user: currentUser, setUser }}>
       <Header toggleAuthOpen={toggleAuthOpen} />
-      {authOpen ? <Auth authing={authing} /> : null}
+      {authOpen ? <Auth authing={authing} onCloseAuth={onCloseAuth} /> : null}
       <div id="detail" className={styles.outlet}>
         <Outlet />
       </div>

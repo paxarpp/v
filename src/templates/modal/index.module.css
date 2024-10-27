@@ -17,6 +17,7 @@
   align-items: center;
   min-width: 300px;
   min-height: 200px;
+  overflow: hidden;
 }
 
 .modal_back {
@@ -32,15 +33,15 @@
 
 .header {
   flex: 0;
-  padding: 50px;
+  width: 100%;
 }
+
 .content {
   flex: 1;
-  padding: 50px;
 }
 .footer {
   flex: 0;
-  padding: 50px;
+  width: 100%;
 }
 
 .title {

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Modal } from '../templates/modal';
 
-export const Auth: React.FC<
-  { authing: (l: string, p: string) => void }
-  > = ({ authing }) => {
+export const Auth: React.FC<{
+  authing: (l: string, p: string) => void;
+  onCloseAuth: () => void;
+  }> = ({ authing, onCloseAuth }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,6 +30,7 @@ export const Auth: React.FC<
   return (
     <Modal
       isOpen={true}
+      close={onCloseAuth}
       title={'Вход в личный кабинет'}
       footer={<button className={styles.auth_button} onClick={onEnter}>Войти</button>}
     >
