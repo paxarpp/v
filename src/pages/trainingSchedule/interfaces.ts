@@ -5,17 +5,12 @@ export interface ISheduleItem {
 }
 
 export interface ISheduleGroup {
-  id: 'MONDAY' |
-      'TUESDAY' |
-      'WEDNESDAY' |
-      'THURSDAY' |
-      'FRIDAY';
+  id: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY';
   name: string;
   days: ISheduleItem[];
 }
 
 export type IShedule = ISheduleGroup[];
-
 
 export interface IPrice {
   id: string;
@@ -25,5 +20,5 @@ export interface IPrice {
     price: number;
     title: string;
     subTitle?: string;
-  }[]
+  }[];
 }

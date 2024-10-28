@@ -1,9 +1,9 @@
-import { CallMe } from "../../templates/callme";
-import { Footer } from "../../templates/footer";
+import { CallMe } from '../../templates/callme';
+import { Footer } from '../../templates/footer';
 import { BlockIcons } from './blockIcons';
-import { Collapsed } from "./collapsed";
-import { Contacts } from "./contacts";
-import { CampsScroller } from "./campsScroller";
+import { Collapsed } from './collapsed';
+import { Contacts } from './contacts';
+import { CampsScroller } from './campsScroller';
 import styles from './index.module.css';
 
 export const Main = () => {
@@ -24,7 +24,6 @@ export const Main = () => {
       <CallMe />
 
       <Footer />
-
     </div>
   );
-}
+};

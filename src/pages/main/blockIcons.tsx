@@ -1,7 +1,7 @@
-import BestGroup from '../../assets/bestGroup.svg?react'
-import RightWay from '../../assets/rightWay.svg?react'
-import Actions from '../../assets/actions.svg?react'
-import styles from './index.module.css'
+import BestGroup from '../../assets/bestGroup.svg?react';
+import RightWay from '../../assets/rightWay.svg?react';
+import Actions from '../../assets/actions.svg?react';
+import styles from './index.module.css';
 
 export const BlockIcons = () => {
   return (
@@ -22,5 +22,5 @@ export const BlockIcons = () => {
         <span className={styles.icon_sub_title}>Слова ценятся тогда, когда совпадают с действиями</span>
       </div>
     </div>
-  )
-}
+  );
+};

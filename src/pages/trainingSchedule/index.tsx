@@ -1,8 +1,8 @@
-import { CallMe } from "../../templates/callme";
-import { Footer } from "../../templates/footer";
-import { Price } from "./price";
-import { SheduleTable } from "./sheduleTable";
-import styles from "./index.module.css";
+import { CallMe } from '../../templates/callme';
+import { Footer } from '../../templates/footer';
+import { Price } from './price';
+import { SheduleTable } from './sheduleTable';
+import styles from './index.module.css';
 
 export const Shedule = () => {
   return (
@@ -16,7 +16,6 @@ export const Shedule = () => {
       <CallMe />
 
       <Footer />
-
     </>
   );
-}
+};

@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { Header } from "./templates/header";
-import { Auth } from "./auth";
-import { AuthContext } from "./context";
-import { IUser } from "./auth/interface";
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Header } from './templates/header';
+import { Auth } from './auth';
+import { AuthContext } from './context';
+import { IUser } from './auth/interface';
 import { login } from './api';
-import styles from "./app.module.css";
+import styles from './app.module.css';
 
 export const App = () => {
   const [authOpen, setOpen] = useState(false);
   const [currentUser, setUser] = useState<IUser | null>(null);
 
   const toggleAuthOpen = () => {
-    setOpen(!authOpen)
-  }
+    setOpen(!authOpen);
+  };
 
   const onCloseAuth = () => {
     setOpen(false);
@@ -22,7 +22,7 @@ export const App = () => {
   const authing = (l: string, p: string) => {
     const authLogin = async () => {
       const user = await login<{
-        data?: IUser 
+        data?: IUser;
       }>(l, p);
       if (user?.data) {
         setUser(user.data);
@@ -40,5 +40,5 @@ export const App = () => {
         <Outlet />
       </div>
     </AuthContext.Provider>
-  )
-}
+  );
+};

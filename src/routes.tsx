@@ -1,40 +1,38 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
-import { ErrorPage } from "./error-page";
-import { Coaches } from "./pages/coaches";
-import { loaderPageCoaches } from "./pages/coaches/loaders";
-import { Main } from "./pages/main";
-import { Shedule } from "./pages/trainingSchedule";
-import { loaderPageMain } from "./pages/main/loaders";
-import { loaderPageShedule } from "./pages/trainingSchedule/loaders";
-import { App } from "./App";
+import { createBrowserRouter } from 'react-router-dom';
+import { ErrorPage } from './error-page';
+import { Coaches } from './pages/coaches';
+import { loaderPageCoaches } from './pages/coaches/loaders';
+import { Main } from './pages/main';
+import { Shedule } from './pages/trainingSchedule';
+import { loaderPageMain } from './pages/main/loaders';
+import { loaderPageShedule } from './pages/trainingSchedule/loaders';
+import { App } from './App';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Main />,
         errorElement: <ErrorPage />,
         loader: loaderPageMain,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <h2>О нас</h2>,
       },
       {
-        path: "/allCoahes",
+        path: '/allCoahes',
         element: <Coaches />,
         errorElement: <ErrorPage />,
         loader: loaderPageCoaches,
       },
       {
-        path: "/weekendCamps",
-        element: <h2>Кемпы на выходные</h2>
+        path: '/weekendCamps',
+        element: <h2>Кемпы на выходные</h2>,
       },
       {
         path: '/longCamps',
@@ -45,7 +43,7 @@ export const router = createBrowserRouter([
         element: <Shedule />,
         errorElement: <ErrorPage />,
         loader: loaderPageShedule,
-      }
+      },
     ],
   },
 ]);

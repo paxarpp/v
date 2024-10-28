@@ -1,6 +1,10 @@
-import { useRouteError } from "react-router-dom";
+import { useRouteError } from 'react-router-dom';
 
-interface IError { status: number; statusText?: string; message: string }
+interface IError {
+  status: number;
+  statusText?: string;
+  message: string;
+}
 
 export const ErrorPage = () => {
   const error = useRouteError() as IError;
@@ -14,4 +18,4 @@ export const ErrorPage = () => {
       </p>
     </div>
   );
-}
+};

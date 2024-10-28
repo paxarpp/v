@@ -1,7 +1,5 @@
-import { useContext, useState } from'react';
-import {
-  useLoaderData,
-} from "react-router-dom";
+import { useContext, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import OpenedIcon from '../../../assets/opened.svg?react';
 import { IQuestion } from '../interfaces';
@@ -15,10 +13,10 @@ export const Collapsed: React.FC = () => {
   const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
   const { main } = useLoaderData() as {
     main: {
-      questions: IQuestion[]
-    }
+      questions: IQuestion[];
+    };
   };
-  const [openId, setIsOpen] = useState<string|null>(null);
+  const [openId, setIsOpen] = useState<string | null>(null);
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -26,15 +24,14 @@ export const Collapsed: React.FC = () => {
 
   const onToggle = (currentId: string) => () => {
     setIsOpen(openId === currentId ? null : currentId);
-  }
+  };
 
   const onDelete = (id: string) => {
     const del = async (id: string) => {
       deleteQuestion(id);
-
     };
     del(id);
-  }
+  };
   const onEdit = (id?: string) => {
     if (id) {
       const getQ = async (id: string) => {
@@ -46,7 +43,7 @@ export const Collapsed: React.FC = () => {
         }
         setLoading(false);
         setError(error);
-      }
+      };
       getQ(id);
     }
 
@@ -57,13 +54,9 @@ export const Collapsed: React.FC = () => {
     setError('');
     setLoading(false);
     openModal(false);
-  }
+  };
 
-  const handleSubmit = async (data: {
-    question: string;
-    answer: string;
-    id?: string;
-  }) => {
+  const handleSubmit = async (data: { question: string; answer: string; id?: string }) => {
     setLoading(true);
     const { error } = await updateQuestion(data);
     setLoading(false);
@@ -72,54 +65,66 @@ export const Collapsed: React.FC = () => {
     } else {
       setError(error);
     }
-  }
+  };
 
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        close={closeModal}
-        title={question?.id ? 'Редактировать вопрос' : 'Добавить вопрос'}
-      >
+      <Modal isOpen={isOpen} close={closeModal} title={question?.id ? 'Редактировать вопрос' : 'Добавить вопрос'}>
         {isLoading ? 'Загрузка...' : null}
-        {error ? error : (
+        {error ? (
+          error
+        ) : (
           <div className={styles.form}>
-            <input value={question?.question} onChange={({ target }) => setQuestion({
-              answer: question?.answer || '',
-              question: target.value,
-              id: question?.id || ''
-            })} />
-            <textarea value={question?.answer} onChange={({ target }) => setQuestion({
-              question: question?.question || '',
-              answer: target.value,
-              id: question?.id || '',
-            })} />
-            <button onClick={() => handleSubmit({
-              question: question?.question || '',
-              answer: question?.answer || '',
-              id: question?.id,
-            })}>{'Сохранить'}</button>
+            <input
+              value={question?.question}
+              onChange={({ target }) =>
+                setQuestion({
+                  answer: question?.answer || '',
+                  question: target.value,
+                  id: question?.id || '',
+                })
+              }
+            />
+            <textarea
+              value={question?.answer}
+              onChange={({ target }) =>
+                setQuestion({
+                  question: question?.question || '',
+                  answer: target.value,
+                  id: question?.id || '',
+                })
+              }
+            />
+            <button
+              onClick={() =>
+                handleSubmit({
+                  question: question?.question || '',
+                  answer: question?.answer || '',
+                  id: question?.id,
+                })
+              }
+            >
+              {'Сохранить'}
+            </button>
           </div>
-          )}
+        )}
       </Modal>
       <div className={styles.asked_questions}>
-        <h2 className={styles.main_title}>Часто задаваемые вопросы{isAdmin ? <button onClick={() => onEdit()}>Добавить</button> : null}</h2>
+        <h2 className={styles.main_title}>
+          Часто задаваемые вопросы{isAdmin ? <button onClick={() => onEdit()}>Добавить</button> : null}
+        </h2>
         <div>
           {main.questions.map((item) => {
             return (
               <div key={item.id} className={styles.question} onClick={onToggle(item.id)}>
                 <div className={styles.question_name_wrapper}>
                   <span className={styles.question_name}>{item.question}</span>
-                    {isAdmin ? <button onClick={() => onDelete(item.id)}>Удалить</button> : null}
-                    {isAdmin ? <button onClick={() => onEdit(item.id)}>Редактировать</button> : null}
-                    {
-                      openId === item.id ? <OpenedIcon /> : <ClosedIcon />
-                    }
+                  {isAdmin ? <button onClick={() => onDelete(item.id)}>Удалить</button> : null}
+                  {isAdmin ? <button onClick={() => onEdit(item.id)}>Редактировать</button> : null}
+                  {openId === item.id ? <OpenedIcon /> : <ClosedIcon />}
                 </div>
                 <div className={openId === item.id ? styles.info_open : styles.info_close}>
-                  <span className={styles.answer}>
-                    {item.answer}
-                  </span>
+                  <span className={styles.answer}>{item.answer}</span>
                 </div>
               </div>
             );
@@ -128,4 +133,4 @@ export const Collapsed: React.FC = () => {
       </div>
     </>
   );
-}
+};

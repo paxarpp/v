@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { IUser } from "./auth/interface";
+import { createContext } from 'react';
+import { IUser } from './auth/interface';
 
 interface IAuthContext {
   user: IUser | null;

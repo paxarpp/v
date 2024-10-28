@@ -13,5 +13,5 @@ export const Days = () => {
       <div className={styles.day_name}>Чт</div>
       <div className={styles.day_name}>Пт</div>
     </div>
-  )
+  );
 };

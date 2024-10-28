@@ -1,7 +1,7 @@
-import Logo from '../../assets/logo.svg?react'
-import Vk from '../../assets/vk.svg?react'
-import T from '../../assets/t.svg?react'
-import Inst from '../../assets/inst.svg?react'
+import Logo from '../../assets/logo.svg?react';
+import Vk from '../../assets/vk.svg?react';
+import T from '../../assets/t.svg?react';
+import Inst from '../../assets/inst.svg?react';
 import styles from './index.module.css';
 
 export const Footer = () => {
@@ -25,18 +25,10 @@ export const Footer = () => {
       <div>
         <span className={styles.menu_title}>О школе</span>
         <ul className={styles.menu}>
-          <li>
-            О нас
-          </li>
-          <li>
-            Отзывы
-          </li>
-          <li>
-            Часто задаваемые вопросы
-          </li>
-          <li>
-            Тренеры
-          </li>
+          <li>О нас</li>
+          <li>Отзывы</li>
+          <li>Часто задаваемые вопросы</li>
+          <li>Тренеры</li>
         </ul>
       </div>
       <div>
@@ -46,4 +38,4 @@ export const Footer = () => {
       </div>
     </footer>
   );
-}
+};

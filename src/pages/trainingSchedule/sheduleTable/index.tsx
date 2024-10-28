@@ -1,41 +1,31 @@
-import {
-  useLoaderData,
-} from "react-router-dom";
-import { IShedule } from "../interfaces";
-import { Days } from "./days";
-import { ErrorLocal } from "../../../templates/errorLocal";
+import { useLoaderData } from 'react-router-dom';
+import { IShedule } from '../interfaces';
+import { Days } from './days';
+import { ErrorLocal } from '../../../templates/errorLocal';
 import styles from '../index.module.css';
 
-
-const weekDays = [
-  'MONDAY',
-  'TUESDAY',
-  'WEDNESDAY',
-  'THURSDAY' ,
-  'FRIDAY',
-] as const;
-
+const weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'] as const;
 
 export const SheduleTable = () => {
   const { shedule } = useLoaderData() as {
     shedule: {
       trainingShedule: {
-        result: IShedule,
-        error?: string
-      },
-    }
+        result: IShedule;
+        error?: string;
+      };
+    };
   };
 
   return (
     <div>
       <Days />
-      {shedule.trainingShedule.error ? (<ErrorLocal error={shedule.trainingShedule.error} />) :
+      {shedule.trainingShedule.error ? (
+        <ErrorLocal error={shedule.trainingShedule.error} />
+      ) : (
         shedule.trainingShedule.result.map((group) => {
           return (
             <div key={group.id} className={styles.group}>
-              <div className={styles.group_name}>
-                {group.name}
-              </div>
+              <div className={styles.group_name}>{group.name}</div>
               {weekDays.map((dayName) => {
                 const day = group.days.find((d) => d.id === dayName);
                 return day ? (
@@ -48,12 +38,11 @@ export const SheduleTable = () => {
                     <div className={styles.empty_day} />
                   </div>
                 );
-              })
-              }
+              })}
             </div>
           );
         })
-      }
+      )}
     </div>
   );
 };

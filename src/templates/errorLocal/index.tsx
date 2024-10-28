@@ -1,4 +1,4 @@
-import styles from "./index.module.css";
+import styles from './index.module.css';
 
 export const ErrorLocal = ({ error }: { error: string }) => {
   return (
@@ -10,4 +10,4 @@ export const ErrorLocal = ({ error }: { error: string }) => {
       </p>
     </div>
   );
-}
+};

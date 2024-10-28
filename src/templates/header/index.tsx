@@ -1,29 +1,31 @@
-import { Link } from "react-router-dom";
-import Logo from '../../assets/logo.svg?react'
-import Vk from '../../assets/vk.svg?react'
-import T from '../../assets/t.svg?react'
-import Inst from '../../assets/inst.svg?react'
-import { logout } from '../../api'
-import { useContext } from 'react'
-import { AuthContext } from '../../context'
-import styles from './index.module.css'
+import { Link } from 'react-router-dom';
+import Logo from '../../assets/logo.svg?react';
+import Vk from '../../assets/vk.svg?react';
+import T from '../../assets/t.svg?react';
+import Inst from '../../assets/inst.svg?react';
+import { logout } from '../../api';
+import { useContext } from 'react';
+import { AuthContext } from '../../context';
+import styles from './index.module.css';
 
 export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen }) => {
   const authCtx = useContext(AuthContext);
   const isAuth = !!authCtx.user;
 
-  const onLogout = () => { 
+  const onLogout = () => {
     logout();
     document.cookie = `magicVolley=;`;
     if (authCtx.setUser) {
       authCtx.setUser(null);
     }
-  }
+  };
   return (
     <div className={styles.header}>
       <ul className={styles.menu}>
         <li>
-          <Link to="/"><Logo /></Link>
+          <Link to="/">
+            <Logo />
+          </Link>
         </li>
         <li>
           <Link to="/weekendCamps">Кемпы на выходные</Link>
@@ -46,8 +48,9 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpe
         <T />
         <Inst />
       </div>
-      <button className={styles.button} onClick={isAuth ? onLogout : toggleAuthOpen}>{isAuth ? 'Выйти' : 'Войти'}</button>
+      <button className={styles.button} onClick={isAuth ? onLogout : toggleAuthOpen}>
+        {isAuth ? 'Выйти' : 'Войти'}
+      </button>
     </div>
   );
-
-}
+};
