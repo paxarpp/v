@@ -123,7 +123,7 @@ export const CoachEdit: React.FC<{
             <span className={styles.image_name}>{currentCoach?.name}</span>
             <span className={styles.text_align_l}>
               <img src={`${baseSrc}${currentCoach?.mainImage?.data}`} alt="" className={styles.upload_coach_img} />
-              <img src={`${}${currentCoach?.mainImage?.data}`} alt="" className={styles.upload_coach_img} />
+              <img src={`${currentCoach?.mainImage?.data}`} alt="" className={styles.upload_coach_img} />
               <BasketIcon onClick={deleteImg} />
             </span>
           </>
