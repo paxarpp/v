@@ -78,7 +78,7 @@ export const CoachEdit: React.FC<{
         setCoach((prevCoach) => ({
           ...(prevCoach as ICoach),
           mainImage: {
-            data: base64.replace(baseSrc, ''),
+            data: base64,
             typeEntity: 'COACH' as const,
             name: file.name,
             contentType: file.type,
