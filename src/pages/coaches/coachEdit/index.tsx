@@ -78,7 +78,7 @@ export const CoachEdit: React.FC<{
         setCoach((prevCoach) => ({
           ...(prevCoach as ICoach),
           mainImage: {
-            data: base64.replace(baseSrc, ''),
+            data: base64.replace(baseSrc(file.type), ''),
             typeEntity: 'COACH' as const,
             name: file.name,
             contentType: file.type,
@@ -122,8 +122,7 @@ export const CoachEdit: React.FC<{
           <>
             <span className={styles.image_name}>{currentCoach?.name}</span>
             <span className={styles.text_align_l}>
-              <img src={`${baseSrc}${currentCoach?.mainImage?.data}`} alt="" className={styles.upload_coach_img} />
-              <img src={`${currentCoach?.mainImage?.data}`} alt="" className={styles.upload_coach_img} />
+              <img src={`${baseSrc(currentCoach?.mainImage?.contentType)}${currentCoach?.mainImage?.data}`} alt="" className={styles.upload_coach_img} />
               <BasketIcon onClick={deleteImg} />
             </span>
           </>

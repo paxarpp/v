@@ -50,7 +50,7 @@ export const CoachesList: React.FC = () => {
       {main.coaches.map((coach) => {
         return (
           <div key={coach.id} className={styles.coach_card}>
-            <img src={`${baseSrc}${coach.mainImage?.data}`} alt={coach.name} className={styles.coach_img} />
+            <img src={`${baseSrc(coach.mainImage?.contentType)}${coach.mainImage?.data}`} alt={coach.name} className={styles.coach_img} />
             <h2>{coach.name}</h2>
             <ul className={styles.coach_infos}>
               {coach.infos.map((info) => (

@@ -1,1 +1,1 @@
-export const baseSrc = 'data:image/jpeg;base64,';
+export const baseSrc = (type?: string) => `data:${type};base64,`;
