@@ -4,8 +4,10 @@ import { ICoach } from '../interfaces';
 import { baseSrc } from '../../../constants';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { AuthContext } from '../../../context';
-import PencilIcon from '../../../assets/pencil.svg?react';
+import Setting from '../../../assets/setting.svg?react';
+import Avatar from '../../../assets/avatar.svg?react';
 import { CoachEdit } from '../coachEdit';
+import { CoachProfile } from '../coachProfile';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
@@ -17,12 +19,12 @@ export const CoachesList: React.FC = () => {
   };
   const authCtx = useContext(AuthContext);
   const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
-  const [coachId, setCoachId] = useState<string | null>(null);
+  const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const openProfile = (id: string) => {
-    setCoachId(id);
+  const openProfile = (coach: ICoach) => {
+    setCoach(coach);
   };
 
   const openEditCoach = (id: string) => {
@@ -31,7 +33,7 @@ export const CoachesList: React.FC = () => {
   };
 
   const closeCoach = () => {
-    setCoachId(null);
+    setCoach(null);
   };
   const closeCoachEdit = () => {
     setEditCoachId(null);
@@ -47,10 +49,19 @@ export const CoachesList: React.FC = () => {
   ) : (
     <div className={styles.coaches_list}>
       <CoachEdit coachId={editCoachId} onClose={closeCoachEdit} isOpen={isOpen} />
+      <CoachProfile coach={coachProfile} onClose={closeCoach} />
       {main.coaches.map((coach) => {
         return (
           <div key={coach.id} className={styles.coach_card}>
-            <img src={`${baseSrc(coach.mainImage?.contentType)}${coach.mainImage?.data}`} alt={coach.name} className={styles.coach_img} />
+            {coach.mainImage?.data ? (
+              <img
+                src={`${baseSrc(coach.mainImage.contentType)}${coach.mainImage.data}`}
+                alt={coach.name}
+                className={styles.coach_img}
+              />
+            ) : (
+              <Avatar className={styles.coach_img} />
+            )}
             <h2>{coach.name}</h2>
             <ul className={styles.coach_infos}>
               {coach.infos.map((info) => (
@@ -58,10 +69,10 @@ export const CoachesList: React.FC = () => {
               ))}
             </ul>
             <div className={styles.coach_card_footer}>
-              <button className={styles.button_profile} onClick={() => openProfile(coach.id)}>
+              <button className={styles.button_profile} onClick={() => openProfile(coach)}>
                 Профайл
               </button>
-              {isAdmin ? <PencilIcon onClick={() => openEditCoach(coach.id)} /> : null}
+              {isAdmin ? <Setting onClick={() => openEditCoach(coach.id)} /> : null}
             </div>
           </div>
         );

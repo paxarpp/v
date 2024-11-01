@@ -1,10 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
+import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
 import BasketIcon from '../../../assets/basket.svg?react';
-import { getCoach, updateCoach } from '../../../api';
+import { getCoach, updateCoach, deleteCoach as deleteCch, creatorRequest } from '../../../api';
 import { ICoach } from '../interfaces';
 import styles from '../index.module.css';
 import { baseSrc } from '../../../constants';
+import { AuthContext } from '../../../context';
 
 const readFile = (file): Promise<string> => {
   return new Promise((resolve) => {
@@ -23,26 +25,23 @@ export const CoachEdit: React.FC<{
   coachId: string | null;
   onClose: () => void;
 }> = ({ isOpen, coachId, onClose }) => {
+  const authCtx = useContext(AuthContext);
   const [currentCoach, setCoach] = useState<ICoach | null>(null);
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+
+  const revalidator = useRevalidator();
 
   useEffect(() => {
     if (isOpen && coachId) {
       // edit
       const getC = async (id: string) => {
-        // setLoading(true);
-        setCoach({ id, name: '', infos: '', promo: '', mainImage: null });
-        const resp: {
-          data?: {
-            result: ICoach;
-          };
-        } = await getCoach<ICoach>(id);
-        if (resp.data) {
-          setCoach(resp.data.result);
+        const axiosCall = creatorRequest(() => authCtx.setUser!(null));
+        setCoach({ id, name: '', infos: [], promo: '', mainImage: null });
+        const { result } = await axiosCall<ICoach>(getCoach(id));
+        if (result.data.result) {
+          setCoach(result.data.result);
         }
-        // setLoading(false);
-        // setError(error);
       };
       getC(coachId);
     } else if (isOpen && !coachId) {
@@ -61,14 +60,30 @@ export const CoachEdit: React.FC<{
   const saveCoach = () => {
     const saveC = async () => {
       if (currentCoach) {
-        const { result, error } = await updateCoach<string>(currentCoach);
+        const axiosCall = creatorRequest(() => authCtx.setUser!(null));
+        const { error } = await axiosCall<string>(updateCoach(currentCoach));
         if (!error) {
           onClose();
+          revalidator.revalidate();
         }
       }
     };
     saveC();
   };
+
+  const deleteCoach = () => {
+    const delC = async () => {
+      if (currentCoach) {
+        const axiosCall = creatorRequest(() => authCtx.setUser!(null));
+        const { error } = await axiosCall<boolean>(deleteCch(currentCoach.id));
+        if (!error) {
+          onClose();
+          revalidator.revalidate();
+        }
+      }
+    };
+    delC();
+  }
 
   const onChangeImage = (e) => {
     const imageConverter = async () => {
@@ -101,8 +116,11 @@ export const CoachEdit: React.FC<{
       close={onClose}
       footer={
         <div className={styles.modal_footer}>
-          <button onClick={saveCoach} className={styles.img_upload}>
+          <button onClick={saveCoach} className={styles.button}>
             {'Сохранить'}
+          </button>
+          <button onClick={deleteCoach} className={styles.button}>
+            {'Удалить карточку тренера'}
           </button>
         </div>
       }
@@ -111,7 +129,7 @@ export const CoachEdit: React.FC<{
       <div className={styles.edit_coach_modal}>
         <span className={styles.text_align_l}>
           <span className={styles.img_label}>{'Фото тренера'}</span>
-          <button onClick={onBtnImg} className={styles.img_upload}>
+          <button onClick={onBtnImg} className={styles.button}>
             Выбрать файл
           </button>
         </span>
@@ -122,7 +140,11 @@ export const CoachEdit: React.FC<{
           <>
             <span className={styles.image_name}>{currentCoach?.name}</span>
             <span className={styles.text_align_l}>
-              <img src={`${baseSrc(currentCoach?.mainImage?.contentType)}${currentCoach?.mainImage?.data}`} alt="" className={styles.upload_coach_img} />
+              <img
+                src={`${baseSrc(currentCoach?.mainImage?.contentType)}${currentCoach?.mainImage?.data}`}
+                alt=""
+                className={styles.upload_coach_img}
+              />
               <BasketIcon onClick={deleteImg} />
             </span>
           </>

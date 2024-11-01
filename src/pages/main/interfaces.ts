@@ -2,7 +2,6 @@ export interface IMediaBase {
   contentType: string;
   id: string;
   name: string;
-  fileName: string;
   size: number;
 }
 
