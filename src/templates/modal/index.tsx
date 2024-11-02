@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren } from 'react';
 import styles from './index.module.css';
 
 interface IProps {
@@ -19,38 +19,22 @@ export const Modal: React.FC<PropsWithChildren<IProps>> = ({
   header,
   classNameModal,
 }) => {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [stylesM, setStylesM] = useState({ left: 0, top: 0 });
-
-  useEffect(() => {
-    if (ref?.current) {
-      const { height, width } = ref.current.getBoundingClientRect();
-      setStylesM({
-        left: (window.innerWidth - width) / 2,
-        top: (window.innerHeight - height) / 2,
-      });
-    }
-  }, [isOpen]);
-
   return isOpen ? (
-    <div className={styles.modal_wrap} style={stylesM}>
+    <div className={styles.modal_wrap}>
       <div className={styles.modal_back} onClick={close ? close : undefined} />
       <div
-        className={`${styles.modal} ${classNameModal ? classNameModal : ''}`}
-        ref={ref}
+        className={`${styles.modal} ${styles.modal_flex} ${classNameModal ? classNameModal : ''}`}
       >
-        <div className={styles.modal_flex}>
-          <div className={styles.header}>
-            {header ? header : <span className={styles.title}>{title}</span>}
-            {close && header ? (
-              <span onClick={close} className={styles.close_icon}>
-                x
-              </span>
-            ) : null}
-          </div>
-          <div className={styles.content}>{children}</div>
-          {footer ? <div className={styles.footer}>{footer}</div> : null}
+        <div className={styles.header}>
+          {header ? header : <span className={styles.title}>{title}</span>}
+          {close && header ? (
+            <span onClick={close} className={styles.close_icon}>
+              x
+            </span>
+          ) : null}
         </div>
+        <div className={styles.content}>{children}</div>
+        {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>
   ) : null;
