@@ -115,6 +115,7 @@ export const CoachEdit: React.FC<{
 
   return (
     <Modal
+      classNameModal={styles.edit_coach_modal}
       isOpen={isOpen}
       close={onClose}
       footer={
@@ -129,7 +130,7 @@ export const CoachEdit: React.FC<{
       }
       header={<div className={styles.modal_header}>{'Карточка тренера'}</div>}
     >
-      <div className={styles.edit_coach_modal}>
+      <div className={styles.edit_coach_content}>
         <span className={styles.text_align_l}>
           <span className={styles.img_label}>{'Фото тренера'}</span>
           <button onClick={onBtnImg} className={styles.button}>

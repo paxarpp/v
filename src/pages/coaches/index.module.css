@@ -76,12 +76,33 @@
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
 }
 
+.profile_coach_modal,
 .edit_coach_modal {
   display: flex;
   flex-flow: column nowrap;
+  overflow: hidden;
+}
+
+.profile_coach_modal {
+  width: 420px;
+  height: 666px;
+  background: rgba(136, 136, 136, 1);
+}
+
+.edit_coach_modal {
   width: 1000px;
-  height: 400px;
+  height: 666px;
+}
+
+.edit_coach_content {
+  display: flex;
+  flex-flow: column nowrap;
   overflow: auto;
+  height: 430px;
+}
+
+.profile_coach_content {
+  overflow: hidden;
 }
 
 .upload_coach_img {
@@ -97,7 +118,7 @@
   height: 120px;
   width: 120px;
   border: 1px dashed gray;
-  padding: 60px 0;
+  padding: 20px 0;
 }
 
 .img_label {
@@ -138,7 +159,7 @@
 }
 
 .modal_header {
-  padding: 40px 60px;
+  padding: 30px 50px;
   border-bottom: 2px solid rgba(255, 255, 255, 1);
   font-family: Open Sans;
   font-size: 40px;
@@ -157,4 +178,31 @@
   height: 40px;
   width: 40px;
   cursor: pointer;
+}
+
+.promo_area {
+  display: block;
+  background: rgba(212, 212, 212, 1);
+  margin: 0 auto 30px auto;
+  height: 180px;
+  width: 400px;
+  border-radius: 8px;
+}
+
+.profile_coach_img,
+.profile_stub_img {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto 20px auto;
+  border-radius: 8px;
+}
+
+.profile_name {
+  width: 400px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  margin: 0 auto;
+  text-align: left;
+  color: rgba(212, 212, 212, 1);
 }
