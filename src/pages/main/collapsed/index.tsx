@@ -56,7 +56,11 @@ export const Collapsed: React.FC = () => {
     openModal(false);
   };
 
-  const handleSubmit = async (data: { question: string; answer: string; id?: string }) => {
+  const handleSubmit = async (data: {
+    question: string;
+    answer: string;
+    id?: string;
+  }) => {
     setLoading(true);
     const { error } = await updateQuestion(data);
     setLoading(false);
@@ -69,7 +73,11 @@ export const Collapsed: React.FC = () => {
 
   return (
     <>
-      <Modal isOpen={isOpen} close={closeModal} title={question?.id ? 'Редактировать вопрос' : 'Добавить вопрос'}>
+      <Modal
+        isOpen={isOpen}
+        close={closeModal}
+        title={question?.id ? 'Редактировать вопрос' : 'Добавить вопрос'}
+      >
         {isLoading ? 'Загрузка...' : null}
         {error ? (
           error
@@ -111,19 +119,34 @@ export const Collapsed: React.FC = () => {
       </Modal>
       <div className={styles.asked_questions}>
         <h2 className={styles.main_title}>
-          Часто задаваемые вопросы{isAdmin ? <button onClick={() => onEdit()}>Добавить</button> : null}
+          Часто задаваемые вопросы
+          {isAdmin ? <button onClick={() => onEdit()}>Добавить</button> : null}
         </h2>
         <div>
           {main.questions.map((item) => {
             return (
-              <div key={item.id} className={styles.question} onClick={onToggle(item.id)}>
+              <div
+                key={item.id}
+                className={styles.question}
+                onClick={onToggle(item.id)}
+              >
                 <div className={styles.question_name_wrapper}>
                   <span className={styles.question_name}>{item.question}</span>
-                  {isAdmin ? <button onClick={() => onDelete(item.id)}>Удалить</button> : null}
-                  {isAdmin ? <button onClick={() => onEdit(item.id)}>Редактировать</button> : null}
+                  {isAdmin ? (
+                    <button onClick={() => onDelete(item.id)}>Удалить</button>
+                  ) : null}
+                  {isAdmin ? (
+                    <button onClick={() => onEdit(item.id)}>
+                      Редактировать
+                    </button>
+                  ) : null}
                   {openId === item.id ? <OpenedIcon /> : <ClosedIcon />}
                 </div>
-                <div className={openId === item.id ? styles.info_open : styles.info_close}>
+                <div
+                  className={
+                    openId === item.id ? styles.info_open : styles.info_close
+                  }
+                >
                   <span className={styles.answer}>{item.answer}</span>
                 </div>
               </div>

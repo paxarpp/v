@@ -65,7 +65,10 @@ export const updateQuestion = async <T>(body: {
 }): Promise<{ result: T; error: string }> => {
   try {
     if (body.id) {
-      const result: T = await axios.put(BASE_URL + `/questions/${body.id}`, body);
+      const result: T = await axios.put(
+        BASE_URL + `/questions/${body.id}`,
+        body,
+      );
       return { result, error: '' };
     } else {
       const result: T = await axios.post(BASE_URL + `/questions`, body);
@@ -75,7 +78,9 @@ export const updateQuestion = async <T>(body: {
     return { error: (e as { message: string }).message, result: {} as T };
   }
 };
-export const getQuestion = async <T>(id: string): Promise<{ question: T; error: string }> => {
+export const getQuestion = async <T>(
+  id: string,
+): Promise<{ question: T; error: string }> => {
   try {
     const {
       data: { result },
@@ -86,7 +91,10 @@ export const getQuestion = async <T>(id: string): Promise<{ question: T; error: 
   }
 };
 
-export const login = async <T>(username: string, password: string): Promise<T> => {
+export const login = async <T>(
+  username: string,
+  password: string,
+): Promise<T> => {
   try {
     return await axios.post(BASE_URL + '/auth/login', {
       username: username,
@@ -147,14 +155,21 @@ export const creatorRequest =
           logout();
         }
         return {
-          error: (error.response?.data.message as string) || 'Server Unavailable',
+          error:
+            (error.response?.data.message as string) || 'Server Unavailable',
           result: {} as AxiosResponse<{ result: T }>,
         };
       }
 
       if (error instanceof Error) {
-        return { error: error.message, result: {} as AxiosResponse<{ result: T }> };
+        return {
+          error: error.message,
+          result: {} as AxiosResponse<{ result: T }>,
+        };
       }
-      return { error: 'Server Unavailable', result: {} as AxiosResponse<{ result: T }> };
+      return {
+        error: 'Server Unavailable',
+        result: {} as AxiosResponse<{ result: T }>,
+      };
     }
   };

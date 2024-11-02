@@ -6,4 +6,7 @@ interface IAuthContext {
   setUser: ((user: IUser | null) => void) | null;
 }
 
-export const AuthContext = createContext<IAuthContext>({ user: null, setUser: null });
+export const AuthContext = createContext<IAuthContext>({
+  user: null,
+  setUser: null,
+});

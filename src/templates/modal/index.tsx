@@ -9,7 +9,14 @@ interface IProps {
   close?: () => void;
 }
 
-export const Modal: React.FC<PropsWithChildren<IProps>> = ({ isOpen, title, footer, children, close, header }) => {
+export const Modal: React.FC<PropsWithChildren<IProps>> = ({
+  isOpen,
+  title,
+  footer,
+  children,
+  close,
+  header,
+}) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [stylesM, setStylesM] = useState({ left: 0, top: 0 });
 

@@ -13,7 +13,9 @@ export const Contacts = () => {
         <div className={styles.contact_wrap}>
           <div className={styles.contact}>
             <Phone />
-            <span>+7 (996) 910-30-47, +7 (996) 910-30-47 Пн-Вс с 10:00 до 21:00</span>
+            <span>
+              +7 (996) 910-30-47, +7 (996) 910-30-47 Пн-Вс с 10:00 до 21:00
+            </span>
           </div>
           <div className={styles.contact}>
             <Mail />
@@ -25,7 +27,11 @@ export const Contacts = () => {
         </div>
         <div className={styles.manager_wrap}>
           <div className={styles.img_wrap}>
-            <img className={styles.manager} src={'src/assets/manager.png'} alt="manager" />
+            <img
+              className={styles.manager}
+              src={'src/assets/manager.png'}
+              alt="manager"
+            />
           </div>
           <span>Ваш менеджер – Татьяна</span>
         </div>

@@ -29,7 +29,9 @@ export const Price = () => {
                       <div key={p.id} className={styles.price_card}>
                         <span>{p.title}</span>
                         {p.subTitle ? (
-                          <span className={styles.price_message}>{p.subTitle}</span>
+                          <span className={styles.price_message}>
+                            {p.subTitle}
+                          </span>
                         ) : (
                           <span className={styles.price_message_empty} />
                         )}

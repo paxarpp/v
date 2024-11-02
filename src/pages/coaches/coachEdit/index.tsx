@@ -2,7 +2,12 @@ import { useEffect, useState, useRef, useContext } from 'react';
 import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
 import BasketIcon from '../../../assets/basket.svg?react';
-import { getCoach, updateCoach, deleteCoach as deleteCch, creatorRequest } from '../../../api';
+import {
+  getCoach,
+  updateCoach,
+  deleteCoach as deleteCch,
+  creatorRequest,
+} from '../../../api';
 import { ICoach } from '../interfaces';
 import styles from '../index.module.css';
 import { baseSrc } from '../../../constants';
@@ -83,7 +88,7 @@ export const CoachEdit: React.FC<{
       }
     };
     delC();
-  }
+  };
 
   const onChangeImage = (e) => {
     const imageConverter = async () => {
@@ -134,7 +139,12 @@ export const CoachEdit: React.FC<{
           </button>
         </span>
         <form ref={formRef}>
-          <input className={styles.input_image} type="file" onChange={onChangeImage} ref={imageRef} />
+          <input
+            className={styles.input_image}
+            type="file"
+            onChange={onChangeImage}
+            ref={imageRef}
+          />
         </form>
         {currentCoach?.mainImage ? (
           <>
@@ -155,7 +165,10 @@ export const CoachEdit: React.FC<{
         <input
           value={currentCoach?.name}
           onChange={(e) => {
-            setCoach((prevCoach) => ({ ...(prevCoach as ICoach), name: e.target.value }));
+            setCoach((prevCoach) => ({
+              ...(prevCoach as ICoach),
+              name: e.target.value,
+            }));
           }}
           className={styles.input_field}
         />
@@ -163,7 +176,10 @@ export const CoachEdit: React.FC<{
         <textarea
           value={(currentCoach?.infos || []).join(';')}
           onChange={(e) => {
-            setCoach((prevCoach) => ({ ...(prevCoach as ICoach), infos: e.target.value.split(';') }));
+            setCoach((prevCoach) => ({
+              ...(prevCoach as ICoach),
+              infos: e.target.value.split(';'),
+            }));
           }}
           rows={4}
           cols={5}
@@ -174,7 +190,10 @@ export const CoachEdit: React.FC<{
           className={styles.input_field}
           value={currentCoach?.promo}
           onChange={(e) => {
-            setCoach((prevCoach) => ({ ...(prevCoach as ICoach), promo: e.target.value }));
+            setCoach((prevCoach) => ({
+              ...(prevCoach as ICoach),
+              promo: e.target.value,
+            }));
           }}
         />
       </div>

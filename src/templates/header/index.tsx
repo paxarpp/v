@@ -8,7 +8,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context';
 import styles from './index.module.css';
 
-export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpen }) => {
+export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
+  toggleAuthOpen,
+}) => {
   const authCtx = useContext(AuthContext);
   const isAuth = !!authCtx.user;
 
@@ -48,7 +50,10 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({ toggleAuthOpe
         <T />
         <Inst />
       </div>
-      <button className={styles.button} onClick={isAuth ? onLogout : toggleAuthOpen}>
+      <button
+        className={styles.button}
+        onClick={isAuth ? onLogout : toggleAuthOpen}
+      >
         {isAuth ? 'Выйти' : 'Войти'}
       </button>
     </div>

@@ -48,7 +48,11 @@ export const CoachesList: React.FC = () => {
     <ErrorLocal error={main.error} />
   ) : (
     <div className={styles.coaches_list}>
-      <CoachEdit coachId={editCoachId} onClose={closeCoachEdit} isOpen={isOpen} />
+      <CoachEdit
+        coachId={editCoachId}
+        onClose={closeCoachEdit}
+        isOpen={isOpen}
+      />
       <CoachProfile coach={coachProfile} onClose={closeCoach} />
       {main.coaches.map((coach) => {
         return (
@@ -69,10 +73,15 @@ export const CoachesList: React.FC = () => {
               ))}
             </ul>
             <div className={styles.coach_card_footer}>
-              <button className={styles.button_profile} onClick={() => openProfile(coach)}>
+              <button
+                className={styles.button_profile}
+                onClick={() => openProfile(coach)}
+              >
                 Профайл
               </button>
-              {isAdmin ? <Setting onClick={() => openEditCoach(coach.id)} /> : null}
+              {isAdmin ? (
+                <Setting onClick={() => openEditCoach(coach.id)} />
+              ) : null}
             </div>
           </div>
         );

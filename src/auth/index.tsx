@@ -39,7 +39,11 @@ export const Auth: React.FC<{
       }
     >
       <div className={styles.input_wrap}>
-        <input className={styles.modal_input} value={username} onChange={onChange} />
+        <input
+          className={styles.modal_input}
+          value={username}
+          onChange={onChange}
+        />
       </div>
       <input
         type="password"

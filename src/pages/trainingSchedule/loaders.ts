@@ -15,7 +15,10 @@ const loaderPrice = async () => {
 };
 
 export const loaderPageShedule = async () => {
-  const [trainingShedule, price] = await Promise.all([loaderShedule(), loaderPrice()]);
+  const [trainingShedule, price] = await Promise.all([
+    loaderShedule(),
+    loaderPrice(),
+  ]);
   const shedule = {
     ...trainingShedule,
     ...price,

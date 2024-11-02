@@ -9,17 +9,23 @@ export const BlockIcons = () => {
       <div className={styles.block_icon}>
         <BestGroup />
         <span className={styles.icon_title}>Лучшая команда</span>
-        <span className={styles.icon_sub_title}>Работаем 24/7 для общего результата</span>
+        <span className={styles.icon_sub_title}>
+          Работаем 24/7 для общего результата
+        </span>
       </div>
       <div className={styles.block_icon_between}>
         <RightWay />
         <span className={styles.icon_title}>Правильный подход</span>
-        <span className={styles.icon_sub_title}>Ставим цели и идем вместе к ним</span>
+        <span className={styles.icon_sub_title}>
+          Ставим цели и идем вместе к ним
+        </span>
       </div>
       <div className={styles.block_icon}>
         <Actions />
         <span className={styles.icon_title}>Действия, а не слова</span>
-        <span className={styles.icon_sub_title}>Слова ценятся тогда, когда совпадают с действиями</span>
+        <span className={styles.icon_sub_title}>
+          Слова ценятся тогда, когда совпадают с действиями
+        </span>
       </div>
     </div>
   );

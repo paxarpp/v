@@ -8,7 +8,11 @@ export const CoachProfile: React.FC<{
   onClose: () => void;
 }> = ({ coach, onClose }) => {
   return (
-    <Modal isOpen={!!coach} close={onClose} header={<div className={styles.modal_header}>{'Карточка тренера'}</div>}>
+    <Modal
+      isOpen={!!coach}
+      close={onClose}
+      header={<div className={styles.modal_header}>{'Карточка тренера'}</div>}
+    >
       <div className={styles.edit_coach_modal}>
         {coach?.mainImage ? (
           <>

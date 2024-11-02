@@ -24,7 +24,9 @@ export const CampsScroller: React.FC = () => {
   const onRight = () => {
     if (!campsLength) return;
     if (campsLength - lastIndex !== 1) {
-      setStartIndex((prev) => (prev === campsLength - 2 ? campsLength - 2 : prev + 1));
+      setStartIndex((prev) =>
+        prev === campsLength - 2 ? campsLength - 2 : prev + 1,
+      );
       setLastIndex((prev) => (prev === campsLength ? campsLength : prev + 1));
     }
   };
@@ -33,8 +35,12 @@ export const CampsScroller: React.FC = () => {
     <div className={styles.camps_wrap}>
       <h2 className={styles.camps_header}>Ближайшие кемпы</h2>
       <div className={styles.camps_scroller}>
-        {main.camps.length ? <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} /> : null}
-        {main.camps.length ? <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} /> : null}
+        {main.camps.length ? (
+          <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
+        ) : null}
+        {main.camps.length ? (
+          <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+        ) : null}
         {main.camps.length ? (
           main.camps
             .filter((_, i) => i >= startIndex && i <= lastIndex)
