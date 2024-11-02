@@ -1,4 +1,9 @@
-import { getMediaAll, getCampsAll, getCoachesAll, getQuestionAll } from '../../api';
+import {
+  getMediaAll,
+  getCampsAll,
+  getCoachesAll,
+  getQuestionAll,
+} from '../../api';
 import { IMedia, ICamp, ICoachExt, IQuestion } from './interfaces';
 
 const loaderMedia = async () => {

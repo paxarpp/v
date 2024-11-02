@@ -4,7 +4,13 @@ import { Days } from './days';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import styles from '../index.module.css';
 
-const weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'] as const;
+const weekDays = [
+  'MONDAY',
+  'TUESDAY',
+  'WEDNESDAY',
+  'THURSDAY',
+  'FRIDAY',
+] as const;
 
 export const SheduleTable = () => {
   const { shedule } = useLoaderData() as {

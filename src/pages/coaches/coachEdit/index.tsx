@@ -18,7 +18,7 @@ const readFile = (file): Promise<string> => {
     if (file.size) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        resolve(e.target.result as string);
+        resolve(e.target?.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -49,8 +49,6 @@ export const CoachEdit: React.FC<{
         }
       };
       getC(coachId);
-    } else if (isOpen && !coachId) {
-      // add
     }
     return () => {
       setCoach(null);
