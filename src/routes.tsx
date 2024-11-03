@@ -3,6 +3,8 @@ import { ErrorPage } from './error-page';
 import { Coaches } from './pages/coaches';
 import { loaderPageCoaches } from './pages/coaches/loaders';
 import { Main } from './pages/main';
+import { LongCamp } from './pages/longCamp';
+import { ShotCamp } from './pages/shotCamp';
 import { Shedule } from './pages/trainingSchedule';
 import { loaderPageMain } from './pages/main/loaders';
 import { loaderPageShedule } from './pages/trainingSchedule/loaders';
@@ -32,11 +34,13 @@ export const router = createBrowserRouter([
       },
       {
         path: '/weekendCamps',
-        element: <h2>Кемпы на выходные</h2>,
+        element: <ShotCamp />,
+        errorElement: <ErrorPage />,
       },
       {
         path: '/longCamps',
-        element: <h2>Кемпы длинные</h2>,
+        element: <LongCamp />,
+        errorElement: <ErrorPage />,
       },
       {
         path: '/trainingSchedule',

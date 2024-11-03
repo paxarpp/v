@@ -21,15 +21,15 @@ export const CoachesList: React.FC = () => {
   const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [openRank, setIsOpen] = useState<number | null>(null);
 
   const openProfile = (coach: ICoach) => {
     setCoach(coach);
   };
 
-  const openEditCoach = (id: string) => {
+  const openEditCoach = (id: string, rank: number) => {
     setEditCoachId(id);
-    setIsOpen(true);
+    setIsOpen(rank);
   };
 
   const closeCoach = () => {
@@ -37,12 +37,25 @@ export const CoachesList: React.FC = () => {
   };
   const closeCoachEdit = () => {
     setEditCoachId(null);
-    setIsOpen(false);
+    setIsOpen(null);
   };
 
-  const addCoach = () => {
-    setIsOpen(true);
+  const addCoach = (rank: number) => {
+    setIsOpen(rank);
   };
+
+  const coachesByRank = main.coaches.reduce((acc, coach, index) => {
+    if (index === 0) {
+      acc.push([coach]);
+    } else if (index === 1) {
+      acc.push([coach]);
+    } else if (index === 2) {
+      acc[1].push(coach);
+    } else {
+      acc[2].push(coach);
+    }
+    return acc;
+  }, [] as ICoach[][])
 
   return main.error ? (
     <ErrorLocal error={main.error} />
@@ -51,48 +64,55 @@ export const CoachesList: React.FC = () => {
       <CoachEdit
         coachId={editCoachId}
         onClose={closeCoachEdit}
-        isOpen={isOpen}
+        openRank={openRank}
       />
       <CoachProfile coach={coachProfile} onClose={closeCoach} />
-      {main.coaches.map((coach) => {
+      {coachesByRank.map((coaches, rank) => {
         return (
-          <div key={coach.id} className={styles.coach_card}>
-            {coach.mainImage?.data ? (
-              <img
-                src={`${baseSrc(coach.mainImage.contentType)}${coach.mainImage.data}`}
-                alt={coach.name}
-                className={styles.coach_img}
-              />
-            ) : (
-              <Avatar className={styles.coach_img} />
-            )}
-            <h2>{coach.name}</h2>
-            <ul className={styles.coach_infos}>
-              {coach.infos.map((info) => (
-                <li key={info}>{info}</li>
-              ))}
-            </ul>
-            <div className={styles.coach_card_footer}>
-              <button
-                className={styles.button_profile}
-                onClick={() => openProfile(coach)}
-              >
-                Профайл
-              </button>
-              {isAdmin ? (
-                <Setting onClick={() => openEditCoach(coach.id)} />
-              ) : null}
-            </div>
+          <div className={styles.coaches_row_rank}>
+            {coaches.map((coach) => {
+              return (
+                <div key={coach.id} className={styles.coach_card}>
+                  {coach.mainImage?.data ? (
+                    <img
+                      src={`${baseSrc(coach.mainImage.contentType)}${coach.mainImage.data}`}
+                      alt={coach.name}
+                      className={styles.coach_img}
+                    />
+                  ) : (
+                    <Avatar className={styles.coach_img} />
+                  )}
+                  <h2>{coach.name}</h2>
+                  <ul className={styles.coach_infos}>
+                    {coach.infos.map((info) => (
+                      <li key={info}>{info}</li>
+                    ))}
+                  </ul>
+                  <div className={styles.coach_card_footer}>
+                    <button
+                      className={styles.button_profile}
+                      onClick={() => openProfile(coach)}
+                    >
+                      Профайл
+                    </button>
+                    {isAdmin ? (
+                      <Setting onClick={() => openEditCoach(coach.id, rank)} />
+                    ) : null}
+                  </div>
+                </div>
+              );
+            })}
+            {isAdmin ? (
+              <div className={styles.coach_card_add}>
+                <span className={styles.coach_add} onClick={() => addCoach(rank)}>
+                +
+                </span>
+              </div>
+            ) : null}
           </div>
-        );
-      })}
-      {isAdmin ? (
-        <div className={styles.coach_card_add}>
-          <span className={styles.coach_add} onClick={addCoach}>
-            +
-          </span>
-        </div>
-      ) : null}
+        )
+      })
+      }
     </div>
   );
 };

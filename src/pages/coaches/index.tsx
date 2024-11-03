@@ -7,7 +7,7 @@ export const Coaches: React.FC = () => {
   return (
     <div>
       <h1 className={styles.title}>
-        Профессиональный тренерский состав школы волейбола Magic Volley
+        Тренерский состав в школе волейбола Magic Volley
       </h1>
 
       <CoachesList />
