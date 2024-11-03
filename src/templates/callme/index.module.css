@@ -7,22 +7,21 @@
   margin-top: 30px;
 }
 
+.modal_input_long,
 .modal_input {
-  width: 420px;
+  width: 412px;
   height: 88px;
   border-radius: 8px;
-
   font-size: 22px;
   font-weight: 600;
   line-height: 33px;
 }
 
-.mlr_30 {
-  margin-left: 30px;
-  margin-right: 30px;
+.modal_input_long {
+  width: 870px;
 }
 
-.input_wrap {
+.input_wrapper {
   position: relative;
 }
 
@@ -42,4 +41,31 @@
   padding: 50px 50px;
   background: rgba(33, 36, 54, 0.5);
   text-align: center;
+}
+
+.col_inputs {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.row_input {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  width: 870px;
+}
+
+.placeholder {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(136, 136, 136, 1);
+}
+
+.mt_30 {
+  margin-top: 30px;
 }

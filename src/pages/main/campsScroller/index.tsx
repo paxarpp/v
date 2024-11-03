@@ -52,11 +52,12 @@ export const CampsScroller: React.FC = () => {
                     {item.dateStart}-{item.dateEnd}
                   </p>
                   <div className={styles.camp_img_wrap}>
-                    <img
+                    {/* <img
                       src={`${baseSrc(item.mainImage.contentType)}${item.mainImage.data}`}
                       alt="картинка кэмпа"
                       className={styles.camp_img}
-                    />
+                    /> */}
+                    пропала картинка из данных
                   </div>
                   <div className={styles.camp_info}>
                     <button className={styles.button_camp}>Подробнее</button>

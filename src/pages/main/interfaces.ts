@@ -9,10 +9,13 @@ export interface IMedia extends IMediaBase {
   url: string;
 }
 
-export interface IMainImg extends IMediaBase {
+export interface IMainImg {
+  contentType: string;
+  id: string;
+  name: string;
+  size: number;
   typeEntity: ITypeEntity;
   data: string;
-  updateAt: null | string;
   url: string;
 }
 
@@ -21,7 +24,7 @@ export type ITypeEntity = 'COACH';
 export interface ICoach {
   id: string;
   name: string;
-  surename: string;
+  promo: string;
   infos: string[];
   mainImage: IMainImg;
 }
@@ -40,8 +43,6 @@ export interface ICamp {
   countAll: number;
   countFree: number;
   coaches: ICoach[];
-  images: IMedia[];
-  mainImage: IMainImg;
 }
 
 export interface IQuestion {
