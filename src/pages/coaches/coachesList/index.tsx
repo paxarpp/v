@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Suspense, useContext, useState } from 'react';
+import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import { ICoach } from '../interfaces';
 import { baseSrc } from '../../../constants';
 import { ErrorLocal } from '../../../templates/errorLocal';
@@ -11,17 +11,67 @@ import { CoachProfile } from '../coachProfile';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
-  const { main } = useLoaderData() as {
-    main: {
-      coaches: ICoach[];
-      error?: string;
-    };
+  const { coaches, error } = useLoaderData() as {
+    coaches: ICoach[];
+    error?: string;
   };
   const authCtx = useContext(AuthContext);
   const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
   const [openRank, setIsOpen] = useState<number | null>(null);
+
+  const closeCoach = () => {
+    setCoach(null);
+  };
+  const closeCoachEdit = () => {
+    setEditCoachId(null);
+    setIsOpen(null);
+  };
+
+  return error ? (
+    <ErrorLocal error={error} />
+  ) : (
+    <div className={styles.coaches_list}>
+      <CoachEdit
+        coachId={editCoachId}
+        onClose={closeCoachEdit}
+        openRank={openRank}
+      />
+      <CoachProfile coach={coachProfile} onClose={closeCoach} />
+      <Suspense fallback={<CoachesSkeleton />}>
+        <Await resolve={coaches}>
+          <CoachesTemplate
+            isAdmin={isAdmin}
+            setCoach={setCoach}
+            setEditCoachId={setEditCoachId}
+            setIsOpen={setIsOpen}
+          />
+        </Await>
+      </Suspense>
+    </div>
+  );
+};
+
+const CoachesSkeleton = () => {
+  return (
+    <div className={styles.coach_card_add}>
+      <span className={styles.coach_add}>
+        <Avatar />
+      </span>
+    </div>
+  );
+};
+
+const CoachesTemplate: React.FC<{
+  isAdmin: boolean;
+  setCoach: (coach: ICoach | null) => void;
+  setEditCoachId: (id: string) => void;
+  setIsOpen: (rank: number) => void;
+}> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen }) => {
+  const { coaches } = useAsyncValue() as {
+    coaches: ICoach[];
+  };
 
   const openProfile = (coach: ICoach) => {
     setCoach(coach);
@@ -32,19 +82,11 @@ export const CoachesList: React.FC = () => {
     setIsOpen(rank);
   };
 
-  const closeCoach = () => {
-    setCoach(null);
-  };
-  const closeCoachEdit = () => {
-    setEditCoachId(null);
-    setIsOpen(null);
-  };
-
   const addCoach = (rank: number) => {
     setIsOpen(rank);
   };
 
-  const coachesByRank = main.coaches.reduce((acc, coach, index) => {
+  const coachesByRank = coaches.reduce((acc, coach, index) => {
     if (index === 0) {
       acc.push([coach]);
     } else if (index === 1) {
@@ -55,18 +97,10 @@ export const CoachesList: React.FC = () => {
       acc[2].push(coach);
     }
     return acc;
-  }, [] as ICoach[][])
+  }, [] as ICoach[][]);
 
-  return main.error ? (
-    <ErrorLocal error={main.error} />
-  ) : (
-    <div className={styles.coaches_list}>
-      <CoachEdit
-        coachId={editCoachId}
-        onClose={closeCoachEdit}
-        openRank={openRank}
-      />
-      <CoachProfile coach={coachProfile} onClose={closeCoach} />
+  return (
+    <>
       {coachesByRank.map((coaches, rank) => {
         return (
           <div className={styles.coaches_row_rank}>
@@ -104,15 +138,17 @@ export const CoachesList: React.FC = () => {
             })}
             {isAdmin ? (
               <div className={styles.coach_card_add}>
-                <span className={styles.coach_add} onClick={() => addCoach(rank)}>
-                +
+                <span
+                  className={styles.coach_add}
+                  onClick={() => addCoach(rank)}
+                >
+                  +
                 </span>
               </div>
             ) : null}
           </div>
-        )
-      })
-      }
-    </div>
+        );
+      })}
+    </>
   );
 };

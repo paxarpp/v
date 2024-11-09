@@ -1,3 +1,4 @@
+import { defer } from 'react-router-dom';
 import { getCoachesAll } from '../../api';
 import { ICoachExt } from '../main/interfaces';
 
@@ -9,9 +10,5 @@ const loaderCoaches = async () => {
 };
 
 export const loaderPageCoaches = async () => {
-  const coches = await loaderCoaches();
-  const main = {
-    ...coches,
-  };
-  return { main };
+  return defer({ coaches: loaderCoaches() });
 };

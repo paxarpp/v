@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Suspense, useContext, useState } from 'react';
+import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import OpenedIcon from '../../../assets/opened.svg?react';
 import { IQuestion } from '../interfaces';
@@ -11,27 +11,15 @@ import styles from '../index.module.css';
 export const Collapsed: React.FC = () => {
   const authCtx = useContext(AuthContext);
   const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
-  const { main } = useLoaderData() as {
-    main: {
-      questions: IQuestion[];
-    };
+  const { questions } = useLoaderData() as {
+    questions: IQuestion[];
   };
-  const [openId, setIsOpen] = useState<string | null>(null);
+
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [question, setQuestion] = useState<IQuestion>();
 
-  const onToggle = (currentId: string) => () => {
-    setIsOpen(openId === currentId ? null : currentId);
-  };
-
-  const onDelete = (id: string) => {
-    const del = async (id: string) => {
-      deleteQuestion(id);
-    };
-    del(id);
-  };
   const onEdit = (id?: string) => {
     if (id) {
       const getQ = async (id: string) => {
@@ -123,37 +111,66 @@ export const Collapsed: React.FC = () => {
           {isAdmin ? <button onClick={() => onEdit()}>Добавить</button> : null}
         </h2>
         <div>
-          {main.questions.map((item) => {
-            return (
-              <div
-                key={item.id}
-                className={styles.question}
-                onClick={onToggle(item.id)}
-              >
-                <div className={styles.question_name_wrapper}>
-                  <span className={styles.question_name}>{item.question}</span>
-                  {isAdmin ? (
-                    <button onClick={() => onDelete(item.id)}>Удалить</button>
-                  ) : null}
-                  {isAdmin ? (
-                    <button onClick={() => onEdit(item.id)}>
-                      Редактировать
-                    </button>
-                  ) : null}
-                  {openId === item.id ? <OpenedIcon /> : <ClosedIcon />}
-                </div>
-                <div
-                  className={
-                    openId === item.id ? styles.info_open : styles.info_close
-                  }
-                >
-                  <span className={styles.answer}>{item.answer}</span>
-                </div>
-              </div>
-            );
-          })}
+          <Suspense fallback={'Загрузка...'}>
+            <Await resolve={questions}>
+              <QuestionsTemplate isAdmin={isAdmin} onEdit={onEdit} />
+            </Await>
+          </Suspense>
         </div>
       </div>
+    </>
+  );
+};
+
+const QuestionsTemplate: React.FC<{
+  isAdmin: boolean;
+  onEdit: (id?: string) => void;
+}> = ({ isAdmin, onEdit }) => {
+  const { questions } = useAsyncValue() as {
+    questions: IQuestion[];
+  };
+  const [openId, setIsOpen] = useState<string | null>(null);
+
+  const onToggle = (currentId: string) => () => {
+    setIsOpen(openId === currentId ? null : currentId);
+  };
+
+  const onDelete = (id: string) => {
+    const del = async (id: string) => {
+      deleteQuestion(id);
+    };
+    del(id);
+  };
+
+  return (
+    <>
+      {questions.map((item) => {
+        return (
+          <div
+            key={item.id}
+            className={styles.question}
+            onClick={onToggle(item.id)}
+          >
+            <div className={styles.question_name_wrapper}>
+              <span className={styles.question_name}>{item.question}</span>
+              {isAdmin ? (
+                <button onClick={() => onDelete(item.id)}>Удалить</button>
+              ) : null}
+              {isAdmin ? (
+                <button onClick={() => onEdit(item.id)}>Редактировать</button>
+              ) : null}
+              {openId === item.id ? <OpenedIcon /> : <ClosedIcon />}
+            </div>
+            <div
+              className={
+                openId === item.id ? styles.info_open : styles.info_close
+              }
+            >
+              <span className={styles.answer}>{item.answer}</span>
+            </div>
+          </div>
+        );
+      })}
     </>
   );
 };

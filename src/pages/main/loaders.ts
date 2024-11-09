@@ -1,3 +1,4 @@
+import { defer } from 'react-router-dom';
 import {
   getMediaAll,
   getCampsAll,
@@ -33,17 +34,10 @@ const loaderQuestions = async () => {
 };
 
 export const loaderPageMain = async () => {
-  const [medias, coches, camps, questions] = await Promise.all([
-    loaderMedia(),
-    loaderCoaches(),
-    loaderCamps(),
-    loaderQuestions(),
-  ]);
-  const main = {
-    ...medias,
-    ...coches,
-    ...camps,
-    ...questions,
-  };
-  return { main };
+  return defer({
+    medias: await loaderMedia(),
+    coaches: loaderCoaches(),
+    camps: loaderCamps(),
+    questions: loaderQuestions(),
+  });
 };
