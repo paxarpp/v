@@ -1,6 +1,11 @@
+.header_mobile,
 .header {
   display: flex;
   flex-flow: row nowrap;
+}
+
+.header_mobile {
+  justify-content: space-between;
 }
 
 .menu {
@@ -13,11 +18,27 @@
   max-width: 850px;
 }
 
+.menu_popap {
+  display: flex;
+  flex-flow: column nowrap;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0;
+  z-index: 999;
+}
+
+.menu_popap > li {
+  margin: 14px 0;
+}
+
+.menu_popap a,
 .menu a {
   color: white;
   text-decoration: none;
 }
 
+.icons_mobile,
 .icons {
   display: flex;
   align-items: center;
@@ -26,7 +47,11 @@
   justify-content: space-between;
   cursor: pointer;
   width: 188px;
+}
+
+.icons {
   margin-left: auto;
+
 }
 
 .button {
@@ -47,4 +72,19 @@
   align-items: center;
   color: #152355;
   cursor: pointer;
+}
+
+.burger {
+  display: flex;
+  align-items: center;
+}
+
+.popap_menu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: black;
+  width: 300px;
+  opacity: 0.9;
 }
