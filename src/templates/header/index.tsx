@@ -1,33 +1,31 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg?react';
 import Burger from '../../assets/burger.svg?react';
 import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
 import Inst from '../../assets/inst.svg?react';
-import { logout } from '../../api';
-import { AuthContext } from '../../context';
-import styles from './index.module.css';
+import { logout as apiLogout } from '../../api';
+import { useUser } from '../../context';
 import { useDeviceDetect } from '../../hooks';
+import styles from './index.module.css';
 
 export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
   toggleAuthOpen,
 }) => {
-  const authCtx = useContext(AuthContext);
-  const isAuth = !!authCtx.user;
+  const { user, logout } = useUser();
+  const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);
 
   const onLogout = () => {
-    logout();
+    apiLogout();
     document.cookie = `magicVolley=;`;
-    if (authCtx.setUser) {
-      authCtx.setUser(null);
-    }
+    logout();
   };
 
   const togglePopapMenu = () => {
-    openPopapMenu(prev => !prev);
+    openPopapMenu((prev) => !prev);
   };
 
   return isMobile ? (

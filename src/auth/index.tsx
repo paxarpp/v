@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Modal } from '../templates/modal';
+import { login } from '../api';
+import { IUser } from './interface';
+import { useUser } from '../context';
 
 export const Auth: React.FC<{
-  authing: (l: string, p: string) => void;
   onCloseAuth: () => void;
-}> = ({ authing, onCloseAuth }) => {
+  toggleAuthOpen: () => void
+}> = ({ onCloseAuth, toggleAuthOpen }) => {
+  const {
+    signin
+  } = useUser()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const authing = (l: string, p: string) => {
+    const authLogin = async () => {
+      const user = await login<{
+        data?: IUser;
+      }>(l, p);
+      if (user?.data) {
+        signin(user.data);
+        toggleAuthOpen();
+      }
+    };
+    authLogin();
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {

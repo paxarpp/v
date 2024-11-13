@@ -11,7 +11,7 @@ import {
 import { ICoach } from '../interfaces';
 import styles from '../index.module.css';
 import { baseSrc } from '../../../constants';
-import { AuthContext } from '../../../context';
+import { useUser } from '../../../context';
 
 const readFile = (file): Promise<string> => {
   return new Promise((resolve) => {
@@ -30,7 +30,7 @@ export const CoachEdit: React.FC<{
   coachId: string | null;
   onClose: () => void;
 }> = ({ openRank, coachId, onClose }) => {
-  const authCtx = useContext(AuthContext);
+  const { logout } = useUser();
   const [currentCoach, setCoach] = useState<(ICoach & { rank: number }) | null>(
     null,
   );
@@ -43,7 +43,7 @@ export const CoachEdit: React.FC<{
     if (openRank !== null && coachId) {
       // edit
       const getC = async (id: string) => {
-        const axiosCall = creatorRequest(() => authCtx.setUser!(null));
+        const axiosCall = creatorRequest(logout);
         setCoach({
           id,
           name: '',
@@ -72,7 +72,7 @@ export const CoachEdit: React.FC<{
   const saveCoach = () => {
     const saveC = async () => {
       if (currentCoach) {
-        const axiosCall = creatorRequest(() => authCtx.setUser!(null));
+        const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall<string>(
           updateCoach({ ...currentCoach, rank: openRank }),
         );
@@ -88,7 +88,7 @@ export const CoachEdit: React.FC<{
   const deleteCoach = () => {
     const delC = async () => {
       if (currentCoach) {
-        const axiosCall = creatorRequest(() => authCtx.setUser!(null));
+        const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall<boolean>(deleteCch(currentCoach.id));
         if (!error) {
           onClose();

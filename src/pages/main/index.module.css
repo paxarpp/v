@@ -170,6 +170,7 @@
   background-image: url('src/assets/asked_questions.jpg');
   height: 660px;
   overflow: hidden;
+  background-size: cover;
 }
 
 .info_open {

@@ -1,16 +1,16 @@
-import { Suspense, useContext, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import OpenedIcon from '../../../assets/opened.svg?react';
 import { IQuestion } from '../interfaces';
 import { Modal } from '../../../templates/modal';
 import { deleteQuestion, updateQuestion, getQuestion } from '../../../api';
-import { AuthContext } from '../../../context';
+import { useUser } from '../../../context';
 import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
-  const authCtx = useContext(AuthContext);
-  const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
+  const { user } = useUser();
+  const isAdmin = !!user?.roles.includes('ADMIN');
   const { questions } = useLoaderData() as {
     questions: IQuestion[];
   };

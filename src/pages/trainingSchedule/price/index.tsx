@@ -1,8 +1,9 @@
+import { Suspense } from 'react';
 import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import { IPrice } from '../interfaces';
 import { ErrorLocal } from '../../../templates/errorLocal';
+import Ball from '../../../assets/ball.svg?react';
 import styles from '../index.module.css';
-import { Suspense } from 'react';
 
 export const Price = () => {
   const { prices, error } = useLoaderData() as {
@@ -35,19 +36,24 @@ const PriceTemplate = () => {
       {prices.map((pr) => {
         return (
           <div key={pr.id} className={styles.price_item}>
-            {pr.name}
+            <p>{pr.name}</p>
             <div className={styles.price_prices}>
-              {pr.prices.map((p) => {
+              {pr.prices.map((p, index) => {
                 return (
-                  <div key={p.id} className={styles.price_card}>
-                    <span>{p.title}</span>
-                    {p.subTitle ? (
-                      <span className={styles.price_message}>{p.subTitle}</span>
-                    ) : (
-                      <span className={styles.price_message_empty} />
-                    )}
-                    <span>{p.price}</span>
-                  </div>
+                  <>
+                    <div key={p.id} className={styles.price_card}>
+                      <span>{p.title}</span>
+                      {p.subTitle ? (
+                        <span className={styles.price_message}>
+                          {p.subTitle}
+                        </span>
+                      ) : (
+                        <span className={styles.price_message_empty} />
+                      )}
+                      <span>{p.price}</span>
+                    </div>
+                    {index === 0 ? <Ball /> : null}
+                  </>
                 );
               })}
             </div>

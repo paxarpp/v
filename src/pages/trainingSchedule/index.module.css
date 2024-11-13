@@ -3,9 +3,13 @@
   flex-flow: row nowrap;
 }
 
+.shedule_table {
+  overflow: auto;
+}
+
 .group_name {
-  min-width: 270px;
-  height: 116px;
+  min-width: 200px;
+  height: 88px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,11 +22,19 @@
   font-size: 22px;
   font-weight: 600;
   line-height: 33px;
+  @media (min-width: 1280px) {
+    min-width: 230px;
+    height: 100px;
+  }
+  @media (min-width: 1400px) {
+    min-width: 270px;
+    height: 116px;
+  }
 }
 
 .group_day {
-  min-width: 240px;
-  height: 116px;
+  min-width: 180px;
+  height: 88px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 1);
   display: flex;
@@ -34,6 +46,14 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+  @media (min-width: 1280px) {
+    min-width: 200px;
+    height: 100px;
+  }
+  @media (min-width: 1400px) {
+    min-width: 240px;
+    height: 116px;
+  }
 }
 
 .day_name + .day_name,
@@ -54,7 +74,7 @@
 }
 
 .day_name {
-  min-width: 240px;
+  min-width: 180px;
   height: 80px;
   border-radius: 8px;
   border-bottom: 1px solid #99660A;
@@ -64,14 +84,26 @@
   line-height: 33px;
   text-align: center;
   color: rgba(212, 212, 212, 1);
+  @media (min-width: 1280px) {
+    min-width: 200px;
+  }
+  @media (min-width: 1400px) {
+    min-width: 240px;
+  }
 }
 
 .logo {
-  min-width: 270px;
+  min-width: 200px;
   height: 80px;
   margin: 0 30px 16px 0;
   padding: 0 10px;
   text-align: center;
+  @media (min-width: 1280px) {
+    min-width: 230px;
+  }
+  @media (min-width: 1400px) {
+    min-width: 270px;
+  }
 }
 
 
@@ -79,8 +111,8 @@
   margin-top: 150px;
   background-image: url('src/assets/price_ball.jpg');
   height: 660px;
-  overflow: hidden;
-  background-size: contain;
+  overflow: auto;
+  background-size: cover;
 }
 
 .price_title {
@@ -91,7 +123,7 @@
 .price_item {
   width: 570px;
   height: 190px;
-  padding: 16px 0px;
+  padding: 0 0 16px 0px;
   border-radius: 8px;
   background: rgba(128, 128, 128, 0.2);
   font-family: Open Sans;
@@ -109,6 +141,9 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  border-top: 1px solid #F2DB51;
+  align-items: center;
+  padding-top: 16px;
 }
 
 .price_card {

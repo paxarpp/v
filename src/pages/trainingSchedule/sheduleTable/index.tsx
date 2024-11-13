@@ -1,9 +1,9 @@
+import { Suspense } from 'react';
 import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import { IShedule } from '../interfaces';
 import { Days } from './days';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import styles from '../index.module.css';
-import { Suspense } from 'react';
 
 const weekDays = [
   'MONDAY',
@@ -20,7 +20,7 @@ export const SheduleTable = () => {
   };
 
   return (
-    <div>
+    <div className={styles.shedule_table}>
       <Days />
       {error ? (
         <ErrorLocal error={error} />

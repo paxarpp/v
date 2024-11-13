@@ -1,9 +1,9 @@
-import { Suspense, useContext, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import { ICoach } from '../interfaces';
 import { baseSrc } from '../../../constants';
 import { ErrorLocal } from '../../../templates/errorLocal';
-import { AuthContext } from '../../../context';
+import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import Avatar from '../../../assets/avatar.svg?react';
 import { CoachEdit } from '../coachEdit';
@@ -15,8 +15,8 @@ export const CoachesList: React.FC = () => {
     coaches: ICoach[];
     error?: string;
   };
-  const authCtx = useContext(AuthContext);
-  const isAdmin = !!authCtx.user?.roles.includes('ADMIN');
+  const { user } = useUser();
+  const isAdmin = !!user?.roles.includes('ADMIN');
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
   const [openRank, setIsOpen] = useState<number | null>(null);
