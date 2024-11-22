@@ -19,25 +19,21 @@ export const CoachesList: React.FC = () => {
   const isAdmin = !!user?.roles.includes('ADMIN');
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
-  const [openRank, setIsOpen] = useState<number | null>(null);
+  const [open, setIsOpen] = useState<boolean>(false);
 
   const closeCoach = () => {
     setCoach(null);
   };
   const closeCoachEdit = () => {
     setEditCoachId(null);
-    setIsOpen(null);
+    setIsOpen(false);
   };
 
   return error ? (
     <ErrorLocal error={error} />
   ) : (
     <div className={styles.coaches_list}>
-      <CoachEdit
-        coachId={editCoachId}
-        onClose={closeCoachEdit}
-        openRank={openRank}
-      />
+      <CoachEdit coachId={editCoachId} onClose={closeCoachEdit} open={open} />
       <CoachProfile coach={coachProfile} onClose={closeCoach} />
       <Suspense fallback={<CoachesSkeleton />}>
         <Await resolve={coaches}>
@@ -67,7 +63,7 @@ const CoachesTemplate: React.FC<{
   isAdmin: boolean;
   setCoach: (coach: ICoach | null) => void;
   setEditCoachId: (id: string) => void;
-  setIsOpen: (rank: number) => void;
+  setIsOpen: (open: boolean) => void;
 }> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen }) => {
   const { coaches } = useAsyncValue() as {
     coaches: ICoach[];
@@ -77,78 +73,56 @@ const CoachesTemplate: React.FC<{
     setCoach(coach);
   };
 
-  const openEditCoach = (id: string, rank: number) => {
+  const openEditCoach = (id: string) => {
     setEditCoachId(id);
-    setIsOpen(rank);
+    setIsOpen(true);
   };
 
-  const addCoach = (rank: number) => {
-    setIsOpen(rank);
+  const addCoach = () => {
+    setIsOpen(true);
   };
-
-  const coachesByRank = coaches.reduce((acc, coach, index) => {
-    if (index === 0) {
-      acc.push([coach]);
-    } else if (index === 1) {
-      acc.push([coach]);
-    } else if (index === 2) {
-      acc[1].push(coach);
-    } else {
-      acc[2].push(coach);
-    }
-    return acc;
-  }, [] as ICoach[][]);
 
   return (
     <>
-      {coachesByRank.map((coaches, rank) => {
+      {coaches.map((coach) => {
         return (
-          <div className={styles.coaches_row_rank}>
-            {coaches.map((coach) => {
-              return (
-                <div key={coach.id} className={styles.coach_card}>
-                  {coach.mainImage?.data ? (
-                    <img
-                      src={`${baseSrc(coach.mainImage.contentType)}${coach.mainImage.data}`}
-                      alt={coach.name}
-                      className={styles.coach_img}
-                    />
-                  ) : (
-                    <Avatar className={styles.coach_img} />
-                  )}
-                  <h2>{coach.name}</h2>
-                  <ul className={styles.coach_infos}>
-                    {coach.infos.map((info) => (
-                      <li key={info}>{info}</li>
-                    ))}
-                  </ul>
-                  <div className={styles.coach_card_footer}>
-                    <button
-                      className={styles.button_profile}
-                      onClick={() => openProfile(coach)}
-                    >
-                      Профайл
-                    </button>
-                    {isAdmin ? (
-                      <Setting onClick={() => openEditCoach(coach.id, rank)} />
-                    ) : null}
-                  </div>
-                </div>
-              );
-            })}
-            {isAdmin ? (
-              <div className={styles.coach_card_add}>
-                <span
-                  className={styles.coach_add}
-                  onClick={() => addCoach(rank)}
-                >
-                  +
-                </span>
-              </div>
-            ) : null}
+          <div key={coach.id} className={styles.coach_card}>
+            {coach.mainImage?.data ? (
+              <img
+                src={`${baseSrc(coach.mainImage.contentType)}${coach.mainImage.data}`}
+                alt={coach.name}
+                className={styles.coach_img}
+              />
+            ) : (
+              <Avatar className={styles.coach_img} />
+            )}
+            <h2>{coach.name}</h2>
+            <ul className={styles.coach_infos}>
+              {coach.infos.map((info) => (
+                <li key={info}>{info}</li>
+              ))}
+            </ul>
+            <div className={styles.coach_card_footer}>
+              <button
+                className={styles.button_profile}
+                onClick={() => openProfile(coach)}
+              >
+                Профайл
+              </button>
+              {isAdmin ? (
+                <Setting onClick={() => openEditCoach(coach.id)} />
+              ) : null}
+            </div>
           </div>
         );
       })}
+      {isAdmin ? (
+        <div className={styles.coach_card_add}>
+          <span className={styles.coach_add} onClick={addCoach}>
+            +
+          </span>
+        </div>
+      ) : null}
     </>
   );
 };

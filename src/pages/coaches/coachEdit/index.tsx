@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
 import BasketIcon from '../../../assets/basket.svg?react';
@@ -26,12 +26,12 @@ const readFile = (file): Promise<string> => {
 };
 
 export const CoachEdit: React.FC<{
-  openRank: null | number;
+  open: boolean;
   coachId: string | null;
   onClose: () => void;
-}> = ({ openRank, coachId, onClose }) => {
+}> = ({ open, coachId, onClose }) => {
   const { logout } = useUser();
-  const [currentCoach, setCoach] = useState<(ICoach & { rank: number }) | null>(
+  const [currentCoach, setCoach] = useState<ICoach | null>(
     null,
   );
   const imageRef = useRef<HTMLInputElement | null>(null);
@@ -40,7 +40,7 @@ export const CoachEdit: React.FC<{
   const revalidator = useRevalidator();
 
   useEffect(() => {
-    if (openRank !== null && coachId) {
+    if (coachId) {
       // edit
       const getC = async (id: string) => {
         const axiosCall = creatorRequest(logout);
@@ -50,11 +50,10 @@ export const CoachEdit: React.FC<{
           infos: [],
           promo: '',
           mainImage: null,
-          rank: 0,
         });
         const { result } = await axiosCall<ICoach>(getCoach(id));
         if (result.data.result) {
-          setCoach({ ...result.data.result, rank: openRank });
+          setCoach({ ...result.data.result });
         }
       };
       getC(coachId);
@@ -62,7 +61,7 @@ export const CoachEdit: React.FC<{
     return () => {
       setCoach(null);
     };
-  }, [openRank, coachId]);
+  }, [coachId]);
 
   const deleteImg = () => {
     setCoach((prevCoach) => ({ ...(prevCoach as ICoach), mainImage: null }));
@@ -74,7 +73,7 @@ export const CoachEdit: React.FC<{
       if (currentCoach) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall<string>(
-          updateCoach({ ...currentCoach, rank: openRank }),
+          updateCoach({ ...currentCoach }),
         );
         if (!error) {
           onClose();
@@ -105,7 +104,7 @@ export const CoachEdit: React.FC<{
       if (file) {
         const base64: string = await readFile(file);
         setCoach((prevCoach) => ({
-          ...(prevCoach as ICoach & { rank: number }),
+          ...prevCoach as ICoach,
           mainImage: {
             data: base64.replace(baseSrc(file.type), ''),
             typeEntity: 'COACH' as const,
@@ -127,7 +126,7 @@ export const CoachEdit: React.FC<{
   return (
     <Modal
       classNameModal={styles.edit_coach_modal}
-      isOpen={openRank !== null}
+      isOpen={open}
       close={onClose}
       footer={
         <div className={styles.modal_footer}>
@@ -176,7 +175,7 @@ export const CoachEdit: React.FC<{
           value={currentCoach?.name}
           onChange={(e) => {
             setCoach((prevCoach) => ({
-              ...(prevCoach as ICoach & { rank: number }),
+              ...prevCoach as ICoach,
               name: e.target.value,
             }));
           }}
@@ -187,7 +186,7 @@ export const CoachEdit: React.FC<{
           value={(currentCoach?.infos || []).join(';')}
           onChange={(e) => {
             setCoach((prevCoach) => ({
-              ...(prevCoach as ICoach & { rank: number }),
+              ...prevCoach as ICoach,
               infos: e.target.value.split(';'),
             }));
           }}
@@ -201,7 +200,7 @@ export const CoachEdit: React.FC<{
           value={currentCoach?.promo}
           onChange={(e) => {
             setCoach((prevCoach) => ({
-              ...(prevCoach as ICoach & { rank: number }),
+              ...prevCoach as ICoach,
               promo: e.target.value,
             }));
           }}
