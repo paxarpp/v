@@ -4,6 +4,8 @@ import Logo from '../../assets/logo.svg?react';
 import Burger from '../../assets/burger.svg?react';
 import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
+import ClosedIcon from '../../assets/closed.svg?react';
+import OpenedIcon from '../../assets/opened.svg?react';
 import Inst from '../../assets/inst.svg?react';
 import { logout as apiLogout } from '../../api';
 import { useUser } from '../../context';
@@ -78,19 +80,53 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
           </Link>
         </li>
         <li>
-          <Link to="/weekendCamps">Кемпы на выходные</Link>
+          <div className={styles.dropdown}>
+            <span className={styles.dropdown_title}>Пляжный волейбол</span>
+            <ClosedIcon className={styles.dropdown_closed} />
+            <OpenedIcon className={styles.dropdown_opened} />
+            <div className={styles.dropdown_content}>
+              <ul className={styles.dropdown_menu}>
+                <li>
+                  <Link to="/weekendCamps">Кемпы выходного дня</Link>
+                </li>
+                <li>
+                  <Link to="/longCamps">Недельные кемпы</Link>
+                </li>
+                <li>
+                  <Link to="/oldCamps">Прошедшие кемпы</Link>
+                </li>
+                <li>
+                  <Link to="/allCoahes">Тренеры</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </li>
         <li>
-          <Link to="/longCamps">Кемпы длинные</Link>
-        </li>
-        <li>
-          <Link to="/trainingSchedule">Расписание тренировок</Link>
+          <div className={styles.dropdown}>
+            <span className={styles.dropdown_title}>Классический волейбол</span>
+            <ClosedIcon className={styles.dropdown_closed} />
+            <OpenedIcon className={styles.dropdown_opened} />
+            <div className={styles.dropdown_content}>
+              <ul className={styles.dropdown_menu}>
+                <li>
+                  <Link to="/trainingSchedule">Расписание</Link>
+                </li>
+                <li>
+                  <Link to="/tournaments">Турниры</Link>
+                </li>
+                <li>
+                  <Link to="/corporates">Корпоративные мероприятия</Link>
+                </li>
+                <li>
+                  <Link to="/allCoahes">Тренеры</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </li>
         <li>
           <Link to="/about">О нас</Link>
-        </li>
-        <li>
-          <Link to="/allCoahes">Тренеры</Link>
         </li>
       </ul>
       <div className={styles.icons}>

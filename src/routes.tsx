@@ -48,6 +48,21 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         loader: loaderPageShedule,
       },
+      {
+        path: '/oldCamps',
+        element: <div />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/tournaments',
+        element: <div />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/corporates',
+        element: <div />,
+        errorElement: <ErrorPage />,
+      },
     ],
   },
 ]);
