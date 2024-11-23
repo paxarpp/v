@@ -14,6 +14,21 @@ interface ICoach {
   };
 }
 
+interface IPackage {
+  packageId: string;
+  name: string;
+  costNamingLink: string;
+  info: string;
+  totalPrice: number;
+  bookingPrice: number;
+  firstPrice: number;
+  firstLimitation: string;
+  secondPrice: number;
+  secondLimitation: string;
+  thirdPrice: number;
+  thirdLimitation: string;
+}
+
 export interface IShortCamp {
   id: string;
   name: string;
@@ -23,20 +38,5 @@ export interface IShortCamp {
   countAll: number;
   countFree: number;
   coaches: ICoach[];
-  packages: [
-    {
-      packageId: string;
-      name: string;
-      costNamingLink: string;
-      info: string;
-      totalPrice: number;
-      bookingPrice: number;
-      firstPrice: number;
-      firstLimitation: string;
-      secondPrice: number;
-      secondLimitation: string;
-      thirdPrice: number;
-      thirdLimitation: string;
-    },
-  ];
+  packages: IPackage[];
 }

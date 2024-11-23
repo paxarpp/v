@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { ICoach } from '../pages/coaches/interfaces';
+import { IShortCamp } from '../pages/shotCamp/interfaces';
 
 const BASE_URL = '/magicvolley';
 
@@ -152,6 +153,18 @@ export const updateCoach = async (body: ICoach) => {
 
 export const deleteCoach = async (id: string) => {
   return await axios.delete(BASE_URL + `/coaches/${id}`);
+};
+
+export const updateCamp = async (body: IShortCamp) => {
+  if (body.id) {
+    return await axios.put(BASE_URL + `/camps/${body.id}`, body);
+  } else {
+    return await axios.post(BASE_URL + `/camps`, body);
+  }
+};
+
+export const deleteCamp = async (id: string) => {
+  return await axios.delete(BASE_URL + `/camps/${id}`);
 };
 
 export const creatorRequest =

@@ -100,6 +100,7 @@
   flex-flow: column nowrap;
   overflow: auto;
   height: 430px;
+  padding: 50px;
 }
 
 .profile_coach_content {
@@ -117,9 +118,15 @@
 
 .stub_img {
   height: 120px;
+  min-height: 120px;
+  max-height: 120px;
   width: 120px;
-  border: 1px dashed gray;
-  padding: 20px 0;
+  background: #D4D4D4;
+  font-size: 56px;
+  color: #152355;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .img_label {

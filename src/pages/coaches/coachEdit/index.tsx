@@ -31,9 +31,7 @@ export const CoachEdit: React.FC<{
   onClose: () => void;
 }> = ({ open, coachId, onClose }) => {
   const { logout } = useUser();
-  const [currentCoach, setCoach] = useState<ICoach | null>(
-    null,
-  );
+  const [currentCoach, setCoach] = useState<ICoach | null>(null);
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -104,7 +102,7 @@ export const CoachEdit: React.FC<{
       if (file) {
         const base64: string = await readFile(file);
         setCoach((prevCoach) => ({
-          ...prevCoach as ICoach,
+          ...(prevCoach as ICoach),
           mainImage: {
             data: base64.replace(baseSrc(file.type), ''),
             typeEntity: 'COACH' as const,
@@ -157,7 +155,9 @@ export const CoachEdit: React.FC<{
         </form>
         {currentCoach?.mainImage ? (
           <>
-            <span className={styles.image_name}>{currentCoach?.name}</span>
+            <span className={styles.image_name}>
+              {currentCoach?.mainImage?.name}
+            </span>
             <span className={styles.text_align_l}>
               <img
                 src={`${baseSrc(currentCoach?.mainImage?.contentType)}${currentCoach?.mainImage?.data}`}
@@ -168,14 +168,14 @@ export const CoachEdit: React.FC<{
             </span>
           </>
         ) : (
-          <div className={styles.stub_img} />
+          <div className={styles.stub_img}>+</div>
         )}
         <label>{'Имя и Фамилия'}</label>
         <input
           value={currentCoach?.name}
           onChange={(e) => {
             setCoach((prevCoach) => ({
-              ...prevCoach as ICoach,
+              ...(prevCoach as ICoach),
               name: e.target.value,
             }));
           }}
@@ -186,7 +186,7 @@ export const CoachEdit: React.FC<{
           value={(currentCoach?.infos || []).join(';')}
           onChange={(e) => {
             setCoach((prevCoach) => ({
-              ...prevCoach as ICoach,
+              ...(prevCoach as ICoach),
               infos: e.target.value.split(';'),
             }));
           }}
@@ -200,7 +200,7 @@ export const CoachEdit: React.FC<{
           value={currentCoach?.promo}
           onChange={(e) => {
             setCoach((prevCoach) => ({
-              ...prevCoach as ICoach,
+              ...(prevCoach as ICoach),
               promo: e.target.value,
             }));
           }}
