@@ -112,6 +112,16 @@ export const logout = async <T>(): Promise<T> => {
   }
 };
 
+export const getShotCamps = async <T>(): Promise<{
+  data: { result: T[]; error?: string };
+}> => {
+  try {
+    return await axios.post(BASE_URL + '/camps/short');
+  } catch (e: unknown) {
+    return { data: { result: [], error: (e as Error).message } };
+  }
+};
+
 export const getShedule = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {

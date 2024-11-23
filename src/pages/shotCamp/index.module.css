@@ -1,0 +1,14 @@
+.info_card {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #D4D4D4;
+}
+
+.info_row {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 20px;
+  justify-content: center;
+}

@@ -8,6 +8,7 @@ import { ShotCamp } from './pages/shotCamp';
 import { Shedule } from './pages/trainingSchedule';
 import { loaderPageMain } from './pages/main/loaders';
 import { loaderPageShedule } from './pages/trainingSchedule/loaders';
+import { loaderPageShotCamps } from './pages/shotCamp/loaders';
 import { App } from './App';
 
 export const router = createBrowserRouter([
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
         path: '/weekendCamps',
         element: <ShotCamp />,
         errorElement: <ErrorPage />,
+        loader: loaderPageShotCamps,
       },
       {
         path: '/longCamps',
