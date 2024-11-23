@@ -4,11 +4,13 @@ import { Coaches } from './pages/coaches';
 import { loaderPageCoaches } from './pages/coaches/loaders';
 import { Main } from './pages/main';
 import { LongCamp } from './pages/longCamp';
-import { ShotCamp } from './pages/shotCamp';
+import { ShotCamps } from './pages/shotCamps';
+import { Camp } from './pages/camp';
 import { Shedule } from './pages/trainingSchedule';
 import { loaderPageMain } from './pages/main/loaders';
 import { loaderPageShedule } from './pages/trainingSchedule/loaders';
-import { loaderPageShotCamps } from './pages/shotCamp/loaders';
+import { loaderPageShotCamps } from './pages/shotCamps/loaders';
+import { loaderPageCamp } from './pages/camp/loaders';
 import { App } from './App';
 
 export const router = createBrowserRouter([
@@ -35,9 +37,15 @@ export const router = createBrowserRouter([
       },
       {
         path: '/weekendCamps',
-        element: <ShotCamp />,
+        element: <ShotCamps />,
         errorElement: <ErrorPage />,
         loader: loaderPageShotCamps,
+      },
+      {
+        path: '/camps/:id',
+        element: <Camp />,
+        errorElement: <ErrorPage />,
+        loader: loaderPageCamp,
       },
       {
         path: '/longCamps',

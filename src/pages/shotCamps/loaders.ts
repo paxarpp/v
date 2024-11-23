@@ -1,11 +1,11 @@
 import { defer } from 'react-router-dom';
 import { getShotCamps } from '../../api';
-import { IShortCamp } from './interfaces';
+import { ICampItem } from './interfaces';
 
 const loaderShortCamps = async () => {
   const {
     data: { result, error },
-  } = await getShotCamps<IShortCamp>();
+  } = await getShotCamps<ICampItem>();
   return { shortCamps: result, error };
 };
 

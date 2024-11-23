@@ -1,14 +1,16 @@
 import { useState, Suspense } from 'react';
-import { useLoaderData, Await, useAsyncValue } from 'react-router-dom';
+import { Link, useLoaderData, Await, useAsyncValue } from 'react-router-dom';
+import Setting from '../../../assets/setting.svg?react';
 import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
-import { IShortCamp } from '../interfaces';
+import { ICampItem } from '../interfaces';
 import { CampEdit } from '../campEdit';
+import { baseSrc } from '../../../constants';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
   const { shortCamps, error } = useLoaderData() as {
-    shortCamps: IShortCamp[];
+    shortCamps: ICampItem[];
     error?: string;
   };
   const { user } = useUser();
@@ -28,7 +30,11 @@ export const CampsList = () => {
       <CampEdit campId={editCampId} onClose={closeCampEdit} open={open} />
       <Suspense fallback={'Загрузка...'}>
         <Await resolve={shortCamps}>
-          <CampsTemplate isAdmin={isAdmin} setIsOpen={setIsOpen} />
+          <CampsTemplate
+            isAdmin={isAdmin}
+            setIsOpen={setIsOpen}
+            setEditCampId={setEditCampId}
+          />
         </Await>
       </Suspense>
     </div>
@@ -38,9 +44,15 @@ export const CampsList = () => {
 const CampsTemplate: React.FC<{
   isAdmin: boolean;
   setIsOpen: (open: boolean) => void;
-}> = ({ isAdmin, setIsOpen }) => {
+  setEditCampId: (id: string) => void;
+}> = ({ isAdmin, setIsOpen, setEditCampId }) => {
   const { shortCamps } = useAsyncValue() as {
-    shortCamps: IShortCamp[];
+    shortCamps: ICampItem[];
+  };
+
+  const openEditCamp = (id: string) => {
+    setEditCampId(id);
+    setIsOpen(true);
   };
 
   const addShortCamp = () => {
@@ -54,13 +66,30 @@ const CampsTemplate: React.FC<{
           <div key={camp.id} className={styles.camp_card}>
             <div>
               <h2>
-                {camp.dateStart}-{camp.dateEnd}
+                {camp.dateString
+                  ? camp.dateString
+                  : `${camp.dateStart}-${camp.dateEnd}`}
               </h2>
               <span>{camp.name}</span>
             </div>
-            <div>тут картинка</div>
+            <div className={styles.camp_image_wrapper}>
+              {camp.imageCart ? (
+                <img
+                  src={`${baseSrc(camp.imageCart?.contentType)}${camp.imageCart.data}`}
+                  alt={camp.name}
+                  className={styles.camp_img}
+                />
+              ) : (
+                'тут картинка'
+              )}
+            </div>
             <div>
-              <button>Подробнее</button>
+              <Link to={`/camps/${camp.id}`} className={styles.button_profile}>
+                Подробнее
+              </Link>
+              {isAdmin ? (
+                <Setting onClick={() => openEditCamp(camp.id)} />
+              ) : null}
             </div>
           </div>
         );
