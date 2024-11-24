@@ -75,7 +75,7 @@ const CampsTemplate: React.FC<{
             <div className={styles.camp_image_wrapper}>
               {camp.imageCart ? (
                 <img
-                  src={`${baseSrc(camp.imageCart?.contentType)}${camp.imageCart.data}`}
+                  src={camp.imageCart.url}
                   alt={camp.name}
                   className={styles.camp_img}
                 />

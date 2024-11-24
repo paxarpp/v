@@ -97,7 +97,7 @@ export const CampEdit: React.FC<{
     const getPacks = async () => {
       const axiosCall = creatorRequest(logout);
       setPacks([]);
-      const { result } = await axiosCall<IPackage>(getPackages());
+      const { result } = await axiosCall<IPackage[]>(getPackages());
       if (result.data.result) {
         setPacks([...result.data.result]);
       }
