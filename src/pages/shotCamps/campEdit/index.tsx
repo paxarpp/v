@@ -79,10 +79,9 @@ const imageSelect = ({
 };
 
 export const CampEdit: React.FC<{
-  open: boolean;
   campId: string | null;
   onClose: () => void;
-}> = ({ open, campId, onClose }) => {
+}> = ({ campId, onClose }) => {
   const { logout } = useUser();
   const [currentCamp, setCamp] = useState<ICampItem | null>(null);
   const [packs, setPacks] = useState<IPackage[]>([]);
@@ -197,7 +196,7 @@ export const CampEdit: React.FC<{
   return (
     <Modal
       classNameModal={styles.edit_camp_modal}
-      isOpen={open}
+      isOpen={true}
       close={onClose}
       footer={
         <div className={styles.modal_footer}>

@@ -6,9 +6,9 @@ const loaderCamp = async (id: string) => {
   const {
     data: { result, error },
   } = await getCamp<ICampItem>(id);
-  return { shortCamp: result, error };
+  return { camp: result, error };
 };
 
 export const loaderPageCamp = async ({ params: { id }}: any) => {
-  return defer({ shortCamp: loaderCamp(id) });
+  return defer({ camp: loaderCamp(id) });
 };

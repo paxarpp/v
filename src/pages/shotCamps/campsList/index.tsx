@@ -26,7 +26,9 @@ export const CampsList = () => {
     <ErrorLocal error={error} />
   ) : (
     <div className={styles.camp_list}>
-      <CampEdit campId={editCampId} onClose={closeCampEdit} open={open} />
+      {open ? (
+        <CampEdit campId={editCampId} onClose={closeCampEdit} />
+      ) : null}
       <Suspense fallback={'Загрузка...'}>
         <Await resolve={shortCamps}>
           <CampsTemplate
