@@ -3,15 +3,7 @@ export interface ICoach {
   name: string;
   infos: string[];
   promo: string;
-  mainImage: {
-    id: string;
-    name: string;
-    contentType: string;
-    size: number;
-    typeEntity: 'COACH';
-    data: string[];
-    url: string;
-  };
+  mainImage: IImage | null;
 }
 
 export interface IPackage {
@@ -35,7 +27,6 @@ interface IImage {
   contentType: string;
   size: number;
   typeEntity: 'COACH';
-  data: string;
   url: string;
 }
 

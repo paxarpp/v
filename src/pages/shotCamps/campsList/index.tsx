@@ -5,7 +5,6 @@ import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { ICampItem } from '../interfaces';
 import { CampEdit } from '../campEdit';
-import { baseSrc } from '../../../constants';
 import styles from '../index.module.css';
 
 export const CampsList = () => {

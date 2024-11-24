@@ -168,27 +168,33 @@
 }
 
 .camp_image_wrapper {
-  width: 520px;
+  width: 570px;
   min-height: 290px;
   max-height: 290px;
+  height: 290px;
 }
 
-.capm_img {
-  width: 520px;
-  min-height: 290px;
-  max-height: 290px;
+.camp_img {
+  width: inherit;
+  min-height: inherit;
+  max-height: inherit;
+  height: inherit;
   border-radius: 8px;
   object-fit: cover;
 }
 
 .button_profile {
   width: 160px;
-  height: 41px;
+  height: 70px;
   padding: 4px 14px;
   border-radius: 8px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
   color: #152355;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .package_card {
