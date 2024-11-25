@@ -40,7 +40,7 @@ export const Info = () => {
         <div className={styles.row_prevew_images}>
           {camp.images
             ? camp.images.map((image) => (
-                <div className={styles.prevew_img_wrapper}>
+                <div className={styles.prevew_img_wrapper} key={image.id}>
                   <img
                     src={image.url}
                     alt={image.name}
@@ -55,7 +55,7 @@ export const Info = () => {
         {camp.info
           ?.split(';')
           .filter(Boolean)
-          .map((inf) => <li>{inf}</li>)}
+          .map((inf, i) => <li key={i + 'info'}>{inf}</li>)}
       </ul>
     </div>
   );
