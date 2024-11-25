@@ -4,7 +4,6 @@ import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import styles from '../index.module.css';
 import { Suspense, useState } from 'react';
-import { baseSrc } from '../../../constants';
 
 export const CampsScroller: React.FC = () => {
   const { camps } = useLoaderData() as {
@@ -83,12 +82,11 @@ const CampsTemplate = () => {
                 {item.dateStart}-{item.dateEnd}
               </p>
               <div className={styles.camp_img_wrap}>
-                {/* <img
-                  src={`${baseSrc(item.mainImage.contentType)}${item.mainImage.data}`}
+                <img
+                  src={item.mainImage.url}
                   alt="картинка кэмпа"
                   className={styles.camp_img}
-                /> */}
-                пропала картинка из данных
+                />
               </div>
               <div className={styles.camp_info}>
                 <button className={styles.button_camp}>Подробнее</button>

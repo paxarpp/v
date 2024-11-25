@@ -16,7 +16,11 @@ export const Packages = () => {
       <div className={styles.package_row}>
         {camp.packages?.map((pack) => (
           <div key={pack.packageId} className={styles.pack_card}>
-            <img src={'/src/assets/pack_back.jpg'} alt={pack.name} className={styles.back_card} />
+            <img
+              src={'/src/assets/pack_back.jpg'}
+              alt={pack.name}
+              className={styles.back_card}
+            />
             {pack.name.toLocaleLowerCase().includes('tur') ? (
               <Tour className={styles.pack_icon} />
             ) : (

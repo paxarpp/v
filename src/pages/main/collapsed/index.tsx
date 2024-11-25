@@ -1,7 +1,6 @@
 import { Suspense, useState } from 'react';
 import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import ClosedIcon from '../../../assets/closed.svg?react';
-import OpenedIcon from '../../../assets/opened.svg?react';
 import { IQuestion } from '../interfaces';
 import { Modal } from '../../../templates/modal';
 import { deleteQuestion, updateQuestion, getQuestion } from '../../../api';
@@ -106,6 +105,11 @@ export const Collapsed: React.FC = () => {
         )}
       </Modal>
       <div className={styles.asked_questions}>
+        <img
+          src={'/src/assets/asked_questions.jpg'}
+          alt={''}
+          className={styles.back_questions}
+        />
         <h2 className={styles.main_title}>
           Часто задаваемые вопросы
           {isAdmin ? <button onClick={() => onEdit()}>Добавить</button> : null}
@@ -159,7 +163,9 @@ const QuestionsTemplate: React.FC<{
               {isAdmin ? (
                 <button onClick={() => onEdit(item.id)}>Редактировать</button>
               ) : null}
-              {openId === item.id ? <OpenedIcon /> : <ClosedIcon />}
+              <ClosedIcon
+                className={openId === item.id ? styles.rotate_to_open : ''}
+              />
             </div>
             <div
               className={
