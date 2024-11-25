@@ -16,11 +16,16 @@ export const Auth: React.FC<{
   const authing = (l: string, p: string) => {
     const authLogin = async () => {
       const user = await login<{
-        data?: IUser;
+        data?: IUser & { cookie: string };
       }>(l, p);
       if (user?.data) {
         signin(user.data);
         toggleAuthOpen();
+        try {
+          localStorage.setItem('user', JSON.stringify(user.data));
+        } catch (e) {
+          //
+        }
       }
     };
     authLogin();

@@ -9,6 +9,7 @@ import Inst from '../../assets/inst.svg?react';
 import { logout as apiLogout } from '../../api';
 import { useUser } from '../../context';
 import { useDeviceDetect } from '../../hooks';
+import { getCookie } from '../../cookie';
 import styles from './index.module.css';
 
 export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
@@ -18,8 +19,22 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);
+  const { signin } = useUser();
   useEffect(() => {
-    console.log(document.cookie);
+    if (!isAuth) {
+      const cookie = getCookie();
+      if (cookie) {
+        try {
+          const raw = localStorage.getItem('user');
+          if (raw) {
+            const user = JSON.parse(raw);
+            signin(user);
+          }
+        } catch (e) {
+          //
+        }
+      }
+    }
   }, [isAuth]);
 
   const onLogout = () => {
