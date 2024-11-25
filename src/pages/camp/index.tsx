@@ -25,7 +25,7 @@ export const Camp = () => {
 
 const CampTemplate = () => {
   return (
-    <div className={styles.camp}>
+    <>
       <MainImage />
 
       <Info />
@@ -35,6 +35,6 @@ const CampTemplate = () => {
       <Coaches />
 
       <CallMe />
-    </div>
+    </>
   );
 };

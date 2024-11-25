@@ -10,11 +10,3 @@ export const getCookie = () => {
   );
   return matches ? matches[1] : undefined;
 };
-
-export const setCookie = (cookieFull: string) => {
-  document.cookie = cookieFull;
-};
-
-export const deleteCookie = () => {
-  setCookie(`${COOKIE_NAME}=;max-age:-1`);
-};
