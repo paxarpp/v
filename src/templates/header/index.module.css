@@ -43,18 +43,13 @@
 .dropdown .dropdown_closed {
   display: inline-block;
 }
-.dropdown .dropdown_opened {
-  display: none;
-}
+
 .dropdown:hover .dropdown_closed {
-  display: none;
-}
-.dropdown:hover .dropdown_opened {
-  display: inline-block;
+  transform-origin: center;
+  transform: rotate(180deg);
 }
 
-.dropdown_closed,
-.dropdown_opened {
+.dropdown_closed {
   width: 16px;
   height: 16px;
   vertical-align: middle;

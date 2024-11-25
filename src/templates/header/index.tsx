@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg?react';
 import Burger from '../../assets/burger.svg?react';
 import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
 import ClosedIcon from '../../assets/closed.svg?react';
-import OpenedIcon from '../../assets/opened.svg?react';
 import Inst from '../../assets/inst.svg?react';
 import { logout as apiLogout } from '../../api';
 import { useUser } from '../../context';
@@ -19,10 +18,13 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);
+  useEffect(() => {
+    console.log(document.cookie);
+  }, [isAuth]);
 
   const onLogout = () => {
     apiLogout();
-    document.cookie = `magicVolley=;`;
+    document.cookie = `magicVolley=`;
     logout();
   };
 
@@ -46,19 +48,25 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
           <div className={styles.popap_menu} onClick={togglePopapMenu}>
             <ul className={styles.menu_popap}>
               <li>
-                <Link to="/weekendCamps">Кемпы на выходные</Link>
+                <Link to="/weekendCamps">Кемпы выходного дня</Link>
               </li>
               <li>
-                <Link to="/longCamps">Кемпы длинные</Link>
+                <Link to="/longCamps">Недельные кемпы</Link>
               </li>
               <li>
-                <Link to="/trainingSchedule">Расписание тренировок</Link>
-              </li>
-              <li>
-                <Link to="/about">О нас</Link>
+                <Link to="/oldCamps">Прошедшие кемпы</Link>
               </li>
               <li>
                 <Link to="/allCoahes">Тренеры</Link>
+              </li>
+              <li>
+                <Link to="/trainingSchedule">Расписание</Link>
+              </li>
+              <li>
+                <Link to="/tournaments">Турниры</Link>
+              </li>
+              <li>
+                <Link to="/corporates">Корпоративные мероприятия</Link>
               </li>
             </ul>
             <button
@@ -83,7 +91,6 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
           <div className={styles.dropdown}>
             <span className={styles.dropdown_title}>Пляжный волейбол</span>
             <ClosedIcon className={styles.dropdown_closed} />
-            <OpenedIcon className={styles.dropdown_opened} />
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>
                 <li>
@@ -106,7 +113,6 @@ export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
           <div className={styles.dropdown}>
             <span className={styles.dropdown_title}>Классический волейбол</span>
             <ClosedIcon className={styles.dropdown_closed} />
-            <OpenedIcon className={styles.dropdown_opened} />
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>
                 <li>

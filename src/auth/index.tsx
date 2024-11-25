@@ -7,11 +7,9 @@ import { useUser } from '../context';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
-  toggleAuthOpen: () => void
+  toggleAuthOpen: () => void;
 }> = ({ onCloseAuth, toggleAuthOpen }) => {
-  const {
-    signin
-  } = useUser()
+  const { signin } = useUser();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
