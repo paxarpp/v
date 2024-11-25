@@ -1,6 +1,5 @@
 import { Modal } from '../../../templates/modal';
 import { ICoach } from '../interfaces';
-import { baseSrc } from '../../../constants';
 import Avatar from '../../../assets/avatar.svg?react';
 import styles from '../index.module.css';
 
@@ -17,7 +16,7 @@ export const CoachProfile: React.FC<{
       <div className={styles.profile_coach_content}>
         {coach.mainImage ? (
           <img
-            src={`${baseSrc(coach.mainImage.contentType)}${coach.mainImage.data}`}
+            src={coach.mainImage.url}
             alt=""
             className={styles.profile_coach_img}
           />

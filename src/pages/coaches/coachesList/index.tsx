@@ -1,7 +1,6 @@
 import { Suspense, useState } from 'react';
 import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
 import { ICoach } from '../interfaces';
-import { baseSrc } from '../../../constants';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
@@ -87,9 +86,9 @@ const CoachesTemplate: React.FC<{
       {coaches.map((coach) => {
         return (
           <div key={coach.id} className={styles.coach_card}>
-            {coach.mainImage?.data ? (
+            {coach.mainImage?.url ? (
               <img
-                src={`${baseSrc(coach.mainImage.contentType)}${coach.mainImage.data}`}
+                src={coach.mainImage.url}
                 alt={coach.name}
                 className={styles.coach_img}
               />

@@ -160,7 +160,11 @@ export const CoachEdit: React.FC<{
             </span>
             <span className={styles.text_align_l}>
               <img
-                src={`${baseSrc(currentCoach?.mainImage?.contentType)}${currentCoach?.mainImage?.data}`}
+                src={
+                  currentCoach?.mainImage.url
+                    ? currentCoach?.mainImage.url
+                    : `${baseSrc(currentCoach?.mainImage?.contentType)}${currentCoach?.mainImage?.data}`
+                }
                 alt=""
                 className={styles.upload_coach_img}
               />

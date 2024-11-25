@@ -1,11 +1,11 @@
 import { defer } from 'react-router-dom';
 import { getCoachesAll } from '../../api';
-import { ICoachExt } from '../main/interfaces';
+import { ICoach } from '../main/interfaces';
 
 const loaderCoaches = async () => {
   const {
     data: { result, error },
-  } = await getCoachesAll<ICoachExt>();
+  } = await getCoachesAll<ICoach>();
   return { coaches: result, error };
 };
 

@@ -1,29 +1,16 @@
-export interface IMediaBase {
-  contentType: string;
-  id: string | null;
+export interface IImage {
+  id: string;
   name: string;
+  contentType: string;
   size: number;
-}
-
-export type ITypeEntity = 'COACH';
-
-export interface IMedia extends IMediaBase {
+  typeEntity: 'COACH';
   url: string;
-}
-
-export interface IMainImg extends IMediaBase {
-  typeEntity: ITypeEntity;
-  data: string;
 }
 
 export interface ICoach {
   id: string;
   name: string;
   infos: string[];
-  mainImage: IMainImg | null;
+  mainImage: IImage | null;
   promo: string;
-}
-
-export interface ICoachExt extends ICoach {
-  name: string;
 }
