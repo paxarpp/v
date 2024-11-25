@@ -1,10 +1,9 @@
 import { Suspense } from 'react';
-import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
+import { Await, useLoaderData } from 'react-router-dom';
 import { ICampItem } from '../shotCamps/interfaces';
 import { CallMe } from '../../templates/callme';
 import { MainImage } from './mainImage';
 import { Info } from './info';
-import styles from './index.module.css';
 import { Packages } from './packages';
 import { Coaches } from './coaches';
 
