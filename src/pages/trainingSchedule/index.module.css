@@ -5,6 +5,7 @@
 
 .shedule_table {
   overflow: auto;
+  padding: 0 75px;
 }
 
 .group_name {
@@ -106,13 +107,22 @@
   }
 }
 
-
 .price_ball {
   margin-top: 150px;
-  background-image: url('src/assets/price_ball.jpg');
   height: 660px;
   overflow: auto;
-  background-size: cover;
+  position: relative;
+  padding: 0 45px 0 75px;
+}
+
+.price_back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .3;
 }
 
 .price_title {
@@ -131,10 +141,6 @@
   font-weight: 600;
   line-height: 33px;
   text-align: center;
-}
-
-.price_item + .price_item {
-  margin-left: 30px;
 }
 
 .price_prices {
@@ -156,7 +162,8 @@
 
 .price_list {
   display: flex;
-  flex-flow: row;
+  flex-flow: row wrap;
+  gap: 30px;
 }
 
 .price_message {

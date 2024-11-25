@@ -14,6 +14,7 @@ export const Price = () => {
   return (
     <div className={styles.price_ball}>
       <h1 className={styles.price_title}>Стоимость тренировок</h1>
+      <img className={styles.price_back} src={'src/assets/price_ball.jpg'} />
       {error ? (
         <ErrorLocal error={error} />
       ) : (
