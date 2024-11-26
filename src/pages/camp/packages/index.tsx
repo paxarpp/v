@@ -3,10 +3,22 @@ import People from '../../../assets/people.svg?react';
 import Tour from '../../../assets/tour.svg?react';
 import { ICampItem } from '../../shortCamps/interfaces';
 import styles from '../index.module.css';
+import { useState } from 'react';
 
 export const Packages = () => {
   const { camp } = useAsyncValue() as {
     camp: ICampItem;
+  };
+  const [showPricesInfo, setShowPricesInfo] = useState<Record<string, boolean>>(
+    {},
+  );
+
+  const togglePricesInfo = (packId: number) => {
+    if (packId in showPricesInfo) {
+      setShowPricesInfo((prev) => ({ ...prev, [packId]: !prev[packId] }));
+    } else {
+      setShowPricesInfo((prev) => ({ ...prev, [packId]: true }));
+    }
   };
 
   return (
@@ -35,13 +47,48 @@ export const Packages = () => {
                   <li key={i + 'pack'}>{inf}</li>
                 ))}
             </ul>
-            <h4 className={styles.total_price}>{`${pack.totalPrice} ₽*`}</h4>
-            <span
-              className={styles.cost_link}
-            >{`*${pack.costNamingLink}`}</span>
-            <span
-              className={styles.booking_price}
-            >{`предоплата по спорт пакету - ${pack.bookingPrice} ₽`}</span>
+            <div onClick={() => togglePricesInfo(pack.packageId)}>
+              {showPricesInfo[pack.packageId] ? (
+                <div className={styles.pack_prices_info}>
+                  <span>
+                    <span
+                      className={styles.total_price}
+                    >{`${pack.firstPrice} ₽ `}</span>
+                    <span
+                      className={styles.pack_limit}
+                    >{`до ${pack.firstLimitation}`}</span>
+                  </span>
+                  <span>
+                    <span
+                      className={styles.total_price}
+                    >{`${pack.secondPrice} ₽ `}</span>
+                    <span
+                      className={styles.pack_limit}
+                    >{`до ${pack.secondLimitation}`}</span>
+                  </span>
+                  <span>
+                    <span
+                      className={styles.total_price}
+                    >{`${pack.thirdPrice} ₽ `}</span>
+                    <span
+                      className={styles.pack_limit}
+                    >{`до ${pack.thirdLimitation}`}</span>
+                  </span>
+                </div>
+              ) : (
+                <>
+                  <h4
+                    className={styles.total_price}
+                  >{`${pack.totalPrice} ₽*`}</h4>
+                  <span
+                    className={styles.cost_link}
+                  >{`*${pack.costNamingLink}`}</span>
+                  <span
+                    className={styles.booking_price}
+                  >{`предоплата по спорт пакету - ${pack.bookingPrice} ₽`}</span>
+                </>
+              )}
+            </div>
           </div>
         ))}
       </div>
