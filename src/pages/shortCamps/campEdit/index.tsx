@@ -1,82 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
-import BasketIcon from '../../../assets/basket.svg?react';
 import {
   getCamp,
   getPackages,
   updateCamp,
   deleteCamp as deleteCmp,
   creatorRequest,
+  uploadImg,
 } from '../../../api';
 import { ICampItem, ICoach, IPackage } from '../interfaces';
-import { baseSrc } from '../../../constants';
 import { useUser } from '../../../context';
+import { imageesMassSelect, imageSelect } from './imageSelect';
 import styles from '../index.module.css';
-
-const readFile = (file): Promise<string> => {
-  return new Promise((resolve) => {
-    if (file.size) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        resolve(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-};
-
-const imageSelect = ({
-  label,
-  onBtnImg,
-  onChangeImage,
-  deleteImg,
-  formRef,
-  imageRef,
-  currentImage,
-}: {
-  label: string;
-  onBtnImg: () => void;
-  onChangeImage: (e: any) => void;
-  deleteImg: () => void;
-  formRef: any;
-  imageRef: any;
-  currentImage: any;
-}) => {
-  return (
-    <>
-      <span className={styles.text_align_l}>
-        <span className={styles.img_label}>{label}</span>
-        <button onClick={onBtnImg} className={styles.button}>
-          Выбрать файл
-        </button>
-      </span>
-      <form ref={formRef}>
-        <input
-          className={styles.input_image}
-          type="file"
-          onChange={onChangeImage}
-          ref={imageRef}
-        />
-      </form>
-      {currentImage ? (
-        <>
-          <span className={styles.image_name}>{currentImage.name}</span>
-          <span className={styles.text_align_l}>
-            <img
-              src={`${baseSrc(currentImage.contentType)}${currentImage.data}`}
-              alt=""
-              className={styles.upload_coach_img}
-            />
-            <BasketIcon onClick={deleteImg} />
-          </span>
-        </>
-      ) : (
-        <div className={styles.stub_img}>+</div>
-      )}
-    </>
-  );
-};
 
 export const CampEdit: React.FC<{
   campId: string | null;
@@ -89,6 +25,8 @@ export const CampEdit: React.FC<{
   const formRef = useRef<HTMLFormElement | null>(null);
   const imageRef2 = useRef<HTMLInputElement | null>(null);
   const formRef2 = useRef<HTMLFormElement | null>(null);
+  const imageRefMass = useRef<HTMLInputElement | null>(null);
+  const formRefMass = useRef<HTMLFormElement | null>(null);
 
   const revalidator = useRevalidator();
 
@@ -134,8 +72,21 @@ export const CampEdit: React.FC<{
   }, [campId]);
 
   const deleteImg = () => {
-    // setCamp((prevCamp) => ({ ...(prevCamp as ICampItem), mainImage: null }));
-    // formRef.current?.reset();
+    setCamp((prevCamp) => ({ ...(prevCamp as ICampItem), mainImage: null }));
+    formRef.current?.reset();
+  };
+  const deleteImg2 = () => {
+    setCamp((prevCamp) => ({ ...(prevCamp as ICampItem), imageCart: null }));
+    formRef2.current?.reset();
+  };
+  const deleteImgMass = (id: string) => {
+    setCamp((prevCamp) => ({
+      ...(prevCamp as ICampItem),
+      images: prevCamp?.images
+        ? prevCamp.images.filter((img) => img.id !== id)
+        : [],
+    }));
+    formRefMass.current?.reset();
   };
 
   const saveCamp = () => {
@@ -168,29 +119,100 @@ export const CampEdit: React.FC<{
     delC();
   };
 
-  const onChangeImage = (e) => {
-    const imageConverter = async () => {
+  const onChangeImage = (e: { target: { files: any[] } }) => {
+    const imageUploader = async () => {
       const file = e.target.files?.[0];
       if (file) {
-        const base64: string = await readFile(file);
-        // setCamp((prevCamp) => ({
-        //   ...(prevCamp as ICampItem),
-        //   mainImage: {
-        //     data: base64.replace(baseSrc(file.type), ''),
-        //     typeEntity: 'COACH' as const,
-        //     name: file.name,
-        //     contentType: file.type,
-        //     size: file.size,
-        //     id: null,
-        //   },
-        // }));
+        const axiosCall = creatorRequest(logout);
+        const formData = new FormData();
+        formData.append('file', file);
+        const { result, error } = await axiosCall<string>(
+          uploadImg(formData, 'CAMP'),
+        );
+        // todo проблемы на проде - расширить ответ
+        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
+        setCamp((prevCamp) => ({
+          ...(prevCamp as ICampItem),
+          mainImage: {
+            typeEntity: 'CAMP' as const,
+            name: file.name,
+            contentType: file.type,
+            size: file.size,
+            id: result.data.result,
+            url: `/magicvolley/media/${result.data.result}`,
+          },
+        }));
       }
     };
-    imageConverter();
+    imageUploader();
+  };
+  const onChangeImage2 = (e: { target: { files: any[] } }) => {
+    const imageUploader = async () => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const axiosCall = creatorRequest(logout);
+        const formData = new FormData();
+        formData.append('file', file);
+        const { result, error } = await axiosCall<string>(
+          uploadImg(formData, 'CAMP'),
+        );
+        // todo проблемы на проде - расширить ответ
+        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
+        setCamp((prevCamp) => ({
+          ...(prevCamp as ICampItem),
+          imageCart: {
+            typeEntity: 'CAMP' as const,
+            name: file.name,
+            contentType: file.type,
+            size: file.size,
+            id: result.data.result,
+            url: `/magicvolley/media/${result.data.result}`,
+          },
+        }));
+      }
+    };
+    imageUploader();
+  };
+  const onChangeImageMass = (e: { target: { files: any[] } }) => {
+    const imageUploader = async () => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const axiosCall = creatorRequest(logout);
+        const formData = new FormData();
+        formData.append('file', file);
+        const { result, error } = await axiosCall<string>(
+          uploadImg(formData, 'CAMP'),
+        );
+        // todo проблемы на проде - расширить ответ
+        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
+        const newImg = {
+          typeEntity: 'CAMP' as const,
+          name: file.name,
+          contentType: file.type,
+          size: file.size,
+          entityId: campId,
+          id: result.data.result,
+          url: `/magicvolley/media/${result.data.result}`,
+        };
+        setCamp((prevCamp) => ({
+          ...(prevCamp as ICampItem),
+          images: prevCamp?.images
+            ? prevCamp.images.concat([newImg])
+            : [newImg],
+        }));
+      }
+    };
+    imageUploader();
   };
 
   const onBtnImg = () => {
     imageRef.current?.click();
+  };
+  const onBtnImg2 = () => {
+    imageRef2.current?.click();
+  };
+  const onBtnImgMass = () => {
+    imageRefMass.current?.click();
   };
 
   return (
@@ -211,23 +233,23 @@ export const CampEdit: React.FC<{
       header={<div className={styles.modal_header}>{'Карточка кемпа'}</div>}
     >
       <div className={styles.edit_camp_content}>
-        <div>
+        <div className={styles.images_row}>
           {imageSelect({
             label: 'Главная фотография карточки',
-            deleteImg,
-            onBtnImg,
-            onChangeImage,
-            formRef,
-            imageRef,
-            currentImage: currentCamp?.mainImage,
+            deleteImg: deleteImg2,
+            onBtnImg: onBtnImg2,
+            onChangeImage: onChangeImage2,
+            formRef: formRef2,
+            imageRef: imageRef2,
+            currentImage: currentCamp?.imageCart,
           })}
           {imageSelect({
             label: 'Главная фотография страницы кемпа',
             deleteImg,
             onBtnImg,
             onChangeImage,
-            formRef: formRef2,
-            imageRef: imageRef2,
+            formRef: formRef,
+            imageRef: imageRef,
             currentImage: currentCamp?.mainImage,
           })}
         </div>
@@ -247,24 +269,24 @@ export const CampEdit: React.FC<{
         <label>{'О месте проведения'}</label>
         <textarea
           value={currentCamp?.info}
-          // onChange={(e) => {
-          //   setCoach((prevCoach) => ({
-          //     ...(prevCoach as ICoach),
-          //     infos: e.target.value.split(';'),
-          //   }));
-          // }}
+          onChange={(e) => {
+            setCamp((prevCamp) => ({
+              ...(prevCamp as ICampItem),
+              info: e.target.value as string,
+            }));
+          }}
           rows={4}
           cols={5}
           className={styles.textarea_field}
         />
-        {imageSelect({
+        {imageesMassSelect({
           label: 'Фотография места проведения',
-          deleteImg,
-          onBtnImg,
-          onChangeImage,
-          formRef,
-          imageRef,
-          currentImage: currentCamp?.mainImage,
+          deleteImg: deleteImgMass,
+          onBtnImg: onBtnImgMass,
+          onChangeImage: onChangeImageMass,
+          formRef: formRefMass,
+          imageRef: imageRefMass,
+          images: currentCamp?.images,
         })}
         <label>{'Выбор пакета'}</label>
         <select

@@ -29,6 +29,7 @@
   line-height: 33px;
   color: rgba(212, 212, 212, 1);
   overflow: hidden;
+  position: relative;
 }
 
 .camp_card_add {
@@ -119,10 +120,17 @@
   justify-content: space-between;
 }
 
+.setting_camp,
 .setting {
   height: 40px;
   width: 40px;
   cursor: pointer;
+}
+
+.setting_camp {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
 }
 
 .img_label {
@@ -265,4 +273,21 @@
 
 .selected_option_pack {
   background: #D4D4D4;
+}
+
+.img_col {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+}
+
+.images_img_col {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.images_row {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 50px;
 }

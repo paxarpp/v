@@ -21,12 +21,12 @@ export interface IPackage {
   thirdLimitation: string;
 }
 
-interface IImage {
+export interface IImage {
   id: string;
   name: string;
   contentType: string;
   size: number;
-  typeEntity: 'COACH';
+  typeEntity: 'COACH' | 'CAMP';
   url: string;
 }
 

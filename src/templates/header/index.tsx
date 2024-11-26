@@ -103,7 +103,7 @@ export const Header = () => {
         </li>
         <li>
           <div className={styles.dropdown}>
-            <span className={styles.dropdown_title}>Пляжный волейбол</span>
+            <span>Пляжный волейбол</span>
             <ClosedIcon className={styles.dropdown_closed} />
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>
@@ -125,7 +125,7 @@ export const Header = () => {
         </li>
         <li>
           <div className={styles.dropdown}>
-            <span className={styles.dropdown_title}>Классический волейбол</span>
+            <span>Классический волейбол</span>
             <ClosedIcon className={styles.dropdown_closed} />
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>

@@ -26,9 +26,7 @@ export const CampsList = () => {
     <ErrorLocal error={error} />
   ) : (
     <div className={styles.camp_list}>
-      {open ? (
-        <CampEdit campId={editCampId} onClose={closeCampEdit} />
-      ) : null}
+      {open ? <CampEdit campId={editCampId} onClose={closeCampEdit} /> : null}
       <Suspense fallback={'Загрузка...'}>
         <Await resolve={shortCamps}>
           <CampsTemplate
@@ -74,22 +72,21 @@ const CampsTemplate: React.FC<{
               <span>{camp.name}</span>
             </div>
             <div className={styles.camp_image_wrapper}>
-              {camp.imageCart ? (
-                <img
-                  src={camp.imageCart.url}
-                  alt={camp.name}
-                  className={styles.camp_img}
-                />
-              ) : (
-                'тут картинка'
-              )}
+              <img
+                src={camp.imageCart?.url}
+                alt={camp.name}
+                className={styles.camp_img}
+              />
             </div>
             <div>
               <Link to={`/camps/${camp.id}`} className={styles.button_profile}>
                 Подробнее
               </Link>
               {isAdmin ? (
-                <Setting onClick={() => openEditCamp(camp.id)} />
+                <Setting
+                  onClick={() => openEditCamp(camp.id)}
+                  className={styles.setting_camp}
+                />
               ) : null}
             </div>
           </div>
