@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
-import { ICampItem } from '../shotCamps/interfaces';
+import { ICampItem } from '../shortCamps/interfaces';
 import { CallMe } from '../../templates/callme';
 import { MainImage } from './mainImage';
 import { Info } from './info';

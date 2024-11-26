@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { ICoach } from '../pages/coaches/interfaces';
-import { ICampItem } from '../pages/shotCamps/interfaces';
+import { ICampItem } from '../pages/shortCamps/interfaces';
 
 const BASE_URL = '/magicvolley';
 
@@ -129,7 +129,7 @@ export const logout = async <T>(): Promise<T> => {
   }
 };
 
-export const getShotCamps = async <T>(): Promise<{
+export const getShortCamps = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {
   try {

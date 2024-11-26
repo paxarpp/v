@@ -1,7 +1,7 @@
 import { useAsyncValue } from 'react-router-dom';
 import People from '../../../assets/people.svg?react';
 import Tour from '../../../assets/tour.svg?react';
-import { ICampItem } from '../../shotCamps/interfaces';
+import { ICampItem } from '../../shortCamps/interfaces';
 import styles from '../index.module.css';
 
 export const Packages = () => {

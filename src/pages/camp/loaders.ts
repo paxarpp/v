@@ -1,6 +1,6 @@
 import { defer } from 'react-router-dom';
 import { getCamp } from '../../api';
-import { ICampItem } from '../shotCamps/interfaces';
+import { ICampItem } from '../shortCamps/interfaces';
 
 const loaderCamp = async (id: string) => {
   const {

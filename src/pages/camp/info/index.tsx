@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAsyncValue } from 'react-router-dom';
-import { ICampItem } from '../../shotCamps/interfaces';
+import { ICampItem } from '../../shortCamps/interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import styles from '../index.module.css';
