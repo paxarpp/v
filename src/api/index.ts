@@ -167,6 +167,13 @@ export const updateCoach = async (body: ICoach) => {
   }
 };
 
+export const uploadImg = async (file: FormData, typeEntity = 'COACH') => {
+  return await axios.post(
+    BASE_URL + `/media/upload?typeEntity=${typeEntity}`,
+    file,
+  );
+};
+
 export const deleteCoach = async (id: string) => {
   return await axios.delete(BASE_URL + `/coaches/${id}`);
 };
@@ -192,6 +199,8 @@ export const creatorRequest =
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
           logout();
+          // закрыть все открытые модалки
+          window.location.reload();
         }
         return {
           error:

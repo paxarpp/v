@@ -17,6 +17,7 @@ const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   };
   const logout = () => {
     setUser(null);
+    document.cookie = `magicVolley=`;
   };
 
   const value = {

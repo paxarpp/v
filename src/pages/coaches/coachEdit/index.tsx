@@ -7,23 +7,23 @@ import {
   updateCoach,
   deleteCoach as deleteCch,
   creatorRequest,
+  uploadImg,
 } from '../../../api';
 import { ICoach } from '../interfaces';
-import styles from '../index.module.css';
-import { baseSrc } from '../../../constants';
 import { useUser } from '../../../context';
+import styles from '../index.module.css';
 
-const readFile = (file): Promise<string> => {
-  return new Promise((resolve) => {
-    if (file.size) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        resolve(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-};
+// const readFile = (file): Promise<string> => {
+//   return new Promise((resolve) => {
+//     if (file.size) {
+//       const reader = new FileReader();
+//       reader.onload = (e) => {
+//         resolve(e.target?.result as string);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   });
+// };
 
 export const CoachEdit: React.FC<{
   open: boolean;
@@ -97,24 +97,29 @@ export const CoachEdit: React.FC<{
   };
 
   const onChangeImage = (e) => {
-    const imageConverter = async () => {
+    const imageUploader = async () => {
       const file = e.target.files?.[0];
       if (file) {
-        const base64: string = await readFile(file);
+        const axiosCall = creatorRequest(logout);
+        const formData = new FormData();
+        formData.append('file', file);
+        const { result, error } = await axiosCall<string>(uploadImg(formData));
+        // todo проблемы на проде - расширить ответ
+        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
         setCoach((prevCoach) => ({
           ...(prevCoach as ICoach),
           mainImage: {
-            data: base64.replace(baseSrc(file.type), ''),
             typeEntity: 'COACH' as const,
             name: file.name,
             contentType: file.type,
             size: file.size,
-            id: null,
+            id: result.data.result,
+            url: `/magicvolley/media/${result.data.result}`,
           },
         }));
       }
     };
-    imageConverter();
+    imageUploader();
   };
 
   const onBtnImg = () => {
@@ -161,9 +166,7 @@ export const CoachEdit: React.FC<{
             <span className={styles.text_align_l}>
               <img
                 src={
-                  currentCoach?.mainImage.url
-                    ? currentCoach?.mainImage.url
-                    : `${baseSrc(currentCoach?.mainImage?.contentType)}${currentCoach?.mainImage?.data}`
+                  currentCoach?.mainImage.url ? currentCoach?.mainImage.url : ''
                 }
                 alt=""
                 className={styles.upload_coach_img}
