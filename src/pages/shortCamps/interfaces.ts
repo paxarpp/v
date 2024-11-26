@@ -23,6 +23,7 @@ export interface IPackage {
 
 export interface IImage {
   id: string;
+  entityId?: string;
   name: string;
   contentType: string;
   size: number;

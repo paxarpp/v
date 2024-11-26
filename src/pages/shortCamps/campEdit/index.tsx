@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, ChangeEvent } from 'react';
 import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
 import {
@@ -8,6 +8,7 @@ import {
   deleteCamp as deleteCmp,
   creatorRequest,
   uploadImg,
+  getCoaches,
 } from '../../../api';
 import { ICampItem, ICoach, IPackage } from '../interfaces';
 import { useUser } from '../../../context';
@@ -21,6 +22,7 @@ export const CampEdit: React.FC<{
   const { logout } = useUser();
   const [currentCamp, setCamp] = useState<ICampItem | null>(null);
   const [packs, setPacks] = useState<IPackage[]>([]);
+  const [coachesAll, setCoaches] = useState<ICoach[]>([]);
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const imageRef2 = useRef<HTMLInputElement | null>(null);
@@ -37,6 +39,14 @@ export const CampEdit: React.FC<{
       const { result } = await axiosCall<IPackage[]>(getPackages());
       if (result.data.result) {
         setPacks([...result.data.result]);
+      }
+    };
+    const getCoachesAll = async () => {
+      const axiosCall = creatorRequest(logout);
+      setCoaches([]);
+      const { result } = await axiosCall<ICoach[]>(getCoaches());
+      if (result.data.result) {
+        setCoaches([...result.data.result]);
       }
     };
     if (campId) {
@@ -66,6 +76,7 @@ export const CampEdit: React.FC<{
       getC(campId);
     }
     getPacks();
+    getCoachesAll();
     return () => {
       setCamp(null);
     };
@@ -119,18 +130,16 @@ export const CampEdit: React.FC<{
     delC();
   };
 
-  const onChangeImage = (e: { target: { files: any[] } }) => {
+  const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     const imageUploader = async () => {
       const file = e.target.files?.[0];
       if (file) {
         const axiosCall = creatorRequest(logout);
         const formData = new FormData();
         formData.append('file', file);
-        const { result, error } = await axiosCall<string>(
+        const { result, error } = await axiosCall<{ id: string; url: string }>(
           uploadImg(formData, 'CAMP'),
         );
-        // todo проблемы на проде - расширить ответ
-        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
         setCamp((prevCamp) => ({
           ...(prevCamp as ICampItem),
           mainImage: {
@@ -138,26 +147,24 @@ export const CampEdit: React.FC<{
             name: file.name,
             contentType: file.type,
             size: file.size,
-            id: result.data.result,
-            url: `/magicvolley/media/${result.data.result}`,
+            id: result.data.result.id,
+            url: result.data.result.url,
           },
         }));
       }
     };
     imageUploader();
   };
-  const onChangeImage2 = (e: { target: { files: any[] } }) => {
+  const onChangeImage2 = (e: ChangeEvent<HTMLInputElement>) => {
     const imageUploader = async () => {
       const file = e.target.files?.[0];
       if (file) {
         const axiosCall = creatorRequest(logout);
         const formData = new FormData();
         formData.append('file', file);
-        const { result, error } = await axiosCall<string>(
+        const { result, error } = await axiosCall<{ id: string; url: string }>(
           uploadImg(formData, 'CAMP'),
         );
-        // todo проблемы на проде - расширить ответ
-        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
         setCamp((prevCamp) => ({
           ...(prevCamp as ICampItem),
           imageCart: {
@@ -165,34 +172,32 @@ export const CampEdit: React.FC<{
             name: file.name,
             contentType: file.type,
             size: file.size,
-            id: result.data.result,
-            url: `/magicvolley/media/${result.data.result}`,
+            id: result.data.result.id,
+            url: result.data.result.url,
           },
         }));
       }
     };
     imageUploader();
   };
-  const onChangeImageMass = (e: { target: { files: any[] } }) => {
+  const onChangeImageMass = (e: ChangeEvent<HTMLInputElement>) => {
     const imageUploader = async () => {
       const file = e.target.files?.[0];
       if (file) {
         const axiosCall = creatorRequest(logout);
         const formData = new FormData();
         formData.append('file', file);
-        const { result, error } = await axiosCall<string>(
+        const { result, error } = await axiosCall<{ id: string; url: string }>(
           uploadImg(formData, 'CAMP'),
         );
-        // todo проблемы на проде - расширить ответ
-        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
         const newImg = {
           typeEntity: 'CAMP' as const,
           name: file.name,
           contentType: file.type,
           size: file.size,
-          entityId: campId,
-          id: result.data.result,
-          url: `/magicvolley/media/${result.data.result}`,
+          entityId: campId as string,
+          id: result.data.result.id,
+          url: result.data.result.url,
         };
         setCamp((prevCamp) => ({
           ...(prevCamp as ICampItem),
@@ -213,6 +218,69 @@ export const CampEdit: React.FC<{
   };
   const onBtnImgMass = () => {
     imageRefMass.current?.click();
+  };
+
+  const onChangePack = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = Number(e.target.value);
+    const isDeselect = !!currentCamp?.packages.some(
+      ({ packageId }) => packageId === selectedId,
+    );
+    setCamp((prevCamp) => {
+      return {
+        ...prevCamp,
+        packages: isDeselect
+          ? prevCamp?.packages.filter(
+              ({ packageId }) => packageId !== selectedId,
+            )
+          : prevCamp?.packages.concat([
+              {
+                ...(packs.find(
+                  ({ packageId }) => packageId === selectedId,
+                ) as IPackage),
+              },
+            ]),
+      } as ICampItem;
+    });
+  };
+
+  const onChangeCoach = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = e.target.value;
+    const isDeselect = !!currentCamp?.coaches.some(
+      ({ id }) => id === selectedId,
+    );
+    setCamp((prevCamp) => {
+      return {
+        ...prevCamp,
+        coaches: isDeselect
+          ? prevCamp?.coaches.filter(({ id }) => id !== selectedId)
+          : prevCamp?.coaches.concat([
+              {
+                ...(coachesAll.find(({ id }) => id === selectedId) as ICoach),
+              },
+            ]),
+      } as ICampItem;
+    });
+  };
+
+  const onChangePackForCamp = (
+    e: ChangeEvent<HTMLInputElement>,
+    packageId: number,
+    field: keyof IPackage,
+    toNumber?: boolean,
+  ) => {
+    setCamp((prevCamp) => ({
+      ...(prevCamp as ICampItem),
+      packages: (prevCamp as ICampItem).packages.map((p) => {
+        if (p.packageId === packageId) {
+          return {
+            ...p,
+            [field]: toNumber ? Number(e.target.value) : e.target.value,
+          };
+        } else {
+          return p;
+        }
+      }),
+    }));
   };
 
   return (
@@ -291,28 +359,7 @@ export const CampEdit: React.FC<{
         <label>{'Выбор пакета'}</label>
         <select
           className={styles.input_field}
-          onChange={(e) => {
-            const selectedId = Number(e.target.value);
-            const isDeselect = !!currentCamp?.packages.some(
-              ({ packageId }) => packageId === selectedId,
-            );
-            setCamp((prevCamp) => {
-              return {
-                ...prevCamp,
-                packages: isDeselect
-                  ? prevCamp?.packages.filter(
-                      ({ packageId }) => packageId !== selectedId,
-                    )
-                  : prevCamp?.packages.concat([
-                      {
-                        ...(packs.find(
-                          ({ packageId }) => packageId === selectedId,
-                        ) as IPackage),
-                      },
-                    ]),
-              } as ICampItem;
-            });
-          }}
+          onChange={onChangePack}
           value={0}
         >
           <option disabled={true} value={0}>{`Пакет`}</option>
@@ -336,25 +383,53 @@ export const CampEdit: React.FC<{
               return (
                 <div key={pack.packageId} className={styles.package_card}>
                   <span>{`Пакет "${pack.name}"`}</span>
-                  <textarea value={pack.info} className={styles.pack_area} />
+                  <textarea
+                    value={pack.info}
+                    className={styles.pack_area}
+                    onChange={(e) =>
+                      onChangePackForCamp(e, pack.packageId, 'info', false)
+                    }
+                  />
                   <label>Стоимость</label>
                   <input
+                    type={'number'}
                     value={pack.totalPrice}
                     className={styles.pack_input}
+                    onChange={(e) =>
+                      onChangePackForCamp(e, pack.packageId, 'totalPrice', true)
+                    }
                   />
                   <div className={styles.row_prices}>
                     <div className={styles.col_price}>
                       <label className={styles.pack_label}>Цена</label>
                       <input
+                        type={'number'}
                         value={pack.firstPrice}
                         className={styles.pack_col}
+                        onChange={(e) =>
+                          onChangePackForCamp(
+                            e,
+                            pack.packageId,
+                            'firstPrice',
+                            true,
+                          )
+                        }
                       />
                     </div>
                     <div className={styles.col_price}>
                       <label className={styles.pack_label}>До даты</label>
                       <input
+                        type={'date'}
                         value={pack.firstLimitation}
                         className={styles.pack_col}
+                        onChange={(e) =>
+                          onChangePackForCamp(
+                            e,
+                            pack.packageId,
+                            'firstLimitation',
+                            false,
+                          )
+                        }
                       />
                     </div>
                   </div>
@@ -362,15 +437,33 @@ export const CampEdit: React.FC<{
                     <div className={styles.col_price}>
                       <label className={styles.pack_label}>Цена</label>
                       <input
+                        type={'number'}
                         value={pack.secondPrice}
                         className={styles.pack_col}
+                        onChange={(e) =>
+                          onChangePackForCamp(
+                            e,
+                            pack.packageId,
+                            'secondPrice',
+                            true,
+                          )
+                        }
                       />
                     </div>
                     <div className={styles.col_price}>
                       <label className={styles.pack_label}>До даты</label>
                       <input
+                        type={'date'}
                         value={pack.secondLimitation}
                         className={styles.pack_col}
+                        onChange={(e) =>
+                          onChangePackForCamp(
+                            e,
+                            pack.packageId,
+                            'secondLimitation',
+                            false,
+                          )
+                        }
                       />
                     </div>
                   </div>
@@ -378,22 +471,49 @@ export const CampEdit: React.FC<{
                     <div className={styles.col_price}>
                       <label className={styles.pack_label}>Цена</label>
                       <input
+                        type={'number'}
                         value={pack.thirdPrice}
                         className={styles.pack_col}
+                        onChange={(e) =>
+                          onChangePackForCamp(
+                            e,
+                            pack.packageId,
+                            'thirdPrice',
+                            true,
+                          )
+                        }
                       />
                     </div>
                     <div className={styles.col_price}>
                       <label className={styles.pack_label}>До даты</label>
                       <input
+                        type={'date'}
                         value={pack.thirdLimitation}
                         className={styles.pack_col}
+                        onChange={(e) =>
+                          onChangePackForCamp(
+                            e,
+                            pack.packageId,
+                            'thirdLimitation',
+                            false,
+                          )
+                        }
                       />
                     </div>
                   </div>
                   <label>Стоимость предоплаты</label>
                   <input
+                    type={'number'}
                     value={pack.bookingPrice}
                     className={styles.pack_input}
+                    onChange={(e) =>
+                      onChangePackForCamp(
+                        e,
+                        pack.packageId,
+                        'bookingPrice',
+                        true,
+                      )
+                    }
                   />
                 </div>
               );
@@ -402,9 +522,26 @@ export const CampEdit: React.FC<{
         ) : null}
 
         <label>{'Тренерский состав'}</label>
-        <select className={styles.input_field}>
-          <option value="">1 1</option>
-          <option value="">2 2</option>
+        <select
+          className={styles.input_field}
+          onChange={onChangeCoach}
+          value={0}
+        >
+          <option disabled={true} value={0}>{`Тренер`}</option>
+          {coachesAll.map((coach) => {
+            const selected = currentCamp?.coaches.some(
+              ({ id }) => id === coach.id,
+            );
+            return (
+              <option
+                className={selected ? styles.selected_option_pack : ''}
+                value={coach.id}
+                key={coach.id}
+              >
+                {coach.name}
+              </option>
+            );
+          })}
         </select>
       </div>
     </Modal>

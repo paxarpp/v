@@ -54,6 +54,16 @@ export const getPackages = async <T>(): Promise<{
   }
 };
 
+export const getCoaches = async <T>(): Promise<{
+  data: { result: T[]; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/coaches/all');
+  } catch (e: unknown) {
+    return { data: { result: [], error: (e as Error).message } };
+  }
+};
+
 export const campReservation = async (
   campId: string,
   userId: string,

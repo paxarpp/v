@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import Close from '../../assets/close.svg?react';
 import styles from './index.module.css';
 
 interface IProps {
@@ -28,9 +29,7 @@ export const Modal: React.FC<PropsWithChildren<IProps>> = ({
         <div className={styles.header}>
           {header ? header : <span className={styles.title}>{title}</span>}
           {close && header ? (
-            <span onClick={close} className={styles.close_icon}>
-              x
-            </span>
+            <Close onClick={close} className={styles.close_icon} />
           ) : null}
         </div>
         <div className={styles.content}>{children}</div>

@@ -1,3 +1,4 @@
+import { ChangeEvent, MutableRefObject } from 'react';
 import { IImage } from '../interfaces';
 import BasketIcon from '../../../assets/basket.svg?react';
 import styles from '../index.module.css';
@@ -13,10 +14,10 @@ export const imageSelect = ({
 }: {
   label: string;
   onBtnImg: () => void;
-  onChangeImage: (e: any) => void;
+  onChangeImage: (e: ChangeEvent<HTMLInputElement>) => void;
   deleteImg: () => void;
-  formRef: any;
-  imageRef: any;
+  formRef: MutableRefObject<HTMLFormElement | null>;
+  imageRef: MutableRefObject<HTMLInputElement | null>;
   currentImage?: IImage | null;
 }) => {
   return (
@@ -65,10 +66,10 @@ export const imageesMassSelect = ({
 }: {
   label: string;
   onBtnImg: () => void;
-  onChangeImage: (e: any) => void;
+  onChangeImage: (e: ChangeEvent<HTMLInputElement>) => void;
   deleteImg: (id: string) => void;
-  formRef: any;
-  imageRef: any;
+  formRef: MutableRefObject<HTMLFormElement | null>;
+  imageRef: MutableRefObject<HTMLInputElement | null>;
   images?: IImage[] | null;
 }) => {
   return (

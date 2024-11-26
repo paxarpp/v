@@ -103,9 +103,7 @@ export const CoachEdit: React.FC<{
         const axiosCall = creatorRequest(logout);
         const formData = new FormData();
         formData.append('file', file);
-        const { result, error } = await axiosCall<string>(uploadImg(formData));
-        // todo проблемы на проде - расширить ответ
-        // нужен url сформированный на сервере вместо url: `/magicvolley/media/${result.data.result}`,
+        const { result, error } = await axiosCall<{ id: string; url: string }>(uploadImg(formData));
         setCoach((prevCoach) => ({
           ...(prevCoach as ICoach),
           mainImage: {
@@ -113,8 +111,8 @@ export const CoachEdit: React.FC<{
             name: file.name,
             contentType: file.type,
             size: file.size,
-            id: result.data.result,
-            url: `/magicvolley/media/${result.data.result}`,
+            id: result.data.result.id,
+            url: result.data.result.url,
           },
         }));
       }
