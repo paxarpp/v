@@ -36,4 +36,16 @@ function useUser() {
   return context;
 }
 
-export { AuthProvider, useUser };
+const AuthOpenContext = createContext<
+  { toggleAuthOpen: () => void } | undefined
+>(undefined);
+
+function useAuth() {
+  const context = useContext(AuthOpenContext);
+  if (context === undefined) {
+    throw new Error();
+  }
+  return context;
+}
+
+export { AuthProvider, useUser, AuthOpenContext, useAuth };

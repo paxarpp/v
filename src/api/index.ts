@@ -54,6 +54,21 @@ export const getPackages = async <T>(): Promise<{
   }
 };
 
+export const campReservation = async (
+  campId: string,
+  userId: string,
+): Promise<{
+  data: { result: boolean; error?: string };
+}> => {
+  try {
+    return await axios.put(BASE_URL + '/camp-user', null, {
+      params: { campId, userId },
+    });
+  } catch (e: unknown) {
+    return { data: { result: false, error: (e as Error).message } };
+  }
+};
+
 export const getCoach = async (id: string) => {
   return await axios.get(BASE_URL + `/coaches/${id}`);
 };
@@ -168,10 +183,9 @@ export const updateCoach = async (body: ICoach) => {
 };
 
 export const uploadImg = async (file: FormData, typeEntity = 'COACH') => {
-  return await axios.post(
-    BASE_URL + `/media/upload?typeEntity=${typeEntity}`,
-    file,
-  );
+  return await axios.post(BASE_URL + '/media/upload', file, {
+    params: { typeEntity },
+  });
 };
 
 export const deleteCoach = async (id: string) => {

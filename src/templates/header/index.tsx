@@ -7,15 +7,14 @@ import T from '../../assets/t.svg?react';
 import ClosedIcon from '../../assets/closed.svg?react';
 import Inst from '../../assets/inst.svg?react';
 import { logout as apiLogout } from '../../api';
-import { useUser } from '../../context';
+import { useUser, useAuth } from '../../context';
 import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
 import styles from './index.module.css';
 
-export const Header: React.FC<{ toggleAuthOpen: () => void }> = ({
-  toggleAuthOpen,
-}) => {
+export const Header = () => {
   const { user, logout } = useUser();
+  const { toggleAuthOpen } = useAuth();
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);

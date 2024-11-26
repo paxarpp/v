@@ -1,14 +1,18 @@
+import { useState } from 'react';
 import { useAsyncValue } from 'react-router-dom';
 import People from '../../../assets/people.svg?react';
 import Tour from '../../../assets/tour.svg?react';
 import { ICampItem } from '../../shortCamps/interfaces';
+import { useAuth, useUser } from '../../../context';
+import { campReservation } from '../../../api';
 import styles from '../index.module.css';
-import { useState } from 'react';
 
 export const Packages = () => {
   const { camp } = useAsyncValue() as {
     camp: ICampItem;
   };
+  const { user } = useUser();
+  const { toggleAuthOpen } = useAuth();
   const [showPricesInfo, setShowPricesInfo] = useState<Record<string, boolean>>(
     {},
   );
@@ -18,6 +22,21 @@ export const Packages = () => {
       setShowPricesInfo((prev) => ({ ...prev, [packId]: !prev[packId] }));
     } else {
       setShowPricesInfo((prev) => ({ ...prev, [packId]: true }));
+    }
+  };
+
+  const onReservation = () => {
+    const reservation = async () => {
+      if (user) {
+        const campId = camp.id;
+        const userId = user.id;
+        const resp = await campReservation(campId, userId);
+      }
+    };
+    if (user) {
+      reservation();
+    } else {
+      toggleAuthOpen();
     }
   };
 
@@ -92,6 +111,10 @@ export const Packages = () => {
           </div>
         ))}
       </div>
+
+      <button className={styles.button_profile} onClick={onReservation}>
+        {'Забронировать'}
+      </button>
     </div>
   );
 };
