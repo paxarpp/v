@@ -3,7 +3,7 @@ import { ErrorPage } from './error-page';
 import { Coaches } from './pages/coaches';
 import { loaderPageCoaches } from './pages/coaches/loaders';
 import { Main } from './pages/main';
-import { LongCamp } from './pages/longCamp';
+import { LongCamps } from './pages/longCamps';
 import { ShortCamps } from './pages/shortCamps';
 import { Camp } from './pages/camp';
 import { Shedule } from './pages/trainingSchedule';
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/longCamps',
-        element: <LongCamp />,
+        element: <LongCamps />,
         errorElement: <ErrorPage />,
       },
       {
