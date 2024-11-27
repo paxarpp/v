@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import Close from '../../assets/close.svg?react';
 import styles from './index.module.css';
 
@@ -20,6 +20,19 @@ export const Modal: React.FC<PropsWithChildren<IProps>> = ({
   header,
   classNameModal,
 }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+      document.body.style.paddingRight = '10px';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+      document.body.style.paddingRight = '';
+    }
+  }, [isOpen]);
+
   return isOpen ? (
     <div className={styles.modal_wrap}>
       <div className={styles.modal_back} onClick={close ? close : undefined} />

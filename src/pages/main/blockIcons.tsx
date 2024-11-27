@@ -15,7 +15,13 @@ export const BlockIcons = () => {
           Работаем 24/7 для общего результата
         </span>
       </div>
-      <div className={isMobile ? styles.block_icon_between_mobile : styles.block_icon_between}>
+      <div
+        className={
+          isMobile
+            ? styles.block_icon_between_mobile
+            : styles.block_icon_between
+        }
+      >
         <RightWay />
         <span className={styles.icon_title}>Правильный подход</span>
         <span className={styles.icon_sub_title}>

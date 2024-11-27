@@ -1,4 +1,4 @@
-import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
+import { Await, Link, useAsyncValue, useLoaderData } from 'react-router-dom';
 import { ICamp } from '../interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
@@ -16,7 +16,7 @@ export const CampsScroller: React.FC = () => {
       <div className={styles.camps_scroller}>
         <Suspense fallback={<CampsSkeleton />}>
           <Await resolve={camps}>
-              <CampsTemplate />
+            <CampsTemplate />
           </Await>
         </Suspense>
       </div>
@@ -42,8 +42,8 @@ const CampsSkeleton = () => {
         </div>
       ))}
     </>
-  )
-}
+  );
+};
 
 const CampsTemplate = () => {
   const { camps } = useAsyncValue() as {
@@ -70,7 +70,7 @@ const CampsTemplate = () => {
 
   return (
     <>
-      <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />   
+      <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
       <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
       {camps
         .filter((_, i) => i >= startIndex && i <= lastIndex)
@@ -89,11 +89,13 @@ const CampsTemplate = () => {
                 />
               </div>
               <div className={styles.camp_info}>
-                <button className={styles.button_camp}>Подробнее</button>
+                <Link to={`/camps/${item.id}`} className={styles.button_camp}>
+                  Подробнее
+                </Link>
               </div>
             </div>
           );
         })}
     </>
   );
-}
+};
