@@ -49,25 +49,25 @@ export const CampEdit: React.FC<{
         setCoaches([...result.data.result]);
       }
     };
+    setCamp({
+      id: '',
+      name: '',
+      info: '',
+      dateStart: '',
+      dateEnd: '',
+      dateString: '',
+      countAll: 0,
+      countFree: 0,
+      mainImage: null,
+      imageCart: null,
+      images: null,
+      coaches: [] as ICoach[],
+      packages: [] as IPackage[],
+    });
     if (campId) {
       // edit
       const getC = async (id: string) => {
         const axiosCall = creatorRequest(logout);
-        setCamp({
-          id,
-          name: '',
-          info: '',
-          dateStart: '',
-          dateEnd: '',
-          dateString: '',
-          countAll: 0,
-          countFree: 0,
-          mainImage: null,
-          imageCart: null,
-          images: null,
-          coaches: [] as ICoach[],
-          packages: [] as IPackage[],
-        });
         const { result } = await axiosCall<ICampItem>(getCamp(id));
         if (result.data.result) {
           setCamp({ ...result.data.result });
