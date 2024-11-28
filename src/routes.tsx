@@ -10,6 +10,7 @@ import { Shedule } from './pages/trainingSchedule';
 import { loaderPageMain } from './pages/main/loaders';
 import { loaderPageShedule } from './pages/trainingSchedule/loaders';
 import { loaderPageShortCamps } from './pages/shortCamps/loaders';
+import { loaderPageLongCamps } from './pages/longCamps/loaders';
 import { loaderPageCamp } from './pages/camp/loaders';
 import { App } from './App';
 
@@ -51,6 +52,7 @@ export const router = createBrowserRouter([
         path: '/longCamps',
         element: <LongCamps />,
         errorElement: <ErrorPage />,
+        loader: loaderPageLongCamps,
       },
       {
         path: '/trainingSchedule',
