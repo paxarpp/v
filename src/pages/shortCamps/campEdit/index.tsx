@@ -4,13 +4,13 @@ import { Modal } from '../../../templates/modal';
 import {
   getCamp,
   getPackages,
-  updateCamp,
+  updateCampShort,
   deleteCamp as deleteCmp,
   creatorRequest,
   uploadImg,
   getCoaches,
 } from '../../../api';
-import { ICampItem, ICoach, IPackage } from '../interfaces';
+import { ICampItem, ICoach, IImage, IPackage } from '../interfaces';
 import { useUser } from '../../../context';
 import { imageesMassSelect, imageSelect } from './imageSelect';
 import styles from '../index.module.css';
@@ -60,7 +60,7 @@ export const CampEdit: React.FC<{
       countFree: 0,
       mainImage: null,
       imageCart: null,
-      images: null,
+      images: [] as IImage[],
       coaches: [] as ICoach[],
       packages: [] as IPackage[],
     });
@@ -105,7 +105,7 @@ export const CampEdit: React.FC<{
       if (currentCamp) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall<string>(
-          updateCamp({ ...currentCamp }),
+          updateCampShort({ ...currentCamp }),
         );
         if (!error) {
           onClose();
@@ -333,7 +333,16 @@ export const CampEdit: React.FC<{
           className={styles.input_field}
         />
         <label>{'Дата проведения'}</label>
-        <input type={'date'} />
+        <input
+          type={'date'}
+          onChange={(e) => {
+            setCamp((prevCamp) => ({
+              ...(prevCamp as ICampItem),
+              dateStart: e.target.value,
+              dateEnd: e.target.value,
+            }));
+          }}
+        />
         <label>{'О месте проведения'}</label>
         <textarea
           value={currentCamp?.info}
@@ -543,6 +552,11 @@ export const CampEdit: React.FC<{
             );
           })}
         </select>
+        <ul>
+          {currentCamp?.coaches.map((coach) => {
+            return <li key={coach.id}>{coach.name}</li>;
+          })}
+        </ul>
       </div>
     </Modal>
   );

@@ -132,3 +132,9 @@
   width: 300px;
   opacity: 0.9;
 }
+
+.user_avatar {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}

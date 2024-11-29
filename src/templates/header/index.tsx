@@ -6,11 +6,12 @@ import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
 import ClosedIcon from '../../assets/closed.svg?react';
 import Inst from '../../assets/inst.svg?react';
-import { logout as apiLogout } from '../../api';
+import Avatar from '../../assets/avatar.svg?react';
 import { useUser, useAuth } from '../../context';
 import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
 import styles from './index.module.css';
+import { IUser } from '../../auth/interface';
 
 export const Header = () => {
   const { user, logout } = useUser();
@@ -35,12 +36,6 @@ export const Header = () => {
       }
     }
   }, [isAuth]);
-
-  const onLogout = () => {
-    apiLogout();
-    document.cookie = `magicVolley=`;
-    logout();
-  };
 
   const togglePopapMenu = () => {
     openPopapMenu((prev) => !prev);
@@ -83,12 +78,18 @@ export const Header = () => {
                 <Link to="/corporates">Корпоративные мероприятия</Link>
               </li>
             </ul>
-            <button
-              className={styles.button}
-              onClick={isAuth ? onLogout : toggleAuthOpen}
-            >
-              {isAuth ? 'Выйти' : 'Войти'}
-            </button>
+            {isAuth ? (
+              <Link
+                to={`/user/:${(user as unknown as IUser).id}`}
+                className={styles.user_avatar}
+              >
+                <Avatar />
+              </Link>
+            ) : (
+              <button className={styles.button} onClick={toggleAuthOpen}>
+                {'Войти'}
+              </button>
+            )}
           </div>
         ) : null}
       </div>
@@ -154,12 +155,18 @@ export const Header = () => {
         <T />
         <Inst />
       </div>
-      <button
-        className={styles.button}
-        onClick={isAuth ? onLogout : toggleAuthOpen}
-      >
-        {isAuth ? 'Выйти' : 'Войти'}
-      </button>
+      {isAuth ? (
+        <Link
+          to={`/user/${(user as unknown as IUser).id}`}
+          className={styles.user_avatar}
+        >
+          <Avatar />
+        </Link>
+      ) : (
+        <button className={styles.button} onClick={toggleAuthOpen}>
+          {'Войти'}
+        </button>
+      )}
     </div>
   );
 };

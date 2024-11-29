@@ -44,6 +44,18 @@ export const getCamp = async <T>(
   }
 };
 
+export const getUser = async <T>(
+  id: string,
+): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + `/profiles/${id}`);
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
 export const getPackages = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {
@@ -211,11 +223,19 @@ export const deleteCoach = async (id: string) => {
   return await axios.delete(BASE_URL + `/coaches/${id}`);
 };
 
-export const updateCamp = async (body: ICampItem) => {
+export const updateCampShort = async (body: ICampItem) => {
   if (body.id) {
     return await axios.put(BASE_URL + `/camps/${body.id}`, body);
   } else {
-    return await axios.post(BASE_URL + `/camps`, body);
+    return await axios.post(BASE_URL + `/camps/short`, body);
+  }
+};
+
+export const updateCampLong = async (body: ICampItem) => {
+  if (body.id) {
+    return await axios.put(BASE_URL + `/camps/${body.id}`, body);
+  } else {
+    return await axios.post(BASE_URL + `/camps/long`, body);
   }
 };
 

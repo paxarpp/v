@@ -6,12 +6,14 @@ import { Main } from './pages/main';
 import { LongCamps } from './pages/longCamps';
 import { ShortCamps } from './pages/shortCamps';
 import { Camp } from './pages/camp';
+import { User } from './pages/user';
 import { Shedule } from './pages/trainingSchedule';
 import { loaderPageMain } from './pages/main/loaders';
 import { loaderPageShedule } from './pages/trainingSchedule/loaders';
 import { loaderPageShortCamps } from './pages/shortCamps/loaders';
 import { loaderPageLongCamps } from './pages/longCamps/loaders';
 import { loaderPageCamp } from './pages/camp/loaders';
+import { loaderPageUser } from './pages/user/loaders';
 import { App } from './App';
 
 export const router = createBrowserRouter([
@@ -75,6 +77,12 @@ export const router = createBrowserRouter([
         element: <div />,
         errorElement: <ErrorPage />,
       },
+      {
+        path: '/user/:id',
+        element: <User />,
+        errorElement: <ErrorPage />,
+        loader: loaderPageUser,
+      }
     ],
   },
 ]);

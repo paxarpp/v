@@ -1,0 +1,133 @@
+.button {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: 10px;
+  width: 108px;
+  height: 47px;
+  background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
+  border-radius: 8px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 16px;
+  align-items: center;
+  color: #152355;
+  cursor: pointer;
+}
+
+.flex_row_info,
+.flex_row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.flex_row_info {
+  width: 50%;
+}
+
+.flex_col_action {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 50%;
+}
+
+.avatar {
+  width: 270px;
+  height: 360px;
+}
+
+.user_info {
+  text-align: left;
+  list-style-type: none;
+}
+
+.user_info > li + li {
+  margin-top: 8px;
+}
+
+.scroll_arrow_right,
+.scroll_arrow_left {
+  position: absolute;
+  top: calc(50% - 25px);
+  cursor: pointer;
+}
+
+.scroll_arrow_left {
+  left: 0;
+}
+
+.scroll_arrow_right {
+  right: 0;
+}
+
+.button_camp {
+  font-family: Open Sans;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  text-align: center;
+
+  width: 244px;
+  height: 70px;
+  padding: 4px 14px;
+  border-radius: 8px;
+  background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
+  color: #152355;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.camp_img_wrap {
+  width: 521px;
+}
+
+.camp_img_dump,
+.camp_img {
+  width: 521px;
+  height: 273px;
+  min-height: 273px;
+  max-height: 273px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.camp_img_dump {
+  background-color: rgba(25, 26, 38, 1);
+}
+
+.camps_wrap {
+  padding-bottom: 20px;
+  margin-left: 75px;
+}
+
+.camps_scroller {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  width: calc(100% - 0px);
+  overflow: auto;
+  height: 100%;
+  overflow: hidden;
+  gap: 20px
+}
+
+.camp_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camp_card {
+  width: 569px;
+  height: 100%;
+  padding: 24px;
+  border-radius: 8px;
+  background: rgba(128, 128, 128, 0.2);
+  border: 2px solid rgba(255, 255, 255, 1)
+}
