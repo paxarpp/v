@@ -6,7 +6,7 @@ import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import Avatar from '../../../assets/avatar.svg?react';
 import { CoachEdit } from '../coachEdit';
-import { CoachProfile } from '../coachProfile';
+import { CoachProfile } from '../../../templates/coachProfile';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {

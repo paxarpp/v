@@ -8,7 +8,7 @@ export interface IImage {
   url: string;
 }
 
-interface ICamp {
+export interface ICamp {
   id: string;
   name: string;
   dateString: string;

@@ -1,7 +1,20 @@
-import { Modal } from '../../../templates/modal';
-import { ICoach } from '../interfaces';
-import Avatar from '../../../assets/avatar.svg?react';
-import styles from '../index.module.css';
+import { Modal } from '../modal';
+import Avatar from '../../assets/avatar.svg?react';
+import styles from './index.module.css';
+
+interface IImage {
+  id: string;
+  name: string;
+  url: string;
+}
+
+interface ICoach {
+  id: string;
+  name: string;
+  infos: string[];
+  mainImage: IImage | null;
+  promo: string;
+}
 
 export const CoachProfile: React.FC<{
   coach: ICoach | null;

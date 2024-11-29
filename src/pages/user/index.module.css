@@ -24,6 +24,10 @@
   flex-flow: row nowrap;
 }
 
+.flex_row {
+  margin: 0 75px;
+}
+
 .flex_row_info {
   width: 50%;
 }

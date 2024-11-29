@@ -1,9 +1,9 @@
+import { Suspense, useState } from 'react';
 import { Await, Link, useAsyncValue, useLoaderData } from 'react-router-dom';
 import { ICamp } from '../interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import styles from '../index.module.css';
-import { Suspense, useState } from 'react';
 
 export const CampsScroller: React.FC = () => {
   const { camps } = useLoaderData() as {
@@ -78,12 +78,10 @@ const CampsTemplate = () => {
           return (
             <div key={item.id} className={styles.camp_card}>
               <p>{item.name}</p>
-              <p>
-                {item.dateStart}-{item.dateEnd}
-              </p>
+              <p>{item.dateString}</p>
               <div className={styles.camp_img_wrap}>
                 <img
-                  src={item.mainImage.url}
+                  src={item.imageCart.url}
                   alt="картинка кэмпа"
                   className={styles.camp_img}
                 />

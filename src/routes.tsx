@@ -15,6 +15,7 @@ import { loaderPageLongCamps } from './pages/longCamps/loaders';
 import { loaderPageCamp } from './pages/camp/loaders';
 import { loaderPageUser } from './pages/user/loaders';
 import { App } from './App';
+import { ProtectedRoute } from './templates/protectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -79,10 +80,14 @@ export const router = createBrowserRouter([
       },
       {
         path: '/user/:id',
-        element: <User />,
+        element: (
+          <ProtectedRoute>
+            <User />
+          </ProtectedRoute>
+        ),
         errorElement: <ErrorPage />,
         loader: loaderPageUser,
-      }
+      },
     ],
   },
 ]);

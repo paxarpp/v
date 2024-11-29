@@ -1,21 +1,33 @@
+import { useState } from 'react';
 import { useAsyncValue } from 'react-router-dom';
-import { ICampItem } from '../../shortCamps/interfaces';
+import { ICampItem, ICoach } from '../../shortCamps/interfaces';
+import { CoachProfile } from '../../../templates/coachProfile';
 import styles from '../index.module.css';
 
 export const Coaches = () => {
   const { camp } = useAsyncValue() as {
     camp: ICampItem;
   };
+  const [coachProfile, setCoach] = useState<ICoach | null>(null);
+
+  const closeCoach = () => {
+    setCoach(null);
+  };
+
+  const openProfile = (coach: ICoach) => {
+    setCoach(coach);
+  };
 
   return (
     <div className={styles.column}>
+      <CoachProfile coach={coachProfile} onClose={closeCoach} />
       <h2>Тренерский состав кемпа</h2>
       <div className={styles.package_row}>
         {camp.coaches.map((coach) => {
           return (
             <div key={coach.id} className={styles.coach_card}>
               <img
-                src={coach.mainImage.url}
+                src={coach.mainImage?.url}
                 alt={coach.name}
                 className={styles.coach_img}
               />
@@ -29,7 +41,7 @@ export const Coaches = () => {
               <div className={styles.coach_card_footer}>
                 <button
                   className={styles.button_profile}
-                  // onClick={() => openProfile(coach)}
+                  onClick={() => openProfile(coach)}
                 >
                   Профайл
                 </button>

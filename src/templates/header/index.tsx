@@ -10,11 +10,11 @@ import Avatar from '../../assets/avatar.svg?react';
 import { useUser, useAuth } from '../../context';
 import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
-import styles from './index.module.css';
 import { IUser } from '../../auth/interface';
+import styles from './index.module.css';
 
 export const Header = () => {
-  const { user, logout } = useUser();
+  const { user } = useUser();
   const { toggleAuthOpen } = useAuth();
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();

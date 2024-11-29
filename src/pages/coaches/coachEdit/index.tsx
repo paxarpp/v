@@ -13,18 +13,6 @@ import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
 import styles from '../index.module.css';
 
-// const readFile = (file): Promise<string> => {
-//   return new Promise((resolve) => {
-//     if (file.size) {
-//       const reader = new FileReader();
-//       reader.onload = (e) => {
-//         resolve(e.target?.result as string);
-//       };
-//       reader.readAsDataURL(file);
-//     }
-//   });
-// };
-
 export const CoachEdit: React.FC<{
   open: boolean;
   coachId: string | null;

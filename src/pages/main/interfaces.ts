@@ -1,48 +1,19 @@
-export interface IMediaBase {
-  contentType: string;
-  id: string;
-  name: string;
-  size: number;
-}
+export type ITypeEntity = 'COACH' | 'CAMP';
 
-export interface IMedia extends IMediaBase {
-  url: string;
-}
-
-export interface IMainImg {
+export interface IImage {
   contentType: string;
   id: string;
   name: string;
   size: number;
   typeEntity: ITypeEntity;
-  data: string;
   url: string;
-}
-
-export type ITypeEntity = 'COACH';
-
-export interface ICoach {
-  id: string;
-  name: string;
-  promo: string;
-  infos: string[];
-  mainImage: IMainImg;
-}
-
-export interface ICoachExt extends ICoach {
-  name: string;
 }
 
 export interface ICamp {
   id: string;
   name: string;
-  info: string;
-  price: number;
-  dateStart: string;
-  dateEnd: string;
-  countAll: number;
-  countFree: number;
-  coaches: ICoach[];
+  dateString: string;
+  imageCart: IImage;
 }
 
 export interface IQuestion {

@@ -1,0 +1,39 @@
+.profile_coach_modal {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  width: 420px;
+  height: 666px;
+  background: rgba(136, 136, 136, 1);
+}
+
+.profile_coach_content {
+  overflow: hidden;
+}
+
+.profile_coach_img,
+.profile_stub_img {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto 20px auto;
+  border-radius: 8px;
+}
+
+.profile_name {
+  width: 400px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  margin: 0 auto;
+  text-align: left;
+  color: rgba(212, 212, 212, 1);
+}
+
+.promo_area {
+  display: block;
+  background: rgba(212, 212, 212, 1);
+  margin: 0 auto 30px auto;
+  height: 180px;
+  width: 400px;
+  border-radius: 8px;
+}
