@@ -4,14 +4,12 @@ import { BlockIcons } from './blockIcons';
 import { Collapsed } from './collapsed';
 import { Contacts } from './contacts';
 import { CampsScroller } from './campsScroller';
-import styles from './index.module.css';
+import { MainImg } from './mainImg';
 
 export const Main = () => {
   return (
     <div>
-      <div>
-        <img src={'src/assets/main foto.jpg'} className={styles.w_100} />
-      </div>
+      <MainImg />
 
       <BlockIcons />
 

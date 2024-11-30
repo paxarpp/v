@@ -1,8 +1,20 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { ICoach } from '../pages/coaches/interfaces';
 import { ICampItem } from '../pages/shortCamps/interfaces';
+import { IMainBlock } from '../pages/main/interfaces';
 
 const BASE_URL = '/magicvolley';
+
+
+export const getHome = async <T>(): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/home');
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
 
 export const getCampsAll = async <T>(): Promise<{
   data: { result: T[]; error?: string };
@@ -104,36 +116,50 @@ export const deleteQuestion = async <T>(id: string): Promise<T> => {
     return {} as T;
   }
 };
+
 export const updateQuestion = async <T>(body: {
   question: string;
   answer: string;
   id?: string;
-}): Promise<{ result: T; error: string }> => {
+}[]): Promise<{ result: T; error: string }> => {
   try {
-    if (body.id) {
-      const result: T = await axios.put(
-        BASE_URL + `/questions/${body.id}`,
-        body,
-      );
-      return { result, error: '' };
-    } else {
+
       const result: T = await axios.post(BASE_URL + `/questions`, body);
       return { result, error: '' };
-    }
+    
   } catch (e: unknown) {
     return { error: (e as { message: string }).message, result: {} as T };
   }
 };
-export const getQuestion = async <T>(
-  id: string,
-): Promise<{ question: T; error: string }> => {
+
+export const updateMainBlock = async <T>(body: IMainBlock): Promise<{ result: T; error: string }> => {
+  try {
+    const result: T = await axios.put(BASE_URL + `/home/main`, body);
+    return { result, error: '' };
+  } catch (e: unknown) {
+    return { error: (e as { message: string }).message, result: {} as T };
+  }
+};
+
+export const getQuestions = async <T>(): Promise<{ questions: T[]; error: string }> => {
   try {
     const {
       data: { result },
-    } = await axios.get(BASE_URL + `/questions/${id}`);
-    return { question: result as T, error: '' };
+    } = await axios.get(BASE_URL + `/questions/all`);
+    return { questions: result as T[], error: '' };
   } catch (e: unknown) {
-    return { error: (e as { message: string }).message, question: {} as T };
+    return { error: (e as { message: string }).message, questions: [] as T[] };
+  }
+};
+
+export const getMain = async <T>(): Promise<{ main: T; error: string }> => {
+  try {
+    const {
+      data: { result },
+    } = await axios.get(BASE_URL + `/home/main`);
+    return { main: result as T, error: '' };
+  } catch (e: unknown) {
+    return { error: (e as { message: string }).message, main: {} as T };
   }
 };
 

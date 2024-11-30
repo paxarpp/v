@@ -1,13 +1,13 @@
 import { Suspense, useState } from 'react';
 import { Await, Link, useAsyncValue, useLoaderData } from 'react-router-dom';
-import { ICamp } from '../interfaces';
+import { IHome } from '../interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import styles from '../index.module.css';
 
 export const CampsScroller: React.FC = () => {
-  const { camps } = useLoaderData() as {
-    camps: ICamp[];
+  const { home } = useLoaderData() as {
+    home: IHome;
   };
 
   return (
@@ -15,7 +15,7 @@ export const CampsScroller: React.FC = () => {
       <h2 className={styles.camps_header}>Ближайшие кемпы</h2>
       <div className={styles.camps_scroller}>
         <Suspense fallback={<CampsSkeleton />}>
-          <Await resolve={camps}>
+          <Await resolve={home}>
             <CampsTemplate />
           </Await>
         </Suspense>
@@ -46,8 +46,8 @@ const CampsSkeleton = () => {
 };
 
 const CampsTemplate = () => {
-  const { camps } = useAsyncValue() as {
-    camps: ICamp[];
+  const { home } = useAsyncValue() as {
+    home: IHome;
   };
 
   const [startIndex, setStartIndex] = useState(0);
@@ -72,7 +72,7 @@ const CampsTemplate = () => {
     <>
       <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
       <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
-      {camps
+      {home.camps
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item) => {
           return (

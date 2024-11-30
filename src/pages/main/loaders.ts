@@ -1,6 +1,6 @@
 import { defer } from 'react-router-dom';
-import { getCampsAll, getQuestionAll } from '../../api';
-import { ICamp, IQuestion } from './interfaces';
+import { getCampsAll, getQuestionAll, getHome } from '../../api';
+import { ICamp, IHome, IQuestion } from './interfaces';
 
 const loaderCamps = async () => {
   const {
@@ -16,9 +16,15 @@ const loaderQuestions = async () => {
   return { questions: result, error };
 };
 
+const loaderHome = async () => {
+  const {
+    data: { result, error },
+  } = await getHome<IHome>();
+  return { home: result, error };
+};
+
 export const loaderPageMain = async () => {
   return defer({
-    camps: loaderCamps(),
-    questions: loaderQuestions(),
+    home: loaderHome(),
   });
 };

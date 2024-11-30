@@ -49,11 +49,6 @@ export const CoachEdit: React.FC<{
     };
   }, [coachId]);
 
-  const deleteImg = () => {
-    setCoach((prevCoach) => ({ ...(prevCoach as ICoach), mainImage: null }));
-    formRef.current?.reset();
-  };
-
   const saveCoach = () => {
     const saveC = async () => {
       if (currentCoach) {
@@ -82,6 +77,11 @@ export const CoachEdit: React.FC<{
       }
     };
     delC();
+  };
+
+  const deleteImg = () => {
+    setCoach((prevCoach) => ({ ...(prevCoach as ICoach), mainImage: null }));
+    formRef.current?.reset();
   };
 
   const onChangeImage = (e) => {
