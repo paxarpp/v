@@ -25,3 +25,11 @@ export interface IUser {
   pastCamps: ICamp[];
   nearestCamps: ICamp[];
 }
+
+export interface IUserInfo {
+  id: string;
+  email: string;
+  telephone: string;
+  fullName: string;
+  birthday: string;
+}

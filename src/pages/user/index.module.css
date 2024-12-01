@@ -1,11 +1,12 @@
+.button_save,
 .button {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
+  padding: 10px 20px;
   display: flex;
   justify-content: center;
   align-self: center;
-  padding: 10px;
-  width: 108px;
   height: 47px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
   border-radius: 8px;
@@ -16,6 +17,18 @@
   align-items: center;
   color: #152355;
   cursor: pointer;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  padding: 10px 20px;
+}
+
+.button_save {
+  margin: 0 0 30px 50px;
+  padding: 10px;
 }
 
 .flex_row_info,
@@ -50,6 +63,10 @@
 
 .user_info > li + li {
   margin-top: 8px;
+}
+
+.icon_edit_info {
+  cursor: pointer;
 }
 
 .scroll_arrow_right,
@@ -134,4 +151,27 @@
   border-radius: 8px;
   background: rgba(128, 128, 128, 0.2);
   border: 2px solid rgba(255, 255, 255, 1)
+}
+
+.modal_edit_info {
+  height: 720px;
+}
+
+.column_info {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 500px;
+  height: 420px;
+  gap: 20px;
+  padding: 50px;
+}
+
+.column_info > input {
+  height: 64px;
+  padding: 20px 0px;
+  border-radius: 4px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
 }
