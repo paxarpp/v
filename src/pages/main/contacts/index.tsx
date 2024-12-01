@@ -1,21 +1,21 @@
-import { Suspense, useRef, useState } from 'react';
-import { Await, useAsyncValue, useLoaderData, useRevalidator } from 'react-router-dom';
+import { Suspense, useState } from 'react';
+import {
+  Await,
+  useAsyncValue,
+  useLoaderData,
+  useRevalidator,
+} from 'react-router-dom';
 import Phone from '../../../assets/phone.svg?react';
 import Mail from '../../../assets/mail.svg?react';
 import Vk from '../../../assets/vk.svg?react';
 import T from '../../../assets/t.svg?react';
 import Inst from '../../../assets/inst.svg?react';
 import Setting from '../../../assets/setting.svg?react';
-import BasketIcon from '../../../assets/basket.svg?react';
 import { useUser } from '../../../context';
 import { IHome, IContactBlock } from '../interfaces';
-import {
-  updateContactBlock,
-  creatorRequest,
-  logout,
-  uploadImg,
-} from '../../../api';
+import { updateContactBlock } from '../../../api';
 import { Modal } from '../../../templates/modal';
+import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import styles from '../index.module.css';
 
 export const Contacts: React.FC = () => {
@@ -41,9 +41,6 @@ export const ContactsTemplate = () => {
   const revalidator = useRevalidator();
   const { user } = useUser();
   const isAdmin = !!user?.roles.includes('ADMIN');
-
-  const imageRef = useRef<HTMLInputElement | null>(null);
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
@@ -71,39 +68,18 @@ export const ContactsTemplate = () => {
   };
 
   const deleteImg = () => {
-    setContact((prevM) => ({ ...(prevM as IContactBlock), mainImage: null }));
-    formRef.current?.reset();
+    setContact((prevC) => ({ ...(prevC as IContactBlock), imageAdmin: null }));
   };
 
-  const onChangeImage = (e) => {
-    const imageUploader = async () => {
-      const file = e.target.files?.[0];
-      if (file) {
-        const axiosCall = creatorRequest(logout);
-        const formData = new FormData();
-        formData.append('file', file);
-        const { result, error } = await axiosCall<{ id: string; url: string }>(
-          uploadImg(formData),
-        );
-        setContact((prevM) => ({
-          ...(prevM as IContactBlock),
-          mainImage: {
-            entityId: '', // todo
-            typeEntity: 'COACH' as const,
-            name: file.name,
-            contentType: file.type,
-            size: file.size,
-            id: result.data.result.id,
-            url: result.data.result.url,
-          },
-        }));
-      }
-    };
-    imageUploader();
-  };
-
-  const onBtnImg = () => {
-    imageRef.current?.click();
+  const onChangeImage = (img: IImageBase) => {
+    setContact((prevC) => ({
+      ...(prevC as IContactBlock),
+      imageAdmin: {
+        entityId: '', // todo
+        typeEntity: 'COACH' as const,
+        ...img,
+      },
+    }));
   };
 
   return (
@@ -184,41 +160,12 @@ export const ContactsTemplate = () => {
               }}
               className={styles.question_field}
             />
-            <>
-              <span className={styles.text_align_l}>
-                <span className={styles.img_label}>{'Фото тренера'}</span>
-                <button onClick={onBtnImg} className={styles.button}>
-                  Выбрать файл
-                </button>
-              </span>
-              <form ref={formRef}>
-                <input
-                  className={styles.input_image}
-                  type="file"
-                  onChange={onChangeImage}
-                  ref={imageRef}
-                />
-              </form>
-              {contact?.imageAdmin ? (
-                <>
-                  <span className={styles.image_name}>
-                    {contact?.imageAdmin?.name}
-                  </span>
-                  <span className={styles.text_align_l}>
-                    <img
-                      src={
-                        contact?.imageAdmin.url ? contact?.imageAdmin.url : ''
-                      }
-                      alt=""
-                      className={styles.upload_coach_img}
-                    />
-                    <BasketIcon onClick={deleteImg} />
-                  </span>
-                </>
-              ) : (
-                <div className={styles.stub_img}>+</div>
-              )}
-            </>
+            <ImageSelect
+              label={'Фотография менеджера'}
+              currentImage={contact?.imageAdmin}
+              deleteImg={deleteImg}
+              onChangeImage={onChangeImage}
+            />
             <label>{'Текст под фото'}</label>
             <input
               value={contact?.textUnderImage}

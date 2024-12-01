@@ -12,7 +12,11 @@ import {
 } from '../../../api';
 import { ICampItem, ICoach, IImage, IPackage } from '../interfaces';
 import { useUser } from '../../../context';
-import { imageesMassSelect, imageSelect } from './imageSelect';
+import {
+  IImageBase,
+  imageesMassSelect,
+  ImageSelect,
+} from '../../../templates/imageSelect';
 import styles from '../index.module.css';
 
 export const CampEdit: React.FC<{
@@ -23,10 +27,6 @@ export const CampEdit: React.FC<{
   const [currentCamp, setCamp] = useState<ICampItem | null>(null);
   const [packs, setPacks] = useState<IPackage[]>([]);
   const [coachesAll, setCoaches] = useState<ICoach[]>([]);
-  const imageRef = useRef<HTMLInputElement | null>(null);
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const imageRef2 = useRef<HTMLInputElement | null>(null);
-  const formRef2 = useRef<HTMLFormElement | null>(null);
   const imageRefMass = useRef<HTMLInputElement | null>(null);
   const formRefMass = useRef<HTMLFormElement | null>(null);
 
@@ -84,11 +84,9 @@ export const CampEdit: React.FC<{
 
   const deleteImg = () => {
     setCamp((prevCamp) => ({ ...(prevCamp as ICampItem), mainImage: null }));
-    formRef.current?.reset();
   };
   const deleteImg2 = () => {
     setCamp((prevCamp) => ({ ...(prevCamp as ICampItem), imageCart: null }));
-    formRef2.current?.reset();
   };
   const deleteImgMass = (id: string) => {
     setCamp((prevCamp) => ({
@@ -130,55 +128,23 @@ export const CampEdit: React.FC<{
     delC();
   };
 
-  const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const imageUploader = async () => {
-      const file = e.target.files?.[0];
-      if (file) {
-        const axiosCall = creatorRequest(logout);
-        const formData = new FormData();
-        formData.append('file', file);
-        const { result, error } = await axiosCall<{ id: string; url: string }>(
-          uploadImg(formData, 'CAMP'),
-        );
-        setCamp((prevCamp) => ({
-          ...(prevCamp as ICampItem),
-          mainImage: {
-            typeEntity: 'CAMP' as const,
-            name: file.name,
-            contentType: file.type,
-            size: file.size,
-            id: result.data.result.id,
-            url: result.data.result.url,
-          },
-        }));
-      }
-    };
-    imageUploader();
+  const onChangeImage = (img: IImageBase) => {
+    setCamp((prevCamp) => ({
+      ...(prevCamp as ICampItem),
+      mainImage: {
+        typeEntity: 'CAMP' as const,
+        ...img,
+      },
+    }));
   };
-  const onChangeImage2 = (e: ChangeEvent<HTMLInputElement>) => {
-    const imageUploader = async () => {
-      const file = e.target.files?.[0];
-      if (file) {
-        const axiosCall = creatorRequest(logout);
-        const formData = new FormData();
-        formData.append('file', file);
-        const { result, error } = await axiosCall<{ id: string; url: string }>(
-          uploadImg(formData, 'CAMP'),
-        );
-        setCamp((prevCamp) => ({
-          ...(prevCamp as ICampItem),
-          imageCart: {
-            typeEntity: 'CAMP' as const,
-            name: file.name,
-            contentType: file.type,
-            size: file.size,
-            id: result.data.result.id,
-            url: result.data.result.url,
-          },
-        }));
-      }
-    };
-    imageUploader();
+  const onChangeImage2 = (img: IImageBase) => {
+    setCamp((prevCamp) => ({
+      ...(prevCamp as ICampItem),
+      imageCart: {
+        typeEntity: 'CAMP' as const,
+        ...img,
+      },
+    }));
   };
   const onChangeImageMass = (e: ChangeEvent<HTMLInputElement>) => {
     const imageUploader = async () => {
@@ -210,12 +176,6 @@ export const CampEdit: React.FC<{
     imageUploader();
   };
 
-  const onBtnImg = () => {
-    imageRef.current?.click();
-  };
-  const onBtnImg2 = () => {
-    imageRef2.current?.click();
-  };
   const onBtnImgMass = () => {
     imageRefMass.current?.click();
   };
@@ -302,24 +262,18 @@ export const CampEdit: React.FC<{
     >
       <div className={styles.edit_camp_content}>
         <div className={styles.images_row}>
-          {imageSelect({
-            label: 'Главная фотография карточки',
-            deleteImg: deleteImg2,
-            onBtnImg: onBtnImg2,
-            onChangeImage: onChangeImage2,
-            formRef: formRef2,
-            imageRef: imageRef2,
-            currentImage: currentCamp?.imageCart,
-          })}
-          {imageSelect({
-            label: 'Главная фотография страницы кемпа',
-            deleteImg,
-            onBtnImg,
-            onChangeImage,
-            formRef: formRef,
-            imageRef: imageRef,
-            currentImage: currentCamp?.mainImage,
-          })}
+          <ImageSelect
+            label={'Главная фотография карточки'}
+            deleteImg={deleteImg2}
+            onChangeImage={onChangeImage2}
+            currentImage={currentCamp?.imageCart}
+          />
+          <ImageSelect
+            label={'Главная фотография страницы кемпа'}
+            deleteImg={deleteImg}
+            onChangeImage={onChangeImage}
+            currentImage={currentCamp?.mainImage}
+          />
         </div>
         <label>{'Место проведения'}</label>
         <input

@@ -1,25 +1,64 @@
-import { ChangeEvent, MutableRefObject } from 'react';
-import { IImage } from '../interfaces';
-import BasketIcon from '../../../assets/basket.svg?react';
-import styles from '../index.module.css';
+import React, { ChangeEvent, MutableRefObject, useRef } from 'react';
+import BasketIcon from '../../assets/basket.svg?react';
+import { creatorRequest, logout, uploadImg } from '../../api';
+import styles from './index.module.css';
 
-export const imageSelect = ({
+export interface IImageBase {
+  contentType: string;
+  id: string;
+  name: string;
+  size: number;
+  url: string;
+}
+
+interface IProps {
+  label: string;
+  onChangeImage: (img: IImageBase) => void;
+  deleteImg: () => void;
+  currentImage?: IImageBase | null;
+}
+
+export const ImageSelect: React.FC<IProps> = ({
   label,
-  onBtnImg,
   onChangeImage,
   deleteImg,
-  formRef,
-  imageRef,
   currentImage,
-}: {
-  label: string;
-  onBtnImg: () => void;
-  onChangeImage: (e: ChangeEvent<HTMLInputElement>) => void;
-  deleteImg: () => void;
-  formRef: MutableRefObject<HTMLFormElement | null>;
-  imageRef: MutableRefObject<HTMLInputElement | null>;
-  currentImage?: IImage | null;
 }) => {
+  const imageRef = useRef<HTMLInputElement | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const upload = (e) => {
+    const imageUploader = async () => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const axiosCall = creatorRequest(logout);
+        const formData = new FormData();
+        formData.append('file', file);
+        const { result, error } = await axiosCall<{ id: string; url: string }>(
+          uploadImg(formData),
+        );
+        if (!error) {
+          onChangeImage({
+            name: file.name,
+            contentType: file.type,
+            size: file.size,
+            id: result.data.result.id,
+            url: result.data.result.url,
+          });
+        }
+      }
+    };
+    imageUploader();
+  };
+
+  const deleteI = () => {
+    deleteImg();
+    formRef.current?.reset();
+  };
+
+  const onBtnImg = () => {
+    imageRef.current?.click();
+  };
   return (
     <div className={styles.img_col}>
       <span className={styles.text_align_l}>
@@ -32,7 +71,7 @@ export const imageSelect = ({
         <input
           className={styles.input_image}
           type="file"
-          onChange={onChangeImage}
+          onChange={upload}
           ref={imageRef}
         />
       </form>
@@ -46,10 +85,12 @@ export const imageSelect = ({
             alt=""
             className={styles.upload_coach_img}
           />
-          <BasketIcon onClick={deleteImg} />
+          <BasketIcon onClick={deleteI} />
         </span>
       ) : (
-        <div className={styles.stub_img}>+</div>
+        <div className={styles.stub_img} onClick={onBtnImg}>
+          +
+        </div>
       )}
     </div>
   );
@@ -70,7 +111,7 @@ export const imageesMassSelect = ({
   deleteImg: (id: string) => void;
   formRef: MutableRefObject<HTMLFormElement | null>;
   imageRef: MutableRefObject<HTMLInputElement | null>;
-  images?: IImage[] | null;
+  images?: IImageBase[] | null;
 }) => {
   return (
     <div className={styles.img_col}>

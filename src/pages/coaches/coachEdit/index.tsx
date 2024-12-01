@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
-import BasketIcon from '../../../assets/basket.svg?react';
 import {
   getCoach,
   updateCoach,
@@ -12,6 +11,7 @@ import {
 import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
 import styles from '../index.module.css';
+import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 
 export const CoachEdit: React.FC<{
   open: boolean;
@@ -20,8 +20,6 @@ export const CoachEdit: React.FC<{
 }> = ({ open, coachId, onClose }) => {
   const { logout } = useUser();
   const [currentCoach, setCoach] = useState<ICoach | null>(null);
-  const imageRef = useRef<HTMLInputElement | null>(null);
-  const formRef = useRef<HTMLFormElement | null>(null);
 
   const revalidator = useRevalidator();
 
@@ -81,35 +79,16 @@ export const CoachEdit: React.FC<{
 
   const deleteImg = () => {
     setCoach((prevCoach) => ({ ...(prevCoach as ICoach), mainImage: null }));
-    formRef.current?.reset();
   };
 
-  const onChangeImage = (e) => {
-    const imageUploader = async () => {
-      const file = e.target.files?.[0];
-      if (file) {
-        const axiosCall = creatorRequest(logout);
-        const formData = new FormData();
-        formData.append('file', file);
-        const { result, error } = await axiosCall<{ id: string; url: string }>(uploadImg(formData));
-        setCoach((prevCoach) => ({
-          ...(prevCoach as ICoach),
-          mainImage: {
-            typeEntity: 'COACH' as const,
-            name: file.name,
-            contentType: file.type,
-            size: file.size,
-            id: result.data.result.id,
-            url: result.data.result.url,
-          },
-        }));
-      }
-    };
-    imageUploader();
-  };
-
-  const onBtnImg = () => {
-    imageRef.current?.click();
+  const onChangeImage = (img: IImageBase) => {
+    setCoach((prevCoach) => ({
+      ...(prevCoach as ICoach),
+      mainImage: {
+        typeEntity: 'COACH' as const,
+        ...img,
+      },
+    }));
   };
 
   return (
@@ -130,39 +109,12 @@ export const CoachEdit: React.FC<{
       header={<div className={styles.modal_header}>{'Карточка тренера'}</div>}
     >
       <div className={styles.edit_coach_content}>
-        <span className={styles.text_align_l}>
-          <span className={styles.img_label}>{'Фото тренера'}</span>
-          <button onClick={onBtnImg} className={styles.button}>
-            Выбрать файл
-          </button>
-        </span>
-        <form ref={formRef}>
-          <input
-            className={styles.input_image}
-            type="file"
-            onChange={onChangeImage}
-            ref={imageRef}
-          />
-        </form>
-        {currentCoach?.mainImage ? (
-          <>
-            <span className={styles.image_name}>
-              {currentCoach?.mainImage?.name}
-            </span>
-            <span className={styles.text_align_l}>
-              <img
-                src={
-                  currentCoach?.mainImage.url ? currentCoach?.mainImage.url : ''
-                }
-                alt=""
-                className={styles.upload_coach_img}
-              />
-              <BasketIcon onClick={deleteImg} />
-            </span>
-          </>
-        ) : (
-          <div className={styles.stub_img}>+</div>
-        )}
+        <ImageSelect
+          label={'Фото тренера'}
+          currentImage={currentCoach?.mainImage}
+          onChangeImage={onChangeImage}
+          deleteImg={deleteImg}
+        />
         <label>{'Имя и Фамилия'}</label>
         <input
           value={currentCoach?.name}
