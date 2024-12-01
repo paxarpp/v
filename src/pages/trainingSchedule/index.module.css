@@ -110,10 +110,8 @@
 
 .price_ball {
   margin-top: 150px;
-  height: 660px;
-  overflow: auto;
   position: relative;
-  padding: 0 45px 0 75px;
+  padding: 0 45px 50px 75px;
 }
 
 .price_back {
