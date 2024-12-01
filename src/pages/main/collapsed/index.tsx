@@ -1,5 +1,5 @@
 import { Suspense, useState } from 'react';
-import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
+import { Await, useAsyncValue, useLoaderData, useRevalidator } from 'react-router-dom';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { IHome, IQuestion } from '../interfaces';
@@ -12,8 +12,9 @@ export const Collapsed: React.FC = () => {
   const { user } = useUser();
   const isAdmin = !!user?.roles.includes('ADMIN');
   const { home } = useLoaderData() as {
-    home: IHome[];
+    home: IHome;
   };
+  const revalidator = useRevalidator();
 
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
@@ -48,6 +49,7 @@ export const Collapsed: React.FC = () => {
     setLoading(false);
     if (!error) {
       closeModal();
+      revalidator.revalidate();
     } else {
       setError(error);
     }
@@ -147,7 +149,9 @@ export const Collapsed: React.FC = () => {
         />
         <h2>
           {'Часто задаваемые вопросы'}
-          {isAdmin ? <Setting onClick={openEditQuestions} /> : null}
+          {isAdmin ? (
+            <Setting onClick={openEditQuestions} className={styles.setting_q} />
+          ) : null}
         </h2>
         <div>
           <Suspense fallback={'Загрузка...'}>

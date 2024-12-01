@@ -1,16 +1,11 @@
 import { Suspense, useRef, useState } from 'react';
-import { useLoaderData, Await, useAsyncValue } from 'react-router-dom';
+import { useLoaderData, Await, useAsyncValue, useRevalidator } from 'react-router-dom';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import BasketIcon from '../../../assets/basket.svg?react';
 import { IHome, IMainBlock } from '../interfaces';
 import { Modal } from '../../../templates/modal';
-import {
-  creatorRequest,
-  updateMainBlock,
-  uploadImg,
-  getMain,
-} from '../../../api';
+import { creatorRequest, updateMainBlock, uploadImg } from '../../../api';
 import styles from '../index.module.css';
 
 export const MainImg: React.FC = () => {
@@ -33,6 +28,7 @@ const MainTemplate = () => {
   const { home } = useAsyncValue() as {
     home: IHome;
   };
+  const revalidator = useRevalidator();
   const { user, logout } = useUser();
   const isAdmin = !!user?.roles.includes('ADMIN');
 
@@ -41,37 +37,24 @@ const MainTemplate = () => {
 
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
-  const [isLoading, setLoading] = useState(false);
   const [main, setMain] = useState<IMainBlock | null>(null);
 
   const openEditMainImg = () => {
-    const getM = async () => {
-      setLoading(true);
-      setMain(null);
-      const { main, error } = await getMain<IMainBlock>();
-      if (!error) {
-        setMain(main);
-      }
-      setLoading(false);
-      setError(error);
-    };
-    getM();
-
+    setMain(home.mainBlock);
     openModal(true);
   };
+
   const closeModal = () => {
     setMain(null);
     setError('');
-    setLoading(false);
     openModal(false);
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
     const { error } = await updateMainBlock(main as IMainBlock);
-    setLoading(false);
     if (!error) {
       closeModal();
+      revalidator.revalidate();
     } else {
       setError(error);
     }
@@ -132,7 +115,6 @@ const MainTemplate = () => {
           </div>
         }
       >
-        {isLoading ? 'Загрузка...' : null}
         {error ? (
           error
         ) : (
@@ -179,6 +161,7 @@ const MainTemplate = () => {
                   title: e.target.value,
                 }));
               }}
+              className={styles.question_field}
             />
             <label>{'Подзаголовок'}</label>
             <input
@@ -189,12 +172,15 @@ const MainTemplate = () => {
                   subtitle: e.target.value,
                 }));
               }}
+              className={styles.question_field}
             />
           </div>
         )}
       </Modal>
       <div className={styles.main_image_wrap}>
-        {isAdmin ? <Setting onClick={openEditMainImg} /> : null}
+        {isAdmin ? (
+          <Setting onClick={openEditMainImg} className={styles.setting} />
+        ) : null}
         <img
           src={home.mainBlock.mainImage?.url}
           className={styles.main_image}
