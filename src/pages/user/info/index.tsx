@@ -40,7 +40,7 @@ export const Info = () => {
   return (
     <>
       {isOpenEd ? <ModalInfo closeModal={closeModal} /> : null}
-      {isOpenChP ? <ModalPass close={closeModal}></ModalPass> : null}
+      {isOpenChP ? <ModalPass closeModal={closeModal} /> : null}
       <h2>{'Личный кабинет'}</h2>
       <div className={styles.flex_row}>
         <div className={styles.flex_row_info}>

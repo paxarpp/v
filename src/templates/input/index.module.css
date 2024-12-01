@@ -1,0 +1,48 @@
+.input_wrapper {
+  position: relative;
+}
+
+.input {
+  height: 88px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+}
+
+.placeholder_with_val,
+.placeholder {
+  position: absolute;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(136, 136, 136, 1);
+  transition-duration: 0.2s;
+  top: 16px;
+  left: 16px;
+}
+
+.placeholder_with_val {
+  transform: translate(-8px, -8px);
+  opacity: 0.5;
+}
+
+.input_validation_error {
+  border-color: red;
+}
+
+.validation_error {
+  position: absolute;
+  left: 8px;
+  bottom: -24px;
+
+}
+
+.icon_validation_error {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+}

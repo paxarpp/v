@@ -3,8 +3,9 @@ import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest, updateUserPass } from '../../../api';
 import { useUser } from '../../../context';
-import styles from '../index.module.css';
 import { IUser } from '../interfaces';
+import { InputStyled } from '../../../templates/input';
+import styles from '../index.module.css';
 
 export interface IPass {
   id: string;
@@ -47,7 +48,7 @@ export const ModalPass: React.FC<{ closeModal: () => void }> = ({
     <Modal
       isOpen={true}
       close={closeModal}
-      header={<h2>{'Редактировать данные'}</h2>}
+      header={<h2>{'Изменить пароль'}</h2>}
       footer={
         <div>
           <button className={styles.button_save} onClick={saveInfo}>
@@ -58,24 +59,24 @@ export const ModalPass: React.FC<{ closeModal: () => void }> = ({
       classNameModal={styles.modal_edit_info}
     >
       <div className={styles.column_info}>
-        <label>{'Старый пароль:'}</label>
-        <input
+        <InputStyled
+          placeholder={'Старый пароль'}
           type={'password'}
           value={currentInfo?.oldPassword}
           onChange={(e) =>
             setCurrentInfo({ ...currentInfo, oldPassword: e.target.value })
           }
         />
-        <label>{'Новый пароль:'}</label>
-        <input
+        <InputStyled
+          placeholder={'Новый пароль'}
           type={'password'}
           value={currentInfo?.newPassword}
           onChange={(e) =>
             setCurrentInfo({ ...currentInfo, newPassword: e.target.value })
           }
         />
-        <label>{'Подтвердите пароль:'}</label>
-        <input
+        <InputStyled
+          placeholder={'Подтвердите пароль'}
           type={'password'}
           value={currentInfo?.confirmPassword}
           onChange={(e) =>

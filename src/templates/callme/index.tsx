@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { InputStyled } from '../input';
 import styles from './index.module.css';
 
 export const CallMe = () => {
@@ -44,35 +45,27 @@ export const CallMe = () => {
       <p>Оставьте свой номер телефона и мы свяжемся с вами!</p>
       <div className={styles.col_inputs}>
         <div className={styles.row_input}>
-          <span className={styles.input_wrapper}>
-            <input
-              className={styles.modal_input}
-              value={name}
-              onChange={onChangeName}
-            />
-            <span className={styles.placeholder}>Имя</span>
-          </span>
-          <span className={styles.input_wrapper}>
-            <input
-              type="tel"
-              className={`${styles.modal_input} ${validationError ? styles.input_validation_error : ''}`}
-              value={tel}
-              onChange={onChangeTel}
-            />
-            {validationError ? (
-              <span className={styles.validation_error}>{validationError}</span>
-            ) : null}
-            <span className={styles.placeholder}>Телефон</span>
-          </span>
-        </div>
-        <span className={`${styles.input_wrapper} ${styles.mt_30}`}>
-          <input
-            className={styles.modal_input_long}
-            value={comment}
-            onChange={onChangeComment}
+          <InputStyled
+            className={styles.modal_input}
+            value={name}
+            onChange={onChangeName}
+            placeholder={'Имя'}
           />
-          <span className={styles.placeholder}>Комментарий</span>
-        </span>
+          <InputStyled
+            type="tel"
+            className={styles.modal_input}
+            value={tel}
+            onChange={onChangeTel}
+            placeholder={'Телефон'}
+            validationError={validationError}
+          />
+        </div>
+        <InputStyled
+          className={styles.modal_input_long}
+          value={comment}
+          onChange={onChangeComment}
+          placeholder={'Комментарий'}
+        />
         <button className={styles.button} onClick={onSend}>
           Отправить
         </button>

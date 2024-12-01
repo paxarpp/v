@@ -4,6 +4,7 @@ import { Modal } from '../../../templates/modal';
 import { creatorRequest, updateUser } from '../../../api';
 import { useUser } from '../../../context';
 import { IUser, IUserInfo } from '../interfaces';
+import { InputStyled } from '../../../templates/input';
 import styles from '../index.module.css';
 
 export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
@@ -53,29 +54,29 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
       classNameModal={styles.modal_edit_info}
     >
       <div className={styles.column_info}>
-        <label>{'Имя:'}</label>
-        <input
+        <InputStyled
+          placeholder={'Имя'}
           value={currentInfo?.fullName}
           onChange={(e) =>
             setCurrentInfo({ ...currentInfo, fullName: e.target.value })
           }
         />
-        <label>{'Дата рождения:'}</label>
-        <input
+        <InputStyled
+          placeholder={'Дата рождения'}
           value={currentInfo?.birthday}
           onChange={(e) =>
             setCurrentInfo({ ...currentInfo, birthday: e.target.value })
           }
         />
-        <label>{'E-mail:'}</label>
-        <input
+        <InputStyled
+          placeholder={'E-mail'}
           value={currentInfo?.email}
           onChange={(e) =>
             setCurrentInfo({ ...currentInfo, email: e.target.value })
           }
         />
-        <label>{'Телефон:'}</label>
-        <input
+        <InputStyled
+          placeholder={'Телефон'}
           value={currentInfo?.telephone}
           onChange={(e) =>
             setCurrentInfo({ ...currentInfo, telephone: e.target.value })
