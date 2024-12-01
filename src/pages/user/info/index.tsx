@@ -4,9 +4,9 @@ import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
 import { logout as apiLogout } from '../../../api';
 import Pencil from '../../../assets/pencil.svg?react';
-import { Modal } from '../../../templates/modal';
-import styles from '../index.module.css';
 import { ModalInfo } from './modalInfo';
+import { ModalPass } from './modalPass';
+import styles from '../index.module.css';
 
 export const Info = () => {
   const { user } = useAsyncValue() as {
@@ -40,7 +40,7 @@ export const Info = () => {
   return (
     <>
       {isOpenEd ? <ModalInfo closeModal={closeModal} /> : null}
-      {isOpenChP ? <Modal isOpen={true} close={closeModal}></Modal> : null}
+      {isOpenChP ? <ModalPass close={closeModal}></ModalPass> : null}
       <h2>{'Личный кабинет'}</h2>
       <div className={styles.flex_row}>
         <div className={styles.flex_row_info}>

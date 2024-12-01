@@ -3,6 +3,7 @@ import { ICoach } from '../pages/coaches/interfaces';
 import { ICampItem } from '../pages/shortCamps/interfaces';
 import { IContactBlock, IMainBlock } from '../pages/main/interfaces';
 import { IUserInfo } from '../pages/user/interfaces';
+import { IPass } from '../pages/user/info/modalPass';
 
 const BASE_URL = '/magicvolley';
 
@@ -137,6 +138,17 @@ export const updateUser = async <T>(
 ): Promise<{ result: T; error: string }> => {
   try {
     const result: T = await axios.put(BASE_URL + `/profiles`, body);
+    return { result, error: '' };
+  } catch (e: unknown) {
+    return { error: (e as { message: string }).message, result: {} as T };
+  }
+};
+
+export const updateUserPass = async <T>(
+  body: IPass,
+): Promise<{ result: T; error: string }> => {
+  try {
+    const result: T = await axios.put(BASE_URL + `/profiles/update-password`, body);
     return { result, error: '' };
   } catch (e: unknown) {
     return { error: (e as { message: string }).message, result: {} as T };
