@@ -1,0 +1,30 @@
+.row_info {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.row_info_mobile {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.block {
+  width: 570px;
+  height: 80px;
+  padding: 10px;
+  border-bottom: 1px solid #D4D4D4
+}
+
+.sub_title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 60px;
+  text-align: center;
+  color: #D4D4D4;
+}

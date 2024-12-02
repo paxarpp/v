@@ -8,6 +8,7 @@ import { ShortCamps } from './pages/shortCamps';
 import { Camp } from './pages/camp';
 import { User } from './pages/user';
 import { Shedule } from './pages/trainingSchedule';
+import { About } from './pages/about';
 import { loaderPageMain } from './pages/main/loaders';
 import { loaderPageShedule } from './pages/trainingSchedule/loaders';
 import { loaderPageShortCamps } from './pages/shortCamps/loaders';
@@ -16,6 +17,7 @@ import { loaderPageCamp } from './pages/camp/loaders';
 import { loaderPageUser } from './pages/user/loaders';
 import { App } from './App';
 import { ProtectedRoute } from './templates/protectedRoute';
+import { loaderPageAbout } from './pages/about/loaders';
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +33,9 @@ export const router = createBrowserRouter([
       },
       {
         path: '/about',
-        element: <h2>О нас</h2>,
+        element: <About />,
+        errorElement: <ErrorPage />,
+        loader: loaderPageAbout,
       },
       {
         path: '/allCoahes',

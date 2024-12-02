@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, ChangeEvent } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
 import {
@@ -7,14 +7,13 @@ import {
   updateCampLong,
   deleteCamp as deleteCmp,
   creatorRequest,
-  uploadImg,
   getCoaches,
 } from '../../../api';
 import { ICampItem, ICoach, IImage, IPackage } from '../interfaces';
 import { useUser } from '../../../context';
 import {
   IImageBase,
-  imageesMassSelect,
+  ImagesMassSelect,
   ImageSelect,
 } from '../../../templates/imageSelect';
 import styles from '../index.module.css';
@@ -27,8 +26,6 @@ export const CampEdit: React.FC<{
   const [currentCamp, setCamp] = useState<ICampItem | null>(null);
   const [packs, setPacks] = useState<IPackage[]>([]);
   const [coachesAll, setCoaches] = useState<ICoach[]>([]);
-  const imageRefMass = useRef<HTMLInputElement | null>(null);
-  const formRefMass = useRef<HTMLFormElement | null>(null);
 
   const revalidator = useRevalidator();
 
@@ -95,7 +92,6 @@ export const CampEdit: React.FC<{
         ? prevCamp.images.filter((img) => img.id !== id)
         : [],
     }));
-    formRefMass.current?.reset();
   };
 
   const saveCamp = () => {
@@ -146,38 +142,15 @@ export const CampEdit: React.FC<{
       },
     }));
   };
-  const onChangeImageMass = (e: ChangeEvent<HTMLInputElement>) => {
-    const imageUploader = async () => {
-      const file = e.target.files?.[0];
-      if (file) {
-        const axiosCall = creatorRequest(logout);
-        const formData = new FormData();
-        formData.append('file', file);
-        const { result, error } = await axiosCall<{ id: string; url: string }>(
-          uploadImg(formData, 'CAMP'),
-        );
-        const newImg = {
-          typeEntity: 'CAMP' as const,
-          name: file.name,
-          contentType: file.type,
-          size: file.size,
-          entityId: campId as string,
-          id: result.data.result.id,
-          url: result.data.result.url,
-        };
-        setCamp((prevCamp) => ({
-          ...(prevCamp as ICampItem),
-          images: prevCamp?.images
-            ? prevCamp.images.concat([newImg])
-            : [newImg],
-        }));
-      }
+  const onChangeImageMass = (img: IImageBase) => {
+    const newImg = {
+      typeEntity: 'CAMP' as const,
+      ...img,
     };
-    imageUploader();
-  };
-
-  const onBtnImgMass = () => {
-    imageRefMass.current?.click();
+    setCamp((prevCamp) => ({
+      ...(prevCamp as ICampItem),
+      images: prevCamp?.images ? prevCamp.images.concat([newImg]) : [newImg],
+    }));
   };
 
   const onChangePack = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -310,15 +283,12 @@ export const CampEdit: React.FC<{
           cols={5}
           className={styles.textarea_field}
         />
-        {imageesMassSelect({
-          label: 'Фотография места проведения',
-          deleteImg: deleteImgMass,
-          onBtnImg: onBtnImgMass,
-          onChangeImage: onChangeImageMass,
-          formRef: formRefMass,
-          imageRef: imageRefMass,
-          images: currentCamp?.images,
-        })}
+        <ImagesMassSelect
+          label={'Фотография места проведения'}
+          deleteImg={deleteImgMass}
+          onChangeImage={onChangeImageMass}
+          images={currentCamp?.images}
+        />
         <label>{'Выбор пакета'}</label>
         <select
           className={styles.input_field}

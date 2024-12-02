@@ -61,6 +61,16 @@ export const getUser = async <T>(
   }
 };
 
+export const getAbout = async <T>(): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + `/about`);
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
 export const getPackages = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {
@@ -148,7 +158,10 @@ export const updateUserPass = async <T>(
   body: IPass,
 ): Promise<{ result: T; error: string }> => {
   try {
-    const result: T = await axios.put(BASE_URL + `/profiles/update-password`, body);
+    const result: T = await axios.put(
+      BASE_URL + `/profiles/update-password`,
+      body,
+    );
     return { result, error: '' };
   } catch (e: unknown) {
     return { error: (e as { message: string }).message, result: {} as T };
