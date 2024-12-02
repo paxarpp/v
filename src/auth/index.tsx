@@ -4,6 +4,7 @@ import { Modal } from '../templates/modal';
 import { login } from '../api';
 import { IUser } from './interface';
 import { useUser } from '../context';
+import { InputStyled } from '../templates/input';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
@@ -53,7 +54,7 @@ export const Auth: React.FC<{
     <Modal
       isOpen={true}
       close={onCloseAuth}
-      title={'Вход в личный кабинет'}
+      header={<h2>{'Вход в личный кабинет'}</h2>}
       footer={
         <button className={styles.auth_button} onClick={onEnter}>
           Войти
@@ -61,18 +62,20 @@ export const Auth: React.FC<{
       }
     >
       <div className={styles.input_wrap}>
-        <input
-          className={styles.modal_input}
+        <InputStyled
+          placeholder={'Логин'}
+          // className={styles.modal_input}
           value={username}
           onChange={onChange}
         />
+        <InputStyled
+          placeholder={'Пароль'}
+          type="password"
+          // className={`${styles.modal_input} ${styles.mt_30}`}
+          value={password}
+          onChange={onChangePass}
+        />
       </div>
-      <input
-        type="password"
-        className={`${styles.modal_input} ${styles.mt_30}`}
-        value={password}
-        onChange={onChangePass}
-      />
     </Modal>
   );
 };

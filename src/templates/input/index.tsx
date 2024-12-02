@@ -11,6 +11,7 @@ interface IProps {
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
 }
 
+/** нужна флексовая обертка */
 export const InputStyled: React.FC<IProps> = ({
   placeholder,
   validationError,
