@@ -19,3 +19,20 @@
   text-align: center;
   overflow: hidden;
 }
+
+/* Применяется ко всем элементам со скроллбаром на странице */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: darkgrey transparent;
+}
+/* Для Webkit-браузеров */
+*::-webkit-scrollbar {
+  width: 8px; /* ширина */
+}
+*::-webkit-scrollbar-track {
+  background: transparent; /* фон дорожки */
+}
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey; /* цвет ползунка */
+  border-radius: 4px; /* закругление углов ползунка */
+}

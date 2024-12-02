@@ -5,7 +5,13 @@ import Inst from '../../assets/inst.svg?react';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
 
-export const Footer = () => {
+interface IProps {
+  linkTg: string;
+  linkInstagram: string;
+  linkVk: string;
+}
+
+export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
   return (
     <footer className={styles.footer}>
       <Link to="/">
@@ -39,9 +45,19 @@ export const Footer = () => {
         </ul>
       </div>
       <div>
-        <Vk className={styles.icon} />
-        <T className={`${styles.icon} ${styles.mlr_20}`} />
-        <Inst className={styles.icon} />
+        <a href={linkVk} target={'_blank'} className={styles.icon}>
+          <Vk />
+        </a>
+        <a
+          href={linkTg}
+          target={'_blank'}
+          className={`${styles.icon} ${styles.mlr_20}`}
+        >
+          <T />
+        </a>
+        <a href={linkInstagram} target={'_blank'} className={styles.icon}>
+          <Inst />
+        </a>
       </div>
     </footer>
   );

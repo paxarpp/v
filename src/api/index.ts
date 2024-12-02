@@ -7,6 +7,16 @@ import { IPass } from '../pages/user/info/modalPass';
 
 const BASE_URL = '/magicvolley';
 
+export const getAppInfo = async <T>(): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/app_links');
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
 export const getHome = async <T>(): Promise<{
   data: { result: T; error?: string };
 }> => {

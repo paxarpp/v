@@ -15,7 +15,8 @@ import { loaderPageShortCamps } from './pages/shortCamps/loaders';
 import { loaderPageLongCamps } from './pages/longCamps/loaders';
 import { loaderPageCamp } from './pages/camp/loaders';
 import { loaderPageUser } from './pages/user/loaders';
-import { App } from './App';
+import { App } from './app/App';
+import { loaderAppInfo } from './app/loader';
 import { ProtectedRoute } from './templates/protectedRoute';
 import { loaderPageAbout } from './pages/about/loaders';
 import { NotFound } from './pages/notFound';
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    loader: loaderAppInfo,
     errorElement: <ErrorPage />,
     children: [
       {

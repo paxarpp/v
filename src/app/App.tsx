@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { Header } from './templates/header';
-import { Auth } from './auth';
-import { AuthProvider, AuthOpenContext } from './context';
-import styles from './app.module.css';
-import { Footer } from './templates/footer';
+import { Outlet, useLoaderData } from 'react-router-dom';
+import { Header } from '../templates/header';
+import { Auth } from '../auth';
+import { AuthProvider, AuthOpenContext } from '../context';
+import { Footer } from '../templates/footer';
+import { IAppInfo } from './interface';
 
 export const App = () => {
+  const { app } = useLoaderData() as {
+    app: { contactBlock: IAppInfo };
+  };
   const [authOpen, setOpen] = useState(false);
 
   const toggleAuthOpen = () => {
@@ -20,14 +23,14 @@ export const App = () => {
   return (
     <AuthProvider>
       <AuthOpenContext.Provider value={{ toggleAuthOpen }}>
-        <Header />
+        <Header {...app.contactBlock} />
         {authOpen ? (
           <Auth onCloseAuth={onCloseAuth} toggleAuthOpen={toggleAuthOpen} />
         ) : null}
-        <div id="detail" className={styles.outlet}>
+        <div id="detail">
           <Outlet />
         </div>
-        <Footer />
+        <Footer {...app.contactBlock} />
       </AuthOpenContext.Provider>
     </AuthProvider>
   );

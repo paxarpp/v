@@ -13,7 +13,13 @@ import { getCookie } from '../../cookie';
 import { IUser } from '../../auth/interface';
 import styles from './index.module.css';
 
-export const Header = () => {
+interface IProps {
+  linkTg: string;
+  linkInstagram: string;
+  linkVk: string;
+}
+
+export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
   const { user } = useUser();
   const { toggleAuthOpen } = useAuth();
   const isAuth = !!user;
@@ -47,9 +53,15 @@ export const Header = () => {
         <Logo />
       </Link>
       <div className={styles.icons_mobile}>
-        <Vk />
-        <T />
-        <Inst />
+        <a href={linkVk} target={'_blank'}>
+          <Vk />
+        </a>
+        <a href={linkTg} target={'_blank'}>
+          <T />
+        </a>
+        <a href={linkInstagram} target={'_blank'}>
+          <Inst />
+        </a>
       </div>
       <div className={styles.burger}>
         <Burger onClick={togglePopapMenu} />
@@ -151,9 +163,15 @@ export const Header = () => {
         </li>
       </ul>
       <div className={styles.icons}>
-        <Vk />
-        <T />
-        <Inst />
+        <a href={linkVk} target={'_blank'}>
+          <Vk />
+        </a>
+        <a href={linkTg} target={'_blank'}>
+          <T />
+        </a>
+        <a href={linkInstagram} target={'_blank'}>
+          <Inst />
+        </a>
       </div>
       {isAuth ? (
         <Link
