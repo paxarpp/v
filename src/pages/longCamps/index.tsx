@@ -1,5 +1,4 @@
 import { CallMe } from '../../templates/callme';
-import { Footer } from '../../templates/footer';
 import { CampInfoIcons } from './campInfoIcons';
 import { CampsList } from './campsList';
 
@@ -13,8 +12,6 @@ export const LongCamps = () => {
       <CampsList />
 
       <CallMe />
-
-      <Footer />
     </div>
   );
 };

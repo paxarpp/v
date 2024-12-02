@@ -18,6 +18,7 @@ import { loaderPageUser } from './pages/user/loaders';
 import { App } from './App';
 import { ProtectedRoute } from './templates/protectedRoute';
 import { loaderPageAbout } from './pages/about/loaders';
+import { NotFound } from './pages/notFound';
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
         ),
         errorElement: <ErrorPage />,
         loader: loaderPageUser,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },

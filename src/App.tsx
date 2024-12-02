@@ -4,6 +4,7 @@ import { Header } from './templates/header';
 import { Auth } from './auth';
 import { AuthProvider, AuthOpenContext } from './context';
 import styles from './app.module.css';
+import { Footer } from './templates/footer';
 
 export const App = () => {
   const [authOpen, setOpen] = useState(false);
@@ -26,6 +27,7 @@ export const App = () => {
         <div id="detail" className={styles.outlet}>
           <Outlet />
         </div>
+        <Footer />
       </AuthOpenContext.Provider>
     </AuthProvider>
   );

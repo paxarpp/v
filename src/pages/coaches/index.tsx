@@ -1,5 +1,4 @@
 import React from 'react';
-import { Footer } from '../../templates/footer';
 import { CoachesList } from './coachesList';
 import styles from './index.module.css';
 
@@ -11,8 +10,6 @@ export const Coaches: React.FC = () => {
       </h1>
 
       <CoachesList />
-
-      <Footer />
     </div>
   );
 };

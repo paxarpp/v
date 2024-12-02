@@ -1,7 +1,5 @@
 import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router-dom';
-import { logout as apiLogout } from '../../api';
-import { useUser } from '../../context';
 import { IAbout } from './interfaces';
 import { Info } from './info';
 import { Activities } from './activities';

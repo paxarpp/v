@@ -1,5 +1,4 @@
 import { CallMe } from '../../templates/callme';
-import { Footer } from '../../templates/footer';
 import { BlockIcons } from './blockIcons';
 import { Collapsed } from './collapsed';
 import { Contacts } from './contacts';
@@ -20,8 +19,6 @@ export const Main = () => {
       <Contacts />
 
       <CallMe />
-
-      <Footer />
     </div>
   );
 };

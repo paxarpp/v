@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 export const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
       <div>
         <span className={styles.menu_title}>Кемпы и тренировки</span>
         <ul className={styles.menu}>
