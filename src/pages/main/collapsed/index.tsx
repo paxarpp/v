@@ -1,5 +1,10 @@
 import { Suspense, useState } from 'react';
-import { Await, useAsyncValue, useLoaderData, useRevalidator } from 'react-router-dom';
+import {
+  Await,
+  useAsyncValue,
+  useLoaderData,
+  useRevalidator,
+} from 'react-router-dom';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { IHome, IQuestion } from '../interfaces';
@@ -9,8 +14,7 @@ import { useUser } from '../../../context';
 import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
-  const { user } = useUser();
-  const isAdmin = !!user?.roles.includes('ADMIN');
+  const { isAdmin } = useUser();
   const { home } = useLoaderData() as {
     home: IHome;
   };

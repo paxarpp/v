@@ -34,9 +34,7 @@ const MainTemplate = () => {
     home: IHome;
   };
   const revalidator = useRevalidator();
-  const { user } = useUser();
-  const isAdmin = !!user?.roles.includes('ADMIN');
-
+  const { isAdmin } = useUser();
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [main, setMain] = useState<IMainBlock | null>(null);

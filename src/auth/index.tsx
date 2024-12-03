@@ -64,14 +64,12 @@ export const Auth: React.FC<{
       <div className={styles.input_wrap}>
         <InputStyled
           placeholder={'Логин'}
-          // className={styles.modal_input}
           value={username}
           onChange={onChange}
         />
         <InputStyled
           placeholder={'Пароль'}
           type="password"
-          // className={`${styles.modal_input} ${styles.mt_30}`}
           value={password}
           onChange={onChangePass}
         />

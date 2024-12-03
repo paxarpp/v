@@ -1,4 +1,4 @@
-export type IUserRole = 'ADMIN' | 'USER' | 'MODERATOR';
+export type IUserRole = 'ADMIN' | 'USER' | 'MODERATOR' | 'GUEST';
 
 export interface IUser {
   email: string;

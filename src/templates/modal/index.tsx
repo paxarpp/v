@@ -30,7 +30,7 @@ export const Modal: React.FC<PropsWithChildren<IProps>> = ({
       document.body.style.overflow = '';
       document.body.style.touchAction = '';
       document.body.style.paddingRight = '';
-    }
+    };
   }, [isOpen]);
 
   return isOpen ? (
@@ -50,4 +50,28 @@ export const Modal: React.FC<PropsWithChildren<IProps>> = ({
       </div>
     </div>
   ) : null;
+};
+
+interface IViewProps {
+  header?: React.ReactNode | undefined;
+  close: () => void;
+  classNameModal?: string;
+}
+
+export const Viewer: React.FC<PropsWithChildren<IViewProps>> = ({
+  children,
+  close,
+  classNameModal,
+}) => {
+  return (
+    <div className={styles.modal_wrap}>
+      <div className={styles.modal_back} onClick={close} />
+      <div
+        className={`${styles.modal_view} ${styles.modal_flex} ${classNameModal ? classNameModal : ''}`}
+      >
+        <Close onClick={close} className={styles.close_icon} />
+        {children}
+      </div>
+    </div>
+  );
 };

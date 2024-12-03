@@ -40,9 +40,7 @@ export const ContactsTemplate = () => {
     home: IHome;
   };
   const revalidator = useRevalidator();
-  const { user } = useUser();
-  const isAdmin = !!user?.roles.includes('ADMIN');
-
+  const { isAdmin } = useUser();
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [contact, setContact] = useState<IContactBlock | null>(null);

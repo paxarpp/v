@@ -2,6 +2,7 @@ import { useState, Suspense } from 'react';
 import { Link, useLoaderData, Await, useAsyncValue } from 'react-router-dom';
 import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
+import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { ICampItem } from '../interfaces';
 import { CampPastAdd } from '../campPastAdd';
 import styles from '../index.module.css';
@@ -11,8 +12,7 @@ export const CampsList = () => {
     pastCamps: ICampItem[];
     error?: string;
   };
-  const { user } = useUser();
-  const isAdmin = !!user?.roles.includes('ADMIN');
+  const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
 
   const closeCampAdd = () => {
@@ -75,9 +75,7 @@ const CampsTemplate: React.FC<{
       })}
       {isAdmin ? (
         <div className={styles.camp_card_add}>
-          <span className={styles.camp_add} onClick={addPastCamp}>
-            +
-          </span>
+          <RoundAdd onClick={addPastCamp} />
         </div>
       ) : null}
     </>

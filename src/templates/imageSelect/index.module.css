@@ -2,6 +2,44 @@
   text-align: left;
 }
 
+.img_wrapper {
+  position: relative;
+  width: 120px;
+  cursor: pointer;
+}
+
+.trash {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 12px);
+  transform: translate(-50%, -50%);
+  color: white;
+  visibility: hidden;
+}
+
+.aye {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 12px);
+  transform: translate(-50%, -50%);
+  color: white;
+  visibility: hidden;
+}
+
+.upload_real_img {
+  height: 120px;
+  width: 120px;
+}
+
+.img_wrapper:hover .upload_real_img {
+  opacity: .3;
+}
+
+.img_wrapper:hover .aye,
+.img_wrapper:hover .trash {
+  visibility: visible;
+}
+
 .img_label {
   margin-right: 20px;
 }
@@ -24,22 +62,11 @@
   display: none;
 }
 
-.upload_coach_img {
-  height: 120px;
-  width: 120px;
-}
-
 .stub_img {
-  height: 120px;
-  min-height: 120px;
-  max-height: 120px;
-  width: 120px;
-  background: #D4D4D4;
-  font-size: 56px;
-  color: #152355;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  cursor: pointer;
+}
+.stub_img:hover {
+  opacity: .8;
 }
 
 .img_col {

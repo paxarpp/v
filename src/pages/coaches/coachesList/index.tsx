@@ -4,6 +4,7 @@ import { ICoach } from '../interfaces';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
+import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Avatar from '../../../assets/avatar.svg?react';
 import { CoachEdit } from '../coachEdit';
 import { CoachProfile } from '../../../templates/coachProfile';
@@ -14,8 +15,7 @@ export const CoachesList: React.FC = () => {
     coaches: ICoach[];
     error?: string;
   };
-  const { user } = useUser();
-  const isAdmin = !!user?.roles.includes('ADMIN');
+  const { isAdmin } = useUser();
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
   const [open, setIsOpen] = useState<boolean>(false);
@@ -117,9 +117,7 @@ const CoachesTemplate: React.FC<{
       })}
       {isAdmin ? (
         <div className={styles.coach_card_add}>
-          <span className={styles.coach_add} onClick={addCoach}>
-            +
-          </span>
+          <RoundAdd onClick={addCoach} />
         </div>
       ) : null}
     </>

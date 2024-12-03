@@ -2,7 +2,6 @@ export interface IAbout {
   title: string;
   subTitleFirst: string;
   subTitleSecond: string;
-  subTitleThird: string;
   activities: IActivity[];
   master: IMaster;
   reviews: IReview[];

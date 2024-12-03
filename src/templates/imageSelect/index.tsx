@@ -1,7 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import BasketIcon from '../../assets/basket.svg?react';
+import SquareAdd from '../../assets/sqareAdd.svg?react';
+import Aye from '../../assets/aye.svg?react';
 import { creatorRequest, logout, uploadImg } from '../../api';
 import styles from './index.module.css';
+import { Modal, Viewer } from '../modal';
 
 export interface IImageBase {
   contentType: string;
@@ -33,6 +36,7 @@ export const ImageSelect: React.FC<IProps> = ({
 }) => {
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [isOpen, setOpen] = useState(false);
 
   const upload = (e) => {
     const imageUploader = async () => {
@@ -66,8 +70,17 @@ export const ImageSelect: React.FC<IProps> = ({
   const onBtnImg = () => {
     imageRef.current?.click();
   };
+
+  const view = () => {
+    setOpen(true);
+  };
   return (
     <div className={styles.img_col}>
+      {isOpen ? (
+        <Viewer close={() => setOpen(false)}>
+          <img src={currentImage?.url} />
+        </Viewer>
+      ) : null}
       <span className={styles.text_align_l}>
         <span className={styles.img_label}>{label}</span>
         <button onClick={onBtnImg} className={styles.button}>
@@ -86,18 +99,17 @@ export const ImageSelect: React.FC<IProps> = ({
         {currentImage?.name || 'Название документа'}
       </span>
       {currentImage ? (
-        <span className={styles.text_align_l}>
+        <span className={styles.img_wrapper}>
           <img
             src={currentImage.url}
             alt=""
-            className={styles.upload_coach_img}
+            className={styles.upload_real_img}
           />
-          <BasketIcon onClick={deleteI} />
+          <Aye className={styles.aye} onClick={view} />
+          <BasketIcon className={styles.trash} onClick={deleteI} />
         </span>
       ) : (
-        <div className={styles.stub_img} onClick={onBtnImg}>
-          +
-        </div>
+        <SquareAdd className={styles.stub_img} onClick={onBtnImg} />
       )}
     </div>
   );
@@ -111,6 +123,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
 }) => {
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [openId, setOpen] = useState('');
 
   const upload = (e) => {
     const imageUploader = async () => {
@@ -144,8 +157,17 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
   const onBtnImg = () => {
     imageRef.current?.click();
   };
+
+  const view = (id: string) => {
+    setOpen(id);
+  };
   return (
     <div className={styles.img_col}>
+      {openId ? (
+        <Viewer close={() => setOpen('')}>
+          <img src={images?.find((image) => image.id === openId)?.url} />
+        </Viewer>
+      ) : null}
       <span className={styles.text_align_l}>
         <span className={styles.img_label}>{label}</span>
         <button onClick={onBtnImg} className={styles.button}>
@@ -168,13 +190,20 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
                 <div key={image.id} className={styles.images_img_col}>
                   <span className={styles.image_name}>{image.name}</span>
 
-                  <span className={styles.text_align_l}>
+                  <span className={styles.img_wrapper}>
                     <img
                       src={image.url}
                       alt=""
-                      className={styles.upload_coach_img}
+                      className={styles.upload_real_img}
                     />
-                    <BasketIcon onClick={() => deleteI(image.id)} />
+                    <Aye
+                      className={styles.aye}
+                      onClick={() => view(image.id)}
+                    />
+                    <BasketIcon
+                      className={styles.trash}
+                      onClick={() => deleteI(image.id)}
+                    />
                   </span>
                 </div>
               );
@@ -183,9 +212,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
         ) : (
           <div className={styles.images_img_col}>
             <span className={styles.image_name}>{'Название документа'}</span>
-            <div className={styles.stub_img} onClick={onBtnImg}>
-              +
-            </div>
+            <SquareAdd className={styles.stub_img} onClick={onBtnImg} />
           </div>
         )}
       </div>

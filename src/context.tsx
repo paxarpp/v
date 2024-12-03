@@ -5,6 +5,8 @@ interface IAuthContext {
   user: IUser | null;
   signin: (user: IUser) => void;
   logout: () => void;
+  isAdmin: boolean;
+  isModerator: boolean;
 }
 
 const UserContext = createContext<IAuthContext | undefined>(undefined);
@@ -19,11 +21,15 @@ const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setUser(null);
     document.cookie = `magicVolley=`;
   };
+  const isAdmin = !!user?.roles.includes('ADMIN');
+  const isModerator = !!user?.roles.includes('MODERATOR');
 
   const value = {
     user,
     signin,
     logout,
+    isAdmin,
+    isModerator,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
