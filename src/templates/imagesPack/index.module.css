@@ -1,0 +1,50 @@
+.info_img_wrapper {
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+.row_prevew_images {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 50px;
+}
+
+.prevew_img_wrapper {
+  height: inherit;
+  min-height: inherit;
+  max-height: inherit;
+  overflow: hidden;
+}
+
+.prevew_img_current,
+.info_current_img,
+.prevew_img {
+  width: inherit;
+  height: inherit;
+  min-height: inherit;
+  max-height: inherit;
+  object-fit: cover;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.prevew_img_current {
+  border: 1px solid blue;
+}
+
+.scroll_arrow_right,
+.scroll_arrow_left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.scroll_arrow_left {
+  left: 0;
+}
+
+.scroll_arrow_right {
+  right: 0;
+}
