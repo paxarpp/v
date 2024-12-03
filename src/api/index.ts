@@ -235,6 +235,16 @@ export const logout = async <T>(): Promise<T> => {
   }
 };
 
+export const getPastCamps = async <T>(): Promise<{
+  data: { result: T[]; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/camps/all');
+  } catch (e: unknown) {
+    return { data: { result: [], error: (e as Error).message } };
+  }
+};
+
 export const getShortCamps = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {
@@ -244,6 +254,7 @@ export const getShortCamps = async <T>(): Promise<{
     return { data: { result: [], error: (e as Error).message } };
   }
 };
+
 export const getLongCamps = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {

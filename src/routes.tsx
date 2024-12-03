@@ -20,6 +20,8 @@ import { loaderAppInfo } from './app/loader';
 import { ProtectedRoute } from './templates/protectedRoute';
 import { loaderPageAbout } from './pages/about/loaders';
 import { NotFound } from './pages/notFound';
+import { PastCamps } from './pages/pastCamps';
+import { loaderPagePastCamps } from './pages/pastCamps/loaders';
 
 export const router = createBrowserRouter([
   {
@@ -72,8 +74,9 @@ export const router = createBrowserRouter([
       },
       {
         path: '/oldCamps',
-        element: <div />,
+        element: <PastCamps />,
         errorElement: <ErrorPage />,
+        loader: loaderPagePastCamps,
       },
       {
         path: '/tournaments',
