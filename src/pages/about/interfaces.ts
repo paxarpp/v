@@ -30,7 +30,6 @@ interface IVideo {
 interface IImage {
   id: string;
   name: string;
-  dateString: string;
   url: string;
 }
 

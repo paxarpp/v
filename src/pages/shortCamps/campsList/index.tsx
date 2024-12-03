@@ -94,7 +94,7 @@ const CampsTemplate: React.FC<{
       })}
       {isAdmin ? (
         <div className={styles.camp_card_add}>
-          <RoundAdd className={styles.camp_add} onClick={addShortCamp} />
+          <RoundAdd onClick={addShortCamp} />
         </div>
       ) : null}
     </>

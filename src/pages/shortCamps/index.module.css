@@ -38,18 +38,6 @@
   align-items: center;
 }
 
-.camp_add {
-  display: inline-block;
-  text-align: center;
-  line-height: 135px;
-  width: 154px;
-  height: 154px;
-  background: rgba(217, 217, 217, 1);
-  border-radius: 50%;
-  color: rgba(136, 136, 136, 1);
-  font-size: 88px;
-}
-
 .camp_list {
   display: flex;
   flex-flow: row wrap;
