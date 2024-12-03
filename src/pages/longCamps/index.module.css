@@ -291,3 +291,7 @@
   flex-flow: row nowrap;
   gap: 50px;
 }
+
+.date_picker {
+  text-align: left;
+}

@@ -16,6 +16,8 @@ import {
   ImagesMassSelect,
   ImageSelect,
 } from '../../../templates/imageSelect';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styles from '../index.module.css';
 
 export const CampEdit: React.FC<{
@@ -260,16 +262,28 @@ export const CampEdit: React.FC<{
           className={styles.input_field}
         />
         <label>{'Дата проведения'}</label>
-        <input
-          type={'date'}
-          onChange={(e) => {
-            setCamp((prevCamp) => ({
-              ...(prevCamp as ICampItem),
-              dateStart: e.target.value,
-              dateEnd: e.target.value,
-            }));
-          }}
-        />
+        <div className={styles.date_picker}>
+          <DatePicker
+            onChange={(dates) => {
+              const [start, end] = dates;
+              setCamp((prevCamp) => ({
+                ...(prevCamp as ICampItem),
+                dateStart: start?.toISOString().slice(0, 10) as string,
+                dateEnd: end?.toISOString().slice(0, 10) as string,
+              }));
+            }}
+            startDate={
+              currentCamp?.dateStart
+                ? new Date(currentCamp.dateStart)
+                : undefined
+            }
+            endDate={
+              currentCamp?.dateEnd ? new Date(currentCamp.dateEnd) : undefined
+            }
+            selectsRange={true}
+            inline={true}
+          />
+        </div>
         <label>{'О месте проведения'}</label>
         <textarea
           value={currentCamp?.info}
