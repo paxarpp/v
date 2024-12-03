@@ -17,6 +17,7 @@ import { updateContactBlock } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import styles from '../index.module.css';
+import { createLinkTg } from '../../../constants';
 
 export const Contacts: React.FC = () => {
   const { home } = useLoaderData() as {
@@ -200,7 +201,7 @@ export const ContactsTemplate = () => {
             <a href={home.contactBlock?.linkVk} target={'_blank'}>
               <Vk />
             </a>
-            <a href={home.contactBlock?.lingTg} target={'_blank'}>
+            <a href={createLinkTg(home.contactBlock?.lingTg)} target={'_blank'}>
               <T className={styles.contact_icon} />
             </a>
             <a href={home.contactBlock?.linkInstagram} target={'_blank'}>

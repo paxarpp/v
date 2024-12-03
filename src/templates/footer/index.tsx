@@ -4,6 +4,7 @@ import T from '../../assets/t.svg?react';
 import Inst from '../../assets/inst.svg?react';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
+import { createLinkTg } from '../../constants';
 
 interface IProps {
   linkTg: string;
@@ -49,7 +50,7 @@ export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
           <Vk />
         </a>
         <a
-          href={linkTg}
+          href={createLinkTg(linkTg)}
           target={'_blank'}
           className={`${styles.icon} ${styles.mlr_20}`}
         >

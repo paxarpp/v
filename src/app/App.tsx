@@ -8,7 +8,7 @@ import { IAppInfo } from './interface';
 
 export const App = () => {
   const { app } = useLoaderData() as {
-    app: { contactBlock: IAppInfo };
+    app: IAppInfo;
   };
   const [authOpen, setOpen] = useState(false);
 
@@ -19,18 +19,18 @@ export const App = () => {
   const onCloseAuth = () => {
     setOpen(false);
   };
-
+console.log(app)
   return (
     <AuthProvider>
       <AuthOpenContext.Provider value={{ toggleAuthOpen }}>
-        <Header {...app.contactBlock} />
+        <Header {...app} />
         {authOpen ? (
           <Auth onCloseAuth={onCloseAuth} toggleAuthOpen={toggleAuthOpen} />
         ) : null}
         <div id="detail">
           <Outlet />
         </div>
-        <Footer {...app.contactBlock} />
+        <Footer {...app} />
       </AuthOpenContext.Provider>
     </AuthProvider>
   );

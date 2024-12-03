@@ -8,5 +8,5 @@ const loaderApp = async () => {
 };
 
 export const loaderAppInfo = async () => {
-  return { app: loaderApp() };
+  return await loaderApp();
 };

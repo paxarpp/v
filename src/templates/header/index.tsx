@@ -12,6 +12,7 @@ import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
 import { IUser } from '../../auth/interface';
 import styles from './index.module.css';
+import { createLinkTg } from '../../constants';
 
 interface IProps {
   linkTg: string;
@@ -56,7 +57,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
         <a href={linkVk} target={'_blank'}>
           <Vk />
         </a>
-        <a href={linkTg} target={'_blank'}>
+        <a href={createLinkTg(linkTg)} target={'_blank'}>
           <T />
         </a>
         <a href={linkInstagram} target={'_blank'}>
@@ -166,7 +167,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
         <a href={linkVk} target={'_blank'}>
           <Vk />
         </a>
-        <a href={linkTg} target={'_blank'}>
+        <a href={createLinkTg(linkTg)} target={'_blank'}>
           <T />
         </a>
         <a href={linkInstagram} target={'_blank'}>
