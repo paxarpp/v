@@ -19,7 +19,7 @@ export const App = () => {
   const onCloseAuth = () => {
     setOpen(false);
   };
-console.log(app)
+
   return (
     <AuthProvider>
       <AuthOpenContext.Provider value={{ toggleAuthOpen }}>
