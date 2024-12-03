@@ -183,7 +183,9 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
         ) : (
           <div className={styles.images_img_col}>
             <span className={styles.image_name}>{'Название документа'}</span>
-            <div className={styles.stub_img}>+</div>
+            <div className={styles.stub_img} onClick={onBtnImg}>
+              +
+            </div>
           </div>
         )}
       </div>
