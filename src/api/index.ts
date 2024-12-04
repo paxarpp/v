@@ -239,7 +239,7 @@ export const getPastCamps = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {
   try {
-    return await axios.get(BASE_URL + '/camps/all');
+    return await axios.get(BASE_URL + '/camps/past-all');
   } catch (e: unknown) {
     return { data: { result: [], error: (e as Error).message } };
   }
