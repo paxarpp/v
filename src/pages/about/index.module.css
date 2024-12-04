@@ -42,3 +42,10 @@
   height: 386px;
   border-top: 1px solid #99660A;
 }
+
+.activity_title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+}

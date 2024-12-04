@@ -1,3 +1,4 @@
+.info_img_wrapper_stub,
 .info_img_wrapper {
   overflow: hidden;
   position: relative;
@@ -7,14 +8,19 @@
 .row_prevew_images {
   display: flex;
   flex-flow: row nowrap;
-  margin-top: 50px;
 }
 
+.prevew_img_wrapper_stub,
 .prevew_img_wrapper {
   height: inherit;
   min-height: inherit;
   max-height: inherit;
   overflow: hidden;
+}
+
+.info_img_wrapper_stub,
+.prevew_img_wrapper_stub {
+  background-color: #999999;
 }
 
 .prevew_img_current,

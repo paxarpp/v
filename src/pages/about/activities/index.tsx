@@ -15,8 +15,8 @@ export const Activities = () => {
     <div className={styles.row_activities}>
       {activities?.map((act) => {
         return (
-          <div className={styles.activity_card}>
-            <span>
+          <div className={styles.activity_card} key={act.name}>
+            <span className={styles.activity_title}>
               <Ball />
               {act.name}
             </span>
@@ -27,6 +27,7 @@ export const Activities = () => {
               widthPreview={74}
               heightPreview={50}
               gapPreview={13}
+              marginPreviewTop={20}
             />
           </div>
         );

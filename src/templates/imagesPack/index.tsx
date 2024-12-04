@@ -17,6 +17,7 @@ interface IProps {
   widthPreview?: number;
   heightPreview?: number;
   gapPreview?: number;
+  marginPreviewTop?: number;
 }
 
 export const ImagePack: React.FC<IProps> = ({
@@ -27,9 +28,11 @@ export const ImagePack: React.FC<IProps> = ({
   widthPreview = 120,
   heightPreview = 80,
   gapPreview = 30,
+  marginPreviewTop = 50,
 }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const images = imgs ? imgs : [];
+  const isEmpty = images.length === 0;
 
   const size = {
     width: `${width}px`,
@@ -42,6 +45,7 @@ export const ImagePack: React.FC<IProps> = ({
     minHeight: `${heightPreview}px`,
     maxHeight: `${heightPreview}px`,
     gap: `${gapPreview}px`,
+    marginTop: `${marginPreviewTop}px`,
   };
   const sizePreviw = {
     width: `${widthPreview}px`,
@@ -53,7 +57,14 @@ export const ImagePack: React.FC<IProps> = ({
   const onRight = () => {
     setCurrentImage(currentImage === images.length - 1 ? 0 : currentImage + 1);
   };
-  return (
+  return isEmpty ? (
+    <div className={className}>
+      <div className={styles.info_img_wrapper_stub} style={size}></div>
+      <div className={styles.row_prevew_images} style={sizeRow}>
+        <div className={styles.prevew_img_wrapper_stub} style={sizePreviw} />
+      </div>
+    </div>
+  ) : (
     <div className={className}>
       <div className={styles.info_img_wrapper} style={size}>
         <img

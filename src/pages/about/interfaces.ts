@@ -3,9 +3,9 @@ export interface IAbout {
   subTitleFirst: string;
   subTitleSecond: string;
   activities: IActivity[];
-  master: IMaster;
+  master: IMaster | null;
   reviews: IReview[];
-  videos: IVideo[];
+  videos: IVideo[] | null;
 }
 
 export interface IReview {
