@@ -74,8 +74,8 @@ export const ContactsTemplate = () => {
     setContact((prevC) => ({
       ...(prevC as IContactBlock),
       imageAdmin: {
-        entityId: '', // todo
-        typeEntity: 'COACH' as const,
+        entityId: home.id,
+        typeEntity: 'PAGE_HOME' as const,
         ...img,
       },
     }));

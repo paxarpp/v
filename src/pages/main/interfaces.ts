@@ -1,4 +1,4 @@
-export type ITypeEntity = 'COACH' | 'CAMP';
+export type ITypeEntity = 'COACH' | 'CAMP' | 'PAGE_HOME';
 
 export interface IImage {
   contentType: string;

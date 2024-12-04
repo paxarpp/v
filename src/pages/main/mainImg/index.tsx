@@ -68,8 +68,8 @@ const MainTemplate = () => {
     setMain((prevM) => ({
       ...(prevM as IMainBlock),
       mainImage: {
-        entityId: '', // todo
-        typeEntity: 'COACH' as const,
+        entityId: home.id,
+        typeEntity: 'PAGE_HOME' as const,
         ...img,
       },
     }));
