@@ -238,12 +238,17 @@
   justify-content: space-between;
 }
 
+.button_confirmed,
 .button_profile {
   width: 160px;
   height: 41px;
   padding: 4px 14px;
   border-radius: 8px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
+}
+
+.button_confirmed {
+  background: #888888;
 }
 
 .pack_prices_info {
@@ -267,3 +272,19 @@
 .column {
   margin-top: 150px;
 }
+
+.table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 30px;
+}
+
+.table > tr > th {
+  border-bottom: 1px solid #888888;
+}
+
+.table td,
+.table th {
+  width: 420px;
+}
+

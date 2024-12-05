@@ -1,5 +1,5 @@
 import { useAsyncValue } from 'react-router-dom';
-import { ICampItem } from '../../shortCamps/interfaces';
+import { ICampItem } from '../interfaces';
 import styles from '../index.module.css';
 
 export const MainImage = () => {

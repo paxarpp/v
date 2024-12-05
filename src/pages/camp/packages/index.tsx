@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAsyncValue } from 'react-router-dom';
 import People from '../../../assets/people.svg?react';
 import Tour from '../../../assets/tour.svg?react';
-import { ICampItem } from '../../shortCamps/interfaces';
+import { ICampItem } from '../interfaces';
 import { useAuth, useUser } from '../../../context';
 import { campReservation } from '../../../api';
 import styles from '../index.module.css';

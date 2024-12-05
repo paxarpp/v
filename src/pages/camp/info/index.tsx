@@ -1,7 +1,7 @@
 import { useAsyncValue } from 'react-router-dom';
-import { ICampItem } from '../../shortCamps/interfaces';
-import styles from '../index.module.css';
+import { ICampItem } from '../interfaces';
 import { ImagePack } from '../../../templates/imagesPack';
+import styles from '../index.module.css';
 
 export const Info = () => {
   const { camp } = useAsyncValue() as {

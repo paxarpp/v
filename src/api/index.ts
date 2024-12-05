@@ -116,6 +116,21 @@ export const campReservation = async (
   }
 };
 
+export const campConfirm = async (
+  campId: string,
+  userId: string,
+): Promise<{
+  data: { result: boolean; error?: string };
+}> => {
+  try {
+    return await axios.put(BASE_URL + '/camp-user-confirm', null, {
+      params: { campId, userId },
+    });
+  } catch (e: unknown) {
+    return { data: { result: false, error: (e as Error).message } };
+  }
+};
+
 export const getCoach = async (id: string) => {
   return await axios.get(BASE_URL + `/coaches/${id}`);
 };
