@@ -246,13 +246,32 @@ export const login = async <T>(
 ): Promise<T> => {
   try {
     return await axios.post(BASE_URL + '/auth/login', {
-      username: username,
-      password: password,
+      username,
+      password,
     });
   } catch {
     return {} as T;
   }
 };
+
+export const signup = async <T>(
+  username: string,
+  password: string,
+  telephone: string,
+  confirmPassword: string,
+): Promise<T> => {
+  try {
+    return await axios.post(BASE_URL + '/auth/signup', {
+      username,
+      password,
+      telephone,
+      confirmPassword,
+    });
+  } catch {
+    return {} as T;
+  }
+};
+
 export const logout = async <T>(): Promise<T> => {
   try {
     return await axios.get(BASE_URL + '/auth/logout');

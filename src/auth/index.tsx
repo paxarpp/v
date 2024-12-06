@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Modal } from '../templates/modal';
-import { login } from '../api';
+import { login, signup } from '../api';
 import { IUser } from './interface';
 import { useUser } from '../context';
 import { InputStyled } from '../templates/input';
@@ -11,14 +11,17 @@ export const Auth: React.FC<{
   toggleAuthOpen: () => void;
 }> = ({ onCloseAuth, toggleAuthOpen }) => {
   const { signin } = useUser();
+  const [tab, setTab] = useState(1);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [telephone, setTelephone] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const authing = (l: string, p: string) => {
+  const authing = () => {
     const authLogin = async () => {
       const user = await login<{
         data?: IUser & { cookie: string };
-      }>(l, p);
+      }>(username, password);
       if (user?.data) {
         signin(user.data);
         toggleAuthOpen();
@@ -32,21 +35,47 @@ export const Auth: React.FC<{
     authLogin();
   };
 
+  const sign = () => {
+    const authSign = async () => {
+      const user = await signup<{
+        data?: IUser & { cookie: string };
+      }>(username, password, telephone, confirmPassword);
+      if (user?.data) {
+        signin(user.data);
+        toggleAuthOpen();
+        try {
+          localStorage.setItem('user', JSON.stringify(user.data));
+        } catch (e) {
+          //
+        }
+      }
+    };
+    authSign();
+  };
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      setUsername(e.target.value);
-    } else if (!e.target.value) {
-      setUsername('');
-    }
+    setUsername(e.target.value || '');
+  };
+  const onChangeTelephone = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTelephone(e.target.value || '');
   };
 
   const onChangePass = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
+  const onChangeConfPass = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+  };
 
   const onEnter = () => {
-    if (username && password) {
-      authing(username, password);
+    if (tab === 1) {
+      if (username && password) {
+        authing();
+      }
+    } else {
+      if (username && password && password === confirmPassword) {
+        sign();
+      }
     }
   };
 
@@ -54,25 +83,72 @@ export const Auth: React.FC<{
     <Modal
       isOpen={true}
       close={onCloseAuth}
-      header={<h2>{'Вход в личный кабинет'}</h2>}
+      header={
+        <div className={styles.header}>
+          <span
+            className={tab === 1 ? styles.current_header : ''}
+            onClick={() => setTab(1)}
+          >
+            {'Вход в личный кабинет'}
+          </span>
+          <span
+            className={tab !== 1 ? styles.current_header : ''}
+            onClick={() => setTab(2)}
+          >
+            {'Регистрация'}
+          </span>
+        </div>
+      }
       footer={
         <button className={styles.auth_button} onClick={onEnter}>
-          Войти
+          {tab === 1 ? 'Войти' : 'Зарегистрироваться'}
         </button>
       }
     >
-      <div className={styles.input_wrap}>
-        <InputStyled
-          placeholder={'Логин'}
-          value={username}
-          onChange={onChange}
-        />
-        <InputStyled
-          placeholder={'Пароль'}
-          type="password"
-          value={password}
-          onChange={onChangePass}
-        />
+      <div className={styles.tab_login}>
+        {tab === 1 ? (
+          <div className={styles.input_wrap}>
+            <InputStyled
+              placeholder={'Логин'}
+              value={username}
+              onChange={onChange}
+            />
+            <InputStyled
+              placeholder={'Пароль'}
+              type="password"
+              value={password}
+              onChange={onChangePass}
+            />
+          </div>
+        ) : null}
+      </div>
+      <div className={styles.tab_registration}>
+        {tab !== 1 ? (
+          <div className={styles.input_wrap}>
+            <InputStyled
+              placeholder={'Имя'}
+              value={username}
+              onChange={onChange}
+            />
+            <InputStyled
+              placeholder={'Телефон'}
+              value={telephone}
+              onChange={onChangeTelephone}
+            />
+            <InputStyled
+              placeholder={'Пароль'}
+              value={password}
+              onChange={onChangePass}
+              type="password"
+            />
+            <InputStyled
+              placeholder={'Подтверждение пароля'}
+              value={confirmPassword}
+              onChange={onChangeConfPass}
+              type="password"
+            />
+          </div>
+        ) : null}
       </div>
     </Modal>
   );

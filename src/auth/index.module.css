@@ -66,6 +66,7 @@
   flex-flow: column nowrap;
   gap: 30px;
   padding: 24px;
+  height: 440px;
 }
 
 .input_validation_error {
@@ -77,4 +78,28 @@
   left: 8px;
   bottom: -24px;
   color: red;
+}
+
+.tab_login {
+  width: 485px;
+}
+
+.tab_registration {
+  width: 485px;
+  margin-left: auto;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 1040px;
+}
+
+.header > span {
+  cursor: pointer;
+}
+
+.current_header {
+  border-bottom: 1px solid #D4D4D4;
 }
