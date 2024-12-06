@@ -150,50 +150,32 @@ export const CoachEdit: React.FC<{
             }));
           }}
         />
-        <label>{'Стиль игры'}</label>
-        <select
-          className={styles.input_field}
-          value={0}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (currentCoach?.campTypes.includes(value)) {
+        <label className={styles.checkbox_field}>
+          <input
+            type={'checkbox'}
+            checked={currentCoach?.isBeach}
+            onChange={(e) => {
               setCoach((prevCoach) => ({
                 ...(prevCoach as ICoach),
-                campTypes:
-                  prevCoach?.campTypes.filter((type) => type !== value) || [],
+                isBeach: e.target.checked,
               }));
-            } else {
+            }}
+          />
+          {'Пляжный'}
+        </label>
+        <label className={styles.checkbox_field}>
+          <input
+            type={'checkbox'}
+            checked={currentCoach?.isClassic}
+            onChange={(e) => {
               setCoach((prevCoach) => ({
                 ...(prevCoach as ICoach),
-                campTypes: (
-                  prevCoach?.campTypes || ([] as ICoach['campTypes'])
-                ).concat([e.target.value as 'BEACH']),
+                isClassic: e.target.checked,
               }));
-            }
-          }}
-        >
-          <option disabled={true} value={0}>Выберите стиль игры</option>
-          <option
-            className={
-              currentCoach?.campTypes.includes('BEACH')
-                ? styles.selected_type
-                : ''
-            }
-            value={'BEACH'}
-          >
-            Пляжный
-          </option>
-          <option
-            className={
-              currentCoach?.campTypes.includes('CLASSIC')
-                ? styles.selected_type
-                : ''
-            }
-            value={'CLASSIC'}
-          >
-            Классический
-          </option>
-        </select>
+            }}
+          />
+          {'Классический'}
+        </label>
       </div>
     </Modal>
   );

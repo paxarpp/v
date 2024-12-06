@@ -24,5 +24,6 @@ export interface ICoach {
   infos: string[];
   mainImage: IImage | null;
   promo: string;
-  campTypes: ('BEACH' | 'CLASSIC')[];
+  isBeach: boolean;
+  isClassic: boolean;
 }
