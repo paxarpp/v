@@ -1,5 +1,5 @@
 import { useAsyncValue } from 'react-router-dom';
-import { ICampItem } from '../interfaces';
+import { ICampItem, IUser } from '../interfaces';
 import { useUser } from '../../../context';
 import { campConfirm } from '../../../api';
 import styles from '../index.module.css';
@@ -10,10 +10,10 @@ export const Users = () => {
   };
   const { isAdmin, isModerator } = useUser();
 
-  const onConfirm = (userId: string) => {
+  const onConfirm = (user: IUser) => {
     const confirm = async () => {
       const campId = camp.id;
-      const resp = await campConfirm(campId, userId, !user.bookingConfirmed);
+      const resp = await campConfirm(campId, user.id, !user.bookingConfirmed);
 
     };
     confirm();
@@ -38,7 +38,7 @@ export const Users = () => {
             <td>
               <button
                 className={styles.button_profile}
-                onClick={() => onConfirm(user.id)}
+                onClick={() => onConfirm(user)}
               >
                 {user.bookingConfirmed ? 'Забронировано' : 'Подтвердить'}
               </button>
