@@ -150,7 +150,7 @@ export const CoachEdit: React.FC<{
             }));
           }}
         />
-        <label>{'Тренер в кемпе'}</label>
+        <label>{'Стиль игры'}</label>
         <select
           className={styles.input_field}
           value={0}
@@ -172,9 +172,7 @@ export const CoachEdit: React.FC<{
             }
           }}
         >
-          <option disabled={true} value={0}>
-            Кэмпы
-          </option>
+          <option disabled={true} value={0}></option>
           <option
             className={
               currentCoach?.campTypes.includes('BEACH')
@@ -183,7 +181,7 @@ export const CoachEdit: React.FC<{
             }
             value={'BEACH'}
           >
-            Кемпы выходного дня
+            Пляжный
           </option>
           <option
             className={
@@ -193,7 +191,7 @@ export const CoachEdit: React.FC<{
             }
             value={'CLASSIC'}
           >
-            Недельные кемпы
+            Классический
           </option>
         </select>
       </div>
