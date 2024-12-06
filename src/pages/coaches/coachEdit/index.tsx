@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useRevalidator } from 'react-router-dom';
 import { Modal } from '../../../templates/modal';
 import {
@@ -6,7 +6,6 @@ import {
   updateCoach,
   deleteCoach as deleteCch,
   creatorRequest,
-  uploadImg,
 } from '../../../api';
 import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
@@ -85,7 +84,7 @@ export const CoachEdit: React.FC<{
     setCoach((prevCoach) => ({
       ...(prevCoach as ICoach),
       mainImage: {
-        typeEntity: 'COACH' as const,
+        typeEntity: 'COACH' as const, // todo typeEntity from url
         ...img,
       },
     }));
@@ -150,6 +149,52 @@ export const CoachEdit: React.FC<{
             }));
           }}
         />
+        <label>{'Тренер в кемпе'}</label>
+        <select
+          className={styles.input_field}
+          value={0}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (currentCoach?.campTypes.includes(value)) {
+              setCoach((prevCoach) => ({
+                ...(prevCoach as ICoach),
+                campTypes:
+                  prevCoach?.campTypes.filter((type) => type !== value) || [],
+              }));
+            } else {
+              setCoach((prevCoach) => ({
+                ...(prevCoach as ICoach),
+                campTypes: (
+                  prevCoach?.campTypes || ([] as ICoach['campTypes'])
+                ).concat([e.target.value as 'BEACH']),
+              }));
+            }
+          }}
+        >
+          <option disabled={true} value={0}>
+            Кэмпы
+          </option>
+          <option
+            className={
+              currentCoach?.campTypes.includes('BEACH')
+                ? styles.selected_type
+                : ''
+            }
+            value={'BEACH'}
+          >
+            Кемпы выходного дня
+          </option>
+          <option
+            className={
+              currentCoach?.campTypes.includes('CLASSIC')
+                ? styles.selected_type
+                : ''
+            }
+            value={'CLASSIC'}
+          >
+            Недельные кемпы
+          </option>
+        </select>
       </div>
     </Modal>
   );

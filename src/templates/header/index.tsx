@@ -131,7 +131,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
                   <Link to="/oldCamps">Прошедшие кемпы</Link>
                 </li>
                 <li>
-                  <Link to="/allCoahes">Тренеры</Link>
+                  <Link to="/beachCoaches">Тренеры</Link>
                 </li>
               </ul>
             </div>
@@ -153,7 +153,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
                   <Link to="/corporates">Корпоративные мероприятия</Link>
                 </li>
                 <li>
-                  <Link to="/allCoahes">Тренеры</Link>
+                  <Link to="/classicCoaches">Тренеры</Link>
                 </li>
               </ul>
             </div>

@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from './error-page';
 import { Coaches } from './pages/coaches';
-import { loaderPageCoaches } from './pages/coaches/loaders';
 import { Main } from './pages/main';
 import { LongCamps } from './pages/longCamps';
 import { ShortCamps } from './pages/shortCamps';
@@ -9,6 +8,9 @@ import { Camp } from './pages/camp';
 import { User } from './pages/user';
 import { Shedule } from './pages/trainingSchedule';
 import { About } from './pages/about';
+import { loaderPageCoaches } from './pages/coaches/loaders';
+import { loaderPageBeachCoaches } from './pages/coaches/loaders';
+import { loaderPageClassicCoaches } from './pages/coaches/loaders';
 import { loaderPageMain } from './pages/main/loaders';
 import { loaderPageShedule } from './pages/trainingSchedule/loaders';
 import { loaderPageShortCamps } from './pages/shortCamps/loaders';
@@ -43,10 +45,22 @@ export const router = createBrowserRouter([
         loader: loaderPageAbout,
       },
       {
-        path: '/allCoahes',
+        path: '/allCoaches',
         element: <Coaches />,
         errorElement: <ErrorPage />,
         loader: loaderPageCoaches,
+      },
+      {
+        path: '/beachCoaches',
+        element: <Coaches />,
+        errorElement: <ErrorPage />,
+        loader: loaderPageBeachCoaches,
+      },
+      {
+        path: '/classicCoaches',
+        element: <Coaches />,
+        errorElement: <ErrorPage />,
+        loader: loaderPageClassicCoaches,
       },
       {
         path: '/weekendCamps',

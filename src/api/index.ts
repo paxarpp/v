@@ -47,6 +47,26 @@ export const getCoachesAll = async <T>(): Promise<{
   }
 };
 
+export const getBeachCoachesAll = async <T>(): Promise<{
+  data: { result: T[]; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/coaches/all/beach-type');
+  } catch (e: unknown) {
+    return { data: { result: [], error: (e as Error).message } };
+  }
+};
+
+export const getClassicCoachesAll = async <T>(): Promise<{
+  data: { result: T[]; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/coaches/all/classic-type');
+  } catch (e: unknown) {
+    return { data: { result: [], error: (e as Error).message } };
+  }
+};
+
 export const getCamp = async <T>(
   id: string,
 ): Promise<{

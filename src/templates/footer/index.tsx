@@ -40,9 +40,6 @@ export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
           </li>
           <li>Отзывы</li>
           <li>Часто задаваемые вопросы</li>
-          <li>
-            <Link to="/allCoahes">Тренеры</Link>
-          </li>
         </ul>
       </div>
       <div>
