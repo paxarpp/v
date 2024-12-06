@@ -73,6 +73,7 @@
   padding: 4px 14px;
   border-radius: 8px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
+  color: #152355;
 }
 
 .profile_coach_modal,
@@ -134,7 +135,8 @@
 .button {
   height: 44px;
   padding: 10px 20px;
-  border-radius: 8px; 
+  border-radius: 8px;
+  color: #152355;
 }
 
 .image_name {

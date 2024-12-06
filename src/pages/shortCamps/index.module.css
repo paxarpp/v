@@ -129,7 +129,8 @@
 .button {
   height: 44px;
   padding: 10px 20px;
-  border-radius: 8px; 
+  border-radius: 8px;
+  color: #152355;
 }
 
 .image_name {
