@@ -14,7 +14,6 @@ export const Users = () => {
     const confirm = async () => {
       const campId = camp.id;
       const resp = await campConfirm(campId, user.id, !user.bookingConfirmed);
-
     };
     confirm();
   };
@@ -37,7 +36,11 @@ export const Users = () => {
             <td>{'user.bookingCount'}</td>
             <td>
               <button
-                className={styles.button_profile}
+                className={
+                  user.bookingConfirmed
+                    ? styles.button_confirmed
+                    : styles.button_profile
+                }
                 onClick={() => onConfirm(user)}
               >
                 {user.bookingConfirmed ? 'Забронировано' : 'Подтвердить'}
