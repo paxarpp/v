@@ -129,12 +129,13 @@ export const campReservation = async (
 export const campConfirm = async (
   campId: string,
   userId: string,
+  isConfirm: boolean,
 ): Promise<{
   data: { result: boolean; error?: string };
 }> => {
   try {
     return await axios.put(BASE_URL + '/camp-user', {
-      params: { campId, userId },
+      params: { campId, userId, isConfirm },
     });
   } catch (e: unknown) {
     return { data: { result: false, error: (e as Error).message } };
