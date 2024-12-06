@@ -111,7 +111,7 @@ export const getPackages = async <T>(): Promise<{
   }
 };
 
-export const getCoaches = async <T>(): Promise<{
+export const getCoachesDropdown = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {
   try {

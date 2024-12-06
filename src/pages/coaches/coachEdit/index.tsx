@@ -33,6 +33,7 @@ export const CoachEdit: React.FC<{
           infos: [],
           promo: '',
           mainImage: null,
+          campTypes: [],
         });
         const { result } = await axiosCall<ICoach>(getCoach(id));
         if (result.data.result) {

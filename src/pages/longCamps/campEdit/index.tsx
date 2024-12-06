@@ -7,7 +7,7 @@ import {
   updateCampLong,
   deleteCamp as deleteCmp,
   creatorRequest,
-  getCoaches,
+  getCoachesDropdown,
 } from '../../../api';
 import { ICampItem, ICoach, IImage, IPackage } from '../interfaces';
 import { useUser } from '../../../context';
@@ -43,7 +43,7 @@ export const CampEdit: React.FC<{
     const getCoachesAll = async () => {
       const axiosCall = creatorRequest(logout);
       setCoaches([]);
-      const { result } = await axiosCall<ICoach[]>(getCoaches());
+      const { result } = await axiosCall<ICoach[]>(getCoachesDropdown());
       if (result.data.result) {
         setCoaches([...result.data.result]);
       }
