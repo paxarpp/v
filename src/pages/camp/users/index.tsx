@@ -13,8 +13,8 @@ export const Users = () => {
   const onConfirm = (userId: string) => {
     const confirm = async () => {
       const campId = camp.id;
-      const resp = await campConfirm(campId, userId);
-      console.log(resp);
+      const resp = await campConfirm(campId, userId, !user.bookingConfirmed);
+
     };
     confirm();
   };
