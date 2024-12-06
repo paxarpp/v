@@ -37,16 +37,6 @@ export const getCampsAll = async <T>(): Promise<{
   }
 };
 
-export const getCoachesAll = async <T>(): Promise<{
-  data: { result: T[]; error?: string };
-}> => {
-  try {
-    return await axios.get(BASE_URL + '/coaches/all');
-  } catch (e: unknown) {
-    return { data: { result: [], error: (e as Error).message } };
-  }
-};
-
 export const getBeachCoachesAll = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {

@@ -8,7 +8,6 @@ import { Camp } from './pages/camp';
 import { User } from './pages/user';
 import { Shedule } from './pages/trainingSchedule';
 import { About } from './pages/about';
-import { loaderPageCoaches } from './pages/coaches/loaders';
 import { loaderPageBeachCoaches } from './pages/coaches/loaders';
 import { loaderPageClassicCoaches } from './pages/coaches/loaders';
 import { loaderPageMain } from './pages/main/loaders';
@@ -43,12 +42,6 @@ export const router = createBrowserRouter([
         element: <About />,
         errorElement: <ErrorPage />,
         loader: loaderPageAbout,
-      },
-      {
-        path: '/allCoaches',
-        element: <Coaches />,
-        errorElement: <ErrorPage />,
-        loader: loaderPageCoaches,
       },
       {
         path: '/beachCoaches',
