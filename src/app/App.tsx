@@ -11,13 +11,18 @@ export const App = () => {
     app: IAppInfo;
   };
   const [authOpen, setOpen] = useState(false);
+  const [campId, setReserv] = useState('');
 
-  const toggleAuthOpen = () => {
+  const toggleAuthOpen = (campId?: string) => {
     setOpen(!authOpen);
+    if (campId) {
+      setReserv(campId);
+    }
   };
 
   const onCloseAuth = () => {
     setOpen(false);
+    setReserv('');
   };
 
   return (
@@ -25,7 +30,11 @@ export const App = () => {
       <AuthOpenContext.Provider value={{ toggleAuthOpen }}>
         <Header {...app} />
         {authOpen ? (
-          <Auth onCloseAuth={onCloseAuth} toggleAuthOpen={toggleAuthOpen} />
+          <Auth
+            onCloseAuth={onCloseAuth}
+            toggleAuthOpen={toggleAuthOpen}
+            campId={campId}
+          />
         ) : null}
         <div id="detail">
           <Outlet />

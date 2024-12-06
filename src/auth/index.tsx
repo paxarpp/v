@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Modal } from '../templates/modal';
-import { login, signup } from '../api';
+import { login, signup, campReservationWithoutUser } from '../api';
 import { IUser } from './interface';
 import { useUser } from '../context';
 import { InputStyled } from '../templates/input';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
-  toggleAuthOpen: () => void;
-}> = ({ onCloseAuth, toggleAuthOpen }) => {
+  toggleAuthOpen: (campId: string) => void;
+  campId?: string;
+}> = ({ onCloseAuth, toggleAuthOpen, campId }) => {
   const { signin } = useUser();
   const [tab, setTab] = useState(1);
   const [username, setUsername] = useState('');
@@ -53,6 +54,17 @@ export const Auth: React.FC<{
     authSign();
   };
 
+  const reserv = () => {
+    const reserved = async () => {
+      const error = await campReservationWithoutUser(
+        campId as string,
+        username,
+        telephone,
+      );
+    };
+    reserved();
+  };
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value || '');
   };
@@ -72,9 +84,13 @@ export const Auth: React.FC<{
       if (username && password) {
         authing();
       }
-    } else {
+    } else if (!campId) {
       if (username && password && password === confirmPassword) {
         sign();
+      }
+    } else if (campId) {
+      if (username && telephone) {
+        reserv();
       }
     }
   };
@@ -95,13 +111,17 @@ export const Auth: React.FC<{
             className={tab !== 1 ? styles.current_header : ''}
             onClick={() => setTab(2)}
           >
-            {'Регистрация'}
+            {campId ? 'Продолжить без регистрации' : 'Регистрация'}
           </span>
         </div>
       }
       footer={
         <button className={styles.auth_button} onClick={onEnter}>
-          {tab === 1 ? 'Войти' : 'Зарегистрироваться'}
+          {tab === 1
+            ? 'Войти'
+            : campId
+              ? 'Забронировать'
+              : 'Зарегистрироваться'}
         </button>
       }
     >
@@ -124,30 +144,45 @@ export const Auth: React.FC<{
       </div>
       <div className={styles.tab_registration}>
         {tab !== 1 ? (
-          <div className={styles.input_wrap}>
-            <InputStyled
-              placeholder={'Имя'}
-              value={username}
-              onChange={onChange}
-            />
-            <InputStyled
-              placeholder={'Телефон'}
-              value={telephone}
-              onChange={onChangeTelephone}
-            />
-            <InputStyled
-              placeholder={'Пароль'}
-              value={password}
-              onChange={onChangePass}
-              type="password"
-            />
-            <InputStyled
-              placeholder={'Подтверждение пароля'}
-              value={confirmPassword}
-              onChange={onChangeConfPass}
-              type="password"
-            />
-          </div>
+          campId ? (
+            <div className={styles.input_wrap}>
+              <InputStyled
+                placeholder={'Имя'}
+                value={username}
+                onChange={onChange}
+              />
+              <InputStyled
+                placeholder={'Телефон'}
+                value={telephone}
+                onChange={onChangeTelephone}
+              />
+            </div>
+          ) : (
+            <div className={styles.input_wrap}>
+              <InputStyled
+                placeholder={'Имя'}
+                value={username}
+                onChange={onChange}
+              />
+              <InputStyled
+                placeholder={'Телефон'}
+                value={telephone}
+                onChange={onChangeTelephone}
+              />
+              <InputStyled
+                placeholder={'Пароль'}
+                value={password}
+                onChange={onChangePass}
+                type="password"
+              />
+              <InputStyled
+                placeholder={'Подтверждение пароля'}
+                value={confirmPassword}
+                onChange={onChangeConfPass}
+                type="password"
+              />
+            </div>
+          )
         ) : null}
       </div>
     </Modal>

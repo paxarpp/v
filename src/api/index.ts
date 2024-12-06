@@ -119,7 +119,27 @@ export const campReservation = async (
 }> => {
   try {
     return await axios.put(BASE_URL + '/camp-user', {
-      params: { campId, userId },
+      campId,
+      userId,
+    });
+  } catch (e: unknown) {
+    return { data: { result: false, error: (e as Error).message } };
+  }
+};
+
+export const campReservationWithoutUser = async (
+  campId: string,
+  username: string,
+  telephone: string,
+): Promise<{
+  data: { result: boolean; error?: string };
+}> => {
+  try {
+    return await axios.put(BASE_URL + '/camp-user', {
+      campId,
+      userId: null,
+      username,
+      telephone,
     });
   } catch (e: unknown) {
     return { data: { result: false, error: (e as Error).message } };
@@ -135,7 +155,9 @@ export const campConfirm = async (
 }> => {
   try {
     return await axios.put(BASE_URL + '/camp-user', {
-      params: { campId, userId, isConfirm },
+      campId,
+      userId,
+      isConfirm,
     });
   } catch (e: unknown) {
     return { data: { result: false, error: (e as Error).message } };

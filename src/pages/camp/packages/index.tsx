@@ -36,7 +36,7 @@ export const Packages = () => {
     if (user) {
       reservation();
     } else {
-      toggleAuthOpen();
+      toggleAuthOpen(camp.id);
     }
   };
 
