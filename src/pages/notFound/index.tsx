@@ -1,8 +1,11 @@
+import NotFoundIcon from '../../assets/404.svg?react';
+
 export const NotFound = () => {
   return (
     <div>
-      <h1>Oops!</h1>
-      <p>Page not found.</p>
+      <NotFoundIcon style={{ width: '100%' }}/>
+      <h2>Извините, запрашиваемая страница не найдена</h2>
+      <h4>Она была удалена либо еще находится в разработке</h4>
     </div>
   );
 };
