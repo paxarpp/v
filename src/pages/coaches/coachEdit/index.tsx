@@ -172,7 +172,7 @@ export const CoachEdit: React.FC<{
             }
           }}
         >
-          <option disabled={true} value={0}></option>
+          <option disabled={true} value={0}>Выберите стиль игры</option>
           <option
             className={
               currentCoach?.campTypes.includes('BEACH')
