@@ -32,8 +32,8 @@ export const Users = () => {
         {camp.users?.map((user) => (
           <tr key={user.id}>
             <td>{user.login}</td>
-            <td>{'user.telephone'}</td>
-            <td>{'user.bookingCount'}</td>
+            <td>{user.telephone}</td>
+            <td>{user.bookingCount}</td>
             <td>
               <button
                 className={
