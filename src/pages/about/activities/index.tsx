@@ -115,7 +115,11 @@ export const Activities = () => {
         >
           <div className={styles.activity_modal_content}>
             <label>{'Название блока'}</label>
-            <input value={currentActivity?.name} onChange={onChangeName} />
+            <input
+              value={currentActivity?.name}
+              onChange={onChangeName}
+              className={styles.input_field}
+            />
             <ImagesMassSelect
               label={'Фотография места проведения'}
               deleteImg={deleteImgMass}
