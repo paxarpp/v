@@ -49,3 +49,28 @@
   justify-content: flex-start;
   gap: 50px;
 }
+
+.master_block {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 0;
+  gap: 150px;
+}
+
+.master_column {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.master_image {
+  width: 270px;
+  height: 360px;
+  object-fit: cover;
+}
+
+.master_infos {
+  border-top: 1px solid #99660A;
+  text-align: left;
+}
