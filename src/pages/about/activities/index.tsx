@@ -23,11 +23,13 @@ export const Activities = () => {
   const { isAdmin, logout } = useUser();
   const [activityAddOpen, setActivityAddOpen] = useState<boolean>(false);
   const [currentActivity, setActivity] = useState<IActivity | null>(null);
+  const [currentId, setId] = useState<string | null>(null);
 
   const openEditActivity = (id?: string) => {
     if (id) {
       const activity = activities.find((a) => a.images?.[0]?.entityId === id);
       if (activity) {
+        setId(id);
         setActivity({ ...activity });
         setActivityAddOpen(true);
       }
@@ -38,6 +40,7 @@ export const Activities = () => {
   };
 
   const onClose = () => {
+    setId(null);
     setActivity(null);
     setActivityAddOpen(false);
   };
@@ -81,11 +84,9 @@ export const Activities = () => {
 
   const deleteActivity = () => {
     const delC = async () => {
-      if (currentActivity?.images?.[0].entityId) {
+      if (currentId) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<boolean>(
-          deleteAct(currentActivity.images[0].entityId),
-        );
+        const { error } = await axiosCall<boolean>(deleteAct(currentId));
         if (!error) {
           onClose();
           revalidator.revalidate();
@@ -102,13 +103,15 @@ export const Activities = () => {
           isOpen={true}
           header={<h2>{'О нас, активности'}</h2>}
           footer={
-            <div>
+            <div className={styles.activity_footer}>
               <button onClick={saveActivity} className={styles.button_save}>
                 {'Сохранить'}
               </button>
-              <button onClick={deleteActivity} className={styles.button_save}>
-                {'Удалить'}
-              </button>
+              {currentId ? (
+                <button onClick={deleteActivity} className={styles.button_save}>
+                  {'Удалить'}
+                </button>
+              ) : null}
             </div>
           }
           close={onClose}
