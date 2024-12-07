@@ -4,6 +4,7 @@ import { ICampItem } from '../pages/shortCamps/interfaces';
 import { IContactBlock, IMainBlock } from '../pages/main/interfaces';
 import { IUserInfo } from '../pages/user/interfaces';
 import { IPass } from '../pages/user/info/modalPass';
+import { IActivity } from '../pages/about/interfaces';
 
 const BASE_URL = '/magicvolley';
 
@@ -370,6 +371,17 @@ export const deleteCoach = async (id: string) => {
   return await axios.delete(BASE_URL + `/coaches/${id}`);
 };
 
+export const updateActivity = async (body: IActivity) => {
+  if (body.images?.[0].entityId) {
+    return await axios.put(
+      BASE_URL + `/activity/${body.images[0].entityId}`,
+      body,
+    );
+  } else {
+    return await axios.post(BASE_URL + `/activity`, body);
+  }
+};
+
 export const updateCampShort = async (body: ICampItem) => {
   if (body.id) {
     return await axios.put(BASE_URL + `/camps/${body.id}`, body);
@@ -388,6 +400,10 @@ export const updateCampLong = async (body: ICampItem) => {
 
 export const deleteCamp = async (id: string) => {
   return await axios.delete(BASE_URL + `/camps/${id}`);
+};
+
+export const deleteAct = async (id: string) => {
+  return await axios.delete(BASE_URL + `/activity/${id}`);
 };
 
 export const creatorRequest =

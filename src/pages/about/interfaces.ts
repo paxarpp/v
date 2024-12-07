@@ -29,8 +29,11 @@ interface IVideo {
 
 interface IImage {
   id: string;
+  entityId: string; // в активити
   name: string;
   url: string;
+  contentType: string,
+  size: number,
 }
 
 export interface IActivity {

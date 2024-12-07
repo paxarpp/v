@@ -54,17 +54,20 @@ const CampsTemplate = () => {
   const [lastIndex, setLastIndex] = useState(2);
 
   const onLeft = () => {
-    if (!camps.length) return;
+    if (!home.camps.length) return;
     setStartIndex((prev) => (prev === 0 ? 0 : prev - 1));
-    setLastIndex((prev) => (prev === 2 ? 2 : prev - 1));
+    setLastIndex((prev) => (prev === 2 ? 2 : prev - 1)); // fixme
   };
   const onRight = () => {
-    if (!camps.length) return;
-    if (camps.length - lastIndex !== 1) {
+    if (!home.camps.length) return;
+    if (home.camps.length < 2) return;
+    if (home.camps.length - lastIndex !== 1) {
       setStartIndex((prev) =>
-        prev === camps.length - 2 ? camps.length - 2 : prev + 1,
+        prev === home.camps.length - 2 ? home.camps.length - 2 : prev + 1,
       );
-      setLastIndex((prev) => (prev === camps.length ? camps.length : prev + 1));
+      setLastIndex((prev) =>
+        prev === home.camps.length ? home.camps.length : prev + 1,
+      );
     }
   };
 
