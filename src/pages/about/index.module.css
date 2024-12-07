@@ -74,3 +74,61 @@
   border-top: 1px solid #99660A;
   text-align: left;
 }
+
+.reviews_block {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+  overflow: hidden;
+  gap: 20px;
+  background: #21243680;
+  padding: 50px 75px;
+}
+
+.scroll_arrow_right,
+.scroll_arrow_left {
+  position: absolute;
+  top: calc(50% - 25px);
+  cursor: pointer;
+}
+
+.scroll_arrow_left {
+  left: 0;
+}
+
+.scroll_arrow_right {
+  right: 0;
+}
+
+.review_card {
+  width: 570px;
+  height: 420px;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #8080804D;
+  border: 1px solid #D4D4D4
+}
+
+.card_row_user {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 20px;
+}
+
+.review_img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.reviewer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 10px;
+}
