@@ -4,7 +4,7 @@ import { ICampItem } from '../pages/shortCamps/interfaces';
 import { IContactBlock, IMainBlock } from '../pages/main/interfaces';
 import { IUserInfo } from '../pages/user/interfaces';
 import { IPass } from '../pages/user/info/modalPass';
-import { IActivity } from '../pages/about/interfaces';
+import { IActivity, IReview } from '../pages/about/interfaces';
 
 const BASE_URL = '/magicvolley';
 
@@ -382,6 +382,14 @@ export const updateActivity = async (body: IActivity) => {
   }
 };
 
+export const updateReview = async (body: IReview) => {
+  if (body.image?.entityId) {
+    return await axios.put(BASE_URL + `/review/${body.image.entityId}`, body);
+  } else {
+    return await axios.post(BASE_URL + `/review`, body);
+  }
+};
+
 export const updateCampShort = async (body: ICampItem) => {
   if (body.id) {
     return await axios.put(BASE_URL + `/camps/${body.id}`, body);
@@ -404,6 +412,10 @@ export const deleteCamp = async (id: string) => {
 
 export const deleteAct = async (id: string) => {
   return await axios.delete(BASE_URL + `/activity/${id}`);
+};
+
+export const deleteRvw = async (id: string) => {
+  return await axios.delete(BASE_URL + `/review/${id}`);
 };
 
 export const creatorRequest =

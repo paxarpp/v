@@ -12,13 +12,13 @@ export interface IReview {
   name: string;
   date: string;
   comment: string;
-  image: IImage;
+  image: IImage | null;
 }
 
 export interface IMaster {
   name: string;
   infos: string[];
-  image: IImage;
+  image: IImage | null;
 }
 
 interface IVideo {
@@ -29,7 +29,7 @@ interface IVideo {
 
 interface IImage {
   id: string;
-  entityId: string; // в активити
+  entityId: string | null; // в активити, в комментах
   name: string;
   url: string;
   contentType: string,

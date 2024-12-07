@@ -25,7 +25,7 @@ export const Activities = () => {
   const [currentActivity, setActivity] = useState<IActivity | null>(null);
   const [currentId, setId] = useState<string | null>(null);
 
-  const openEditActivity = (id?: string) => {
+  const openEditActivity = (id?: string | null) => {
     if (id) {
       const activity = activities.find((a) => a.images?.[0]?.entityId === id);
       if (activity) {
@@ -101,7 +101,7 @@ export const Activities = () => {
       {activityAddOpen ? (
         <Modal
           isOpen={true}
-          header={<h2>{'О нас, активности'}</h2>}
+          header={<h2>{'Карточка активности'}</h2>}
           footer={
             <div className={styles.activity_footer}>
               <button onClick={saveActivity} className={styles.button_save}>

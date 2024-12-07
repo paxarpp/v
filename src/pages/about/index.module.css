@@ -44,6 +44,7 @@
   border-top: 1px solid #99660A;
 }
 
+.review_card_add,
 .activity_card_add {
   background: #8080804D;
   border: 2px solid #FFFFFF;
@@ -129,6 +130,7 @@
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .review_img {
@@ -145,13 +147,21 @@
   margin-left: 10px;
 }
 
+.setting_review,
 .setting_activity {
   height: 40px;
   width: 40px;
   cursor: pointer;
   position: absolute;
-  bottom: 5px;
   right: 5px;
+}
+
+.setting_activity {
+  bottom: 5px;
+}
+
+.setting_review {
+  top: 5px;
 }
 
 .button_save {
@@ -160,6 +170,7 @@
   border-radius: 8px;
 }
 
+.review_modal_content,
 .activity_modal_content {
   height: 400px;
   width: 500px;
@@ -170,6 +181,12 @@
   gap: 30px;
 }
 
+.review_modal_content {
+  width: 800px;
+  height: 500px;
+}
+
+.textarea_field,
 .input_field {
   height: 64px;
   padding: 20px;
@@ -179,8 +196,29 @@
   line-height: 24px;
 }
 
+.textarea_field {
+  min-height: 192px;
+  resize: none;
+}
+
 .activity_footer {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+}
+
+.review_card_add {
+  width: 570px;
+  height: 420px;
+}
+
+.row {
+  display: flex;
+  gap: 30px;
+}
+
+.col {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
 }
