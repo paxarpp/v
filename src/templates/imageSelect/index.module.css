@@ -85,4 +85,5 @@
   display: flex;
   flex-flow: row nowrap;
   gap: 50px;
+  overflow: auto;
 }
