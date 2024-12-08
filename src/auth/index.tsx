@@ -8,7 +8,7 @@ import { InputStyled } from '../templates/input';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
-  toggleAuthOpen: (campId: string) => void;
+  toggleAuthOpen: (campId?: string) => void;
   campId?: string;
 }> = ({ onCloseAuth, toggleAuthOpen, campId }) => {
   const { signin } = useUser();

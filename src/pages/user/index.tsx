@@ -18,7 +18,6 @@ export const User = () => {
   useEffect(() => {
     if (error) {
       apiLogout();
-      document.cookie = `magicVolley=`;
       logout();
     }
   }, [error]);
