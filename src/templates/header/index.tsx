@@ -182,7 +182,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
           <Avatar />
         </Link>
       ) : (
-        <button className={styles.button} onClick={toggleAuthOpen}>
+        <button className={styles.button} onClick={() => toggleAuthOpen()}>
           {'Войти'}
         </button>
       )}

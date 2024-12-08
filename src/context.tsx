@@ -43,7 +43,7 @@ function useUser() {
 }
 
 const AuthOpenContext = createContext<
-  { toggleAuthOpen: (campId: string) => void } | undefined
+  { toggleAuthOpen: (campId?: string) => void } | undefined
 >(undefined);
 
 function useAuth() {
