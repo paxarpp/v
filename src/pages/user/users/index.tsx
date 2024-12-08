@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useAsyncValue, useRevalidator } from 'react-router-dom';
 import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
-import { creatorRequest, updateUserReservation } from '../../../api';
+import { creatorRequest, updateUserReservation, deleteUserReservation } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import Pencil from '../../../assets/pencil.svg?react';
+import Basket from '../../../assets/basket.svg?react';
 import styles from '../index.module.css';
 
 export const Users = () => {
@@ -36,13 +37,17 @@ export const Users = () => {
     const update = async () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall<string>(
-        updateUserReservation(newUser?.id ? {
-          ...newUser,
-          name: newUser?.username,
-          avatar: null,
-        } : {
-          ...newUser,
-        }),
+        updateUserReservation(
+          newUser?.id
+            ? {
+                ...newUser,
+                name: newUser?.username,
+                avatar: null,
+              }
+            : {
+                ...newUser,
+              },
+        ),
       );
       if (!error) {
         closeModal();
@@ -65,6 +70,18 @@ export const Users = () => {
   const editUser = (user) => {
     setOpen(true);
     setNewUser({ ...user, username: user.name });
+  };
+
+  const deleteUser = (id: string) => {
+    const deleteU = async () => {
+      const axiosCall = creatorRequest(logout);
+      const { error } = await axiosCall<string>(deleteUserReservation(id));
+      if (!error) {
+        closeModal();
+        revalidator.revalidate();
+      }
+    };
+    deleteU();
   };
 
   return user.isAdmin ? (
@@ -154,6 +171,7 @@ export const Users = () => {
             </td>
             <td>
               <Pencil onClick={() => editUser(u)} />
+              <Basket onClick={() => deleteUser(u.id)} />
             </td>
           </tr>
         ))}

@@ -399,6 +399,10 @@ export const deleteCoach = async (id: string) => {
   return await axios.delete(BASE_URL + `/coaches/${id}`);
 };
 
+export const deleteUserReservation = async (id: string) => {
+  return await axios.delete(BASE_URL + `/users/${id}`);
+};
+
 export const updateActivity = async (body: IActivity) => {
   if (body.images?.[0].entityId) {
     return await axios.put(
