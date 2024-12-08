@@ -37,7 +37,13 @@ export const Users = () => {
   const onConfirm = (user: IUser) => {
     const confirm = async () => {
       const campId = camp.id;
-      const resp = await campConfirm(campId, user.id, !user.bookingConfirmed);
+      const axiosCall = creatorRequest(logout);
+      const { error } = await axiosCall<string>(
+        campConfirm(campId, user.id, !user.bookingConfirmed),
+      );
+      if (!error) {
+        revalidator.revalidate();
+      }
     };
     confirm();
   };
