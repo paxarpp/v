@@ -1,6 +1,6 @@
 export interface IUser {
   bookingConfirmed: boolean; // пронирование подтверждено
-  id: string;
+  id: string | null;
   telephone: string;
   bookingCount: number;
   login: string;

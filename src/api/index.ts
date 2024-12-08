@@ -70,6 +70,22 @@ export const getCamp = async <T>(
   }
 };
 
+export const updateUserReservation = async <T>(data: {
+  id?: string | null;
+}): Promise<{
+  data: { result: T[]; error?: string };
+}> => {
+  try {
+    if (data.id) {
+      return await axios.put(BASE_URL + '/users/add-user', data);
+    } else {
+      return await axios.post(BASE_URL + '/users/add-user', data);
+    }
+  } catch (e: unknown) {
+    return { data: { result: [], error: (e as Error).message } };
+  }
+};
+
 export const getUser = async <T>(
   id: string,
 ): Promise<{
