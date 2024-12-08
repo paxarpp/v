@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import Setting from '../../../assets/setting.svg?react';
+import Basket from '../../../assets/basket.svg?react';
 import { IHome, IQuestion } from '../interfaces';
 import { Modal } from '../../../templates/modal';
 import { deleteQuestion, updateQuestion, getQuestions } from '../../../api';
@@ -59,11 +60,8 @@ export const Collapsed: React.FC = () => {
     }
   };
 
-  const onDelete = (id: string) => {
-    const del = async (id: string) => {
-      deleteQuestion(id);
-    };
-    del(id);
+  const onDelete = (indx: number) => {
+    setQuestions((prevQ) => prevQ.filter((_, i) => i !== indx));
   };
 
   const addQuestion = () => {
@@ -98,43 +96,48 @@ export const Collapsed: React.FC = () => {
             <>
               {questions.map(({ id, question, answer }, indx) => {
                 return (
-                  <div key={id ? id : indx} className={styles.question_block}>
-                    <input
-                      value={question}
-                      onChange={({ target }) => {
-                        setQuestions((prevQ) =>
-                          prevQ.map((q, i) => {
-                            if (indx === i) {
-                              return {
-                                ...q,
-                                question: target.value,
-                              };
-                            } else {
-                              return q;
-                            }
-                          }),
-                        );
-                      }}
-                      className={styles.question_field}
-                    />
-                    <textarea
-                      value={answer}
-                      onChange={({ target }) => {
-                        setQuestions((prevQ) =>
-                          prevQ.map((q, i) => {
-                            if (indx === i) {
-                              return {
-                                ...q,
-                                answer: target.value,
-                              };
-                            } else {
-                              return q;
-                            }
-                          }),
-                        );
-                      }}
-                      className={styles.question_field}
-                    />
+                  <div key={id ? id : indx} className={styles.question_row}>
+                    <div className={styles.question_block}>
+                      <input
+                        value={question}
+                        onChange={({ target }) => {
+                          setQuestions((prevQ) =>
+                            prevQ.map((q, i) => {
+                              if (indx === i) {
+                                return {
+                                  ...q,
+                                  question: target.value,
+                                };
+                              } else {
+                                return q;
+                              }
+                            }),
+                          );
+                        }}
+                        className={styles.question_field}
+                      />
+                      <textarea
+                        value={answer}
+                        onChange={({ target }) => {
+                          setQuestions((prevQ) =>
+                            prevQ.map((q, i) => {
+                              if (indx === i) {
+                                return {
+                                  ...q,
+                                  answer: target.value,
+                                };
+                              } else {
+                                return q;
+                              }
+                            }),
+                          );
+                        }}
+                        className={styles.question_field}
+                      />
+                    </div>
+                    <div>
+                      <Basket onClick={() => onDelete(indx)} />
+                    </div>
                   </div>
                 );
               })}

@@ -315,9 +315,15 @@
   padding: 0 50px;
 }
 
+.question_row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
 .question_block {
   display: flex;
   flex-flow: column nowrap;
+  width: 100%;
 }
 
 .question_button {
