@@ -7,5 +7,7 @@ export const NearestCamps = () => {
     user: IUser;
   };
 
-  return <Scroller title={'Мои ближайшие кемпы'} camps={user.nearestCamps} />;
+  return user.isAdmin ? null : (
+    <Scroller title={'Мои ближайшие кемпы'} camps={user.nearestCamps} />
+  );
 };

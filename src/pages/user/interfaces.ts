@@ -18,12 +18,14 @@ export interface ICamp {
 export interface IUser {
   id: string;
   email: string;
-  avatar: IImage;
+  avatar: IImage | null;
   birthday: string;
   fullName: string;
   telephone: string;
+  isAdmin: boolean;
   pastCamps: ICamp[];
   nearestCamps: ICamp[];
+  users?: IUserItem[] | null;
 }
 
 export interface IUserInfo {
@@ -32,4 +34,13 @@ export interface IUserInfo {
   telephone: string;
   fullName: string;
   birthday: string;
+}
+
+export interface IUserItem {
+  id: string;
+  isAdmin: boolean;
+  isModerator: boolean;
+  isUser: boolean;
+  name: string;
+  telephone: string;
 }

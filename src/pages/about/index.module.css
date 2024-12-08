@@ -222,3 +222,16 @@
   flex-flow: column nowrap;
   align-items: flex-start;
 }
+
+.setting_about {
+  float: right;
+}
+
+.about_modal {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 700px;
+  width: 800px;
+  overflow: auto;
+  padding: 0 20px;
+}

@@ -2,9 +2,10 @@ import React, { useRef, useState } from 'react';
 import BasketIcon from '../../assets/basket.svg?react';
 import SquareAdd from '../../assets/sqareAdd.svg?react';
 import Aye from '../../assets/aye.svg?react';
-import { creatorRequest, logout, uploadImg } from '../../api';
+import { creatorRequest, uploadImg } from '../../api';
+import { Viewer } from '../modal';
+import { useUser } from '../../context';
 import styles from './index.module.css';
-import { Modal, Viewer } from '../modal';
 
 export interface IImageBase {
   contentType: string;
@@ -37,6 +38,7 @@ export const ImageSelect: React.FC<IProps> = ({
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [isOpen, setOpen] = useState(false);
+  const { logout } = useUser();
 
   const upload = (e) => {
     const imageUploader = async () => {

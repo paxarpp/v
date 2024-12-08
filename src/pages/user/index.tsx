@@ -6,6 +6,7 @@ import { IUser } from './interfaces';
 import { Info } from './info';
 import { NearestCamps } from './nearestCamps';
 import { PastCamps } from './pastCamps';
+import { Users } from './users';
 
 export const User = () => {
   const { user, error } = useLoaderData() as {
@@ -39,6 +40,8 @@ const UserTemplate = () => {
       <NearestCamps />
 
       <PastCamps />
+
+      <Users />
     </>
   );
 };

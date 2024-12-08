@@ -7,5 +7,7 @@ export const PastCamps = () => {
     user: IUser;
   };
 
-  return <Scroller title={'Мои прошедшие кемпы'} camps={user.pastCamps} />;
+  return user.isAdmin ? null : (
+    <Scroller title={'Мои прошедшие кемпы'} camps={user.pastCamps} />
+  );
 };

@@ -2,6 +2,9 @@ export interface IAbout {
   title: string;
   subTitleFirst: string;
   subTitleSecond: string;
+  numberOfStudents: string;
+  numberOfWorkouts: string;
+  numberOfCamps: string;
   activities: IActivity[];
   master: IMaster | null;
   reviews: IReview[];

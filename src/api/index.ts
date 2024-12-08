@@ -70,19 +70,31 @@ export const getCamp = async <T>(
   }
 };
 
+export const updateAbout = async <T>(
+  data: unknown,
+): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.put(BASE_URL + '/about', data);
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
 export const updateUserReservation = async <T>(data: {
   id?: string | null;
 }): Promise<{
-  data: { result: T[]; error?: string };
+  data: { result: T; error?: string };
 }> => {
   try {
     if (data.id) {
-      return await axios.put(BASE_URL + '/users/add-user', data);
+      return await axios.put(BASE_URL + '/users', data);
     } else {
       return await axios.post(BASE_URL + '/users/add-user', data);
     }
   } catch (e: unknown) {
-    return { data: { result: [], error: (e as Error).message } };
+    return { data: { result: {} as T, error: (e as Error).message } };
   }
 };
 

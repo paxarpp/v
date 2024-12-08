@@ -1,21 +1,18 @@
 import { useState } from 'react';
 import { useAsyncValue, useRevalidator } from 'react-router-dom';
-import { ICampItem, IUser } from '../interfaces';
+import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
-import {
-  campConfirm,
-  creatorRequest,
-  updateUserReservation,
-} from '../../../api';
+import { creatorRequest, updateUserReservation } from '../../../api';
 import { Modal } from '../../../templates/modal';
+import Pencil from '../../../assets/pencil.svg?react';
 import styles from '../index.module.css';
 
 export const Users = () => {
-  const { camp } = useAsyncValue() as {
-    camp: ICampItem;
+  const { user } = useAsyncValue() as {
+    user: IUser;
   };
   const revalidator = useRevalidator();
-  const { isAdmin, isModerator, logout } = useUser();
+  const { logout } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [newUser, setNewUser] = useState<{
     id: string | null;
@@ -24,44 +21,26 @@ export const Users = () => {
     isAdmin: boolean;
     isUser: boolean;
     isModerator: boolean;
-  }>({
-    id: null,
-    telephone: '',
-    username: '',
-    isAdmin: false,
-    isUser: true,
-    isModerator: false,
-  });
-
-  const onConfirm = (user: IUser) => {
-    const confirm = async () => {
-      const campId = camp.id;
-      const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<string>(
-        campConfirm(campId, user.id, !user.bookingConfirmed),
-      );
-      if (!error) {
-        revalidator.revalidate();
-      }
-    };
-    confirm();
-  };
+  } | null>(null);
 
   const openModal = () => {
     setOpen(true);
   };
 
   const closeModal = () => {
+    setNewUser(null);
     setOpen(false);
   };
 
   const addUser = () => {
     const update = async () => {
-      const campId = camp.id;
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall<string>(
-        updateUserReservation({
-          campId,
+        updateUserReservation(newUser?.id ? {
+          ...newUser,
+          name: newUser?.username,
+          avatar: null,
+        } : {
           ...newUser,
         }),
       );
@@ -83,7 +62,12 @@ export const Users = () => {
     }));
   };
 
-  return isAdmin || isModerator ? (
+  const editUser = (user) => {
+    setOpen(true);
+    setNewUser({ ...user, username: user.name });
+  };
+
+  return user.isAdmin ? (
     <div className={styles.column}>
       {isOpen ? (
         <Modal
@@ -92,14 +76,14 @@ export const Users = () => {
           header={<h2>Участник кемпа</h2>}
           footer={
             <button onClick={addUser} className={styles.button}>
-              {'Добавить'}
+              {newUser?.id ? 'Редактировать' : 'Добавить'}
             </button>
           }
         >
           <div className={styles.add_user_modal}>
             <label>{'Имя'}</label>
             <input
-              value={newUser.username}
+              value={newUser?.username}
               onChange={(e) =>
                 setNewUser({ ...newUser, username: e.target.value })
               }
@@ -107,7 +91,7 @@ export const Users = () => {
             />
             <label>{'Телефон'}</label>
             <input
-              value={newUser.telephone}
+              value={newUser?.telephone}
               onChange={(e) =>
                 setNewUser({ ...newUser, telephone: e.target.value })
               }
@@ -116,48 +100,67 @@ export const Users = () => {
             <label>
               <input
                 type={'radio'}
-                checked={newUser.isUser}
+                checked={newUser?.isUser}
                 id={'isUser'}
                 name={'user'}
                 onChange={onChange}
               />
               {'Пользователь'}
             </label>
+            <label>
+              <input
+                type={'radio'}
+                checked={newUser?.isModerator}
+                id={'isModerator'}
+                name={'user'}
+                onChange={onChange}
+              />
+              {'Модератор'}
+            </label>
+            <label>
+              <input
+                type={'radio'}
+                checked={newUser?.isAdmin}
+                id={'isAdmin'}
+                name={'user'}
+                onChange={onChange}
+              />
+              {'Администратор'}
+            </label>
           </div>
         </Modal>
       ) : null}
-      <h2>{'Состав участников кемпа'}</h2>
+      <h2>{'Пользователи'}</h2>
 
       <table className={styles.table}>
         <tr>
           <th>Имя</th>
           <th>Телефон</th>
-          <th>Количество мест</th>
-          <th>Бронь</th>
+          <th>Роль</th>
+          <th>Действия</th>
         </tr>
-        {camp.users?.map((user) => (
+        {user.users?.map((u) => (
           <tr key={user.id}>
-            <td>{user.login}</td>
-            <td>{user.telephone}</td>
-            <td>{user.bookingCount}</td>
+            <td>{u.name}</td>
+            <td>{u.telephone}</td>
             <td>
-              <button
-                className={
-                  user.bookingConfirmed
-                    ? styles.button_confirmed
-                    : styles.button_profile
-                }
-                onClick={() => onConfirm(user)}
-              >
-                {user.bookingConfirmed ? 'Забронировано' : 'Подтвердить'}
-              </button>
+              {u.isUser
+                ? 'Пользователь'
+                : u.isAdmin
+                  ? 'Администратор'
+                  : u.isModerator
+                    ? 'Модератор'
+                    : '???'}
+            </td>
+            <td>
+              <Pencil onClick={() => editUser(u)} />
             </td>
           </tr>
         ))}
       </table>
       <div className={styles.wrap_user_add}>
-        <button onClick={openModal} className={styles.button_profile}>
-          {'Добавить участника'}
+        <button onClick={openModal} className={styles.button}>
+          {'Добавить пользователя'}
         </button>
       </div>
     </div>
