@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { useAsyncValue, useRevalidator } from 'react-router-dom';
 import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
-import { creatorRequest, updateUserReservation, deleteUserReservation } from '../../../api';
+import {
+  creatorRequest,
+  updateUserReservation,
+  deleteUserReservation,
+} from '../../../api';
 import { Modal } from '../../../templates/modal';
 import Pencil from '../../../assets/pencil.svg?react';
 import Basket from '../../../assets/basket.svg?react';
@@ -150,31 +154,35 @@ export const Users = () => {
       <h2>{'Пользователи'}</h2>
 
       <table className={styles.table}>
-        <tr>
-          <th>Имя</th>
-          <th>Телефон</th>
-          <th>Роль</th>
-          <th>Действия</th>
-        </tr>
-        {user.users?.map((u) => (
-          <tr key={user.id}>
-            <td>{u.name}</td>
-            <td>{u.telephone}</td>
-            <td>
-              {u.isUser
-                ? 'Пользователь'
-                : u.isAdmin
-                  ? 'Администратор'
-                  : u.isModerator
-                    ? 'Модератор'
-                    : '???'}
-            </td>
-            <td>
-              <Pencil onClick={() => editUser(u)} />
-              <Basket onClick={() => deleteUser(u.id)} />
-            </td>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Роль</th>
+            <th>Действия</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {user.users?.map((u) => (
+            <tr key={u.id}>
+              <td>{u.name}</td>
+              <td>{u.telephone}</td>
+              <td>
+                {u.isUser
+                  ? 'Пользователь'
+                  : u.isAdmin
+                    ? 'Администратор'
+                    : u.isModerator
+                      ? 'Модератор'
+                      : '???'}
+              </td>
+              <td>
+                <Pencil onClick={() => editUser(u)} />
+                <Basket onClick={() => deleteUser(u.id)} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
       <div className={styles.wrap_user_add}>
         <button onClick={openModal} className={styles.button}>

@@ -20,7 +20,6 @@ export const Info = () => {
 
   const onLogout = () => {
     apiLogout();
-    document.cookie = `magicVolley=`;
     logout();
   };
 
