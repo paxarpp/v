@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getAbout } from '../../api';
 import { IAbout } from './interfaces';
 
@@ -10,5 +9,5 @@ const loaderAbout = async () => {
 };
 
 export const loaderPageAbout = async () => {
-  return defer({ about: loaderAbout() });
+  return { about: loaderAbout() };
 };

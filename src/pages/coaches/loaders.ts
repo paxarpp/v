@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getBeachCoachesAll, getClassicCoachesAll } from '../../api';
 import { ICoach } from './interfaces';
 
@@ -10,7 +9,7 @@ const loaderBeachCoaches = async () => {
 };
 
 export const loaderPageBeachCoaches = async () => {
-  return defer({ coaches: loaderBeachCoaches() });
+  return { coaches: loaderBeachCoaches() };
 };
 
 const loaderClassicCoaches = async () => {
@@ -21,5 +20,5 @@ const loaderClassicCoaches = async () => {
 };
 
 export const loaderPageClassicCoaches = async () => {
-  return defer({ coaches: loaderClassicCoaches() });
+  return { coaches: loaderClassicCoaches() };
 };

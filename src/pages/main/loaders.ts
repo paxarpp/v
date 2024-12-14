@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getCampsAll, getQuestionAll, getHome } from '../../api';
 import { ICamp, IHome, IQuestion } from './interfaces';
 
@@ -24,7 +23,7 @@ const loaderHome = async () => {
 };
 
 export const loaderPageMain = async () => {
-  return defer({
+  return {
     home: loaderHome(),
-  });
+  };
 };

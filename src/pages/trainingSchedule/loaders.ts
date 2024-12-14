@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getShedule, getPrice } from '../../api';
 import { IPrice, IShedule } from './interfaces';
 
@@ -16,5 +15,5 @@ const loaderPrice = async () => {
 };
 
 export const loaderPageShedule = async () => {
-  return defer({ trainingShedule: loaderShedule(), prices: loaderPrice() });
+  return { trainingShedule: loaderShedule(), prices: loaderPrice() };
 };

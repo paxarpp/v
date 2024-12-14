@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getCamp } from '../../api';
 import { ICampItem } from './interfaces';
 
@@ -10,5 +9,5 @@ const loaderCamp = async (id: string) => {
 };
 
 export const loaderPageCamp = async ({ params: { id }}: any) => {
-  return defer({ camp: loaderCamp(id) });
+  return { camp: loaderCamp(id) };
 };

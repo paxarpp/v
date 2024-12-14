@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getLongCamps } from '../../api';
 import { ICampItem } from './interfaces';
 
@@ -10,5 +9,5 @@ const loaderLongCamps = async () => {
 };
 
 export const loaderPageLongCamps = async () => {
-  return defer({ longCamps: loaderLongCamps() });
+  return { longCamps: loaderLongCamps() };
 };
