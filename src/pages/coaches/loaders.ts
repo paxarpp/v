@@ -9,7 +9,7 @@ const loaderBeachCoaches = async () => {
 };
 
 export const loaderPageBeachCoaches = async () => {
-  return { coaches: loaderBeachCoaches() };
+  return await loaderBeachCoaches();
 };
 
 const loaderClassicCoaches = async () => {
@@ -20,5 +20,5 @@ const loaderClassicCoaches = async () => {
 };
 
 export const loaderPageClassicCoaches = async () => {
-  return { coaches: loaderClassicCoaches() };
+  return await loaderClassicCoaches();
 };

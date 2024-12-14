@@ -9,5 +9,5 @@ const loaderPastCamps = async () => {
 };
 
 export const loaderPagePastCamps = async () => {
-  return { pastCamps: loaderPastCamps() };
+  return await loaderPastCamps();
 };

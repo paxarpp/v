@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest, updateUser } from '../../../api';
 import { useUser } from '../../../context';
@@ -10,9 +10,9 @@ import styles from '../index.module.css';
 export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
   closeModal,
 }) => {
-  const { user } = useAsyncValue() as {
+  const { user } = useLoaderData<{
     user: IUser;
-  };
+  }>();
   const revalidator = useRevalidator();
 
   const [currentInfo, setCurrentInfo] = useState<IUserInfo>(user);

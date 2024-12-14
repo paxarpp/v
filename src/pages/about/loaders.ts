@@ -9,5 +9,5 @@ const loaderAbout = async () => {
 };
 
 export const loaderPageAbout = async () => {
-  return { about: loaderAbout() };
+  return await loaderAbout();
 };

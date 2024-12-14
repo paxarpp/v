@@ -1,5 +1,5 @@
-import { useState, Suspense } from 'react';
-import { Link, useLoaderData, Await, useAsyncValue } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLoaderData } from 'react-router';
 import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
@@ -8,10 +8,10 @@ import { CampPastAdd } from '../campPastAdd';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
-  const { pastCamps, error } = useLoaderData() as {
+  const { error } = useLoaderData<{
     pastCamps: ICampItem[];
     error?: string;
-  };
+  }>();
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
 
@@ -28,11 +28,7 @@ export const CampsList = () => {
   ) : (
     <div className={styles.camp_list}>
       {open ? <CampPastAdd onClose={closeCampAdd} /> : null}
-      <Suspense fallback={'Загрузка...'}>
-        <Await resolve={pastCamps}>
-          <CampsTemplate isAdmin={isAdmin} addPastCamp={addPastCamp} />
-        </Await>
-      </Suspense>
+      <CampsTemplate isAdmin={isAdmin} addPastCamp={addPastCamp} />
     </div>
   );
 };
@@ -41,9 +37,9 @@ const CampsTemplate: React.FC<{
   isAdmin: boolean;
   addPastCamp: () => void;
 }> = ({ isAdmin, addPastCamp }) => {
-  const { pastCamps } = useAsyncValue() as {
+  const { pastCamps } = useLoaderData<{
     pastCamps: ICampItem[];
-  };
+  }>();
 
   return (
     <>

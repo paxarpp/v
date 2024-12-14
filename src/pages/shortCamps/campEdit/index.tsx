@@ -1,5 +1,5 @@
 import { useEffect, useState, ChangeEvent } from 'react';
-import { useRevalidator } from 'react-router-dom';
+import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import {
   getCamp,

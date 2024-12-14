@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
 import {
@@ -13,9 +13,9 @@ import Basket from '../../../assets/basket.svg?react';
 import styles from '../index.module.css';
 
 export const Users = () => {
-  const { user } = useAsyncValue() as {
+  const { user } = useLoaderData<{
     user: IUser;
-  };
+  }>();
   const revalidator = useRevalidator();
   const { logout } = useUser();
   const [isOpen, setOpen] = useState(false);

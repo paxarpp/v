@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { useUser } from '../../context';
 
 export const ProtectedRoute: React.FC<PropsWithChildren> = ({ children }) => {

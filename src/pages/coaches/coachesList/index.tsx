@@ -1,5 +1,5 @@
 import { Suspense, useState } from 'react';
-import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
+import { Await, useAsyncValue, useLoaderData } from 'react-router';
 import { ICoach } from '../interfaces';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { useUser } from '../../../context';
@@ -11,7 +11,7 @@ import { CoachProfile } from '../../../templates/coachProfile';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
-  const { coaches, error } = useLoaderData() as {
+  const { error } = useLoaderData() as {
     coaches: ICoach[];
     error?: string;
   };
@@ -34,26 +34,12 @@ export const CoachesList: React.FC = () => {
     <div className={styles.coaches_list}>
       <CoachEdit coachId={editCoachId} onClose={closeCoachEdit} open={open} />
       <CoachProfile coach={coachProfile} onClose={closeCoach} />
-      <Suspense fallback={<CoachesSkeleton />}>
-        <Await resolve={coaches}>
-          <CoachesTemplate
-            isAdmin={isAdmin}
-            setCoach={setCoach}
-            setEditCoachId={setEditCoachId}
-            setIsOpen={setIsOpen}
-          />
-        </Await>
-      </Suspense>
-    </div>
-  );
-};
-
-const CoachesSkeleton = () => {
-  return (
-    <div className={styles.coach_card_add}>
-      <span className={styles.coach_add}>
-        <Avatar />
-      </span>
+      <CoachesTemplate
+        isAdmin={isAdmin}
+        setCoach={setCoach}
+        setEditCoachId={setEditCoachId}
+        setIsOpen={setIsOpen}
+      />
     </div>
   );
 };
@@ -64,9 +50,9 @@ const CoachesTemplate: React.FC<{
   setEditCoachId: (id: string) => void;
   setIsOpen: (open: boolean) => void;
 }> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen }) => {
-  const { coaches } = useAsyncValue() as {
+  const { coaches } = useLoaderData<{
     coaches: ICoach[];
-  };
+  }>();
 
   const openProfile = (coach: ICoach) => {
     setCoach(coach);

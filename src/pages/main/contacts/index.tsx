@@ -1,10 +1,5 @@
-import { Suspense, useState } from 'react';
-import {
-  Await,
-  useAsyncValue,
-  useLoaderData,
-  useRevalidator,
-} from 'react-router-dom';
+import { useState } from 'react';
+import { useLoaderData, useRevalidator } from 'react-router';
 import Phone from '../../../assets/phone.svg?react';
 import Mail from '../../../assets/mail.svg?react';
 import Vk from '../../../assets/vk.svg?react';
@@ -20,25 +15,8 @@ import styles from '../index.module.css';
 import { createLinkTg } from '../../../constants';
 
 export const Contacts: React.FC = () => {
-  const { home } = useLoaderData() as {
-    home: IHome;
-  };
+  const { home } = useLoaderData<{ home: IHome }>();
 
-  return (
-    <div>
-      <Suspense fallback={'Загрузка...'}>
-        <Await resolve={home}>
-          <ContactsTemplate />
-        </Await>
-      </Suspense>
-    </div>
-  );
-};
-
-export const ContactsTemplate = () => {
-  const { home } = useAsyncValue() as {
-    home: IHome;
-  };
   const revalidator = useRevalidator();
   const { isAdmin } = useUser();
   const [isOpen, openModal] = useState(false);

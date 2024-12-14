@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { ICampItem, IUser } from '../interfaces';
 import { useUser } from '../../../context';
 import {
@@ -11,9 +11,9 @@ import { Modal } from '../../../templates/modal';
 import styles from '../index.module.css';
 
 export const Users = () => {
-  const { camp } = useAsyncValue() as {
+  const { camp } = useLoaderData<{
     camp: ICampItem;
-  };
+  }>();
   const revalidator = useRevalidator();
   const { isAdmin, isModerator, logout } = useUser();
   const [isOpen, setOpen] = useState(false);

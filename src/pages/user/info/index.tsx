@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsyncValue } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
 import { logout as apiLogout } from '../../../api';
@@ -9,9 +9,9 @@ import { ModalPass } from './modalPass';
 import styles from '../index.module.css';
 
 export const Info = () => {
-  const { user } = useAsyncValue() as {
+  const { user } = useLoaderData<{
     user: IUser;
-  };
+  }>();
 
   const [isOpenEd, setOpenEd] = useState(false);
   const [isOpenChP, setOpenChP] = useState(false);

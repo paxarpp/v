@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
 import Setting from '../../../assets/setting.svg?react';
 import { IAbout } from '../interfaces';
@@ -10,9 +10,7 @@ import { creatorRequest, updateAbout } from '../../../api';
 import styles from '../index.module.css';
 
 export const Info = () => {
-  const { about } = useAsyncValue() as {
-    about: IAbout;
-  };
+  const { about } = useLoaderData<{ about: IAbout }>();
   const { isMobile } = useDeviceDetect();
   const revalidator = useRevalidator();
   const { isAdmin, logout } = useUser();

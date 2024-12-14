@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { Await, useLoaderData } from 'react-router-dom';
+import { Await, useLoaderData } from 'react-router';
 import { logout as apiLogout } from '../../api';
 import { useUser } from '../../context';
 import { IUser } from './interfaces';
@@ -7,12 +7,26 @@ import { Info } from './info';
 import { NearestCamps } from './nearestCamps';
 import { PastCamps } from './pastCamps';
 import { Users } from './users';
+import { loaderPageUser } from './loaders';
+import { ProtectedRoute } from '../../templates/protectedRoute';
 
-export const User = () => {
-  const { user, error } = useLoaderData() as {
+export async function clientLoader({ params: { id } }) {
+  return await loaderPageUser(id);
+}
+
+export default function User() {
+  return (
+    <ProtectedRoute>
+      <UserTemplate />
+    </ProtectedRoute>
+  );
+}
+
+const UserTemplate = () => {
+  const { user, error } = useLoaderData<{
     user: IUser;
     error?: string;
-  };
+  }>();
   const { logout } = useUser();
 
   useEffect(() => {
@@ -25,22 +39,16 @@ export const User = () => {
   return (
     <Suspense fallback={'Загрузка...'}>
       <Await resolve={user}>
-        <UserTemplate />
+        <>
+          <Info />
+
+          <NearestCamps />
+
+          <PastCamps />
+
+          <Users />
+        </>
       </Await>
     </Suspense>
-  );
-};
-
-const UserTemplate = () => {
-  return (
-    <>
-      <Info />
-
-      <NearestCamps />
-
-      <PastCamps />
-
-      <Users />
-    </>
   );
 };

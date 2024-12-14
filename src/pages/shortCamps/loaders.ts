@@ -9,5 +9,5 @@ const loaderShortCamps = async () => {
 };
 
 export const loaderPageShortCamps = async () => {
-  return { shortCamps: loaderShortCamps() };
+  return await loaderShortCamps();
 };

@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useAsyncValue } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import { ICampItem, ICoach } from '../../shortCamps/interfaces';
 import { CoachProfile } from '../../../templates/coachProfile';
 import styles from '../index.module.css';
 
 export const Coaches = () => {
-  const { camp } = useAsyncValue() as {
+  const { camp } = useLoaderData<{
     camp: ICampItem;
-  };
+  }>();
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
 
   const closeCoach = () => {

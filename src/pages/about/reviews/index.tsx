@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
 import { IAbout, IReview } from '../interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
@@ -15,9 +15,7 @@ import styles from '../index.module.css';
 export const Reviews = () => {
   const {
     about: { reviews },
-  } = useAsyncValue() as {
-    about: IAbout;
-  };
+  } = useLoaderData<{ about: IAbout }>();
   const { isMobile } = useDeviceDetect();
 
   const revalidator = useRevalidator();

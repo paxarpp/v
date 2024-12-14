@@ -9,5 +9,5 @@ const loaderLongCamps = async () => {
 };
 
 export const loaderPageLongCamps = async () => {
-  return { longCamps: loaderLongCamps() };
+  return await loaderLongCamps();
 };

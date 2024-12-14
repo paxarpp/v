@@ -1,4 +1,4 @@
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { IAbout, IActivity } from '../interfaces';
 import { ImagePack } from '../../../templates/imagesPack';
 import Ball from '../../../assets/ball.svg?react';
@@ -14,9 +14,7 @@ import styles from '../index.module.css';
 export const Activities = () => {
   const {
     about: { activities },
-  } = useAsyncValue() as {
-    about: IAbout;
-  };
+  } = useLoaderData<{ about: IAbout }>();
 
   const revalidator = useRevalidator();
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { ICamp } from '../interfaces';

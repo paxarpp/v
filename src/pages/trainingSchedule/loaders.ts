@@ -15,5 +15,5 @@ const loaderPrice = async () => {
 };
 
 export const loaderPageShedule = async () => {
-  return { trainingShedule: loaderShedule(), prices: loaderPrice() };
+  return await Promise.all([loaderShedule(), loaderPrice()]);
 };

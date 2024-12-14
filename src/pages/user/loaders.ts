@@ -8,6 +8,6 @@ const loaderUser = async (id: string) => {
   return { user: result, error };
 };
 
-export const loaderPageUser = async ({ params: { id }}: any) => {
-  return { user: loaderUser(id) };
+export const loaderPageUser = async (id: string) => {
+  return await loaderUser(id);
 };

@@ -3,7 +3,7 @@ import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
 import Inst from '../../assets/inst.svg?react';
 import styles from './index.module.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { createLinkTg } from '../../constants';
 
 interface IProps {

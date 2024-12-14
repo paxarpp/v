@@ -1,10 +1,5 @@
-import { Suspense, useState } from 'react';
-import {
-  useLoaderData,
-  Await,
-  useAsyncValue,
-  useRevalidator,
-} from 'react-router-dom';
+import { useState } from 'react';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import { IHome, IMainBlock } from '../interfaces';
@@ -14,25 +9,8 @@ import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import styles from '../index.module.css';
 
 export const MainImg: React.FC = () => {
-  const { home } = useLoaderData() as {
-    home: IHome;
-  };
+  const { home } = useLoaderData<{ home: IHome }>();
 
-  return (
-    <div>
-      <Suspense fallback={'Загрузка...'}>
-        <Await resolve={home}>
-          <MainTemplate />
-        </Await>
-      </Suspense>
-    </div>
-  );
-};
-
-const MainTemplate = () => {
-  const { home } = useAsyncValue() as {
-    home: IHome;
-  };
   const revalidator = useRevalidator();
   const { isAdmin } = useUser();
   const [isOpen, openModal] = useState(false);

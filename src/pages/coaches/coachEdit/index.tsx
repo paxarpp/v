@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRevalidator } from 'react-router-dom';
+import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import {
   getCoach,
@@ -9,8 +9,8 @@ import {
 } from '../../../api';
 import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
-import styles from '../index.module.css';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
+import styles from '../index.module.css';
 
 export const CoachEdit: React.FC<{
   open: boolean;

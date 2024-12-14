@@ -1,15 +1,20 @@
 import { Suspense } from 'react';
-import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
+import { Await, useAsyncValue, useLoaderData } from 'react-router';
 import { IPrice } from '../interfaces';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import Ball from '../../../assets/ball.svg?react';
 import styles from '../index.module.css';
 
 export const Price = () => {
-  const { prices, error } = useLoaderData() as {
-    prices: IPrice[];
-    error?: string;
-  };
+  const [_, { prices, error }] = useLoaderData<
+    [
+      unknown,
+      {
+        prices: IPrice[];
+        error?: string;
+      },
+    ]
+  >();
 
   return (
     <div className={styles.price_ball}>
@@ -29,9 +34,15 @@ export const Price = () => {
 };
 
 const PriceTemplate = () => {
-  const { prices } = useAsyncValue() as {
-    prices: IPrice[];
-  };
+  const [_, { prices }] = useLoaderData<
+    [
+      unknown,
+      {
+        prices: IPrice[];
+        error?: string;
+      },
+    ]
+  >();
   return (
     <div className={styles.price_list}>
       {prices.map((pr) => {

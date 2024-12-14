@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRevalidator } from 'react-router-dom';
+import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest, updateUserPass } from '../../../api';
 import { useUser } from '../../../context';
