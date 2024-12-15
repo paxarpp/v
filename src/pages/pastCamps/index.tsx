@@ -3,19 +3,13 @@ import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { CampsList } from './campsList';
 import { loaderPagePastCamps } from './loaders';
-import { ICampItem } from './interfaces';
+import { Route } from './+types';
 
 export async function clientLoader() {
   return await loaderPagePastCamps();
 }
 
-export default function PastCamps({
-  loaderData,
-}: {
-  loaderData: {
-    pastCamps: ICampItem[];
-  };
-}) {
+export default function PastCamps({ loaderData }: Route.ComponentProps) {
   return (
     <div>
       <h2>Прошедшие кемпы</h2>

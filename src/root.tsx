@@ -1,6 +1,5 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { useState } from 'react';
-import { IAppInfo } from './app/interface';
 import { Auth } from './auth';
 import { AuthProvider, AuthOpenContext } from './context';
 import { Footer } from './templates/footer';
@@ -58,13 +57,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 }
 
-export default function Root({
-  loaderData,
-}: {
-  loaderData: {
-    app: IAppInfo;
-  };
-}) {
+export default function Root({ loaderData }: Route.ComponentProps) {
   const { app } = loaderData;
 
   const [authOpen, setOpen] = useState(false);

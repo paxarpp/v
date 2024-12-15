@@ -1,22 +1,16 @@
 import { Suspense } from 'react';
 import { CoachesList } from './coachesList';
 import { loaderPageBeachCoaches } from './loaders';
-import { ICoach } from './interfaces';
 import { CoachesSkeleton } from './skeleton';
 import { Await } from 'react-router';
+import { Route } from './+types';
 import styles from './index.module.css';
 
 export async function clientLoader() {
   return await loaderPageBeachCoaches();
 }
 
-export default function Coaches({
-  loaderData,
-}: {
-  loaderData: {
-    coaches: ICoach[];
-  };
-}) {
+export default function Coaches({ loaderData }: Route.ComponentProps) {
   return (
     <div>
       <h1 className={styles.title}>

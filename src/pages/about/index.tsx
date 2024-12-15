@@ -7,18 +7,13 @@ import { Master } from './master';
 import { Videos } from './videos';
 import { Reviews } from './reviews';
 import { loaderPageAbout } from './loaders';
+import { Route } from './+types';
 
 export async function clientLoader() {
   return await loaderPageAbout();
 }
 
-export default function About({
-  loaderData,
-}: {
-  loaderData: {
-    about: IAbout;
-  };
-}) {
+export default function About({ loaderData }: Route.ComponentProps) {
   return (
     <Suspense fallback={'Загрузка...'}>
       <Await resolve={loaderData.about}>
