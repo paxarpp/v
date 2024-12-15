@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import Logo from '../../assets/logo.svg?react';
 import Burger from '../../assets/burger.svg?react';
 import Vk from '../../assets/vk.svg?react';
@@ -19,6 +19,15 @@ interface IProps {
   linkInstagram: string;
   linkVk: string;
 }
+
+const createLinkClassName = ({
+  isPending,
+  isActive,
+}: {
+  isPending: boolean;
+  isActive: boolean;
+}) =>
+  isPending ? styles.link_pending : isActive ? styles.link_active : styles.link;
 
 export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
   const { user } = useUser();
@@ -50,9 +59,12 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
 
   return isMobile ? (
     <div className={styles.header_mobile}>
-      <Link to="/">
+      <NavLink
+        to="/"
+        className={({ isPending }) => (isPending ? styles.link_pending : '')}
+      >
         <Logo />
-      </Link>
+      </NavLink>
       <div className={styles.icons_mobile}>
         <a href={linkVk} target={'_blank'}>
           <Vk />
@@ -70,25 +82,39 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
           <div className={styles.popap_menu} onClick={togglePopapMenu}>
             <ul className={styles.menu_popap}>
               <li>
-                <Link to="/weekendCamps">Кемпы выходного дня</Link>
+                <NavLink to="/weekendCamps" className={createLinkClassName}>
+                  Кемпы выходного дня
+                </NavLink>
               </li>
               <li>
-                <Link to="/longCamps">Недельные кемпы</Link>
+                <NavLink to="/longCamps" className={createLinkClassName}>
+                  Недельные кемпы
+                </NavLink>
               </li>
               <li>
-                <Link to="/oldCamps">Прошедшие кемпы</Link>
+                <NavLink to="/oldCamps" className={createLinkClassName}>
+                  Прошедшие кемпы
+                </NavLink>
               </li>
               <li>
-                <Link to="/allCoahes">Тренеры</Link>
+                <NavLink to="/allCoahes" className={createLinkClassName}>
+                  Тренеры
+                </NavLink>
               </li>
               <li>
-                <Link to="/trainingSchedule">Расписание</Link>
+                <NavLink to="/trainingSchedule" className={createLinkClassName}>
+                  Расписание
+                </NavLink>
               </li>
               <li>
-                <Link to="/tournaments">Турниры</Link>
+                <NavLink to="/tournaments" className={createLinkClassName}>
+                  Турниры
+                </NavLink>
               </li>
               <li>
-                <Link to="/corporates">Корпоративные мероприятия</Link>
+                <NavLink to="/corporates" className={createLinkClassName}>
+                  Корпоративные мероприятия
+                </NavLink>
               </li>
             </ul>
             {isAuth ? (
@@ -99,7 +125,10 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
                 <Avatar />
               </Link>
             ) : (
-              <button className={styles.button} onClick={toggleAuthOpen}>
+              <button
+                className={styles.button}
+                onClick={() => toggleAuthOpen()}
+              >
                 {'Войти'}
               </button>
             )}
@@ -111,9 +140,9 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
     <div className={styles.header}>
       <ul className={styles.menu}>
         <li>
-          <Link to="/">
+          <NavLink to="/" className={createLinkClassName}>
             <Logo />
-          </Link>
+          </NavLink>
         </li>
         <li>
           <div className={styles.dropdown}>
@@ -122,16 +151,24 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>
                 <li>
-                  <Link to="/weekendCamps">Кемпы выходного дня</Link>
+                  <NavLink to="/weekendCamps" className={createLinkClassName}>
+                    Кемпы выходного дня
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/longCamps">Недельные кемпы</Link>
+                  <NavLink to="/longCamps" className={createLinkClassName}>
+                    Недельные кемпы
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/oldCamps">Прошедшие кемпы</Link>
+                  <NavLink to="/oldCamps" className={createLinkClassName}>
+                    Прошедшие кемпы
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/beachCoaches">Тренеры</Link>
+                  <NavLink to="/beachCoaches" className={createLinkClassName}>
+                    Тренеры
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -144,23 +181,36 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>
                 <li>
-                  <Link to="/trainingSchedule">Расписание</Link>
+                  <NavLink
+                    to="/trainingSchedule"
+                    className={createLinkClassName}
+                  >
+                    Расписание
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/tournaments">Турниры</Link>
+                  <NavLink to="/tournaments" className={createLinkClassName}>
+                    Турниры
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/corporates">Корпоративные мероприятия</Link>
+                  <NavLink to="/corporates" className={createLinkClassName}>
+                    Корпоративные мероприятия
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/classicCoaches">Тренеры</Link>
+                  <NavLink to="/classicCoaches" className={createLinkClassName}>
+                    Тренеры
+                  </NavLink>
                 </li>
               </ul>
             </div>
           </div>
         </li>
         <li>
-          <Link to="/about">О нас</Link>
+          <NavLink to="/about" className={createLinkClassName}>
+            О нас
+          </NavLink>
         </li>
       </ul>
       <div className={styles.icons}>

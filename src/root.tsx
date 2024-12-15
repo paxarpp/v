@@ -1,4 +1,11 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useNavigation,
+} from 'react-router';
 import { useState } from 'react';
 import { Auth } from './auth';
 import { AuthProvider, AuthOpenContext } from './context';
@@ -7,6 +14,7 @@ import { Header } from './templates/header';
 import { loaderAppInfo } from './app/loader';
 import { NotFound } from './pages/notFound';
 import { Route } from './+types/root';
+import { GlobalSpinner } from './templates/globalSpinner';
 import './index.css';
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -59,6 +67,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
 export default function Root({ loaderData }: Route.ComponentProps) {
   const { app } = loaderData;
+  const navigation = useNavigation();
+  const isNavigating = Boolean(navigation.location);
 
   const [authOpen, setOpen] = useState(false);
   const [campId, setReserv] = useState('');
@@ -86,6 +96,7 @@ export default function Root({ loaderData }: Route.ComponentProps) {
           />
         ) : null}
         <div id="detail">
+          {isNavigating ? <GlobalSpinner /> : null}
           <Outlet />
         </div>
         <Footer {...app} />

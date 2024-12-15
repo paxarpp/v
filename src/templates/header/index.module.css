@@ -138,3 +138,16 @@
   align-items: center;
   margin-left: auto;
 }
+
+.link_pending {
+  color: gray !important;
+  opacity: .8;
+}
+
+.link_active {
+  color: #99660A !important;
+}
+
+.link {
+  color: gray !important;
+}
