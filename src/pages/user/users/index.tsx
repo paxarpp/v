@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
-import { IUser } from '../interfaces';
+import { Route } from '../+types';
 import { useUser } from '../../../context';
 import {
   creatorRequest,
@@ -13,9 +13,7 @@ import Basket from '../../../assets/basket.svg?react';
 import styles from '../index.module.css';
 
 export const Users = () => {
-  const { user } = useLoaderData<{
-    user: IUser;
-  }>();
+  const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
   const { logout } = useUser();
   const [isOpen, setOpen] = useState(false);

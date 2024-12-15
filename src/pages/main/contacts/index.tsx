@@ -7,15 +7,16 @@ import T from '../../../assets/t.svg?react';
 import Inst from '../../../assets/inst.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { useUser } from '../../../context';
-import { IHome, IContactBlock } from '../interfaces';
+import { IContactBlock } from '../interfaces';
 import { updateContactBlock } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import styles from '../index.module.css';
+import { Route } from '../+types';
 import { createLinkTg } from '../../../constants';
 
 export const Contacts: React.FC = () => {
-  const { home } = useLoaderData<{ home: IHome }>();
+  const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
   const { isAdmin } = useUser();

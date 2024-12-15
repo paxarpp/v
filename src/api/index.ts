@@ -61,12 +61,12 @@ export const getClassicCoachesAll = async <T>(): Promise<{
 export const getCamp = async <T>(
   id: string,
 ): Promise<{
-  data: { result: T[]; error?: string };
+  data: { result: T; error?: string };
 }> => {
   try {
     return await axios.get(BASE_URL + `/camps/${id}`);
   } catch (e: unknown) {
-    return { data: { result: [], error: (e as Error).message } };
+    return { data: { result: {} as T, error: (e as Error).message } };
   }
 };
 
@@ -362,12 +362,12 @@ export const getLongCamps = async <T>(): Promise<{
 };
 
 export const getShedule = async <T>(): Promise<{
-  data: { result: T[]; error?: string };
+  data: { result: T; error?: string };
 }> => {
   try {
     return await axios.get(BASE_URL + '/shedule');
   } catch (e: unknown) {
-    return { data: { result: [], error: (e as Error).message } };
+    return { data: { result: {} as T, error: (e as Error).message } };
   }
 };
 

@@ -3,16 +3,15 @@ import { useLoaderData, useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest, updateUser } from '../../../api';
 import { useUser } from '../../../context';
-import { IUser, IUserInfo } from '../interfaces';
+import { IUserInfo } from '../interfaces';
 import { InputStyled } from '../../../templates/input';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
   closeModal,
 }) => {
-  const { user } = useLoaderData<{
-    user: IUser;
-  }>();
+  const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
 
   const [currentInfo, setCurrentInfo] = useState<IUserInfo>(user);

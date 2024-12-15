@@ -1,11 +1,9 @@
 import { useLoaderData } from 'react-router';
-import { ICampItem } from '../interfaces';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const MainImage = () => {
-  const { camp } = useLoaderData<{
-    camp: ICampItem;
-  }>();
+  const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   return (
     <div className={styles.main_img_wrapper}>
       {camp.imageCart ? (

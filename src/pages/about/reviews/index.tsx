@@ -15,7 +15,7 @@ import styles from '../index.module.css';
 export const Reviews = () => {
   const {
     about: { reviews },
-  } = useLoaderData<{ about: IAbout }>();
+  } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
 
   const revalidator = useRevalidator();

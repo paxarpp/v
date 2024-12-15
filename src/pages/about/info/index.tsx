@@ -7,10 +7,11 @@ import { useUser } from '../../../context';
 import { Modal } from '../../../templates/modal';
 import { ImageSelect } from '../../../templates/imageSelect';
 import { creatorRequest, updateAbout } from '../../../api';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Info = () => {
-  const { about } = useLoaderData<{ about: IAbout }>();
+  const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
   const revalidator = useRevalidator();
   const { isAdmin, logout } = useUser();

@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
-import { IHome, IMainBlock } from '../interfaces';
+import { IMainBlock } from '../interfaces';
 import { Modal } from '../../../templates/modal';
 import { updateMainBlock } from '../../../api';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const MainImg: React.FC = () => {
-  const { home } = useLoaderData<{ home: IHome }>();
+  const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
   const { isAdmin } = useUser();

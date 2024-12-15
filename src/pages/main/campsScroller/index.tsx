@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
-import { IHome } from '../interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CampsScroller: React.FC = () => {
@@ -17,7 +17,7 @@ export const CampsScroller: React.FC = () => {
 };
 
 const CampsTemplate = () => {
-  const { home } = useLoaderData<{ home: IHome }>();
+  const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const [startIndex, setStartIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(2);

@@ -1,5 +1,5 @@
-import { Suspense, useState } from 'react';
-import { Await, useAsyncValue, useLoaderData } from 'react-router';
+import { useState } from 'react';
+import { useLoaderData } from 'react-router';
 import { ICoach } from '../interfaces';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { useUser } from '../../../context';
@@ -8,13 +8,11 @@ import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Avatar from '../../../assets/avatar.svg?react';
 import { CoachEdit } from '../coachEdit';
 import { CoachProfile } from '../../../templates/coachProfile';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
-  const { error } = useLoaderData() as {
-    coaches: ICoach[];
-    error?: string;
-  };
+  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
@@ -50,9 +48,7 @@ const CoachesTemplate: React.FC<{
   setEditCoachId: (id: string) => void;
   setIsOpen: (open: boolean) => void;
 }> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen }) => {
-  const { coaches } = useLoaderData<{
-    coaches: ICoach[];
-  }>();
+  const { coaches } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openProfile = (coach: ICoach) => {
     setCoach(coach);

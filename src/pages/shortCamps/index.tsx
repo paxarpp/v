@@ -3,20 +3,14 @@ import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { CampInfoIcons } from './campInfoIcons';
 import { CampsList } from './campsList';
-import { ICampItem } from './interfaces';
+import { Route } from './+types';
 import { loaderPageShortCamps } from './loaders';
 
 export async function clientLoader() {
   return await loaderPageShortCamps();
 }
 
-export default function ShortCamps({
-  loaderData,
-}: {
-  loaderData: {
-    shortCamps: ICampItem[];
-  };
-}) {
+export default function ShortCamps({ loaderData }: Route.ComponentProps) {
   return (
     <Suspense fallback={'Загрузка...'}>
       <Await resolve={loaderData.shortCamps}>
@@ -31,4 +25,4 @@ export default function ShortCamps({
       </Await>
     </Suspense>
   );
-};
+}

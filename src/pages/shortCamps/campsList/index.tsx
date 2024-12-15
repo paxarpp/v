@@ -6,12 +6,11 @@ import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { ICampItem } from '../interfaces';
 import { CampEdit } from '../campEdit';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
-  const { error } = useLoaderData<{
-    error?: string;
-  }>();
+  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editCampId, setEditCampId] = useState<string | null>(null);
@@ -40,9 +39,7 @@ const CampsTemplate: React.FC<{
   setIsOpen: (open: boolean) => void;
   setEditCampId: (id: string) => void;
 }> = ({ isAdmin, setIsOpen, setEditCampId }) => {
-  const { shortCamps } = useLoaderData<{
-    shortCamps: ICampItem[];
-  }>();
+  const { shortCamps } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openEditCamp = (id: string) => {
     setEditCampId(id);

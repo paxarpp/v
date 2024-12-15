@@ -1,12 +1,10 @@
 import { useLoaderData } from 'react-router';
-import { ICampItem } from '../interfaces';
+import { Route } from '../+types';
 import { ImagePack } from '../../../templates/imagesPack';
 import styles from '../index.module.css';
 
 export const Info = () => {
-  const { camp } = useLoaderData<{
-    camp: ICampItem;
-  }>();
+  const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   return (
     <div className={styles.info_row}>

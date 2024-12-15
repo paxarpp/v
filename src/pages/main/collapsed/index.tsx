@@ -3,10 +3,11 @@ import { useLoaderData, useRevalidator } from 'react-router';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import Basket from '../../../assets/basket.svg?react';
-import { IHome, IQuestion } from '../interfaces';
+import { IQuestion } from '../interfaces';
 import { Modal } from '../../../templates/modal';
 import { updateQuestion, getQuestions } from '../../../api';
 import { useUser } from '../../../context';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
@@ -162,7 +163,7 @@ export const Collapsed: React.FC = () => {
 };
 
 const QuestionsTemplate: React.FC = () => {
-  const { home } = useLoaderData<{ home: IHome }>();
+  const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const [openId, setIsOpen] = useState<string | null>(null);
 

@@ -3,15 +3,12 @@ import { Link, useLoaderData } from 'react-router';
 import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
-import { ICampItem } from '../interfaces';
 import { CampPastAdd } from '../campPastAdd';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
-  const { error } = useLoaderData<{
-    pastCamps: ICampItem[];
-    error?: string;
-  }>();
+  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
 
@@ -37,9 +34,7 @@ const CampsTemplate: React.FC<{
   isAdmin: boolean;
   addPastCamp: () => void;
 }> = ({ isAdmin, addPastCamp }) => {
-  const { pastCamps } = useLoaderData<{
-    pastCamps: ICampItem[];
-  }>();
+  const { pastCamps } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { useLoaderData, useRevalidator } from 'react-router';
-import { IAbout, IActivity } from '../interfaces';
+import { IActivity } from '../interfaces';
 import { ImagePack } from '../../../templates/imagesPack';
 import Ball from '../../../assets/ball.svg?react';
 import Setting from '../../../assets/setting.svg?react';
@@ -9,12 +9,13 @@ import { useState } from 'react';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
 import { creatorRequest, updateActivity, deleteAct } from '../../../api';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Activities = () => {
   const {
     about: { activities },
-  } = useLoaderData<{ about: IAbout }>();
+  } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
 

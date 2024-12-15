@@ -7,6 +7,7 @@ import { Footer } from './templates/footer';
 import { Header } from './templates/header';
 import { loaderAppInfo } from './app/loader';
 import { NotFound } from './pages/notFound';
+import { Route } from './+types/root';
 import './index.css';
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -40,7 +41,7 @@ export function HydrateFallback() {
   );
 }
 
-export function ErrorBoundary({ error }) {
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   if (error?.status === 404) {
     return <NotFound />;
   } else if (error instanceof Error) {
