@@ -4,7 +4,6 @@ import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
-import { ICampItem } from '../interfaces';
 import { CampEdit } from '../campEdit';
 import { Route } from '../+types';
 import styles from '../index.module.css';

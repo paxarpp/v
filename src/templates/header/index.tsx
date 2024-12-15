@@ -11,8 +11,8 @@ import { useUser, useAuth } from '../../context';
 import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
 import { IUser } from '../../auth/interface';
-import styles from './index.module.css';
 import { createLinkTg } from '../../constants';
+import styles from './index.module.css';
 
 interface IProps {
   linkTg: string;
