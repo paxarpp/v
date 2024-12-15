@@ -1,5 +1,5 @@
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
-import { IAbout, IActivity } from '../interfaces';
+import { useLoaderData, useRevalidator } from 'react-router';
+import { IActivity } from '../interfaces';
 import { ImagePack } from '../../../templates/imagesPack';
 import Ball from '../../../assets/ball.svg?react';
 import Setting from '../../../assets/setting.svg?react';
@@ -9,14 +9,13 @@ import { useState } from 'react';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
 import { creatorRequest, updateActivity, deleteAct } from '../../../api';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Activities = () => {
   const {
     about: { activities },
-  } = useAsyncValue() as {
-    about: IAbout;
-  };
+  } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
 
@@ -70,7 +69,7 @@ export const Activities = () => {
     const saveA = async () => {
       if (currentActivity) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
+        const { error } = await axiosCall(
           updateActivity({ ...currentActivity }),
         );
         if (!error) {
@@ -86,7 +85,7 @@ export const Activities = () => {
     const delC = async () => {
       if (currentId) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<boolean>(deleteAct(currentId));
+        const { error } = await axiosCall(deleteAct(currentId));
         if (!error) {
           onClose();
           revalidator.revalidate();

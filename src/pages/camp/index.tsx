@@ -1,42 +1,36 @@
 import { Suspense } from 'react';
-import { Await, useLoaderData } from 'react-router-dom';
-import { ICampItem } from './interfaces';
+import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { MainImage } from './mainImage';
 import { Info } from './info';
 import { Packages } from './packages';
 import { Coaches } from './coaches';
 import { Users } from './users';
+import { loaderPageCamp } from './loaders';
+import { Route } from './+types';
 
-export const Camp = () => {
-  const { camp, error } = useLoaderData() as {
-    camp: ICampItem[];
-    error?: string;
-  };
+export async function clientLoader({ params: { id } }: Route.ClientLoaderArgs) {
+  return await loaderPageCamp(id);
+}
 
+export default function Camp({ loaderData }: Route.ComponentProps) {
   return (
     <Suspense fallback={'Загрузка...'}>
-      <Await resolve={camp}>
-        <CampTemplate />
+      <Await resolve={loaderData.camp}>
+        <>
+          <MainImage />
+
+          <Info />
+
+          <Packages />
+
+          <Coaches />
+
+          <Users />
+
+          <CallMe />
+        </>
       </Await>
     </Suspense>
   );
-};
-
-const CampTemplate = () => {
-  return (
-    <>
-      <MainImage />
-
-      <Info />
-
-      <Packages />
-
-      <Coaches />
-
-      <Users />
-
-      <CallMe />
-    </>
-  );
-};
+}

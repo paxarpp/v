@@ -1,12 +1,10 @@
-import { useAsyncValue } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
+import { Route } from '../+types';
 import styles from '../index.module.css';
-import { IAbout } from '../interfaces';
 
 export const Master = () => {
-  const { about } = useAsyncValue() as {
-    about: IAbout;
-  };
+  const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
   return (
     <div className={styles.master_block}>

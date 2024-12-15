@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRevalidator } from 'react-router-dom';
+import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import {
   getCoach,
@@ -9,8 +9,8 @@ import {
 } from '../../../api';
 import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
-import styles from '../index.module.css';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
+import styles from '../index.module.css';
 
 export const CoachEdit: React.FC<{
   open: boolean;
@@ -37,7 +37,7 @@ export const CoachEdit: React.FC<{
           isClassic: false,
         });
         const { result } = await axiosCall<ICoach>(getCoach(id));
-        if (result.data.result) {
+        if (result?.data.result) {
           setCoach({ ...result.data.result });
         }
       };
@@ -52,9 +52,7 @@ export const CoachEdit: React.FC<{
     const saveC = async () => {
       if (currentCoach) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
-          updateCoach({ ...currentCoach }),
-        );
+        const { error } = await axiosCall(updateCoach({ ...currentCoach }));
         if (!error) {
           onClose();
           revalidator.revalidate();
@@ -68,7 +66,7 @@ export const CoachEdit: React.FC<{
     const delC = async () => {
       if (currentCoach) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<boolean>(deleteCch(currentCoach.id));
+        const { error } = await axiosCall(deleteCch(currentCoach.id));
         if (!error) {
           onClose();
           revalidator.revalidate();

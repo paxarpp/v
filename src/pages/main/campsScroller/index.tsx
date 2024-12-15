@@ -1,54 +1,23 @@
-import { Suspense, useState } from 'react';
-import { Await, Link, useAsyncValue, useLoaderData } from 'react-router-dom';
-import { IHome } from '../interfaces';
+import { useState } from 'react';
+import { Link, useLoaderData } from 'react-router';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CampsScroller: React.FC = () => {
-  const { home } = useLoaderData() as {
-    home: IHome;
-  };
-
   return (
     <div className={styles.camps_wrap}>
       <h2 className={styles.camps_header}>Ближайшие кемпы</h2>
       <div className={styles.camps_scroller}>
-        <Suspense fallback={<CampsSkeleton />}>
-          <Await resolve={home}>
-            <CampsTemplate />
-          </Await>
-        </Suspense>
+        <CampsTemplate />
       </div>
     </div>
   );
 };
 
-const CampsSkeleton = () => {
-  return (
-    <>
-      {[0, 1, 2].map((i) => (
-        <div className={styles.camp_card} key={i}>
-          <p>{i}</p>
-          <p>загрузка...</p>
-          <div className={styles.camp_img_wrap}>
-            <div className={styles.camp_img_dump} />
-          </div>
-          <div className={styles.camp_info}>
-            <button disabled={true} className={styles.button_camp}>
-              Подробнее
-            </button>
-          </div>
-        </div>
-      ))}
-    </>
-  );
-};
-
 const CampsTemplate = () => {
-  const { home } = useAsyncValue() as {
-    home: IHome;
-  };
+  const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const [startIndex, setStartIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(2);

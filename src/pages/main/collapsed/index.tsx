@@ -1,24 +1,18 @@
-import { Suspense, useState } from 'react';
-import {
-  Await,
-  useAsyncValue,
-  useLoaderData,
-  useRevalidator,
-} from 'react-router-dom';
+import { useState } from 'react';
+import { useLoaderData, useRevalidator } from 'react-router';
 import ClosedIcon from '../../../assets/closed.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import Basket from '../../../assets/basket.svg?react';
-import { IHome, IQuestion } from '../interfaces';
+import { IQuestion } from '../interfaces';
 import { Modal } from '../../../templates/modal';
-import { deleteQuestion, updateQuestion, getQuestions } from '../../../api';
+import { updateQuestion, getQuestions } from '../../../api';
 import { useUser } from '../../../context';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
   const { isAdmin } = useUser();
-  const { home } = useLoaderData() as {
-    home: IHome;
-  };
+
   const revalidator = useRevalidator();
 
   const [isOpen, openModal] = useState(false);
@@ -161,11 +155,7 @@ export const Collapsed: React.FC = () => {
           ) : null}
         </h2>
         <div>
-          <Suspense fallback={'Загрузка...'}>
-            <Await resolve={home}>
-              <QuestionsTemplate />
-            </Await>
-          </Suspense>
+          <QuestionsTemplate />
         </div>
       </div>
     </>
@@ -173,9 +163,8 @@ export const Collapsed: React.FC = () => {
 };
 
 const QuestionsTemplate: React.FC = () => {
-  const { home } = useAsyncValue() as {
-    home: IHome;
-  };
+  const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
+
   const [openId, setIsOpen] = useState<string | null>(null);
 
   const onToggle = (currentId: string) => () => {

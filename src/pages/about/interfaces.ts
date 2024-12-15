@@ -35,8 +35,8 @@ interface IImage {
   entityId: string | null; // в активити, в комментах
   name: string;
   url: string;
-  contentType: string,
-  size: number,
+  contentType: string;
+  size: number;
 }
 
 export interface IActivity {

@@ -1,12 +1,10 @@
-import { useAsyncValue } from 'react-router-dom';
-import { ICampItem } from '../interfaces';
+import { useLoaderData } from 'react-router';
+import { Route } from '../+types';
 import { ImagePack } from '../../../templates/imagesPack';
 import styles from '../index.module.css';
 
 export const Info = () => {
-  const { camp } = useAsyncValue() as {
-    camp: ICampItem;
-  };
+  const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   return (
     <div className={styles.info_row}>

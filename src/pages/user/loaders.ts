@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getUser } from '../../api';
 import { IUser } from './interfaces';
 
@@ -9,6 +8,6 @@ const loaderUser = async (id: string) => {
   return { user: result, error };
 };
 
-export const loaderPageUser = async ({ params: { id }}: any) => {
-  return defer({ user: loaderUser(id) });
+export const loaderPageUser = async (id: string) => {
+  return await loaderUser(id);
 };

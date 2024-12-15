@@ -62,6 +62,10 @@
   position: absolute;
 }
 
+.dropdown:has(.link_active) {
+  color: #99660A !important;
+}
+
 .menu_popap {
   display: flex;
   flex-flow: column nowrap;
@@ -137,4 +141,13 @@
   display: flex;
   align-items: center;
   margin-left: auto;
+}
+
+.link_pending {
+  color: gray !important;
+  opacity: .8;
+}
+
+.link_active {
+  color: #99660A !important;
 }

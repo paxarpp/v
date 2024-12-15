@@ -1,10 +1,5 @@
-import { Suspense, useState } from 'react';
-import {
-  Await,
-  useAsyncValue,
-  useLoaderData,
-  useRevalidator,
-} from 'react-router-dom';
+import { useState } from 'react';
+import { useLoaderData, useRevalidator } from 'react-router';
 import Phone from '../../../assets/phone.svg?react';
 import Mail from '../../../assets/mail.svg?react';
 import Vk from '../../../assets/vk.svg?react';
@@ -12,33 +7,17 @@ import T from '../../../assets/t.svg?react';
 import Inst from '../../../assets/inst.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { useUser } from '../../../context';
-import { IHome, IContactBlock } from '../interfaces';
+import { IContactBlock } from '../interfaces';
 import { updateContactBlock } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import styles from '../index.module.css';
+import { Route } from '../+types';
 import { createLinkTg } from '../../../constants';
 
 export const Contacts: React.FC = () => {
-  const { home } = useLoaderData() as {
-    home: IHome;
-  };
+  const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
-  return (
-    <div>
-      <Suspense fallback={'Загрузка...'}>
-        <Await resolve={home}>
-          <ContactsTemplate />
-        </Await>
-      </Suspense>
-    </div>
-  );
-};
-
-export const ContactsTemplate = () => {
-  const { home } = useAsyncValue() as {
-    home: IHome;
-  };
   const revalidator = useRevalidator();
   const { isAdmin } = useUser();
   const [isOpen, openModal] = useState(false);

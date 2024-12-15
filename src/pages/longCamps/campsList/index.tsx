@@ -1,18 +1,15 @@
-import { useState, Suspense } from 'react';
-import { Link, useLoaderData, Await, useAsyncValue } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLoaderData } from 'react-router';
 import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
 import { ErrorLocal } from '../../../templates/errorLocal';
-import { ICampItem } from '../interfaces';
 import { CampEdit } from '../campEdit';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
-  const { longCamps, error } = useLoaderData() as {
-    longCamps: ICampItem[];
-    error?: string;
-  };
+  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editCampId, setEditCampId] = useState<string | null>(null);
@@ -27,15 +24,11 @@ export const CampsList = () => {
   ) : (
     <div className={styles.camp_list}>
       {open ? <CampEdit campId={editCampId} onClose={closeCampEdit} /> : null}
-      <Suspense fallback={'Загрузка...'}>
-        <Await resolve={longCamps}>
-          <CampsTemplate
-            isAdmin={isAdmin}
-            setIsOpen={setIsOpen}
-            setEditCampId={setEditCampId}
-          />
-        </Await>
-      </Suspense>
+      <CampsTemplate
+        isAdmin={isAdmin}
+        setIsOpen={setIsOpen}
+        setEditCampId={setEditCampId}
+      />
     </div>
   );
 };
@@ -45,9 +38,7 @@ const CampsTemplate: React.FC<{
   setIsOpen: (open: boolean) => void;
   setEditCampId: (id: string) => void;
 }> = ({ isAdmin, setIsOpen, setEditCampId }) => {
-  const { longCamps } = useAsyncValue() as {
-    longCamps: ICampItem[];
-  };
+  const { longCamps } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openEditCamp = (id: string) => {
     setEditCampId(id);

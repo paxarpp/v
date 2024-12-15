@@ -1,4 +1,3 @@
-import { defer } from 'react-router-dom';
 import { getShortCamps } from '../../api';
 import { ICampItem } from './interfaces';
 
@@ -10,5 +9,5 @@ const loaderShortCamps = async () => {
 };
 
 export const loaderPageShortCamps = async () => {
-  return defer({ shortCamps: loaderShortCamps() });
+  return await loaderShortCamps();
 };

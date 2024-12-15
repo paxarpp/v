@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { useAsyncValue } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import People from '../../../assets/people.svg?react';
 import Tour from '../../../assets/tour.svg?react';
-import { ICampItem } from '../interfaces';
+import { Route } from '../+types';
 import { useAuth, useUser } from '../../../context';
 import { campReservation } from '../../../api';
 import styles from '../index.module.css';
 
 export const Packages = () => {
-  const { camp } = useAsyncValue() as {
-    camp: ICampItem;
-  };
+  const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { user } = useUser();
   const { toggleAuthOpen } = useAuth();
   const [showPricesInfo, setShowPricesInfo] = useState<Record<string, boolean>>(

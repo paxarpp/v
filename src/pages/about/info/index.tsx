@@ -1,18 +1,17 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
 import Setting from '../../../assets/setting.svg?react';
 import { IAbout } from '../interfaces';
 import { useUser } from '../../../context';
 import { Modal } from '../../../templates/modal';
-import { ImageSelect } from '../../../templates/imageSelect';
+import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { creatorRequest, updateAbout } from '../../../api';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Info = () => {
-  const { about } = useAsyncValue() as {
-    about: IAbout;
-  };
+  const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
   const revalidator = useRevalidator();
   const { isAdmin, logout } = useUser();
@@ -32,9 +31,7 @@ export const Info = () => {
     const saveA = async () => {
       if (currentAbout) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
-          updateAbout({ ...currentAbout }),
-        );
+        const { error } = await axiosCall(updateAbout({ ...currentAbout }));
         if (!error) {
           closeModal();
           revalidator.revalidate();
@@ -45,23 +42,35 @@ export const Info = () => {
   };
 
   const deleteImg = () => {
-    setAbout((prevAbout) => ({
-      ...(prevAbout as IAbout),
-      master: { ...prevAbout.master, image: null },
-    }));
+    setAbout((prevAbout) =>
+      prevAbout
+        ? {
+            ...prevAbout,
+            master: prevAbout.master
+              ? { ...prevAbout.master, image: null }
+              : null,
+          }
+        : null,
+    );
   };
 
   const onChangeImage = (img: IImageBase) => {
-    setAbout((prevAbout) => ({
-      ...(prevAbout as IAbout),
-      master: {
-        ...prevAbout.master,
-        image: {
-          typeEntity: 'COACH' as const,
-          ...img,
-        },
-      },
-    }));
+    setAbout((prevAbout) =>
+      prevAbout
+        ? {
+            ...prevAbout,
+            master: {
+              name: prevAbout.master?.name || '',
+              infos: prevAbout.master?.infos || [],
+              image: {
+                typeEntity: 'COACH' as const,
+                entityId: prevAbout.master?.image?.entityId || null,
+                ...img,
+              },
+            },
+          }
+        : null,
+    );
   };
 
   return (
@@ -145,13 +154,19 @@ export const Info = () => {
               value={currentAbout?.master?.name}
               className={styles.input_field}
               onChange={(e) => {
-                setAbout((prevAbout) => ({
-                  ...(prevAbout as IAbout),
-                  master: {
-                    ...prevAbout.master,
-                    name: e.target.value,
-                  },
-                }));
+                setAbout((prevAbout) =>
+                  prevAbout
+                    ? {
+                        ...prevAbout,
+                        master: prevAbout.master
+                          ? {
+                              ...prevAbout.master,
+                              name: e.target.value,
+                            }
+                          : null,
+                      }
+                    : null,
+                );
               }}
             />
             <label>{'Информация'}</label>
@@ -159,13 +174,19 @@ export const Info = () => {
               value={currentAbout?.master?.infos.join(';')}
               className={styles.textarea_field}
               onChange={(e) => {
-                setAbout((prevAbout) => ({
-                  ...(prevAbout as IAbout),
-                  master: {
-                    ...prevAbout.master,
-                    infos: e.target.value.split(';'),
-                  },
-                }));
+                setAbout((prevAbout) =>
+                  prevAbout
+                    ? {
+                        ...prevAbout,
+                        master: prevAbout.master
+                          ? {
+                              ...prevAbout.master,
+                              infos: e.target.value.split(';'),
+                            }
+                          : null,
+                      }
+                    : null,
+                );
               }}
             />
             <ImageSelect

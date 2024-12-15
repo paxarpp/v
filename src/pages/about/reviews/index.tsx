@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
 import { IAbout, IReview } from '../interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
@@ -15,9 +15,7 @@ import styles from '../index.module.css';
 export const Reviews = () => {
   const {
     about: { reviews },
-  } = useAsyncValue() as {
-    about: IAbout;
-  };
+  } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
 
   const revalidator = useRevalidator();
@@ -78,7 +76,7 @@ export const Reviews = () => {
     const saveA = async () => {
       if (currentReview) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
+        const { error } = await axiosCall(
           updateReview({ ...currentReview }),
         );
         if (!error) {
@@ -94,7 +92,7 @@ export const Reviews = () => {
     const delC = async () => {
       if (currentId) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<boolean>(deleteRvw(currentId));
+        const { error } = await axiosCall(deleteRvw(currentId));
         if (!error) {
           onClose();
           revalidator.revalidate();

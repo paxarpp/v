@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useAsyncValue, useRevalidator } from 'react-router-dom';
-import { ICampItem, IUser } from '../interfaces';
+import { useLoaderData, useRevalidator } from 'react-router';
+import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
 import {
   campConfirm,
@@ -8,12 +8,11 @@ import {
   updateUserReservation,
 } from '../../../api';
 import { Modal } from '../../../templates/modal';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Users = () => {
-  const { camp } = useAsyncValue() as {
-    camp: ICampItem;
-  };
+  const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
   const { isAdmin, isModerator, logout } = useUser();
   const [isOpen, setOpen] = useState(false);
@@ -37,7 +36,7 @@ export const Users = () => {
     const confirm = async () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<string>(
+      const { error } = await axiosCall(
         campConfirm(campId, user.id, !user.bookingConfirmed),
       );
       if (!error) {
@@ -59,7 +58,7 @@ export const Users = () => {
     const update = async () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<string>(
+      const { error } = await axiosCall(
         updateUserReservation({
           campId,
           ...newUser,

@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { useAsyncValue } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
 import { logout as apiLogout } from '../../../api';
 import Pencil from '../../../assets/pencil.svg?react';
 import { ModalInfo } from './modalInfo';
 import { ModalPass } from './modalPass';
+import { Route } from '../+types';
+
 import styles from '../index.module.css';
 
 export const Info = () => {
-  const { user } = useAsyncValue() as {
-    user: IUser;
-  };
+  const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const [isOpenEd, setOpenEd] = useState(false);
   const [isOpenChP, setOpenChP] = useState(false);
@@ -20,7 +20,6 @@ export const Info = () => {
 
   const onLogout = () => {
     apiLogout();
-    document.cookie = `magicVolley=`;
     logout();
   };
 

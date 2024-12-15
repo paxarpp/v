@@ -20,6 +20,10 @@
   overflow: hidden;
 }
 
+#detail {
+  text-align: center;
+}
+
 /* Применяется ко всем элементам со скроллбаром на странице */
 * {
   scrollbar-width: thin;

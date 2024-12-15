@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRevalidator } from 'react-router-dom';
+import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest, updateUserPass } from '../../../api';
 import { useUser } from '../../../context';
@@ -30,7 +30,7 @@ export const ModalPass: React.FC<{ closeModal: () => void }> = ({
   const saveInfo = () => {
     const userInfoUpdate = async () => {
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<IPass>(
+      const { error } = await axiosCall(
         updateUserPass({
           ...currentInfo,
           id: (user as unknown as IUser).id,

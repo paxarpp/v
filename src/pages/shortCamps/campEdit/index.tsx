@@ -1,5 +1,5 @@
 import { useEffect, useState, ChangeEvent } from 'react';
-import { useRevalidator } from 'react-router-dom';
+import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import {
   getCamp,
@@ -36,7 +36,7 @@ export const CampEdit: React.FC<{
       const axiosCall = creatorRequest(logout);
       setPacks([]);
       const { result } = await axiosCall<IPackage[]>(getPackages());
-      if (result.data.result) {
+      if (result?.data.result) {
         setPacks([...result.data.result]);
       }
     };
@@ -44,7 +44,7 @@ export const CampEdit: React.FC<{
       const axiosCall = creatorRequest(logout);
       setCoaches([]);
       const { result } = await axiosCall<ICoach[]>(getCoachesDropdown());
-      if (result.data.result) {
+      if (result?.data.result) {
         setCoaches([...result.data.result]);
       }
     };
@@ -68,7 +68,7 @@ export const CampEdit: React.FC<{
       const getC = async (id: string) => {
         const axiosCall = creatorRequest(logout);
         const { result } = await axiosCall<ICampItem>(getCamp(id));
-        if (result.data.result) {
+        if (result?.data.result) {
           setCamp({ ...result.data.result });
         }
       };
@@ -100,9 +100,7 @@ export const CampEdit: React.FC<{
     const saveC = async () => {
       if (currentCamp) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
-          updateCampShort({ ...currentCamp }),
-        );
+        const { error } = await axiosCall(updateCampShort({ ...currentCamp }));
         if (!error) {
           onClose();
           revalidator.revalidate();
@@ -116,7 +114,7 @@ export const CampEdit: React.FC<{
     const delC = async () => {
       if (currentCamp) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<boolean>(deleteCmp(currentCamp.id));
+        const { error } = await axiosCall(deleteCmp(currentCamp.id));
         if (!error) {
           onClose();
           revalidator.revalidate();

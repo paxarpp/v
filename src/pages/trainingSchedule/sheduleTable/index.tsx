@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
-import { Await, useAsyncValue, useLoaderData } from 'react-router-dom';
-import { IShedule } from '../interfaces';
+import { Await, useLoaderData } from 'react-router';
 import { Days } from './days';
 import { ErrorLocal } from '../../../templates/errorLocal';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 const weekDays = [
@@ -14,10 +14,8 @@ const weekDays = [
 ] as const;
 
 export const SheduleTable = () => {
-  const { trainingShedule, error } = useLoaderData() as {
-    trainingShedule: IShedule;
-    error?: string;
-  };
+  const [{ trainingShedule, error }] =
+    useLoaderData<Route.ComponentProps['loaderData']>();
 
   return (
     <div className={styles.shedule_table}>
@@ -51,9 +49,8 @@ const SheduleSkeleton = () => {
 };
 
 const SheduleeTemplate = () => {
-  const { trainingShedule } = useAsyncValue() as {
-    trainingShedule: IShedule;
-  };
+  const [{ trainingShedule }] =
+    useLoaderData<Route.ComponentProps['loaderData']>();
   return (
     <>
       {trainingShedule.map((group) => {

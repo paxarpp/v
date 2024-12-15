@@ -28,6 +28,26 @@ export const getHome = async <T>(): Promise<{
   }
 };
 
+export const getTournaments = async <T>(): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/tournaments');
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
+export const getCorporates = async <T>(): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/corporates');
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
 export const getCampsAll = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {
@@ -61,12 +81,12 @@ export const getClassicCoachesAll = async <T>(): Promise<{
 export const getCamp = async <T>(
   id: string,
 ): Promise<{
-  data: { result: T[]; error?: string };
+  data: { result: T; error?: string };
 }> => {
   try {
     return await axios.get(BASE_URL + `/camps/${id}`);
   } catch (e: unknown) {
-    return { data: { result: [], error: (e as Error).message } };
+    return { data: { result: {} as T, error: (e as Error).message } };
   }
 };
 
@@ -362,12 +382,12 @@ export const getLongCamps = async <T>(): Promise<{
 };
 
 export const getShedule = async <T>(): Promise<{
-  data: { result: T[]; error?: string };
+  data: { result: T; error?: string };
 }> => {
   try {
     return await axios.get(BASE_URL + '/shedule');
   } catch (e: unknown) {
-    return { data: { result: [], error: (e as Error).message } };
+    return { data: { result: {} as T, error: (e as Error).message } };
   }
 };
 
@@ -452,9 +472,13 @@ export const deleteRvw = async (id: string) => {
 
 export const creatorRequest =
   (logout: () => void) =>
-  async <T>(axiosCall: Promise<AxiosResponse<{ result: T }>>) => {
+  async <T = unknown>(
+    axiosCall: Promise<{
+      data: { result: T; error?: string };
+    }>,
+  ) => {
     try {
-      return { result: await axiosCall, error: '' };
+      return { result: await axiosCall, error: null };
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
@@ -465,19 +489,19 @@ export const creatorRequest =
         return {
           error:
             (error.response?.data.message as string) || 'Server Unavailable',
-          result: {} as AxiosResponse<{ result: T }>,
+          result: null,
         };
       }
 
       if (error instanceof Error) {
         return {
           error: error.message,
-          result: {} as AxiosResponse<{ result: T }>,
+          result: null,
         };
       }
       return {
         error: 'Server Unavailable',
-        result: {} as AxiosResponse<{ result: T }>,
+        result: null,
       };
     }
   };

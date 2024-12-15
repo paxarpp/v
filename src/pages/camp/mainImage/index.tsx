@@ -1,11 +1,9 @@
-import { useAsyncValue } from 'react-router-dom';
-import { ICampItem } from '../interfaces';
+import { useLoaderData } from 'react-router';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const MainImage = () => {
-  const { camp } = useAsyncValue() as {
-    camp: ICampItem;
-  };
+  const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   return (
     <div className={styles.main_img_wrapper}>
       {camp.imageCart ? (
