@@ -1,7 +1,9 @@
+import { loaderPageCorporates } from './loaders';
+
 export async function clientLoader() {
-  return await Promise.resolve();
+  return await loaderPageCorporates();
 }
 
 export default function Corporates() {
-  return <div></div>;
+  return <div>Corporates</div>;
 };

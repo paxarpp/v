@@ -26,8 +26,7 @@ const createLinkClassName = ({
 }: {
   isPending: boolean;
   isActive: boolean;
-}) =>
-  isPending ? styles.link_pending : isActive ? styles.link_active : styles.link;
+}) => (isPending ? styles.link_pending : isActive ? styles.link_active : '');
 
 export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
   const { user } = useUser();

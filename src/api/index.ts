@@ -28,6 +28,26 @@ export const getHome = async <T>(): Promise<{
   }
 };
 
+export const getTournaments = async <T>(): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/tournaments');
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
+export const getCorporates = async <T>(): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  try {
+    return await axios.get(BASE_URL + '/corporates');
+  } catch (e: unknown) {
+    return { data: { result: {} as T, error: (e as Error).message } };
+  }
+};
+
 export const getCampsAll = async <T>(): Promise<{
   data: { result: T[]; error?: string };
 }> => {

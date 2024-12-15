@@ -1,7 +1,9 @@
+import { loaderPageTournaments } from './loaders';
+
 export async function clientLoader() {
-  return await Promise.resolve();
+  return await loaderPageTournaments();
 }
 
 export default function Tournaments() {
-  return <div></div>;
-};
+  return <div>Tournaments</div>;
+}
