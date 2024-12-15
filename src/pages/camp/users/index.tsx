@@ -36,7 +36,7 @@ export const Users = () => {
     const confirm = async () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<string>(
+      const { error } = await axiosCall(
         campConfirm(campId, user.id, !user.bookingConfirmed),
       );
       if (!error) {
@@ -58,7 +58,7 @@ export const Users = () => {
     const update = async () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<string>(
+      const { error } = await axiosCall(
         updateUserReservation({
           campId,
           ...newUser,

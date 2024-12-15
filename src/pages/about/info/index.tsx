@@ -31,9 +31,7 @@ export const Info = () => {
     const saveA = async () => {
       if (currentAbout) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
-          updateAbout({ ...currentAbout }),
-        );
+        const { error } = await axiosCall(updateAbout({ ...currentAbout }));
         if (!error) {
           closeModal();
           revalidator.revalidate();

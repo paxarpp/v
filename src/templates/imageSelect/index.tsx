@@ -50,7 +50,7 @@ export const ImageSelect: React.FC<IProps> = ({
         const { result, error } = await axiosCall<{ id: string; url: string }>(
           uploadImg(formData),
         );
-        if (!error) {
+        if (!error && result) {
           onChangeImage({
             name: file.name,
             contentType: file.type,
@@ -126,6 +126,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [openId, setOpen] = useState('');
+  const { logout } = useUser();
 
   const upload = (e) => {
     const imageUploader = async () => {
@@ -137,7 +138,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
         const { result, error } = await axiosCall<{ id: string; url: string }>(
           uploadImg(formData),
         );
-        if (!error) {
+        if (!error && result) {
           onChangeImage({
             name: file.name,
             contentType: file.type,

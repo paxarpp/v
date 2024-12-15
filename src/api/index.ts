@@ -452,9 +452,13 @@ export const deleteRvw = async (id: string) => {
 
 export const creatorRequest =
   (logout: () => void) =>
-  async <T>(axiosCall: Promise<AxiosResponse<{ result: T }>>) => {
+  async <T = unknown>(
+    axiosCall: Promise<{
+      data: { result: T; error?: string };
+    }>,
+  ) => {
     try {
-      return { result: await axiosCall, error: '' };
+      return { result: await axiosCall, error: null };
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
@@ -465,19 +469,19 @@ export const creatorRequest =
         return {
           error:
             (error.response?.data.message as string) || 'Server Unavailable',
-          result: {} as AxiosResponse<{ result: T }>,
+          result: null,
         };
       }
 
       if (error instanceof Error) {
         return {
           error: error.message,
-          result: {} as AxiosResponse<{ result: T }>,
+          result: null,
         };
       }
       return {
         error: 'Server Unavailable',
-        result: {} as AxiosResponse<{ result: T }>,
+        result: null,
       };
     }
   };

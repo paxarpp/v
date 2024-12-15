@@ -21,7 +21,7 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
   const saveInfo = () => {
     const userInfoUpdate = async () => {
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<IUserInfo>(
+      const { error } = await axiosCall(
         updateUser({
           id: authUser.id,
           email: currentInfo.email,

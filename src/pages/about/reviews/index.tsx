@@ -76,7 +76,7 @@ export const Reviews = () => {
     const saveA = async () => {
       if (currentReview) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
+        const { error } = await axiosCall(
           updateReview({ ...currentReview }),
         );
         if (!error) {
@@ -92,7 +92,7 @@ export const Reviews = () => {
     const delC = async () => {
       if (currentId) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<boolean>(deleteRvw(currentId));
+        const { error } = await axiosCall(deleteRvw(currentId));
         if (!error) {
           onClose();
           revalidator.revalidate();

@@ -10,6 +10,7 @@ import {
 import { Modal } from '../../../templates/modal';
 import Pencil from '../../../assets/pencil.svg?react';
 import Basket from '../../../assets/basket.svg?react';
+import { IUserItem } from '../interfaces';
 import styles from '../index.module.css';
 
 export const Users = () => {
@@ -38,12 +39,12 @@ export const Users = () => {
   const addUser = () => {
     const update = async () => {
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<string>(
+      const { error } = await axiosCall(
         updateUserReservation(
           newUser?.id
             ? {
                 ...newUser,
-                name: newUser?.username,
+                name: newUser.username,
                 avatar: null,
               }
             : {
@@ -69,7 +70,7 @@ export const Users = () => {
     }));
   };
 
-  const editUser = (user) => {
+  const editUser = (user: IUserItem) => {
     setOpen(true);
     setNewUser({ ...user, username: user.name });
   };
@@ -77,7 +78,7 @@ export const Users = () => {
   const deleteUser = (id: string) => {
     const deleteU = async () => {
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall<string>(deleteUserReservation(id));
+      const { error } = await axiosCall(deleteUserReservation(id));
       if (!error) {
         closeModal();
         revalidator.revalidate();

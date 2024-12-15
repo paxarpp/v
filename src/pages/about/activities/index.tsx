@@ -69,7 +69,7 @@ export const Activities = () => {
     const saveA = async () => {
       if (currentActivity) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<string>(
+        const { error } = await axiosCall(
           updateActivity({ ...currentActivity }),
         );
         if (!error) {
@@ -85,7 +85,7 @@ export const Activities = () => {
     const delC = async () => {
       if (currentId) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall<boolean>(deleteAct(currentId));
+        const { error } = await axiosCall(deleteAct(currentId));
         if (!error) {
           onClose();
           revalidator.revalidate();
