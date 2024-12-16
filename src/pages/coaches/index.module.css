@@ -48,7 +48,7 @@
 .coaches_list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 150px 75px;
   gap: 50px;
 }
