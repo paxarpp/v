@@ -1,8 +1,11 @@
 import { Suspense } from 'react';
 import { Await, useLoaderData } from 'react-router';
+import RoundAdd from '../../../assets/roundAdd.svg?react';
+import Setting from '../../../assets/setting.svg?react';
 import { Days } from './days';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { Route } from '../+types';
+import { useUser } from '../../../context';
 import styles from '../index.module.css';
 
 const weekDays = [
@@ -16,6 +19,7 @@ const weekDays = [
 export const SheduleTable = () => {
   const [{ trainingShedule, error }] =
     useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isAdmin } = useUser();
 
   return (
     <div className={styles.shedule_table}>
@@ -25,7 +29,7 @@ export const SheduleTable = () => {
       ) : (
         <Suspense fallback={<SheduleSkeleton />}>
           <Await resolve={trainingShedule}>
-            <SheduleeTemplate />
+            <SheduleeTemplate isAdmin={isAdmin} />
           </Await>
         </Suspense>
       )}
@@ -48,7 +52,9 @@ const SheduleSkeleton = () => {
   );
 };
 
-const SheduleeTemplate = () => {
+const SheduleeTemplate: React.FC<{
+  isAdmin: boolean;
+}> = ({ isAdmin }) => {
   const [{ trainingShedule }] =
     useLoaderData<Route.ComponentProps['loaderData']>();
   return (
@@ -56,7 +62,15 @@ const SheduleeTemplate = () => {
       {trainingShedule.map((group) => {
         return (
           <div key={group.id} className={styles.group}>
-            <div className={styles.group_name}>{group.name}</div>
+            <div className={styles.group_name}>
+              {group.name}
+              {isAdmin ? (
+                <Setting
+                  onClick={() => {}}
+                  className={styles.setting_shedule}
+                />
+              ) : null}
+            </div>
             {weekDays.map((dayName) => {
               const day = group.days.find((d) => d.id === dayName);
               return day ? (
@@ -73,6 +87,11 @@ const SheduleeTemplate = () => {
           </div>
         );
       })}
+      {isAdmin ? (
+        <div className={styles.shedule_card_add}>
+          <RoundAdd onClick={() => {}} className={styles.shedule_round} />
+        </div>
+      ) : null}
     </>
   );
 };

@@ -13,7 +13,7 @@ export interface ISheduleGroup {
 export type IShedule = ISheduleGroup[];
 
 export interface IPrice {
-  id: string;
+  id: string | null;
   name: string;
   prices: {
     id: string;

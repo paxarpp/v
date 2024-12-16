@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { ICoach } from '../pages/coaches/interfaces';
 import { ICampItem } from '../pages/shortCamps/interfaces';
 import { IContactBlock, IMainBlock } from '../pages/main/interfaces';
@@ -90,16 +90,20 @@ export const getCamp = async <T>(
   }
 };
 
+export const getShedulePrice = async <T>(
+  id: string,
+): Promise<{
+  data: { result: T; error?: string };
+}> => {
+  return await axios.get(BASE_URL + `/shedule/price/${id}`);
+};
+
 export const updateAbout = async <T>(
   data: unknown,
 ): Promise<{
   data: { result: T; error?: string };
 }> => {
-  try {
-    return await axios.put(BASE_URL + '/about', data);
-  } catch (e: unknown) {
-    return { data: { result: {} as T, error: (e as Error).message } };
-  }
+  return await axios.put(BASE_URL + '/about', data);
 };
 
 export const updateUserReservation = async <T>(data: {
@@ -107,14 +111,10 @@ export const updateUserReservation = async <T>(data: {
 }): Promise<{
   data: { result: T; error?: string };
 }> => {
-  try {
-    if (data.id) {
-      return await axios.put(BASE_URL + '/users', data);
-    } else {
-      return await axios.post(BASE_URL + '/users/add-user', data);
-    }
-  } catch (e: unknown) {
-    return { data: { result: {} as T, error: (e as Error).message } };
+  if (data.id) {
+    return await axios.put(BASE_URL + '/users', data);
+  } else {
+    return await axios.post(BASE_URL + '/users/add-user', data);
   }
 };
 
@@ -228,11 +228,7 @@ export const getQuestionAll = async <T>(): Promise<{
 };
 
 export const deleteQuestion = async <T>(id: string): Promise<T> => {
-  try {
-    return await axios.delete(BASE_URL + `/questions/${id}`);
-  } catch {
-    return {} as T;
-  }
+  return await axios.delete(BASE_URL + `/questions/${id}`);
 };
 
 export const updateQuestion = async <T>(
@@ -242,59 +238,39 @@ export const updateQuestion = async <T>(
     id?: string;
   }[],
 ): Promise<{ result: T; error: string }> => {
-  try {
-    const result: T = await axios.post(BASE_URL + `/questions`, body);
-    return { result, error: '' };
-  } catch (e: unknown) {
-    return { error: (e as { message: string }).message, result: {} as T };
-  }
+  const result: T = await axios.post(BASE_URL + `/questions`, body);
+  return { result, error: '' };
 };
 
 export const updateUser = async <T>(
   body: IUserInfo,
 ): Promise<{ result: T; error: string }> => {
-  try {
-    const result: T = await axios.put(BASE_URL + `/profiles`, body);
-    return { result, error: '' };
-  } catch (e: unknown) {
-    return { error: (e as { message: string }).message, result: {} as T };
-  }
+  const result: T = await axios.put(BASE_URL + `/profiles`, body);
+  return { result, error: '' };
 };
 
 export const updateUserPass = async <T>(
   body: IPass,
 ): Promise<{ result: T; error: string }> => {
-  try {
-    const result: T = await axios.put(
-      BASE_URL + `/profiles/update-password`,
-      body,
-    );
-    return { result, error: '' };
-  } catch (e: unknown) {
-    return { error: (e as { message: string }).message, result: {} as T };
-  }
+  const result: T = await axios.put(
+    BASE_URL + `/profiles/update-password`,
+    body,
+  );
+  return { result, error: '' };
 };
 
 export const updateMainBlock = async <T>(
   body: IMainBlock,
 ): Promise<{ result: T; error: string }> => {
-  try {
-    const result: T = await axios.put(BASE_URL + `/home/main`, body);
-    return { result, error: '' };
-  } catch (e: unknown) {
-    return { error: (e as { message: string }).message, result: {} as T };
-  }
+  const result: T = await axios.put(BASE_URL + `/home/main`, body);
+  return { result, error: '' };
 };
 
 export const updateContactBlock = async <T>(
   body: IContactBlock,
 ): Promise<{ result: T; error: string }> => {
-  try {
-    const result: T = await axios.put(BASE_URL + `/home/contact`, body);
-    return { result, error: '' };
-  } catch (e: unknown) {
-    return { error: (e as { message: string }).message, result: {} as T };
-  }
+  const result: T = await axios.put(BASE_URL + `/home/contact`, body);
+  return { result, error: '' };
 };
 
 export const getQuestions = async <T>(): Promise<{
@@ -402,11 +378,7 @@ export const getPrice = async <T>(): Promise<{
 };
 
 export const updateCoach = async (body: ICoach) => {
-  if (body.id) {
-    return await axios.put(BASE_URL + `/coaches/${body.id}`, body);
-  } else {
-    return await axios.post(BASE_URL + `/coaches`, body);
-  }
+  return await axios.put(BASE_URL + `/coaches/${body.id}`, body);
 };
 
 export const uploadImg = async (file: FormData, typeEntity = 'COACH') => {
@@ -450,6 +422,14 @@ export const updateCampShort = async (body: ICampItem) => {
   }
 };
 
+export const updateShedulePrice = async (body: ICampItem) => {
+  if (body.id) {
+    return await axios.put(BASE_URL + `/shedule/price/${body.id}`, body);
+  } else {
+    return await axios.post(BASE_URL + `/shedule/price`, body);
+  }
+};
+
 export const updateCampLong = async (body: ICampItem) => {
   if (body.id) {
     return await axios.put(BASE_URL + `/camps/${body.id}`, body);
@@ -460,6 +440,10 @@ export const updateCampLong = async (body: ICampItem) => {
 
 export const deleteCamp = async (id: string) => {
   return await axios.delete(BASE_URL + `/camps/${id}`);
+};
+
+export const deleteShedulePrice = async (id: string) => {
+  return await axios.delete(BASE_URL + `/shedule/price/${id}`);
 };
 
 export const deleteAct = async (id: string) => {
