@@ -38,7 +38,7 @@ const PriceTemplate = () => {
               {pr.prices.map((p, index) => {
                 return (
                   <>
-                    <div key={p.id} className={styles.price_card}>
+                    <div key={`sub-${p.id}`} className={styles.price_card}>
                       <span>{p.title}</span>
                       {p.subTitle ? (
                         <span className={styles.price_message}>
@@ -53,6 +53,11 @@ const PriceTemplate = () => {
                   </>
                 );
               })}
+            </div>
+            <div className={styles.sale}>
+              <span>{'*студентам очной формы обучения скидка 10 %'}</span>
+              <br />
+              <span>{'*многодетным семьям скидка 10 %'}</span>
             </div>
           </div>
         );
