@@ -82,6 +82,13 @@ export const pl = {
   }> => {
     return await instance.get(`/shedule/price/${id}`);
   },
+  getSheduleTrein: async <T>(
+    id: string,
+  ): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    return await instance.get(`/shedule/trein/${id}`);
+  },
   getUser: async <T>(
     id: string,
   ): Promise<{

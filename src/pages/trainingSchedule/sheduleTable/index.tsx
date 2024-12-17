@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { Await, useLoaderData } from 'react-router';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Setting from '../../../assets/setting.svg?react';
@@ -6,6 +6,7 @@ import { Days } from './days';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
+import { TreinEdit } from '../treinEdit';
 import styles from '../index.module.css';
 
 const weekDays = [
@@ -20,6 +21,13 @@ export const SheduleTable = () => {
   const [{ trainingShedule, error }] =
     useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
+  const [open, setIsOpen] = useState<boolean>(false);
+  const [editTreinId, setEditTreinId] = useState<string | null>(null);
+
+  const closeTreinEdit = () => {
+    setEditTreinId(null);
+    setIsOpen(false);
+  };
 
   return (
     <div className={styles.shedule_table}>
@@ -29,7 +37,14 @@ export const SheduleTable = () => {
       ) : (
         <Suspense fallback={<SheduleSkeleton />}>
           <Await resolve={trainingShedule}>
-            <SheduleeTemplate isAdmin={isAdmin} />
+            {open ? (
+              <TreinEdit treinId={editTreinId} onClose={closeTreinEdit} />
+            ) : null}
+            <SheduleeTemplate
+              isAdmin={isAdmin}
+              setIsOpen={setIsOpen}
+              setEditTreinId={setEditTreinId}
+            />
           </Await>
         </Suspense>
       )}
@@ -54,9 +69,21 @@ const SheduleSkeleton = () => {
 
 const SheduleeTemplate: React.FC<{
   isAdmin: boolean;
-}> = ({ isAdmin }) => {
+  setIsOpen: (open: boolean) => void;
+  setEditTreinId: (id: string) => void;
+}> = ({ isAdmin, setIsOpen, setEditTreinId }) => {
   const [{ trainingShedule }] =
     useLoaderData<Route.ComponentProps['loaderData']>();
+
+  const openEditTrein = (id: string) => {
+    setEditTreinId(id);
+    setIsOpen(true);
+  };
+
+  const addTrein = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       {trainingShedule.map((group) => {
@@ -66,7 +93,7 @@ const SheduleeTemplate: React.FC<{
               {group.name}
               {isAdmin ? (
                 <Setting
-                  onClick={() => {}}
+                  onClick={() => openEditTrein(group.id as string)}
                   className={styles.setting_shedule}
                 />
               ) : null}
@@ -89,7 +116,7 @@ const SheduleeTemplate: React.FC<{
       })}
       {isAdmin ? (
         <div className={styles.shedule_card_add}>
-          <RoundAdd onClick={() => {}} className={styles.shedule_round} />
+          <RoundAdd onClick={addTrein} className={styles.shedule_round} />
         </div>
       ) : null}
     </>

@@ -1,11 +1,11 @@
 export interface ISheduleItem {
-  id: string;
+  id: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY';
   time: string;
   address: string;
 }
 
 export interface ISheduleGroup {
-  id: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY';
+  id: string | null;
   name: string;
   days: ISheduleItem[];
 }

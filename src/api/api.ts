@@ -5,6 +5,7 @@ import { IUserInfo } from '../pages/user/interfaces';
 import { IPass } from '../pages/user/info/modalPass';
 import { IActivity, IReview } from '../pages/about/interfaces';
 import { instance } from '.';
+import { IPrice, IShedule, ISheduleGroup } from '../pages/trainingSchedule/interfaces';
 
 export const api = {
   updateAbout: async <T>(
@@ -230,7 +231,7 @@ export const api = {
     }
   },
   updateShedulePrice: async <T>(
-    body: ICampItem,
+    body: IPrice,
   ): Promise<{
     data: { result: T; error?: string };
   }> => {
@@ -238,6 +239,17 @@ export const api = {
       return await instance.put(`/shedule/price/${body.id}`, body);
     } else {
       return await instance.post('/shedule/price', body);
+    }
+  },
+  updateSheduleTrein: async <T>(
+    body: ISheduleGroup,
+  ): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    if (body.id) {
+      return await instance.put(`/shedule/trein/${body.id}`, body);
+    } else {
+      return await instance.post('/shedule/trein', body);
     }
   },
   updateCampLong: async <T>(
@@ -264,6 +276,13 @@ export const api = {
     data: { result: boolean; error?: string };
   }> => {
     return await instance.delete(`/shedule/price/${id}`);
+  },
+  deleteSheduleTrein: async (
+    id: string,
+  ): Promise<{
+    data: { result: boolean; error?: string };
+  }> => {
+    return await instance.delete(`/shedule/trein/${id}`);
   },
   deleteAct: async (
     id: string,
