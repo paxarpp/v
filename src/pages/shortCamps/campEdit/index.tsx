@@ -1,14 +1,7 @@
 import { useEffect, useState, ChangeEvent } from 'react';
 import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
-import {
-  getCamp,
-  getPackages,
-  updateCampShort,
-  deleteCamp as deleteCmp,
-  creatorRequest,
-  getCoachesDropdown,
-} from '../../../api';
+import { api, pl, creatorRequest } from '../../../api';
 import { ICampItem, ICoach, IImage, IPackage } from '../interfaces';
 import { useUser } from '../../../context';
 import {
@@ -35,7 +28,7 @@ export const CampEdit: React.FC<{
     const getPacks = async () => {
       const axiosCall = creatorRequest(logout);
       setPacks([]);
-      const { result } = await axiosCall<IPackage[]>(getPackages());
+      const { result } = await axiosCall<IPackage[]>(pl.getPackages());
       if (result?.data.result) {
         setPacks([...result.data.result]);
       }
@@ -43,7 +36,7 @@ export const CampEdit: React.FC<{
     const getCoachesAll = async () => {
       const axiosCall = creatorRequest(logout);
       setCoaches([]);
-      const { result } = await axiosCall<ICoach[]>(getCoachesDropdown());
+      const { result } = await axiosCall<ICoach[]>(pl.getCoachesDropdown());
       if (result?.data.result) {
         setCoaches([...result.data.result]);
       }
@@ -67,7 +60,7 @@ export const CampEdit: React.FC<{
       // edit
       const getC = async (id: string) => {
         const axiosCall = creatorRequest(logout);
-        const { result } = await axiosCall<ICampItem>(getCamp(id));
+        const { result } = await axiosCall<ICampItem>(pl.getCamp(id));
         if (result?.data.result) {
           setCamp({ ...result.data.result });
         }
@@ -100,7 +93,9 @@ export const CampEdit: React.FC<{
     const saveC = async () => {
       if (currentCamp) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(updateCampShort({ ...currentCamp }));
+        const { error } = await axiosCall(
+          api.updateCampShort({ ...currentCamp }),
+        );
         if (!error) {
           onClose();
           revalidator.revalidate();
@@ -114,7 +109,7 @@ export const CampEdit: React.FC<{
     const delC = async () => {
       if (currentCamp) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(deleteCmp(currentCamp.id));
+        const { error } = await axiosCall(api.deleteCamp(currentCamp.id));
         if (!error) {
           onClose();
           revalidator.revalidate();

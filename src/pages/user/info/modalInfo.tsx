@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
-import { creatorRequest, updateUser } from '../../../api';
+import { creatorRequest, api } from '../../../api';
 import { useUser } from '../../../context';
 import { IUserInfo } from '../interfaces';
 import { InputStyled } from '../../../templates/input';
@@ -22,7 +22,7 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
     const userInfoUpdate = async () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
-        updateUser({
+        api.updateUser({
           id: authUser.id,
           email: currentInfo.email,
           telephone: currentInfo.telephone,

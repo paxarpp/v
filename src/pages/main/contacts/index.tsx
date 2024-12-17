@@ -8,7 +8,7 @@ import Inst from '../../../assets/inst.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { useUser } from '../../../context';
 import { IContactBlock } from '../interfaces';
-import { updateContactBlock } from '../../../api';
+import { api } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import styles from '../index.module.css';
@@ -36,7 +36,7 @@ export const Contacts: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const { error } = await updateContactBlock(contact as IContactBlock);
+    const { error } = await api.updateContactBlock(contact as IContactBlock);
     if (!error) {
       closeModal();
       revalidator.revalidate();

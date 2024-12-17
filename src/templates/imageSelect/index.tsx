@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import BasketIcon from '../../assets/basket.svg?react';
 import SquareAdd from '../../assets/sqareAdd.svg?react';
 import Aye from '../../assets/aye.svg?react';
-import { creatorRequest, uploadImg } from '../../api';
+import { creatorRequest, api } from '../../api';
 import { Viewer } from '../modal';
 import { useUser } from '../../context';
 import styles from './index.module.css';
@@ -48,7 +48,7 @@ export const ImageSelect: React.FC<IProps> = ({
         const formData = new FormData();
         formData.append('file', file);
         const { result, error } = await axiosCall<{ id: string; url: string }>(
-          uploadImg(formData),
+          api.uploadImg(formData),
         );
         if (!error && result) {
           onChangeImage({
@@ -136,7 +136,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
         const formData = new FormData();
         formData.append('file', file);
         const { result, error } = await axiosCall<{ id: string; url: string }>(
-          uploadImg(formData),
+          api.uploadImg(formData),
         );
         if (!error && result) {
           onChangeImage({

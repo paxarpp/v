@@ -1,9 +1,9 @@
-import { getCorporates } from '../../api';
+import { pl } from '../../api';
 
 const loaderCorporates = async () => {
   const {
     data: { result, error },
-  } = await getCorporates();
+  } = await pl.getCorporates();
   return { corporates: result, error };
 };
 

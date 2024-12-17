@@ -1,10 +1,10 @@
-import { getLongCamps } from '../../api';
+import { pl } from '../../api';
 import { ICampItem } from './interfaces';
 
 const loaderLongCamps = async () => {
   const {
     data: { result, error },
-  } = await getLongCamps<ICampItem>();
+  } = await pl.getLongCamps<ICampItem>();
   return { longCamps: result, error };
 };
 

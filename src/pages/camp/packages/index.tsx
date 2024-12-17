@@ -4,12 +4,12 @@ import People from '../../../assets/people.svg?react';
 import Tour from '../../../assets/tour.svg?react';
 import { Route } from '../+types';
 import { useAuth, useUser } from '../../../context';
-import { campReservation } from '../../../api';
+import { api, creatorRequest } from '../../../api';
 import styles from '../index.module.css';
 
 export const Packages = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
-  const { user } = useUser();
+  const { user, logout } = useUser();
   const { toggleAuthOpen } = useAuth();
   const [showPricesInfo, setShowPricesInfo] = useState<Record<string, boolean>>(
     {},
@@ -28,7 +28,8 @@ export const Packages = () => {
       if (user) {
         const campId = camp.id;
         const userId = user.id;
-        const resp = await campReservation(campId, userId);
+        const axiosCall = creatorRequest(logout);
+        await axiosCall(api.campReservation(campId, userId));
       }
     };
     if (user) {

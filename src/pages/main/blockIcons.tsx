@@ -1,8 +1,8 @@
 import BestGroup from '../../assets/bestGroup.svg?react';
 import RightWay from '../../assets/rightWay.svg?react';
 import Actions from '../../assets/actions.svg?react';
-import styles from './index.module.css';
 import { useDeviceDetect } from '../../hooks';
+import styles from './index.module.css';
 
 export const BlockIcons = () => {
   const { isMobile } = useDeviceDetect();

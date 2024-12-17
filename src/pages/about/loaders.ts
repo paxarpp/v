@@ -1,10 +1,10 @@
-import { getAbout } from '../../api';
+import { pl } from '../../api';
 import { IAbout } from './interfaces';
 
 const loaderAbout = async () => {
   const {
     data: { result, error },
-  } = await getAbout<IAbout>();
+  } = await pl.getAbout<IAbout>();
   return { about: result, error };
 };
 

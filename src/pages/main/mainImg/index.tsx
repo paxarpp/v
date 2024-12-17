@@ -4,7 +4,7 @@ import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import { IMainBlock } from '../interfaces';
 import { Modal } from '../../../templates/modal';
-import { updateMainBlock } from '../../../api';
+import { api } from '../../../api';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
 import styles from '../index.module.css';
@@ -30,7 +30,7 @@ export const MainImg: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const { error } = await updateMainBlock(main as IMainBlock);
+    const { error } = await api.updateMainBlock(main as IMainBlock);
     if (!error) {
       closeModal();
       revalidator.revalidate();

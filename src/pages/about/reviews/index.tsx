@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
-import { IAbout, IReview } from '../interfaces';
+import { IReview } from '../interfaces';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { Modal } from '../../../templates/modal';
-import { creatorRequest, deleteRvw, updateReview } from '../../../api';
+import { creatorRequest, api } from '../../../api';
 import { useUser } from '../../../context';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
+import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Reviews = () => {
-  const {
-    about: { reviews },
-  } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { reviews } = about;
   const { isMobile } = useDeviceDetect();
 
   const revalidator = useRevalidator();
@@ -77,7 +77,7 @@ export const Reviews = () => {
       if (currentReview) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall(
-          updateReview({ ...currentReview }),
+          api.updateReview({ ...currentReview }),
         );
         if (!error) {
           onClose();
@@ -92,7 +92,7 @@ export const Reviews = () => {
     const delC = async () => {
       if (currentId) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(deleteRvw(currentId));
+        const { error } = await axiosCall(api.deleteRvw(currentId));
         if (!error) {
           onClose();
           revalidator.revalidate();

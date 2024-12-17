@@ -1,10 +1,10 @@
-import { getShortCamps } from '../../api';
+import { pl } from '../../api';
 import { ICampItem } from './interfaces';
 
 const loaderShortCamps = async () => {
   const {
     data: { result, error },
-  } = await getShortCamps<ICampItem>();
+  } = await pl.getShortCamps<ICampItem>();
   return { shortCamps: result, error };
 };
 

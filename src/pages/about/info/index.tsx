@@ -6,7 +6,7 @@ import { IAbout } from '../interfaces';
 import { useUser } from '../../../context';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
-import { creatorRequest, updateAbout } from '../../../api';
+import { creatorRequest, api } from '../../../api';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 
@@ -31,7 +31,7 @@ export const Info = () => {
     const saveA = async () => {
       if (currentAbout) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(updateAbout({ ...currentAbout }));
+        const { error } = await axiosCall(api.updateAbout({ ...currentAbout }));
         if (!error) {
           closeModal();
           revalidator.revalidate();

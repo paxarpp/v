@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Modal } from '../templates/modal';
-import { login, signup, campReservationWithoutUser } from '../api';
+import { api } from '../api';
 import { IUser } from './interface';
 import { useUser } from '../context';
 import { InputStyled } from '../templates/input';
@@ -20,7 +20,7 @@ export const Auth: React.FC<{
 
   const authing = () => {
     const authLogin = async () => {
-      const user = await login<{
+      const user = await api.login<{
         data?: IUser & { cookie: string };
       }>(username, password);
       if (user?.data) {
@@ -38,7 +38,7 @@ export const Auth: React.FC<{
 
   const sign = () => {
     const authSign = async () => {
-      const user = await signup<{
+      const user = await api.signup<{
         data?: IUser & { cookie: string };
       }>(username, password, telephone, confirmPassword);
       if (user?.data) {
@@ -56,7 +56,7 @@ export const Auth: React.FC<{
 
   const reserv = () => {
     const reserved = async () => {
-      const error = await campReservationWithoutUser(
+      await api.campReservationWithoutUser(
         campId as string,
         username,
         telephone,

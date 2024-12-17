@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
-import {
-  campConfirm,
-  creatorRequest,
-  updateUserReservation,
-} from '../../../api';
+import { api, creatorRequest } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import { Route } from '../+types';
 import styles from '../index.module.css';
@@ -37,7 +33,7 @@ export const Users = () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
-        campConfirm(campId, user.id, !user.bookingConfirmed),
+        api.campConfirm(campId, user.id, !user.bookingConfirmed),
       );
       if (!error) {
         revalidator.revalidate();
@@ -59,7 +55,7 @@ export const Users = () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
-        updateUserReservation({
+        api.updateUserReservation({
           campId,
           ...newUser,
         }),

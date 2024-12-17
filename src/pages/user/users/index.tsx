@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
-import {
-  creatorRequest,
-  updateUserReservation,
-  deleteUserReservation,
-} from '../../../api';
+import { api, creatorRequest } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import Pencil from '../../../assets/pencil.svg?react';
 import Basket from '../../../assets/basket.svg?react';
@@ -40,7 +36,7 @@ export const Users = () => {
     const update = async () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
-        updateUserReservation(
+        api.updateUserReservation(
           newUser?.id
             ? {
                 ...newUser,
@@ -78,7 +74,7 @@ export const Users = () => {
   const deleteUser = (id: string) => {
     const deleteU = async () => {
       const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall(deleteUserReservation(id));
+      const { error } = await axiosCall(api.deleteUserReservation(id));
       if (!error) {
         closeModal();
         revalidator.revalidate();

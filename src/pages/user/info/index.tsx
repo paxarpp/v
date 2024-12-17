@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
-import { IUser } from '../interfaces';
 import { useUser } from '../../../context';
-import { logout as apiLogout } from '../../../api';
+import { api } from '../../../api';
 import Pencil from '../../../assets/pencil.svg?react';
 import { ModalInfo } from './modalInfo';
 import { ModalPass } from './modalPass';
@@ -19,7 +18,7 @@ export const Info = () => {
   const { logout } = useUser();
 
   const onLogout = () => {
-    apiLogout();
+    api.logout();
     logout();
   };
 

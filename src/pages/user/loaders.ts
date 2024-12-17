@@ -1,10 +1,10 @@
-import { getUser } from '../../api';
+import { pl } from '../../api';
 import { IUser } from './interfaces';
 
 const loaderUser = async (id: string) => {
   const {
     data: { result, error },
-  } = await getUser<IUser>(id);
+  } = await pl.getUser<IUser>(id);
   return { user: result, error };
 };
 

@@ -8,7 +8,7 @@ import { useUser } from '../../../context';
 import { useState } from 'react';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
-import { creatorRequest, updateActivity, deleteAct } from '../../../api';
+import { creatorRequest, api } from '../../../api';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 
@@ -70,7 +70,7 @@ export const Activities = () => {
       if (currentActivity) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall(
-          updateActivity({ ...currentActivity }),
+          api.updateActivity({ ...currentActivity }),
         );
         if (!error) {
           onClose();
@@ -85,7 +85,7 @@ export const Activities = () => {
     const delC = async () => {
       if (currentId) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(deleteAct(currentId));
+        const { error } = await axiosCall(api.deleteAct(currentId));
         if (!error) {
           onClose();
           revalidator.revalidate();

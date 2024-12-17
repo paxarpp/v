@@ -5,7 +5,7 @@ import Setting from '../../../assets/setting.svg?react';
 import Basket from '../../../assets/basket.svg?react';
 import { IQuestion } from '../interfaces';
 import { Modal } from '../../../templates/modal';
-import { updateQuestion, getQuestions } from '../../../api';
+import { api } from '../../../api';
 import { useUser } from '../../../context';
 import { Route } from '../+types';
 import styles from '../index.module.css';
@@ -24,7 +24,7 @@ export const Collapsed: React.FC = () => {
     const getQ = async () => {
       setLoading(true);
       setQuestions([]);
-      const { questions, error } = await getQuestions<IQuestion>();
+      const { questions, error } = await api.getQuestions<IQuestion>();
       if (!error) {
         setQuestions(questions);
       }
@@ -44,7 +44,7 @@ export const Collapsed: React.FC = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const { error } = await updateQuestion(questions);
+    const { error } = await api.updateQuestion(questions);
     setLoading(false);
     if (!error) {
       closeModal();

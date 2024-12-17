@@ -1,10 +1,10 @@
-import { getCamp } from '../../api';
+import { pl } from '../../api';
 import { ICampItem } from './interfaces';
 
 const loaderCamp = async (id: string) => {
   const {
     data: { result, error },
-  } = await getCamp<ICampItem>(id);
+  } = await pl.getCamp<ICampItem>(id);
   return { camp: result, error };
 };
 

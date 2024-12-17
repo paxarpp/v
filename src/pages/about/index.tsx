@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Await } from 'react-router';
-import { IAbout } from './interfaces';
 import { Info } from './info';
 import { Activities } from './activities';
 import { Master } from './master';

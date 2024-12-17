@@ -1,9 +1,9 @@
-import { getTournaments } from '../../api';
+import { pl } from '../../api';
 
 const loaderTournaments = async () => {
   const {
     data: { result, error },
-  } = await getTournaments();
+  } = await pl.getTournaments();
   return { tournaments: result, error };
 };
 

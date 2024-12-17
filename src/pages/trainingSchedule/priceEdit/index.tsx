@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
-import {
-  getShedulePrice,
-  updateShedulePrice,
-  deleteShedulePrice,
-  creatorRequest,
-} from '../../../api';
+import { api, pl, creatorRequest } from '../../../api';
 import { IPrice } from '../interfaces';
 import { useUser } from '../../../context';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -31,7 +26,9 @@ export const PriceEdit: React.FC<{
       // edit
       const getP = async (id: string) => {
         const axiosCall = creatorRequest(logout);
-        const { result, error } = await axiosCall<IPrice>(getShedulePrice(id));
+        const { result, error } = await axiosCall<IPrice>(
+          pl.getShedulePrice(id),
+        );
         if (!error && result?.data) {
           setPrice({ ...result.data.result });
         }
@@ -48,7 +45,7 @@ export const PriceEdit: React.FC<{
       if (currentPrice) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall(
-          updateShedulePrice({ ...currentPrice }),
+          api.updateShedulePrice({ ...currentPrice }),
         );
         if (!error) {
           onClose();
@@ -63,7 +60,9 @@ export const PriceEdit: React.FC<{
     const delC = async () => {
       if (currentPrice?.id) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(deleteShedulePrice(currentPrice.id));
+        const { error } = await axiosCall(
+          api.deleteShedulePrice(currentPrice.id),
+        );
         if (!error) {
           onClose();
           revalidator.revalidate();

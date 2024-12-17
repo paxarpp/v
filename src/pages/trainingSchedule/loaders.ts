@@ -1,16 +1,16 @@
-import { getShedule, getPrice } from '../../api';
+import { pl } from '../../api';
 import { IPrice, IShedule } from './interfaces';
 
 const loaderShedule = async () => {
   const {
     data: { result, error },
-  } = await getShedule<IShedule>();
+  } = await pl.getShedule<IShedule>();
   return { trainingShedule: result, error };
 };
 const loaderPrice = async () => {
   const {
     data: { result, error },
-  } = await getPrice<IPrice>();
+  } = await pl.getPrice<IPrice>();
   return { prices: result, error };
 };
 

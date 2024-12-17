@@ -1,9 +1,9 @@
-import { getAppInfo } from '../api';
+import { pl } from '../api';
 
 const loaderApp = async () => {
   const {
     data: { result, error },
-  } = await getAppInfo();
+  } = await pl.getAppInfo();
   return { app: result, error };
 };
 

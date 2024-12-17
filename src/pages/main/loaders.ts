@@ -1,10 +1,10 @@
-import { getHome } from '../../api';
+import { pl } from '../../api';
 import { IHome } from './interfaces';
 
 const loaderHome = async () => {
   const {
     data: { result, error },
-  } = await getHome<IHome>();
+  } = await pl.getHome<IHome>();
   return { home: result, error };
 };
 
