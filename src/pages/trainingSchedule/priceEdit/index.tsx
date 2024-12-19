@@ -4,7 +4,6 @@ import { Modal } from '../../../templates/modal';
 import { api, pl, creatorRequest } from '../../../api';
 import { IPrice } from '../interfaces';
 import { useUser } from '../../../context';
-import 'react-datepicker/dist/react-datepicker.css';
 import styles from '../index.module.css';
 
 export const PriceEdit: React.FC<{

@@ -4,9 +4,8 @@ import { Modal } from '../../../templates/modal';
 import { api, creatorRequest } from '../../../api';
 import { ISheduleGroup } from '../interfaces';
 import { useUser } from '../../../context';
-import 'react-datepicker/dist/react-datepicker.css';
-import styles from '../index.module.css';
 import { weekDays } from '../sheduleTable';
+import styles from '../index.module.css';
 
 export const nameDay: Record<(typeof weekDays)['number'], string> = {
   MONDAY: 'Понедельник',
