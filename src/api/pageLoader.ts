@@ -75,13 +75,6 @@ export const pl = {
       return { data: { result: [], error: (e as Error).message } };
     }
   },
-  getShedulePrice: async <T>(
-    id: string,
-  ): Promise<{
-    data: { result: T; error?: string };
-  }> => {
-    return await instance.get(`/shedule/price/${id}`);
-  },
   getSheduleTrein: async <T>(
     id: string,
   ): Promise<{
@@ -107,24 +100,6 @@ export const pl = {
       return await instance.get(`/about`);
     } catch (e: unknown) {
       return { data: { result: {} as T, error: (e as Error).message } };
-    }
-  },
-  getPackages: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
-  }> => {
-    try {
-      return await instance.get('/package-card/dropdown');
-    } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
-    }
-  },
-  getCoachesDropdown: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
-  }> => {
-    try {
-      return await instance.get('/coaches/all');
-    } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
     }
   },
   getQuestionAll: async <T>(): Promise<{

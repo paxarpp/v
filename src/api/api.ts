@@ -5,7 +5,11 @@ import { IUserInfo } from '../pages/user/interfaces';
 import { IPass } from '../pages/user/info/modalPass';
 import { IActivity, IReview } from '../pages/about/interfaces';
 import { instance } from '.';
-import { IPrice, IShedule, ISheduleGroup } from '../pages/trainingSchedule/interfaces';
+import {
+  IPrice,
+  IShedule,
+  ISheduleGroup,
+} from '../pages/trainingSchedule/interfaces';
 
 export const api = {
   updateAbout: async <T>(
@@ -236,9 +240,9 @@ export const api = {
     data: { result: T; error?: string };
   }> => {
     if (body.id) {
-      return await instance.put(`/shedule/price/${body.id}`, body);
+      return await instance.put(`/price/${body.id}`, body);
     } else {
-      return await instance.post('/shedule/price', body);
+      return await instance.post('/price', body);
     }
   },
   updateSheduleTrein: async <T>(
@@ -275,7 +279,7 @@ export const api = {
   ): Promise<{
     data: { result: boolean; error?: string };
   }> => {
-    return await instance.delete(`/shedule/price/${id}`);
+    return await instance.delete(`/price/${id}`);
   },
   deleteSheduleTrein: async (
     id: string,
@@ -297,5 +301,37 @@ export const api = {
     data: { result: boolean; error?: string };
   }> => {
     return await instance.delete(`/review/${id}`);
+  },
+  getPackages: async <T>(): Promise<{
+    data: { result: T[]; error?: string };
+  }> => {
+    return await instance.get('/package-card/dropdown');
+  },
+  updatePackage: async <T>(body: {
+    packageId: string | null;
+  }): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    if (body.packageId) {
+      return await instance.put('/package-card', body);
+    } else {
+      return await instance.post('/package-card', body);
+    }
+  },
+  deletePackage: async (
+    id: string,
+  ): Promise<{
+    data: { result: boolean; error?: string };
+  }> => {
+    return await instance.delete(`/package-card/${id}`);
+  },
+  getCoachesDropdown: async <T>(): Promise<{
+    data: { result: T[]; error?: string };
+  }> => {
+    try {
+      return await instance.get('/coaches/all');
+    } catch (e: unknown) {
+      return { data: { result: [], error: (e as Error).message } };
+    }
   },
 };

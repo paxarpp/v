@@ -28,7 +28,7 @@ export const CampEdit: React.FC<{
     const getPacks = async () => {
       const axiosCall = creatorRequest(logout);
       setPacks([]);
-      const { result } = await axiosCall<IPackage[]>(pl.getPackages());
+      const { result } = await axiosCall<IPackage[]>(api.getPackages());
       if (result?.data.result) {
         setPacks([...result.data.result]);
       }
@@ -36,7 +36,7 @@ export const CampEdit: React.FC<{
     const getCoachesAll = async () => {
       const axiosCall = creatorRequest(logout);
       setCoaches([]);
-      const { result } = await axiosCall<ICoach[]>(pl.getCoachesDropdown());
+      const { result } = await axiosCall<ICoach[]>(api.getCoachesDropdown());
       if (result?.data.result) {
         setCoaches([...result.data.result]);
       }
@@ -170,7 +170,6 @@ export const CampEdit: React.FC<{
       } as ICampItem;
     });
   };
-
   const onChangeCoach = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedId = e.target.value;
     const isDeselect = !!currentCamp?.coaches.some(
@@ -189,7 +188,6 @@ export const CampEdit: React.FC<{
       } as ICampItem;
     });
   };
-
   const onChangePackForCamp = (
     e: ChangeEvent<HTMLInputElement>,
     packageId: number,

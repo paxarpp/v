@@ -26,11 +26,11 @@ export const PriceEdit: React.FC<{
       // edit
       const getP = async (id: string) => {
         const axiosCall = creatorRequest(logout);
-        const { result, error } = await axiosCall<IPrice>(
-          pl.getShedulePrice(id),
+        const { result, error } = await axiosCall<IPrice[]>(
+          pl.getPrice<IPrice>(),
         );
         if (!error && result?.data) {
-          setPrice({ ...result.data.result });
+          setPrice({ ...result.data.result.find((p) => p.id === id) });
         }
       };
       getP(priceId);
