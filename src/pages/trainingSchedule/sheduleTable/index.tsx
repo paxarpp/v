@@ -9,7 +9,7 @@ import { useUser } from '../../../context';
 import { TreinEdit } from '../treinEdit';
 import styles from '../index.module.css';
 
-const weekDays = [
+export const weekDays = [
   'MONDAY',
   'TUESDAY',
   'WEDNESDAY',

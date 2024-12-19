@@ -220,3 +220,14 @@
 .shedule_round {
   width: 36px;
 }
+
+.row_day {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.col_day {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 50%;
+}

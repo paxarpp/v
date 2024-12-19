@@ -251,9 +251,9 @@ export const api = {
     data: { result: T; error?: string };
   }> => {
     if (body.id) {
-      return await instance.put(`/shedule/trein/${body.id}`, body);
+      return await instance.put(`/shedule/${body.id}`, body);
     } else {
-      return await instance.post('/shedule/trein', body);
+      return await instance.post('/shedule', body);
     }
   },
   updateCampLong: async <T>(
@@ -333,5 +333,12 @@ export const api = {
     } catch (e: unknown) {
       return { data: { result: [], error: (e as Error).message } };
     }
+  },
+  getShedule: async <T>(
+    id: string,
+  ): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    return await instance.get(`/shedule/${id}`);
   },
 };
