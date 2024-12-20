@@ -122,6 +122,7 @@ export const TreinEdit: React.FC<{
           className={styles.input_field}
         />
         {weekDays.map((dayName) => {
+          const hasDay = !!currentTrein?.days.some((d) => d.id === dayName);
           return (
             <div key={dayName} className={styles.day}>
               <label>{nameDay[dayName]}</label>
@@ -133,29 +134,25 @@ export const TreinEdit: React.FC<{
                       currentTrein?.days.find((d) => d.id === dayName)?.time
                     }
                     onChange={(e) => {
-                      const treinIndex =
-                        currentTrein?.days.findIndex((d) => d.id === dayName) ||
-                        -1;
                       setTrein((prevTrein) =>
                         prevTrein
                           ? {
                               ...prevTrein,
-                              days:
-                                treinIndex >= 0
-                                  ? prevTrein.days.map((d) => {
-                                      if (d.id === dayName) {
-                                        return {
-                                          ...d,
-                                          time: e.target.value,
-                                        };
-                                      }
-                                      return d;
-                                    })
-                                  : prevTrein.days.concat({
-                                      id: dayName,
-                                      time: e.target.value,
-                                      address: '',
-                                    }),
+                              days: hasDay
+                                ? prevTrein.days.map((d) => {
+                                    if (d.id === dayName) {
+                                      return {
+                                        ...d,
+                                        time: e.target.value,
+                                      };
+                                    }
+                                    return d;
+                                  })
+                                : prevTrein.days.concat({
+                                    id: dayName,
+                                    time: e.target.value,
+                                    address: '',
+                                  }),
                             }
                           : {
                               name: '',
@@ -180,29 +177,25 @@ export const TreinEdit: React.FC<{
                       currentTrein?.days.find((d) => d.id === dayName)?.address
                     }
                     onChange={(e) => {
-                      const treinIndex =
-                        currentTrein?.days.findIndex((d) => d.id === dayName) ||
-                        -1;
                       setTrein((prevTrein) =>
                         prevTrein
                           ? {
                               ...prevTrein,
-                              days:
-                                treinIndex >= 0
-                                  ? prevTrein.days.map((d) => {
-                                      if (d.id === dayName) {
-                                        return {
-                                          ...d,
-                                          address: e.target.value,
-                                        };
-                                      }
-                                      return d;
-                                    })
-                                  : prevTrein.days.concat({
-                                      id: dayName,
-                                      address: e.target.value,
-                                      time: '',
-                                    }),
+                              days: hasDay
+                                ? prevTrein.days.map((d) => {
+                                    if (d.id === dayName) {
+                                      return {
+                                        ...d,
+                                        address: e.target.value,
+                                      };
+                                    }
+                                    return d;
+                                  })
+                                : prevTrein.days.concat({
+                                    id: dayName,
+                                    address: e.target.value,
+                                    time: '',
+                                  }),
                             }
                           : {
                               name: '',
