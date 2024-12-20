@@ -52,7 +52,7 @@ export const Activities = () => {
   };
   const onChangeImageMass = (img: IImageBase) => {
     const newImg = {
-      entityId: null,
+      entityId: currentActivity ? currentActivity.id : null,
       ...img,
     };
     setActivity((prevA) => ({

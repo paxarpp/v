@@ -206,8 +206,8 @@ export const api = {
   ): Promise<{
     data: { result: T; error?: string };
   }> => {
-    if (body.images?.[0].entityId) {
-      return await instance.put(`/activity/${body.images[0].entityId}`, body);
+    if (body.id) {
+      return await instance.put(`/activity/${body.id}`, body);
     } else {
       return await instance.post('/activity', body);
     }
