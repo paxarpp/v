@@ -26,7 +26,7 @@ export const Activities = () => {
 
   const openEditActivity = (id?: string | null) => {
     if (id) {
-      const activity = activities.find((a) => a.images?.[0]?.entityId === id);
+      const activity = activities.find((a) => a.id === id);
       if (activity) {
         setId(id);
         setActivity({ ...activity });
@@ -133,13 +133,13 @@ export const Activities = () => {
       ) : null}
       {activities?.map((act) => {
         return (
-          <div className={styles.activity_card} key={act.name}>
+          <div className={styles.activity_card} key={act.id}>
             <span className={styles.activity_title}>
               <Ball />
               {act.name}
               {isAdmin ? (
                 <Setting
-                  onClick={() => openEditActivity(act.images?.[0].entityId)}
+                  onClick={() => openEditActivity(act.id)}
                   className={styles.setting_activity}
                 />
               ) : null}

@@ -40,6 +40,7 @@ interface IImage {
 }
 
 export interface IActivity {
+  id: string | null;
   name: string;
   images: null | IImage[];
 }
