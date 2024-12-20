@@ -5,11 +5,7 @@ import { IUserInfo } from '../pages/user/interfaces';
 import { IPass } from '../pages/user/info/modalPass';
 import { IActivity, IReview } from '../pages/about/interfaces';
 import { instance } from '.';
-import {
-  IPrice,
-  IShedule,
-  ISheduleGroup,
-} from '../pages/trainingSchedule/interfaces';
+import { IPrice, ISheduleGroup } from '../pages/trainingSchedule/interfaces';
 
 export const api = {
   updateAbout: async <T>(
@@ -48,10 +44,11 @@ export const api = {
   ): Promise<{
     data: { result: boolean; error?: string };
   }> => {
-    return await instance.put('/camp-user', {
+    return await instance.post('/camp-user', {
       campId,
       userId: null,
       username,
+      telephone,
     });
   },
   campConfirm: async (
