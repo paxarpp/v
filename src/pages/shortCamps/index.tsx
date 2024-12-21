@@ -4,10 +4,15 @@ import { CallMe } from '../../templates/callme';
 import { CampInfoIcons } from './campInfoIcons';
 import { CampsList } from './campsList';
 import { Route } from './+types';
-import { loaderPageShortCamps } from './loaders';
+import { ICampItem } from './interfaces';
+import { pl } from '../../api';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
-  return await loaderPageShortCamps();
+  const {
+    data: { result, error },
+  } = await pl.getShortCamps<ICampItem>();
+  return { shortCamps: result, error };
 }
 
 export default function ShortCamps({ loaderData }: Route.ComponentProps) {

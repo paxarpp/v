@@ -4,6 +4,7 @@ import { SheduleTable } from './sheduleTable';
 import { loaderPageShedule } from './loaders';
 import styles from './index.module.css';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
   return await loaderPageShedule();
 }

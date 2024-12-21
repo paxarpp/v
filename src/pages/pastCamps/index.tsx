@@ -2,11 +2,16 @@ import { Suspense } from 'react';
 import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { CampsList } from './campsList';
-import { loaderPagePastCamps } from './loaders';
 import { Route } from './+types';
+import { ICampItem } from './interfaces';
+import { pl } from '../../api';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
-  return await loaderPagePastCamps();
+  const {
+    data: { result, error },
+  } = await pl.getPastCamps<ICampItem>();
+  return { pastCamps: result, error };
 }
 
 export default function PastCamps({ loaderData }: Route.ComponentProps) {
