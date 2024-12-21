@@ -4,7 +4,8 @@ import People from '../../../assets/people.svg?react';
 import Tour from '../../../assets/tour.svg?react';
 import { Route } from '../+types';
 import { useAuth, useUser } from '../../../context';
-import { api, creatorRequest } from '../../../api';
+import { api } from '../../../api/api';
+import { creatorRequest } from '../../../api';
 import imgUrl from '../../../assets/pack_back.jpg';
 import styles from '../index.module.css';
 

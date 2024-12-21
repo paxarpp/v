@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
-import { api, pl, creatorRequest } from '../../../api';
+import { api } from '../../../api/api';
+import { pl } from '../../../api/pageLoader';
+import { creatorRequest } from '../../../api';
 import { IPrice } from '../interfaces';
 import { useUser } from '../../../context';
 import styles from '../index.module.css';

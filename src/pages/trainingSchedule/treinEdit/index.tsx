@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
-import { api, creatorRequest } from '../../../api';
+import { api } from '../../../api/api';
+import { creatorRequest } from '../../../api';
 import { ISheduleGroup } from '../interfaces';
 import { useUser } from '../../../context';
 import { weekDays } from '../sheduleTable';

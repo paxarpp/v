@@ -4,7 +4,7 @@ import { Collapsed } from './collapsed';
 import { Contacts } from './contacts';
 import { CampsScroller } from './campsScroller';
 import { MainImg } from './mainImg';
-import { pl } from '../../api';
+import { pl } from '../../api/pageLoader';
 import { IHome } from './interfaces';
 
 // eslint-disable-next-line react-refresh/only-export-components

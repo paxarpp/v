@@ -1,6 +1,6 @@
 import { CoachesList } from './coachesList';
 import { ICoach } from './interfaces';
-import { pl } from '../../api';
+import { pl } from '../../api/pageLoader';
 import styles from './index.module.css';
 
 // eslint-disable-next-line react-refresh/only-export-components

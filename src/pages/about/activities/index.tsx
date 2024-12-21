@@ -8,7 +8,8 @@ import { useUser } from '../../../context';
 import { useState } from 'react';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
-import { creatorRequest, api } from '../../../api';
+import { creatorRequest } from '../../../api';
+import { api } from '../../../api/api';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 

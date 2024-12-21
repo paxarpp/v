@@ -1,5 +1,5 @@
 import { CoachesList } from './coachesList';
-import { pl } from '../../api';
+import { pl } from '../../api/pageLoader';
 import { ICoach } from './interfaces';
 import styles from './index.module.css';
 

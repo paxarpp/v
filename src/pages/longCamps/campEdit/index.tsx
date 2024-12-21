@@ -1,7 +1,9 @@
 import { useEffect, useState, ChangeEvent } from 'react';
 import { useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
-import { api, pl, creatorRequest } from '../../../api';
+import { pl } from '../../../api/pageLoader';
+import { api } from '../../../api/api';
+import { creatorRequest } from '../../../api';
 import { ICampItem, ICoach, IImage, IPackage } from '../interfaces';
 import { useUser } from '../../../context';
 import {

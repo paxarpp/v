@@ -3,9 +3,6 @@ import axios, { AxiosError } from 'axios';
 const BASE_URL = '/magicvolley';
 export const instance = axios.create({ baseURL: BASE_URL });
 
-export { pl } from './pageLoader';
-export { api } from './api';
-
 export const creatorRequest =
   (logout: () => void, closable = true) =>
   async <T = unknown>(

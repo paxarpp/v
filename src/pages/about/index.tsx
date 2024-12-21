@@ -3,7 +3,7 @@ import { Activities } from './activities';
 import { Master } from './master';
 import { Videos } from './videos';
 import { Reviews } from './reviews';
-import { pl } from '../../api';
+import { pl } from '../../api/pageLoader';
 import { IAbout } from './interfaces';
 
 // eslint-disable-next-line react-refresh/only-export-components

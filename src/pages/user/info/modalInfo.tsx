@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
-import { creatorRequest, api } from '../../../api';
+import { creatorRequest } from '../../../api';
+import { api } from '../../../api/api';
 import { useUser } from '../../../context';
 import { IUserInfo } from '../interfaces';
 import { InputStyled } from '../../../templates/input';

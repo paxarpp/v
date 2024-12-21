@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { useUser } from '../../../context';
-import { api } from '../../../api';
+import { api } from '../../../api/api';
 import Pencil from '../../../assets/pencil.svg?react';
 import { ModalInfo } from './modalInfo';
 import { ModalPass } from './modalPass';

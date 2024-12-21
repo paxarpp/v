@@ -6,7 +6,8 @@ import { IAbout } from '../interfaces';
 import { useUser } from '../../../context';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
-import { creatorRequest, api } from '../../../api';
+import { creatorRequest } from '../../../api';
+import { api } from '../../../api/api';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 

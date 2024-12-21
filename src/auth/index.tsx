@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Modal } from '../templates/modal';
-import { api } from '../api';
+import { api } from '../api/api';
 import { IUser } from './interface';
 import { useUser } from '../context';
 import { InputStyled } from '../templates/input';

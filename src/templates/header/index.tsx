@@ -12,7 +12,7 @@ import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
 import { IUser } from '../../auth/interface';
 import { createLinkTg } from '../../constants';
-import { api } from '../../api';
+import { api } from '../../api/api';
 import styles from './index.module.css';
 import { AxiosError } from 'axios';
 

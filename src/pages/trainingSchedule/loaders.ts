@@ -1,4 +1,4 @@
-import { pl } from '../../api';
+import { pl } from '../../api/pageLoader';
 import { IPrice, IShedule } from './interfaces';
 
 const loaderShedule = async () => {

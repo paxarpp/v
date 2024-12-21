@@ -1,4 +1,4 @@
-import { pl } from '../api';
+import { pl } from '../api/pageLoader';
 
 const loaderApp = async () => {
   const {
