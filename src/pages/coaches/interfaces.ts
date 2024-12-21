@@ -15,6 +15,7 @@ export interface IImage {
   contentType: string;
   size: number;
   typeEntity: typeEntity;
+  entityId: string | null;
   url: string;
 }
 
@@ -23,6 +24,7 @@ export interface ICoach {
   name: string;
   infos: string[];
   mainImage: IImage | null;
+  images: IImage[];
   promo: string;
   isBeach: boolean;
   isClassic: boolean;

@@ -1,26 +1,23 @@
-import { Suspense } from 'react';
 import { CoachesList } from './coachesList';
-import { loaderPageClassicCoaches } from './loaders';
-import { Await } from 'react-router';
-import { CoachesSkeleton } from './skeleton';
-import { Route } from './+types';
+import { pl } from '../../api';
+import { ICoach } from './interfaces';
 import styles from './index.module.css';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
-  return await loaderPageClassicCoaches();
+  const {
+    data: { result, error },
+  } = await pl.getClassicCoachesAll<ICoach>();
+  return { coaches: result, error };
 }
 
-export default function Coaches({ loaderData }: Route.ComponentProps) {
+export default function Coaches() {
   return (
     <div>
       <h1 className={styles.title}>
         Тренерский состав в школе волейбола Magic Volley
       </h1>
-      <Suspense fallback={<CoachesSkeleton />}>
-        <Await resolve={loaderData.coaches}>
-          <CoachesList />
-        </Await>
-      </Suspense>
+      <CoachesList />
     </div>
   );
 }

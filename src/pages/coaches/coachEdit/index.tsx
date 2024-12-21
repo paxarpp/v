@@ -4,7 +4,11 @@ import { Modal } from '../../../templates/modal';
 import { api, creatorRequest } from '../../../api';
 import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
-import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
+import {
+  IImageBase,
+  ImageSelect,
+  ImagesMassSelect,
+} from '../../../templates/imageSelect';
 import styles from '../index.module.css';
 
 export const CoachEdit: React.FC<{
@@ -28,6 +32,7 @@ export const CoachEdit: React.FC<{
           infos: [],
           promo: '',
           mainImage: null,
+          images: [],
           isBeach: false,
           isClassic: false,
         });
@@ -79,9 +84,28 @@ export const CoachEdit: React.FC<{
     setCoach((prevCoach) => ({
       ...(prevCoach as ICoach),
       mainImage: {
-        typeEntity: 'COACH' as const, // todo typeEntity from url
+        typeEntity: 'COACH' as const,
+        entityId: currentCoach ? currentCoach.id : null,
         ...img,
       },
+    }));
+  };
+
+  const deleteImgMass = (id: string) => {
+    setCoach((prevC) => ({
+      ...(prevC as ICoach),
+      images: prevC?.images ? prevC.images.filter((img) => img.id !== id) : [],
+    }));
+  };
+  const onChangeImageMass = (img: IImageBase) => {
+    const newImg = {
+      entityId: currentCoach ? currentCoach.id : null,
+      typeEntity: 'COACH' as const,
+      ...img,
+    };
+    setCoach((prevC) => ({
+      ...(prevC as ICoach),
+      images: prevC?.images ? prevC.images.concat([newImg]) : [newImg],
     }));
   };
 
@@ -170,6 +194,12 @@ export const CoachEdit: React.FC<{
           />
           {'Классический'}
         </label>
+        <ImagesMassSelect
+          label={'Фотографии тренера'}
+          deleteImg={deleteImgMass}
+          onChangeImage={onChangeImageMass}
+          images={currentCoach?.images}
+        />
       </div>
     </Modal>
   );
