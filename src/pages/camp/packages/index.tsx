@@ -52,7 +52,8 @@ export const Packages = () => {
               alt={pack.name}
               className={styles.back_card}
             />
-            {pack.name.toLocaleLowerCase().includes('tur') ? (
+            {pack.name.toLocaleLowerCase().includes('tur') ||
+            pack.name.toLocaleLowerCase().includes('тур') ? (
               <Tour className={styles.pack_icon} />
             ) : (
               <People className={styles.pack_icon} />
