@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     plugins: [reactRouter(), svgr()],
     server: {
       proxy: {
-        '/magicvolley': 'http://localhost:8081',
+        '/magicvolley': mode !== 'production' ? 'http://localhost:8081' : '',
       },
       port: 3000,
     },
