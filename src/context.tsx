@@ -18,6 +18,11 @@ const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setUser(user);
   };
   const logout = () => {
+    try {
+      localStorage.removeItem('user');
+    } catch (e) {
+      //
+    }
     setUser(null);
     document.cookie = `magicVolley=`;
   };

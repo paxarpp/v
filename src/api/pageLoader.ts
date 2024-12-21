@@ -78,12 +78,12 @@ export const pl = {
   getUser: async <T>(
     id: string,
   ): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
       return await instance.get(`/profiles/${id}`);
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getAbout: async <T>(): Promise<{

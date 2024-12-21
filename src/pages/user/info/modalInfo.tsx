@@ -14,7 +14,7 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
 
-  const [currentInfo, setCurrentInfo] = useState<IUserInfo>(user);
+  const [currentInfo, setCurrentInfo] = useState<IUserInfo | null>(user);
 
   const { logout, user: authUser } = useUser();
 

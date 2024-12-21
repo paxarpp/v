@@ -349,4 +349,14 @@ export const api = {
   }> => {
     return await instance.get(`/shedule/${id}`);
   },
+  notification: {
+    getNotifications: async <T>() => {
+      return await instance.get<{ result: T[] }>('/notifications');
+    },
+    getNotificationCount: async () => {
+      return await instance.get<{ result: number | null }>(
+        '/notifications/count',
+      );
+    },
+  },
 };

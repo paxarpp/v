@@ -151,3 +151,25 @@
 .link_active {
   color: #99660A !important;
 }
+
+.auth_block {
+  position: relative;
+}
+
+.auth_block .notifications_list {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 50px;
+  width: 200px;
+  min-height: 100px;
+  max-height: 200px;
+  overflow:  auto;
+  background-color: black;
+  border-radius: 8px;
+  color: white;
+}
+
+.auth_block:hover .notifications_list {
+  display: block;
+}

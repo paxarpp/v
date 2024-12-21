@@ -5,7 +5,7 @@ import { Scroller } from '../scroller';
 export const NearestCamps = () => {
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
 
-  return user.isAdmin ? null : (
-    <Scroller title={'Мои ближайшие кемпы'} camps={user.nearestCamps} />
+  return user?.isAdmin ? null : (
+    <Scroller title={'Мои ближайшие кемпы'} camps={user?.nearestCamps} />
   );
 };

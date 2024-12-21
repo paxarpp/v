@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import Logo from '../../assets/logo.svg?react';
 import Burger from '../../assets/burger.svg?react';
@@ -12,7 +12,10 @@ import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
 import { IUser } from '../../auth/interface';
 import { createLinkTg } from '../../constants';
+import { api, creatorRequest } from '../../api';
 import styles from './index.module.css';
+import { INotification } from './interfaces';
+import { AxiosError } from 'axios';
 
 interface IProps {
   linkTg: string;
@@ -29,12 +32,14 @@ const createLinkClassName = ({
 }) => (isPending ? styles.link_pending : isActive ? styles.link_active : '');
 
 export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
-  const { user } = useUser();
+  const { user, isAdmin, signin } = useUser();
   const { toggleAuthOpen } = useAuth();
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);
-  const { signin } = useUser();
+  const [notifications, setNotif] = useState<INotification[]>([]);
+  const tN = useRef<number | undefined>(undefined);
+
   useEffect(() => {
     if (!isAuth) {
       const cookie = getCookie();
@@ -51,6 +56,33 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
       }
     }
   }, [isAuth]);
+
+  useEffect(() => {
+    if (isAdmin && !tN.current) {
+      const getNotif = async () => {
+        try {
+          const { result } = await api.notification.getNotifications();
+          if (!result?.data.error && result?.data.result) {
+            setNotif(result.data.result);
+          }
+        } catch (error) {
+          if (error instanceof AxiosError) {
+            if (error.response?.status === 401) {
+              console.log('timerNumber', tN.current);
+              clearInterval(tN.current);
+            }
+          }
+        }
+      };
+      const timer = setInterval(getNotif, 10000);
+      tN.current = timer;
+    } else if (!isAdmin && tN.current) {
+      clearInterval(tN.current);
+    }
+    return () => {
+      clearInterval(tN.current);
+    };
+  }, [isAdmin]);
 
   const togglePopapMenu = () => {
     openPopapMenu((prev) => !prev);
@@ -226,9 +258,18 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
       {isAuth ? (
         <Link
           to={`/user/${(user as unknown as IUser).id}`}
-          className={styles.user_avatar}
+          className={`${styles.user_avatar} ${styles.auth_block}`}
         >
           <Avatar />
+          {notifications.length ? (
+            <div className={styles.notifications_list}>
+              <ul>
+                {notifications.map((n) => (
+                  <li key={n.campId}>{`${n.campName}: ${n.countNewUsers}`}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </Link>
       ) : (
         <button className={styles.button} onClick={() => toggleAuthOpen()}>

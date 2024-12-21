@@ -83,7 +83,7 @@ export const Users = () => {
     deleteU();
   };
 
-  return user.isAdmin ? (
+  return user?.isAdmin ? (
     <div className={styles.column}>
       {isOpen ? (
         <Modal

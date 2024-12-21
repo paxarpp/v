@@ -1,42 +1,33 @@
-import { Suspense, useEffect } from 'react';
-import { Await, useLoaderData } from 'react-router';
+import { useEffect } from 'react';
 import { useUser } from '../../context';
 import { Info } from './info';
 import { NearestCamps } from './nearestCamps';
 import { PastCamps } from './pastCamps';
 import { Users } from './users';
-import { loaderPageUser } from './loaders';
 import { ProtectedRoute } from '../../templates/protectedRoute';
 import { Route } from './+types';
+import { IUser } from './interfaces';
+import { pl } from '../../api';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader({ params: { id } }: Route.ClientLoaderArgs) {
-  return await loaderPageUser(id);
+  const {
+    data: { result, error },
+  } = await pl.getUser<IUser>(id);
+  return { user: result, error };
 }
 
 export default function User({ loaderData }: Route.ComponentProps) {
-  return (
-    <ProtectedRoute>
-      <Suspense fallback={'Загрузка...'}>
-        <Await resolve={loaderData.user}>
-          <UserTemplate />
-        </Await>
-      </Suspense>
-    </ProtectedRoute>
-  );
-}
-
-const UserTemplate = () => {
-  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { logout } = useUser();
 
   useEffect(() => {
-    if (error) {
+    if (loaderData?.error) {
       logout();
     }
-  }, [error]);
+  }, [loaderData?.error]);
 
   return (
-    <>
+    <ProtectedRoute>
       <Info />
 
       <NearestCamps />
@@ -44,6 +35,6 @@ const UserTemplate = () => {
       <PastCamps />
 
       <Users />
-    </>
+    </ProtectedRoute>
   );
-};
+}

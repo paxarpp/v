@@ -7,7 +7,7 @@ export { pl } from './pageLoader';
 export { api } from './api';
 
 export const creatorRequest =
-  (logout: () => void) =>
+  (logout: () => void, closable = true) =>
   async <T = unknown>(
     axiosCall: Promise<{
       data: { result: T; error?: string };
@@ -20,7 +20,9 @@ export const creatorRequest =
         if (error.response?.status === 401) {
           logout();
           // закрыть все открытые модалки
-          window.location.reload();
+          if (closable) {
+            window.location.reload();
+          }
         }
         return {
           error:
