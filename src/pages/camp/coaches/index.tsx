@@ -22,7 +22,7 @@ export const Coaches = () => {
       <CoachProfile coach={coachProfile} onClose={closeCoach} />
       <h2>Тренерский состав кемпа</h2>
       <div className={styles.package_row}>
-        {camp.coaches.map((coach) => {
+        {camp?.coaches.map((coach) => {
           return (
             <div key={coach.id} className={styles.coach_card}>
               <img

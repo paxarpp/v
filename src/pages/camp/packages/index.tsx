@@ -24,6 +24,7 @@ export const Packages = () => {
   };
 
   const onReservation = () => {
+    if (!camp) return;
     const reservation = async () => {
       if (user) {
         const campId = camp.id;
@@ -44,7 +45,7 @@ export const Packages = () => {
       <h2>{'Что входит в стоимость'}</h2>
 
       <div className={styles.package_row}>
-        {camp.packages?.map((pack) => (
+        {camp?.packages?.map((pack) => (
           <div key={pack.packageId} className={styles.pack_card}>
             <img
               src={'/src/assets/pack_back.jpg'}
@@ -56,7 +57,7 @@ export const Packages = () => {
             ) : (
               <People className={styles.pack_icon} />
             )}
-            <h4 className={styles.pack_title}>{`Пакет "${pack.name}"`}</h4>
+            <h4 className={styles.pack_title}>{pack.name}</h4>
             <ul className={styles.pack_info}>
               {pack.info
                 .split(';')

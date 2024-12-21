@@ -8,9 +8,9 @@ export const Info = () => {
 
   return (
     <div className={styles.info_row}>
-      <ImagePack images={camp.images} />
+      <ImagePack images={camp?.images} />
       <ul className={styles.info_list}>
-        {camp.info
+        {camp?.info
           ?.split(';')
           .filter(Boolean)
           .map((inf, i) => <li key={i + 'info'}>{inf}</li>)}

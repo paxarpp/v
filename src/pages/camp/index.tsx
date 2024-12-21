@@ -1,36 +1,35 @@
-import { Suspense } from 'react';
-import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { MainImage } from './mainImage';
 import { Info } from './info';
 import { Packages } from './packages';
 import { Coaches } from './coaches';
 import { Users } from './users';
-import { loaderPageCamp } from './loaders';
 import { Route } from './+types';
+import { ICampItem } from './interfaces';
+import { pl } from '../../api';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader({ params: { id } }: Route.ClientLoaderArgs) {
-  return await loaderPageCamp(id);
+  const {
+    data: { result, error },
+  } = await pl.getCamp<ICampItem>(id);
+  return { camp: result, error };
 }
 
-export default function Camp({ loaderData }: Route.ComponentProps) {
+export default function Camp() {
   return (
-    <Suspense fallback={'Загрузка...'}>
-      <Await resolve={loaderData.camp}>
-        <>
-          <MainImage />
+    <>
+      <MainImage />
 
-          <Info />
+      <Info />
 
-          <Packages />
+      <Packages />
 
-          <Coaches />
+      <Coaches />
 
-          <Users />
+      <Users />
 
-          <CallMe />
-        </>
-      </Await>
-    </Suspense>
+      <CallMe />
+    </>
   );
 }

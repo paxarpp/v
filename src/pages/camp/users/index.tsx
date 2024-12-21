@@ -19,6 +19,8 @@ export const Users = () => {
     isAdmin: boolean;
     isUser: boolean;
     isModerator: boolean;
+    bookingCount: number;
+    campId: string | null;
   }>({
     id: null,
     telephone: '',
@@ -26,9 +28,12 @@ export const Users = () => {
     isAdmin: false,
     isUser: true,
     isModerator: false,
+    bookingCount: 0,
+    campId: null,
   });
 
   const onConfirm = (user: IUser) => {
+    if (!camp) return;
     const confirm = async () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
@@ -51,13 +56,14 @@ export const Users = () => {
   };
 
   const addUser = () => {
+    if (!camp) return;
     const update = async () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
         api.updateUserReservation({
-          campId,
           ...newUser,
+          campId,
         }),
       );
       if (!error) {
@@ -108,6 +114,17 @@ export const Users = () => {
               }
               className={styles.input_field}
             />
+            <label>{'Резерв мест'}</label>
+            <input
+              value={newUser.bookingCount}
+              onChange={(e) =>
+                setNewUser({
+                  ...newUser,
+                  bookingCount: e.target.value ? Number(e.target.value) : 0,
+                })
+              }
+              className={styles.input_field}
+            />
             <label>
               <input
                 type={'radio'}
@@ -130,7 +147,7 @@ export const Users = () => {
           <th>Количество мест</th>
           <th>Бронь</th>
         </tr>
-        {camp.users?.map((user) => (
+        {camp?.users?.map((user) => (
           <tr key={user.id}>
             <td>{user.login}</td>
             <td>{user.telephone}</td>

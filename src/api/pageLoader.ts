@@ -13,12 +13,12 @@ export const pl = {
   getCamp: async <T>(
     id: string,
   ): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
       return await instance.get(`/camps/${id}`);
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getBeachCoachesAll: async <T>(): Promise<{
