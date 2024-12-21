@@ -1,8 +1,11 @@
-import { loaderPageTournaments } from './loaders';
+import { pl } from '../../api';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
-  return await loaderPageTournaments();
+  const {
+    data: { result, error },
+  } = await pl.getTournaments();
+  return { tournaments: result, error };
 }
 
 export default function Tournaments() {
