@@ -5,11 +5,16 @@ import { Activities } from './activities';
 import { Master } from './master';
 import { Videos } from './videos';
 import { Reviews } from './reviews';
-import { loaderPageAbout } from './loaders';
 import { Route } from './+types';
+import { pl } from '../../api';
+import { IAbout } from './interfaces';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
-  return await loaderPageAbout();
+  const {
+    data: { result, error },
+  } = await pl.getAbout<IAbout>();
+  return { about: result, error };
 }
 
 export default function About({ loaderData }: Route.ComponentProps) {

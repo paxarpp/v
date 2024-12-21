@@ -209,13 +209,19 @@ export const Info = () => {
       <h3>{about.subTitleSecond}</h3>
       <div className={isMobile ? styles.row_info_mobile : styles.row_info}>
         <div className={styles.block}>
-          <span className={styles.sub_title}>{'> 35 000 тренировок'}</span>
+          <span
+            className={styles.sub_title}
+          >{`> ${about.numberOfWorkouts} тренировок`}</span>
         </div>
         <div className={styles.block}>
-          <span className={styles.sub_title}>{'> 100 кемпов'}</span>
+          <span
+            className={styles.sub_title}
+          >{`> ${about.numberOfCamps} кемпов`}</span>
         </div>
         <div className={styles.block}>
-          <span className={styles.sub_title}>{'> 3000 учеников'}</span>
+          <span
+            className={styles.sub_title}
+          >{`> ${about.numberOfStudents} учеников`}</span>
         </div>
       </div>
     </>
