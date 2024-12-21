@@ -1,11 +1,8 @@
-import { Suspense } from 'react';
-import { Await } from 'react-router';
 import { Info } from './info';
 import { Activities } from './activities';
 import { Master } from './master';
 import { Videos } from './videos';
 import { Reviews } from './reviews';
-import { Route } from './+types';
 import { pl } from '../../api';
 import { IAbout } from './interfaces';
 
@@ -17,20 +14,18 @@ export async function clientLoader() {
   return { about: result, error };
 }
 
-export default function About({ loaderData }: Route.ComponentProps) {
+export default function About() {
   return (
-    <Suspense fallback={'Загрузка...'}>
-      <Await resolve={loaderData.about}>
-        <Info />
+    <>
+      <Info />
 
-        <Activities />
+      <Activities />
 
-        <Master />
+      <Master />
 
-        <Videos />
+      <Videos />
 
-        <Reviews />
-      </Await>
-    </Suspense>
+      <Reviews />
+    </>
   );
 }

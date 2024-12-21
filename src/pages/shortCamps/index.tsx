@@ -1,9 +1,6 @@
-import { Suspense } from 'react';
-import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { CampInfoIcons } from './campInfoIcons';
 import { CampsList } from './campsList';
-import { Route } from './+types';
 import { ICampItem } from './interfaces';
 import { pl } from '../../api';
 
@@ -15,19 +12,15 @@ export async function clientLoader() {
   return { shortCamps: result, error };
 }
 
-export default function ShortCamps({ loaderData }: Route.ComponentProps) {
+export default function ShortCamps() {
   return (
-    <Suspense fallback={'Загрузка...'}>
-      <Await resolve={loaderData.shortCamps}>
-        <div>
-          <h2>Кемпы выходного дня</h2>
-          <CampInfoIcons />
+    <div>
+      <h2>Кемпы выходного дня</h2>
+      <CampInfoIcons />
 
-          <CampsList />
+      <CampsList />
 
-          <CallMe />
-        </div>
-      </Await>
-    </Suspense>
+      <CallMe />
+    </div>
   );
 }

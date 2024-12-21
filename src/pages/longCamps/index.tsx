@@ -1,9 +1,6 @@
-import { Suspense } from 'react';
-import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { CampInfoIcons } from './campInfoIcons';
 import { CampsList } from './campsList';
-import { Route } from './+types';
 import { ICampItem } from './interfaces';
 import { pl } from '../../api';
 
@@ -15,20 +12,16 @@ export async function clientLoader() {
   return { longCamps: result, error };
 }
 
-export default function LongCamps({ loaderData }: Route.ComponentProps) {
+export default function LongCamps() {
   return (
-    <Suspense fallback={'Загрузка...'}>
-      <Await resolve={loaderData.longCamps}>
-        <div>
-          <h2>Недельные кемпы</h2>
+    <div>
+      <h2>Недельные кемпы</h2>
 
-          <CampInfoIcons />
+      <CampInfoIcons />
 
-          <CampsList />
+      <CampsList />
 
-          <CallMe />
-        </div>
-      </Await>
-    </Suspense>
+      <CallMe />
+    </div>
   );
 }
