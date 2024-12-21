@@ -1,53 +1,16 @@
-import type { RouteConfig } from '@react-router/dev/routes';
+import { index, route, type RouteConfig } from '@react-router/dev/routes';
 
 export default [
-  {
-    index: true,
-    path: '/',
-    file: './pages/main/index.tsx',
-  },
-  {
-    path: '/about',
-    file: './pages/about/index.tsx',
-  },
-  {
-    path: '/beachCoaches',
-    file: './pages/coaches/index.tsx',
-  },
-  {
-    path: '/classicCoaches',
-    file: './pages/coaches/classic.tsx',
-  },
-  {
-    path: '/weekendCamps',
-    file: './pages/shortCamps/index.tsx',
-  },
-  {
-    path: '/camps/:id',
-    file: './pages/camp/index.tsx',
-  },
-  {
-    path: '/longCamps',
-    file: './pages/longCamps/index.tsx',
-  },
-  {
-    path: '/trainingSchedule',
-    file: './pages/trainingSchedule/index.tsx',
-  },
-  {
-    path: '/oldCamps',
-    file: './pages/pastCamps/index.tsx',
-  },
-  {
-    path: '/tournaments',
-    file: './pages/tournaments/index.tsx',
-  },
-  {
-    path: '/corporates',
-    file: './pages/corporates/index.tsx',
-  },
-  {
-    path: '/user/:id',
-    file: './pages/user/index.tsx',
-  },
+  index('./pages/main/index.tsx'),
+  route('/about', './pages/about/index.tsx'),
+  route('/beachCoaches', './pages/coaches/index.tsx'),
+  route('/classicCoaches', './pages/coaches/classic.tsx'),
+  route('/weekendCamps', './pages/shortCamps/index.tsx'),
+  route('/camps/:id', './pages/camp/index.tsx'),
+  route('/longCamps', './pages/longCamps/index.tsx'),
+  route('/trainingSchedule', './pages/trainingSchedule/index.tsx'),
+  route('/oldCamps', './pages/pastCamps/index.tsx'),
+  route('/tournaments', './pages/tournaments/index.tsx'),
+  route('/corporates', './pages/corporates/index.tsx'),
+  route('/user/:id', './pages/user/index.tsx'),
 ] satisfies RouteConfig;
