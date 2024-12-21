@@ -12,9 +12,8 @@ import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
 import { IUser } from '../../auth/interface';
 import { createLinkTg } from '../../constants';
-import { api, creatorRequest } from '../../api';
+import { api } from '../../api';
 import styles from './index.module.css';
-import { INotification } from './interfaces';
 import { AxiosError } from 'axios';
 
 interface IProps {
@@ -37,7 +36,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);
-  const [notifications, setNotif] = useState<INotification[]>([]);
+  const [count, setNotif] = useState<number>(0);
   const tN = useRef<number | undefined>(undefined);
 
   useEffect(() => {
@@ -261,14 +260,8 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
           className={`${styles.user_avatar} ${styles.auth_block}`}
         >
           <Avatar />
-          {notifications.length ? (
-            <div className={styles.notifications_list}>
-              <ul>
-                {notifications.map((n) => (
-                  <li key={n.campId}>{`${n.campName}: ${n.countNewUsers}`}</li>
-                ))}
-              </ul>
-            </div>
+          {count !== 0 ? (
+            <span className={styles.notifications_count}>{count}</span>
           ) : null}
         </Link>
       ) : (
