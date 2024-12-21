@@ -1,36 +1,34 @@
-import { Suspense } from 'react';
-import { Await } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { BlockIcons } from './blockIcons';
 import { Collapsed } from './collapsed';
 import { Contacts } from './contacts';
 import { CampsScroller } from './campsScroller';
 import { MainImg } from './mainImg';
-import { loaderPageMain } from './loaders';
-import { Route } from './+types';
+import { pl } from '../../api';
+import { IHome } from './interfaces';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
-  return await loaderPageMain();
+  const {
+    data: { result, error },
+  } = await pl.getHome<IHome>();
+  return { home: result, error };
 }
 
-export default function Main({ loaderData }: Route.ComponentProps) {
+export default function Main() {
   return (
-    <Suspense fallback={'Загрузка...'}>
-      <Await resolve={loaderData.home}>
-        <div>
-          <MainImg />
+    <div>
+      <MainImg />
 
-          <BlockIcons />
+      <BlockIcons />
 
-          <CampsScroller />
+      <CampsScroller />
 
-          <Collapsed />
+      <Collapsed />
 
-          <Contacts />
+      <Contacts />
 
-          <CallMe />
-        </div>
-      </Await>
-    </Suspense>
+      <CallMe />
+    </div>
   );
 }

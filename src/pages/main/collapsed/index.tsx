@@ -5,30 +5,27 @@ import Setting from '../../../assets/setting.svg?react';
 import Basket from '../../../assets/basket.svg?react';
 import { IQuestion } from '../interfaces';
 import { Modal } from '../../../templates/modal';
-import { api } from '../../../api';
+import { api, creatorRequest } from '../../../api';
 import { useUser } from '../../../context';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
-  const { isAdmin } = useUser();
+  const { isAdmin, logout } = useUser();
 
   const revalidator = useRevalidator();
 
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
-  const [isLoading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<IQuestion[]>([]);
 
   const openEditQuestions = () => {
     const getQ = async () => {
-      setLoading(true);
       setQuestions([]);
       const { questions, error } = await api.getQuestions<IQuestion>();
       if (!error) {
         setQuestions(questions);
       }
-      setLoading(false);
       setError(error);
     };
     getQ();
@@ -38,14 +35,12 @@ export const Collapsed: React.FC = () => {
   const closeModal = () => {
     setQuestions([]);
     setError('');
-    setLoading(false);
     openModal(false);
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
-    const { error } = await api.updateQuestion(questions);
-    setLoading(false);
+    const axiosCall = creatorRequest(logout);
+    const { error } = await axiosCall(api.updateQuestion(questions));
     if (!error) {
       closeModal();
       revalidator.revalidate();
@@ -81,7 +76,6 @@ export const Collapsed: React.FC = () => {
           </div>
         }
       >
-        {isLoading ? 'Загрузка...' : null}
         {error ? (
           error
         ) : (
@@ -173,7 +167,7 @@ const QuestionsTemplate: React.FC = () => {
 
   return (
     <>
-      {home.questions.map((item) => {
+      {home?.questions.map((item) => {
         return (
           <div
             key={item.id}

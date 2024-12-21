@@ -36,7 +36,7 @@ export const Users = () => {
     const update = async () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
-        api.updateUserReservation(
+        api.addUser(
           newUser?.id
             ? {
                 ...newUser,

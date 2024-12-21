@@ -23,24 +23,22 @@ export const Reviews = () => {
   const { isAdmin, logout } = useUser();
   const [reviewOpen, setReviewOpen] = useState<boolean>(false);
   const [currentReview, setReview] = useState<IReview | null>(null);
-  const [currentId, setId] = useState<string | null>(null);
 
   const openEditReview = (id?: string | null) => {
     if (id) {
-      const review = reviews.find((r) => r.image?.entityId === id);
+      const review = reviews.find((r) => r.id === id);
       if (review) {
-        setId(id);
         setReview({ ...review });
         setReviewOpen(true);
       }
     }
   };
   const addReview = () => {
+    setReview({ id: null, name: '', date: '', comment: '', image: null });
     setReviewOpen(true);
   };
 
   const onClose = () => {
-    setId(null);
     setReview(null);
     setReviewOpen(false);
   };
@@ -53,7 +51,7 @@ export const Reviews = () => {
   };
   const onChangeImage = (img: IImageBase) => {
     const newImg = {
-      entityId: null,
+      entityId: currentReview ? currentReview.id : null,
       ...img,
     };
     setReview((prevR) => ({
@@ -90,9 +88,9 @@ export const Reviews = () => {
 
   const deleteActivity = () => {
     const delC = async () => {
-      if (currentId) {
+      if (currentReview?.id) {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(api.deleteRvw(currentId));
+        const { error } = await axiosCall(api.deleteRvw(currentReview?.id));
         if (!error) {
           onClose();
           revalidator.revalidate();
@@ -134,7 +132,7 @@ export const Reviews = () => {
               <button onClick={saveActivity} className={styles.button_save}>
                 {'Сохранить'}
               </button>
-              {currentId ? (
+              {currentReview?.id ? (
                 <button onClick={deleteActivity} className={styles.button_save}>
                   {'Удалить'}
                 </button>

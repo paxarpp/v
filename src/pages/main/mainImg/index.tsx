@@ -4,7 +4,7 @@ import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import { IMainBlock } from '../interfaces';
 import { Modal } from '../../../templates/modal';
-import { api } from '../../../api';
+import { api, creatorRequest } from '../../../api';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
 import styles from '../index.module.css';
@@ -13,14 +13,16 @@ export const MainImg: React.FC = () => {
   const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
-  const { isAdmin } = useUser();
+  const { isAdmin, logout } = useUser();
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [main, setMain] = useState<IMainBlock | null>(null);
 
   const openEditMainImg = () => {
-    setMain(home.mainBlock);
-    openModal(true);
+    if (home) {
+      setMain(home.mainBlock);
+      openModal(true);
+    }
   };
 
   const closeModal = () => {
@@ -30,7 +32,10 @@ export const MainImg: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const { error } = await api.updateMainBlock(main as IMainBlock);
+    const axiosCall = creatorRequest(logout);
+    const { error } = await axiosCall(
+      api.updateMainBlock<string>(main as IMainBlock),
+    );
     if (!error) {
       closeModal();
       revalidator.revalidate();
@@ -113,13 +118,13 @@ export const MainImg: React.FC = () => {
           <Setting onClick={openEditMainImg} className={styles.setting} />
         ) : null}
         <img
-          src={home.mainBlock.mainImage?.url}
+          src={home?.mainBlock.mainImage?.url}
           className={styles.main_image}
         />
         <div className={styles.main_title_wrap}>
-          <span className={styles.main_title}>{home.mainBlock.title}</span>
+          <span className={styles.main_title}>{home?.mainBlock.title}</span>
           <span className={styles.main_sub_title}>
-            {home.mainBlock.subtitle}
+            {home?.mainBlock.subtitle}
           </span>
         </div>
       </div>

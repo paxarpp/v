@@ -8,25 +8,27 @@ import Inst from '../../../assets/inst.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { useUser } from '../../../context';
 import { IContactBlock } from '../interfaces';
-import { api } from '../../../api';
+import { api, creatorRequest } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
-import styles from '../index.module.css';
 import { Route } from '../+types';
 import { createLinkTg } from '../../../constants';
+import styles from '../index.module.css';
 
 export const Contacts: React.FC = () => {
   const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
-  const { isAdmin } = useUser();
+  const { isAdmin, logout } = useUser();
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [contact, setContact] = useState<IContactBlock | null>(null);
 
   const openEditContact = () => {
-    setContact(home.contactBlock);
-    openModal(true);
+    if (home) {
+      setContact(home.contactBlock);
+      openModal(true);
+    }
   };
 
   const closeModal = () => {
@@ -36,7 +38,10 @@ export const Contacts: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const { error } = await api.updateContactBlock(contact as IContactBlock);
+    const axiosCall = creatorRequest(logout);
+    const { error } = await axiosCall(
+      api.updateContactBlock(contact as IContactBlock),
+    );
     if (!error) {
       closeModal();
       revalidator.revalidate();
@@ -168,20 +173,23 @@ export const Contacts: React.FC = () => {
         <div className={styles.contact_wrap}>
           <div className={styles.contact}>
             <Phone />
-            {home.contactBlock?.contacts}
+            {home?.contactBlock?.contacts}
           </div>
           <div className={styles.contact}>
             <Mail />
-            {home.contactBlock?.email}
+            {home?.contactBlock?.email}
           </div>
           <div className={styles.mt_20}>
-            <a href={home.contactBlock?.linkVk} target={'_blank'}>
+            <a href={home?.contactBlock?.linkVk} target={'_blank'}>
               <Vk />
             </a>
-            <a href={createLinkTg(home.contactBlock?.lingTg)} target={'_blank'}>
+            <a
+              href={createLinkTg(home?.contactBlock?.lingTg)}
+              target={'_blank'}
+            >
               <T className={styles.contact_icon} />
             </a>
-            <a href={home.contactBlock?.linkInstagram} target={'_blank'}>
+            <a href={home?.contactBlock?.linkInstagram} target={'_blank'}>
               <Inst />
             </a>
           </div>
@@ -190,11 +198,11 @@ export const Contacts: React.FC = () => {
           <div className={styles.img_wrap}>
             <img
               className={styles.manager}
-              src={home.contactBlock?.imageAdmin?.url}
+              src={home?.contactBlock?.imageAdmin?.url}
               alt="manager"
             />
           </div>
-          <span>{home.contactBlock?.textUnderImage}</span>
+          <span>{home?.contactBlock?.textUnderImage}</span>
         </div>
       </div>
     </div>

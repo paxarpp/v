@@ -15,6 +15,7 @@ export interface IReview {
   name: string;
   date: string;
   comment: string;
+  id: string | null;
   image: IImage | null;
 }
 

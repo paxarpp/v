@@ -23,12 +23,12 @@ const CampsTemplate = () => {
   const [lastIndex, setLastIndex] = useState(2);
 
   const onLeft = () => {
-    if (!home.camps.length) return;
+    if (!home?.camps.length) return;
     setStartIndex((prev) => (prev === 0 ? 0 : prev - 1));
-    setLastIndex((prev) => (prev === 2 ? 2 : prev - 1)); // fixme
+    setLastIndex((prev) => (prev === 2 ? 2 : prev - 1));
   };
   const onRight = () => {
-    if (!home.camps.length) return;
+    if (!home?.camps.length) return;
     if (home.camps.length < 2) return;
     if (home.camps.length - lastIndex !== 1) {
       setStartIndex((prev) =>
@@ -44,7 +44,7 @@ const CampsTemplate = () => {
     <>
       <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
       <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
-      {home.camps
+      {home?.camps
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item) => {
           return (
@@ -53,7 +53,7 @@ const CampsTemplate = () => {
               <p>{item.dateString}</p>
               <div className={styles.camp_img_wrap}>
                 <img
-                  src={item.imageCart.url}
+                  src={item.imageCart?.url}
                   alt="картинка кэмпа"
                   className={styles.camp_img}
                 />

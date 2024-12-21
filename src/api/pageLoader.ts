@@ -31,12 +31,12 @@ export const pl = {
     }
   },
   getHome: async <T>(): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
-      return await instance.get('/home');
+      return await instance.get<{ result: T | null; error?: string }>('/home');
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getTournaments: async <T>(): Promise<{
