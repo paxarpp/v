@@ -11,7 +11,7 @@
 
 .group_name {
   position: relative;
-  min-width: 200px;
+  width: 200px;
   height: 88px;
   display: flex;
   justify-content: center;
@@ -26,17 +26,17 @@
   font-weight: 600;
   line-height: 33px;
   @media (min-width: 1280px) {
-    min-width: 230px;
+    width: 230px;
     height: 100px;
   }
   @media (min-width: 1400px) {
-    min-width: 270px;
+    width: 300px;
     height: 116px;
   }
 }
 
 .group_day {
-  min-width: 180px;
+  width: 180px;
   height: 88px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 1);
@@ -50,11 +50,11 @@
   font-weight: 400;
   line-height: 24px;
   @media (min-width: 1280px) {
-    min-width: 200px;
+    width: 200px;
     height: 100px;
   }
   @media (min-width: 1400px) {
-    min-width: 240px;
+    width: 240px;
     height: 116px;
   }
 }
@@ -72,7 +72,7 @@
 }
 
 .day_name {
-  min-width: 180px;
+  width: 180px;
   height: 80px;
   border-radius: 8px;
   border-bottom: 1px solid #99660A;
@@ -83,24 +83,24 @@
   text-align: center;
   color: rgba(212, 212, 212, 1);
   @media (min-width: 1280px) {
-    min-width: 200px;
+    width: 200px;
   }
   @media (min-width: 1400px) {
-    min-width: 240px;
+    width: 240px;
   }
 }
 
 .logo {
-  min-width: 200px;
+  width: 200px;
   height: 80px;
   margin: 0 30px 16px 0;
   padding: 0 10px;
   text-align: center;
   @media (min-width: 1280px) {
-    min-width: 230px;
+    width: 230px;
   }
   @media (min-width: 1400px) {
-    min-width: 270px;
+    width: 300px;
   }
 }
 

@@ -2,6 +2,7 @@ import type { RouteConfig } from '@react-router/dev/routes';
 
 export default [
   {
+    index: true,
     path: '/',
     file: './pages/main/index.tsx',
   },

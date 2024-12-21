@@ -11,10 +11,10 @@ import { Auth } from './auth';
 import { AuthProvider, AuthOpenContext } from './context';
 import { Footer } from './templates/footer';
 import { Header } from './templates/header';
-import { loaderAppInfo } from './app/loader';
 import { NotFound } from './pages/notFound';
 import { Route } from './+types/root';
 import { GlobalSpinner } from './templates/globalSpinner';
+import { pl } from './api/pageLoader';
 import './index.css';
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -36,8 +36,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
-  return await loaderAppInfo();
+  const {
+    data: { result, error },
+  } = await pl.getAppInfo();
+  return { app: result, error };
 }
 
 export function HydrateFallback() {
