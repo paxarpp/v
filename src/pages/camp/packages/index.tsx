@@ -5,6 +5,7 @@ import Tour from '../../../assets/tour.svg?react';
 import { Route } from '../+types';
 import { useAuth, useUser } from '../../../context';
 import { api, creatorRequest } from '../../../api';
+import imgUrl from '../../../assets/pack_back.jpg';
 import styles from '../index.module.css';
 
 export const Packages = () => {
@@ -47,11 +48,7 @@ export const Packages = () => {
       <div className={styles.package_row}>
         {camp?.packages?.map((pack) => (
           <div key={pack.packageId} className={styles.pack_card}>
-            <img
-              src={'/src/assets/pack_back.jpg'}
-              alt={pack.name}
-              className={styles.back_card}
-            />
+            <img src={imgUrl} alt={pack.name} className={styles.back_card} />
             {pack.name.toLocaleLowerCase().includes('tur') ||
             pack.name.toLocaleLowerCase().includes('тур') ? (
               <Tour className={styles.pack_icon} />

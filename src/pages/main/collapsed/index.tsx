@@ -8,6 +8,7 @@ import { Modal } from '../../../templates/modal';
 import { api, creatorRequest } from '../../../api';
 import { useUser } from '../../../context';
 import { Route } from '../+types';
+import imgUrl from '../../../assets/asked_questions.jpg';
 import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
@@ -137,11 +138,7 @@ export const Collapsed: React.FC = () => {
         )}
       </Modal>
       <div className={styles.asked_questions}>
-        <img
-          src={'/src/assets/asked_questions.jpg'}
-          alt={''}
-          className={styles.back_questions}
-        />
+        <img src={imgUrl} alt={''} className={styles.back_questions} />
         <h2>
           {'Часто задаваемые вопросы'}
           {isAdmin ? (

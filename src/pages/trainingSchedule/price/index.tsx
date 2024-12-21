@@ -7,6 +7,7 @@ import Setting from '../../../assets/setting.svg?react';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
 import { PriceEdit } from '../priceEdit';
+import imgUrl from '../../../assets/price_ball.jpg';
 import styles from '../index.module.css';
 
 export const Price = () => {
@@ -25,7 +26,7 @@ export const Price = () => {
   return (
     <div className={styles.price_ball}>
       <h1 className={styles.price_title}>Стоимость тренировок</h1>
-      <img className={styles.price_back} src={'src/assets/price_ball.jpg'} />
+      <img className={styles.price_back} src={imgUrl} />
       {error ? (
         <ErrorLocal error={error} />
       ) : (
