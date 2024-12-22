@@ -14,9 +14,7 @@ import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Activities = () => {
-  const {
-    about: { activities },
-  } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
 
@@ -27,7 +25,7 @@ export const Activities = () => {
 
   const openEditActivity = (id?: string | null) => {
     if (id) {
-      const activity = activities.find((a) => a.id === id);
+      const activity = about?.activities.find((a) => a.id === id);
       if (activity) {
         setId(id);
         setActivity({ ...activity });
@@ -132,7 +130,7 @@ export const Activities = () => {
           </div>
         </Modal>
       ) : null}
-      {activities?.map((act) => {
+      {about?.activities?.map((act) => {
         return (
           <div className={styles.activity_card} key={act.id}>
             <span className={styles.activity_title}>

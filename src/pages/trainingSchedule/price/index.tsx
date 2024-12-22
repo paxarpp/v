@@ -1,5 +1,5 @@
-import { Suspense, useState } from 'react';
-import { Await, useLoaderData } from 'react-router';
+import { useState } from 'react';
+import { useLoaderData } from 'react-router';
 import { ErrorLocal } from '../../../templates/errorLocal';
 import Ball from '../../../assets/ball.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
@@ -11,8 +11,7 @@ import imgUrl from '../../../assets/price_ball.jpg';
 import styles from '../index.module.css';
 
 export const Price = () => {
-  const [_, { prices, error }] =
-    useLoaderData<Route.ComponentProps['loaderData']>();
+  const { errPr } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
@@ -27,21 +26,19 @@ export const Price = () => {
     <div className={styles.price_ball}>
       <h1 className={styles.price_title}>Стоимость тренировок</h1>
       <img className={styles.price_back} src={imgUrl} />
-      {error ? (
-        <ErrorLocal error={error} />
+      {errPr ? (
+        <ErrorLocal error={errPr} />
       ) : (
-        <Suspense fallback={'Загрузка...'}>
-          <Await resolve={prices}>
-            {open ? (
-              <PriceEdit priceId={editPriceId} onClose={closePriceEdit} />
-            ) : null}
-            <PriceTemplate
-              isAdmin={isAdmin}
-              setIsOpen={setIsOpen}
-              setEditPriceId={setEditPriceId}
-            />
-          </Await>
-        </Suspense>
+        <>
+          {open ? (
+            <PriceEdit priceId={editPriceId} onClose={closePriceEdit} />
+          ) : null}
+          <PriceTemplate
+            isAdmin={isAdmin}
+            setIsOpen={setIsOpen}
+            setEditPriceId={setEditPriceId}
+          />
+        </>
       )}
     </div>
   );
@@ -52,7 +49,7 @@ const PriceTemplate: React.FC<{
   setIsOpen: (open: boolean) => void;
   setEditPriceId: (id: string) => void;
 }> = ({ isAdmin, setIsOpen, setEditPriceId }) => {
-  const [_, { prices }] = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { prices } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openEditPrice = (id: string) => {
     setEditPriceId(id);

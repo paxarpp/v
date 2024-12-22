@@ -16,7 +16,7 @@ import styles from '../index.module.css';
 
 export const Reviews = () => {
   const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
-  const { reviews } = about;
+
   const { isMobile } = useDeviceDetect();
 
   const revalidator = useRevalidator();
@@ -27,7 +27,7 @@ export const Reviews = () => {
 
   const openEditReview = (id?: string | null) => {
     if (id) {
-      const review = reviews.find((r) => r.id === id);
+      const review = about?.reviews.find((r) => r.id === id);
       if (review) {
         setReview({ ...review });
         setReviewOpen(true);
@@ -105,19 +105,19 @@ export const Reviews = () => {
   const [lastIndex, setLastIndex] = useState(2);
 
   const onLeft = () => {
-    if (!about.reviews.length) return;
+    if (!about?.reviews.length) return;
     setStartIndex((prev) => (prev === 0 ? 0 : prev - 1));
     setLastIndex((prev) => (prev === 2 ? 2 : prev - 1)); //fixme
   };
   const onRight = () => {
-    if (!reviews.length) return;
-    if (reviews.length < 2) return;
-    if (reviews.length - lastIndex !== 1) {
+    if (!about?.reviews.length) return;
+    if (about?.reviews.length < 2) return;
+    if (about?.reviews.length - lastIndex !== 1) {
       setStartIndex((prev) =>
-        prev === reviews.length - 2 ? reviews.length - 2 : prev + 1,
+        prev === about?.reviews.length - 2 ? about?.reviews.length - 2 : prev + 1,
       );
       setLastIndex((prev) =>
-        prev === reviews.length ? reviews.length : prev + 1,
+        prev === about?.reviews.length ? about?.reviews.length : prev + 1,
       );
     }
   };
@@ -175,7 +175,7 @@ export const Reviews = () => {
 
       <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
       <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
-      {reviews
+      {about?.reviews
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item, indx) => {
           return (

@@ -205,24 +205,30 @@ export const Info = () => {
           <Setting onClick={openEdit} className={styles.setting_about} />
         ) : null}
       </h2>
-      <h2>{about.title}</h2>
-      <h3>{about.subTitleFirst}</h3>
-      <h3>{about.subTitleSecond}</h3>
+      <h2>{about?.title}</h2>
+      <h3>{about?.subTitleFirst}</h3>
+      <h3>{about?.subTitleSecond}</h3>
       <div className={isMobile ? styles.row_info_mobile : styles.row_info}>
         <div className={styles.block}>
-          <span
-            className={styles.sub_title}
-          >{`> ${about.numberOfWorkouts} тренировок`}</span>
+          <span className={styles.sub_title}>
+            {about?.numberOfWorkouts
+              ? `> ${about.numberOfWorkouts} тренировок`
+              : 'считаем тренеровки'}
+          </span>
         </div>
         <div className={styles.block}>
-          <span
-            className={styles.sub_title}
-          >{`> ${about.numberOfCamps} кемпов`}</span>
+          <span className={styles.sub_title}>
+            {about?.numberOfCamps
+              ? `> ${about.numberOfCamps} кемпов`
+              : 'считаем кемпы'}
+          </span>
         </div>
         <div className={styles.block}>
-          <span
-            className={styles.sub_title}
-          >{`> ${about.numberOfStudents} учеников`}</span>
+          <span className={styles.sub_title}>
+            {about?.numberOfStudents
+              ? `> ${about.numberOfStudents} учеников`
+              : 'считаем учеников'}
+          </span>
         </div>
       </div>
     </>

@@ -43,7 +43,7 @@ export const api = {
   ): Promise<{
     data: { result: boolean; error?: string };
   }> => {
-    return await instance.put('/camp-user', {
+    return await instance.post('/camp-user', {
       campId,
       userId,
     });

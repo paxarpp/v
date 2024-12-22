@@ -26,6 +26,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <title>Magic Volley</title>
         <Meta />
         <Links />
+        <base href="/" />
       </head>
       <body>
         {children}

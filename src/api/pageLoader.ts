@@ -40,21 +40,21 @@ export const pl = {
     }
   },
   getTournaments: async <T>(): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
       return await instance.get('/tournaments');
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getCorporates: async <T>(): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
       return await instance.get('/corporates');
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getCampsAll: async <T>(): Promise<{
@@ -87,12 +87,12 @@ export const pl = {
     }
   },
   getAbout: async <T>(): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
       return await instance.get(`/about`);
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getQuestionAll: async <T>(): Promise<{
@@ -132,12 +132,12 @@ export const pl = {
     }
   },
   getShedule: async <T>(): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
       return await instance.get('/shedule');
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getPrice: async <T>(): Promise<{
