@@ -22,12 +22,12 @@ export const pl = {
     }
   },
   getBeachCoachesAll: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+     data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/coaches/all/beach-type');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getHome: async <T>(): Promise<{
@@ -58,21 +58,21 @@ export const pl = {
     }
   },
   getCampsAll: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+     data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/camps/all');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getClassicCoachesAll: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+     data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/coaches/all/classic-type');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getUser: async <T>(
@@ -96,39 +96,39 @@ export const pl = {
     }
   },
   getQuestionAll: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+     data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/questions/all');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getShortCamps: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/camps/short-all');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getLongCamps: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+     data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/camps/long-all');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getPastCamps: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+     data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/camps/past-all');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getShedule: async <T>(): Promise<{
@@ -141,12 +141,12 @@ export const pl = {
     }
   },
   getPrice: async <T>(): Promise<{
-    data: { result: T[]; error?: string };
+     data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/price');
     } catch (e: unknown) {
-      return { data: { result: [], error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
 };

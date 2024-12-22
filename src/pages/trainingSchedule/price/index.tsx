@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
-import { ErrorLocal } from '../../../templates/errorLocal';
 import Ball from '../../../assets/ball.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Setting from '../../../assets/setting.svg?react';
@@ -11,8 +10,6 @@ import imgUrl from '../../../assets/price_ball.jpg';
 import styles from '../index.module.css';
 
 export const Price = () => {
-  const { errPr } = useLoaderData<Route.ComponentProps['loaderData']>();
-
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editPriceId, setEditPriceId] = useState<string | null>(null);
@@ -26,20 +23,14 @@ export const Price = () => {
     <div className={styles.price_ball}>
       <h1 className={styles.price_title}>Стоимость тренировок</h1>
       <img className={styles.price_back} src={imgUrl} />
-      {errPr ? (
-        <ErrorLocal error={errPr} />
-      ) : (
-        <>
-          {open ? (
-            <PriceEdit priceId={editPriceId} onClose={closePriceEdit} />
-          ) : null}
-          <PriceTemplate
-            isAdmin={isAdmin}
-            setIsOpen={setIsOpen}
-            setEditPriceId={setEditPriceId}
-          />
-        </>
-      )}
+      {open ? (
+        <PriceEdit priceId={editPriceId} onClose={closePriceEdit} />
+      ) : null}
+      <PriceTemplate
+        isAdmin={isAdmin}
+        setIsOpen={setIsOpen}
+        setEditPriceId={setEditPriceId}
+      />
     </div>
   );
 };
@@ -62,7 +53,7 @@ const PriceTemplate: React.FC<{
 
   return (
     <div className={styles.price_list}>
-      {prices.map((pr) => {
+      {prices?.map((pr) => {
         return (
           <div key={pr.id} className={styles.price_item}>
             <p>

@@ -26,8 +26,8 @@ const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setUser(null);
     document.cookie = `magicVolley=`;
   };
-  const isAdmin = !!user?.roles.includes('ADMIN');
-  const isModerator = !!user?.roles.includes('MODERATOR');
+  const isAdmin = !!user?.roles?.includes('ADMIN');
+  const isModerator = !!user?.roles?.includes('MODERATOR');
 
   const value = {
     user,

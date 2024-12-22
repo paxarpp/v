@@ -3,7 +3,6 @@ import { useLoaderData } from 'react-router';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { Days } from './days';
-import { ErrorLocal } from '../../../templates/errorLocal';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
 import { TreinEdit } from '../treinEdit';
@@ -18,7 +17,6 @@ export const weekDays = [
 ] as const;
 
 export const SheduleTable = () => {
-  const { errShedule } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editTreinId, setEditTreinId] = useState<string | null>(null);
@@ -31,20 +29,14 @@ export const SheduleTable = () => {
   return (
     <div className={styles.shedule_table}>
       <Days />
-      {errShedule ? (
-        <ErrorLocal error={errShedule} />
-      ) : (
-        <>
-          {open ? (
-            <TreinEdit treinId={editTreinId} onClose={closeTreinEdit} />
-          ) : null}
-          <SheduleeTemplate
-            isAdmin={isAdmin}
-            setIsOpen={setIsOpen}
-            setEditTreinId={setEditTreinId}
-          />
-        </>
-      )}
+      {open ? (
+        <TreinEdit treinId={editTreinId} onClose={closeTreinEdit} />
+      ) : null}
+      <SheduleeTemplate
+        isAdmin={isAdmin}
+        setIsOpen={setIsOpen}
+        setEditTreinId={setEditTreinId}
+      />
     </div>
   );
 };

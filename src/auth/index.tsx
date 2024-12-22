@@ -23,7 +23,7 @@ export const Auth: React.FC<{
       const user = await api.login<{
         data?: IUser & { cookie: string };
       }>(username, password);
-      if (user?.data) {
+      if (user?.data?.id) {
         signin(user.data);
         toggleAuthOpen();
         try {
@@ -41,7 +41,7 @@ export const Auth: React.FC<{
       const user = await api.signup<{
         data?: IUser & { cookie: string };
       }>(username, password, telephone, confirmPassword);
-      if (user?.data) {
+      if (user?.data?.id) {
         signin(user.data);
         toggleAuthOpen();
         try {

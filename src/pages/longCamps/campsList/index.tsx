@@ -3,13 +3,11 @@ import { Link, useLoaderData } from 'react-router';
 import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
-import { ErrorLocal } from '../../../templates/errorLocal';
 import { CampEdit } from '../campEdit';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
-  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editCampId, setEditCampId] = useState<string | null>(null);
@@ -19,9 +17,7 @@ export const CampsList = () => {
     setIsOpen(false);
   };
 
-  return error ? (
-    <ErrorLocal error={error} />
-  ) : (
+  return (
     <div className={styles.camp_list}>
       {open ? <CampEdit campId={editCampId} onClose={closeCampEdit} /> : null}
       <CampsTemplate
@@ -51,7 +47,7 @@ const CampsTemplate: React.FC<{
 
   return (
     <>
-      {longCamps.map((camp) => {
+      {longCamps?.map((camp) => {
         return (
           <div key={camp.id} className={styles.camp_card}>
             <div>

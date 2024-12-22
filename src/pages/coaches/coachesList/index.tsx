@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { ICoach } from '../interfaces';
-import { ErrorLocal } from '../../../templates/errorLocal';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
@@ -12,7 +11,6 @@ import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
-  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
@@ -26,9 +24,7 @@ export const CoachesList: React.FC = () => {
     setIsOpen(false);
   };
 
-  return error ? (
-    <ErrorLocal error={error} />
-  ) : (
+  return (
     <div className={styles.coaches_list}>
       <CoachEdit coachId={editCoachId} onClose={closeCoachEdit} open={open} />
       <CoachProfile coach={coachProfile} onClose={closeCoach} />
@@ -65,7 +61,7 @@ const CoachesTemplate: React.FC<{
 
   return (
     <>
-      {coaches.map((coach) => {
+      {coaches?.map((coach) => {
         return (
           <div key={coach.id} className={styles.coach_card}>
             {coach.mainImage?.url ? (

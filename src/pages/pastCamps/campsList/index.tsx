@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import { useUser } from '../../../context';
-import { ErrorLocal } from '../../../templates/errorLocal';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { CampPastAdd } from '../campPastAdd';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
-  const { error } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isAdmin } = useUser();
   const [open, setIsOpen] = useState<boolean>(false);
 
@@ -20,9 +18,7 @@ export const CampsList = () => {
     setIsOpen(true);
   };
 
-  return error ? (
-    <ErrorLocal error={error} />
-  ) : (
+  return (
     <div className={styles.camp_list}>
       {open ? <CampPastAdd onClose={closeCampAdd} /> : null}
       <CampsTemplate isAdmin={isAdmin} addPastCamp={addPastCamp} />
@@ -38,7 +34,7 @@ const CampsTemplate: React.FC<{
 
   return (
     <>
-      {pastCamps.map((camp) => {
+      {pastCamps?.map((camp) => {
         return (
           <div key={camp.id} className={styles.camp_card}>
             <div>
