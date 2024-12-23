@@ -369,12 +369,20 @@ export const api = {
   },
   notification: {
     getNotifications: async <T>() => {
-      return await instance.get<{ result: T[] }>('/notifications');
+      try {
+        return await instance.get<{ result: T[] | null }>('/notifications');
+      } catch (e: unknown) {
+        return { data: { result: null, error: (e as Error).message } };
+      }
     },
     getNotificationCount: async () => {
-      return await instance.get<{ result: number | null }>(
-        '/notifications/count',
-      );
+      try {
+        return await instance.get<{ result: number | null }>(
+          '/notifications/count',
+        );
+      } catch (e: unknown) {
+        return { data: { result: null, error: (e as Error).message } };
+      }
     },
   },
 };

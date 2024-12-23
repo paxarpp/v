@@ -8,13 +8,19 @@ import { ProtectedRoute } from '../../templates/protectedRoute';
 import { Route } from './+types';
 import { IUser } from './interfaces';
 import { pl } from '../../api/pageLoader';
+import { api } from '../../api/api';
+import { INotification } from '../../templates/header/interfaces';
+import { Notifications } from './notifications';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader({ params: { id } }: Route.ClientLoaderArgs) {
   const {
     data: { result, error },
   } = await pl.getUser<IUser>(id);
-  return { user: result, error };
+  const {
+    data: { result: resNotification },
+  } = await api.notification.getNotifications<INotification>();
+  return { user: result, error, notifications: resNotification };
 }
 
 export default function User({ loaderData }: Route.ComponentProps) {
@@ -35,6 +41,8 @@ export default function User({ loaderData }: Route.ComponentProps) {
       <PastCamps />
 
       <Users />
+
+      <Notifications />
     </ProtectedRoute>
   );
 }

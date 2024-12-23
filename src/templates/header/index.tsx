@@ -13,8 +13,8 @@ import { getCookie } from '../../cookie';
 import { IUser } from '../../auth/interface';
 import { createLinkTg } from '../../constants';
 import { api } from '../../api/api';
-import styles from './index.module.css';
 import { AxiosError } from 'axios';
+import styles from './index.module.css';
 
 interface IProps {
   linkTg: string;
@@ -60,14 +60,14 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
     if (isAdmin && !tN.current) {
       const getNotif = async () => {
         try {
-          const { result } = await api.notification.getNotifications();
-          if (!result?.data.error && result?.data.result) {
-            setNotif(result.data.result);
+          const { data } = await api.notification.getNotificationCount();
+
+          if (data?.result !== null) {
+            setNotif(data.result);
           }
         } catch (error) {
           if (error instanceof AxiosError) {
             if (error.response?.status === 401) {
-              console.log('timerNumber', tN.current);
               clearInterval(tN.current);
             }
           }
@@ -260,7 +260,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
           className={`${styles.user_avatar} ${styles.auth_block}`}
         >
           <Avatar />
-          {count !== 0 ? (
+          {isAdmin && count !== 0 ? (
             <span className={styles.notifications_count}>{count}</span>
           ) : null}
         </Link>
