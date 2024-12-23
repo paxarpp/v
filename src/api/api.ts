@@ -342,6 +342,15 @@ export const api = {
       return { data: { result: [], error: (e as Error).message } };
     }
   },
+  getCoachesMedia: async <T>(): Promise<{
+    data: { result: T[] | null; error?: string };
+  }> => {
+    try {
+      return await instance.get<{ result: T[] }>('/coaches/all/media');
+    } catch (e: unknown) {
+      return { data: { result: null, error: (e as Error).message } };
+    }
+  },
   getShedule: async <T>(
     id: string,
   ): Promise<{

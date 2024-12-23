@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const env = loadEnv(mode, process.cwd(), '');
+  const isDev = mode !== 'production';
 
   const API_URL = `${env.VITE_API_URL ?? 'http://localhost:8081'}`;
   const PORT = `${env.VITE_PORT ?? '3000'}`;
@@ -18,10 +19,10 @@ export default defineConfig(({ mode }) => {
     plugins: [reactRouter(), svgr()],
     server: {
       proxy: {
-        '/magicvolley': API_URL,
+        '/magicvolley': isDev ? 'http://localhost:8081' : API_URL,
       },
-      port: PORT,
+      port: isDev ? 3000 : Number(PORT),
     },
-    base: mode !== 'production' ? '/' : url,
+    base: isDev ? '/' : url,
   };
 });
