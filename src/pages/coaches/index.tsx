@@ -2,8 +2,8 @@ import { CoachesList } from './coachesList';
 import { ICoach, IImage } from './interfaces';
 import { pl } from '../../api/pageLoader';
 import { api } from '../../api/api';
-import styles from './index.module.css';
 import { ImagesList } from './images';
+import styles from './index.module.css';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
@@ -12,7 +12,7 @@ export async function clientLoader() {
   } = await pl.getBeachCoachesAll<ICoach>();
   const {
     data: { result: resImg },
-  } = await api.getCoachesMedia<IImage>();
+  } = await api.getCoachesMediaBeach<IImage>();
   return { coaches: result, error, images: resImg };
 }
 

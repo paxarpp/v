@@ -342,11 +342,20 @@ export const api = {
       return { data: { result: [], error: (e as Error).message } };
     }
   },
-  getCoachesMedia: async <T>(): Promise<{
+  getCoachesMediaBeach: async <T>(): Promise<{
     data: { result: T[] | null; error?: string };
   }> => {
     try {
-      return await instance.get<{ result: T[] }>('/coaches/all/media');
+      return await instance.get<{ result: T[] }>('/coaches/all/media/beach');
+    } catch (e: unknown) {
+      return { data: { result: null, error: (e as Error).message } };
+    }
+  },
+  getCoachesMediaClassic: async <T>(): Promise<{
+    data: { result: T[] | null; error?: string };
+  }> => {
+    try {
+      return await instance.get<{ result: T[] }>('/coaches/all/media/classic');
     } catch (e: unknown) {
       return { data: { result: null, error: (e as Error).message } };
     }
