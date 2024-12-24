@@ -15,6 +15,7 @@ import { NotFound } from './pages/notFound';
 import { Route } from './+types/root';
 import { GlobalSpinner } from './templates/globalSpinner';
 import { pl } from './api/pageLoader';
+import { IAppInfo } from './app/interface';
 import './index.css';
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -41,7 +42,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export async function clientLoader() {
   const {
     data: { result, error },
-  } = await pl.getAppInfo();
+  } = await pl.getAppInfo<IAppInfo>();
   return { app: result, error };
 }
 

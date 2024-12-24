@@ -2,12 +2,12 @@ import { instance } from '.';
 
 export const pl = {
   getAppInfo: async <T>(): Promise<{
-    data: { result: T; error?: string };
+    data: { result: T | null; error?: string };
   }> => {
     try {
       return await instance.get('/app_links');
     } catch (e: unknown) {
-      return { data: { result: {} as T, error: (e as Error).message } };
+      return { data: { result: null, error: (e as Error).message } };
     }
   },
   getCamp: async <T>(
@@ -22,7 +22,7 @@ export const pl = {
     }
   },
   getBeachCoachesAll: async <T>(): Promise<{
-     data: { result: T[] | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/coaches/all/beach-type');
@@ -58,7 +58,7 @@ export const pl = {
     }
   },
   getCampsAll: async <T>(): Promise<{
-     data: { result: T[] | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/camps/all');
@@ -67,7 +67,7 @@ export const pl = {
     }
   },
   getClassicCoachesAll: async <T>(): Promise<{
-     data: { result: T[] | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/coaches/all/classic-type');
@@ -96,7 +96,7 @@ export const pl = {
     }
   },
   getQuestionAll: async <T>(): Promise<{
-     data: { result: T[] | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/questions/all');
@@ -114,7 +114,7 @@ export const pl = {
     }
   },
   getLongCamps: async <T>(): Promise<{
-     data: { result: T[] | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/camps/long-all');
@@ -123,7 +123,7 @@ export const pl = {
     }
   },
   getPastCamps: async <T>(): Promise<{
-     data: { result: T[] | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/camps/past-all');
@@ -141,7 +141,7 @@ export const pl = {
     }
   },
   getPrice: async <T>(): Promise<{
-     data: { result: T[] | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
       return await instance.get('/price');
