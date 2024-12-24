@@ -17,9 +17,9 @@ import { AxiosError } from 'axios';
 import styles from './index.module.css';
 
 interface IProps {
-  linkTg: string;
-  linkInstagram: string;
-  linkVk: string;
+  linkTg?: string;
+  linkInstagram?: string;
+  linkVk?: string;
 }
 
 const createLinkClassName = ({

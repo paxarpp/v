@@ -7,9 +7,9 @@ import { createLinkTg } from '../../constants';
 import styles from './index.module.css';
 
 interface IProps {
-  linkTg: string;
-  linkInstagram: string;
-  linkVk: string;
+  linkTg?: string;
+  linkInstagram?: string;
+  linkVk?: string;
 }
 
 export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
