@@ -185,6 +185,15 @@ export const api = {
   }> => {
     return await instance.put(`/coaches/${body.id}`, body);
   },
+  updateCoachVisible: async <T>(
+    body: ICoach,
+  ): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    return await instance.put(`/coaches/visible/${body.id}`, {
+      isVisible: body.isVisible,
+    });
+  },
   uploadImg: async <T>(
     file: FormData,
     typeEntity = 'COACH',

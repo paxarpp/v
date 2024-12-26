@@ -4,10 +4,10 @@ import { pl } from '../../api/pageLoader';
 export async function clientLoader() {
   const {
     data: { result, error },
-  } = await pl.getTournaments();
-  return { tournaments: result, error };
+  } = await pl.getChildCamps();
+  return { childCamps: result, error };
 }
 
-export default function Tournaments() {
-  return <div>Tournaments</div>;
+export default function childCamps() {
+  return <div>childCamps</div>;
 }

@@ -1,20 +1,26 @@
 import { useState } from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useRevalidator } from 'react-router';
 import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Avatar from '../../../assets/avatar.svg?react';
+import Eye from '../../../assets/eye_enabled.svg?react';
+import EyeDisabled from '../../../assets/eye_disabled.svg?react';
 import { CoachEdit } from '../coachEdit';
 import { CoachProfile } from '../../../templates/coachProfile';
 import { Route } from '../+types';
+import { creatorRequest } from '../../../api';
+import { api } from '../../../api/api';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
-  const { isAdmin } = useUser();
+  const { isAdmin, logout } = useUser();
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
   const [open, setIsOpen] = useState<boolean>(false);
+
+  const revalidator = useRevalidator();
 
   const closeCoach = () => {
     setCoach(null);
@@ -22,6 +28,17 @@ export const CoachesList: React.FC = () => {
   const closeCoachEdit = () => {
     setEditCoachId(null);
     setIsOpen(false);
+  };
+
+  const toggleVisible = (coach: ICoach) => {
+    const saveVisible = async () => {
+      const axiosCall = creatorRequest(logout);
+      const { error } = await axiosCall(api.updateCoachVisible(coach));
+      if (!error) {
+        revalidator.revalidate();
+      }
+    };
+    saveVisible();
   };
 
   return (
@@ -33,6 +50,7 @@ export const CoachesList: React.FC = () => {
         setCoach={setCoach}
         setEditCoachId={setEditCoachId}
         setIsOpen={setIsOpen}
+        toggleVisible={toggleVisible}
       />
     </div>
   );
@@ -43,7 +61,8 @@ const CoachesTemplate: React.FC<{
   setCoach: (coach: ICoach | null) => void;
   setEditCoachId: (id: string) => void;
   setIsOpen: (open: boolean) => void;
-}> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen }) => {
+  toggleVisible: (coach: ICoach) => void;
+}> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen, toggleVisible }) => {
   const { coaches } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openProfile = (coach: ICoach) => {
@@ -86,6 +105,21 @@ const CoachesTemplate: React.FC<{
               >
                 Профайл
               </button>
+              {isAdmin ? (
+                <>
+                  {coach.isVisible ? (
+                    <Eye
+                      onClick={() => toggleVisible(coach)}
+                      className={styles.coach_visible}
+                    />
+                  ) : (
+                    <EyeDisabled
+                      onClick={() => toggleVisible(coach)}
+                      className={styles.coach_visible}
+                    />
+                  )}
+                </>
+              ) : null}
               {isAdmin ? (
                 <Setting onClick={() => openEditCoach(coach.id)} />
               ) : null}

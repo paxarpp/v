@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const isDev = mode !== 'production';
 
-  const API_URL = `${env.VITE_API_URL ?? 'http://localhost:8081'}`;
+  const API_URL = `${env.VITE_API_URL ?? 'http://localhost:8081/'}`;
   const PORT = `${env.VITE_PORT ?? '3000'}`;
   const url = `${env.URL_ENTRY_POINT ?? '/'}`;
 
@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     plugins: [reactRouter(), svgr()],
     server: {
       proxy: {
-        '/magicvolley': isDev ? 'http://localhost:8081' : API_URL,
+        '/magicvolley': isDev ? 'http://localhost:8081/' : API_URL,
       },
       port: isDev ? 3000 : Number(PORT),
     },

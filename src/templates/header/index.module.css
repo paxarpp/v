@@ -137,10 +137,21 @@
   opacity: 0.9;
 }
 
-.user_avatar {
+.user_bell {
   display: flex;
   align-items: center;
   margin-left: auto;
+}
+
+.user_avatar_without_bell {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.user_avatar {
+  display: flex;
+  align-items: center;
+  margin-left: 60px;
 }
 
 .link_pending {
@@ -152,11 +163,11 @@
   color: #99660A !important;
 }
 
-.auth_block {
+.user_bell {
   position: relative;
 }
 
-.auth_block .notifications_count {
+.user_bell .notifications_count {
   position: absolute;
   top: 10px;
   right: -8px;

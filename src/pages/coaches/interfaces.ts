@@ -28,4 +28,5 @@ export interface ICoach {
   promo: string;
   isBeach: boolean;
   isClassic: boolean;
+  isVisible: boolean;
 }

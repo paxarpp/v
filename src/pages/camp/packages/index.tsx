@@ -6,8 +6,27 @@ import { Route } from '../+types';
 import { useAuth, useUser } from '../../../context';
 import { api } from '../../../api/api';
 import { creatorRequest } from '../../../api';
-import imgUrl from '../../../assets/pack_back.jpg';
+import imgUrlPrem from '../../../assets/pack_back.jpg';
+import imgUrlGold from '../../../assets/pack_back.jpg';
+import imgUrlSilver from '../../../assets/pack_back.jpg';
+import imgUrlTour from '../../../assets/pack_back.jpg';
+import { IType } from '../interfaces';
 import styles from '../index.module.css';
+
+const getPackImgUrl = (type: IType) => {
+  switch (type) {
+    case 'TOUR':
+      return imgUrlTour;
+    case 'GOLD':
+      return imgUrlGold;
+    case 'PREMIUM':
+      return imgUrlPrem;
+    case 'SILVER':
+      return imgUrlSilver;
+    default:
+      return imgUrlTour;
+  }
+};
 
 export const Packages = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
@@ -49,7 +68,11 @@ export const Packages = () => {
       <div className={styles.package_row}>
         {camp?.packages?.map((pack) => (
           <div key={pack.packageId} className={styles.pack_card}>
-            <img src={imgUrl} alt={pack.name} className={styles.back_card} />
+            <img
+              src={getPackImgUrl(pack.type)}
+              alt={pack.name}
+              className={styles.back_card}
+            />
             {pack.name.toLocaleLowerCase().includes('tur') ||
             pack.name.toLocaleLowerCase().includes('тур') ? (
               <Tour className={styles.pack_icon} />

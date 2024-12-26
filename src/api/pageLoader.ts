@@ -39,20 +39,11 @@ export const pl = {
       return { data: { result: null, error: (e as Error).message } };
     }
   },
-  getTournaments: async <T>(): Promise<{
+  getChildCamps: async <T>(): Promise<{
     data: { result: T | null; error?: string };
   }> => {
     try {
-      return await instance.get('/tournaments');
-    } catch (e: unknown) {
-      return { data: { result: null, error: (e as Error).message } };
-    }
-  },
-  getCorporates: async <T>(): Promise<{
-    data: { result: T | null; error?: string };
-  }> => {
-    try {
-      return await instance.get('/corporates');
+      return await instance.get('/childCamps');
     } catch (e: unknown) {
       return { data: { result: null, error: (e as Error).message } };
     }

@@ -1,3 +1,5 @@
+export type IType = 'GOLD' | 'PREMIUM' | 'SILVER' | 'TOUR';
+
 export interface IUser {
   bookingConfirmed: boolean; // пронирование подтверждено
   id: string | null;
@@ -27,6 +29,7 @@ export interface IPackage {
   secondLimitation: string;
   thirdPrice: number;
   thirdLimitation: string;
+  type: IType;
 }
 
 export interface IImage {

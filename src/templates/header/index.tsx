@@ -7,6 +7,7 @@ import T from '../../assets/t.svg?react';
 import ClosedIcon from '../../assets/closed.svg?react';
 import Inst from '../../assets/inst.svg?react';
 import Avatar from '../../assets/avatar.svg?react';
+import Bell from '../../assets/bell.svg?react';
 import { useUser, useAuth } from '../../context';
 import { useDeviceDetect } from '../../hooks';
 import { getCookie } from '../../cookie';
@@ -14,6 +15,8 @@ import { IUser } from '../../auth/interface';
 import { createLinkTg } from '../../constants';
 import { api } from '../../api/api';
 import { AxiosError } from 'axios';
+import { CampsInfo } from './campsInfo';
+import { INotification } from './interfaces';
 import styles from './index.module.css';
 
 interface IProps {
@@ -36,7 +39,9 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);
-  const [count, setNotif] = useState<number>(0);
+  const [isOpenNotif, openNotif] = useState(false);
+  const [notifications, setNotifications] = useState<INotification[]>([]);
+  const [count, setCount] = useState<number>(0);
   const tN = useRef<number | undefined>(undefined);
 
   useEffect(() => {
@@ -63,7 +68,7 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
           const { data } = await api.notification.getNotificationCount();
 
           if (data?.result !== null) {
-            setNotif(data.result);
+            setCount(data.result);
           }
         } catch (error) {
           if (error instanceof AxiosError) {
@@ -87,188 +92,230 @@ export const Header: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
     openPopapMenu((prev) => !prev);
   };
 
-  return isMobile ? (
-    <div className={styles.header_mobile}>
-      <NavLink
-        to="/"
-        className={({ isPending }) => (isPending ? styles.link_pending : '')}
-      >
-        <Logo />
-      </NavLink>
-      <div className={styles.icons_mobile}>
-        <a href={linkVk} target={'_blank'}>
-          <Vk />
-        </a>
-        <a href={createLinkTg(linkTg)} target={'_blank'}>
-          <T />
-        </a>
-        <a href={linkInstagram} target={'_blank'}>
-          <Inst />
-        </a>
-      </div>
-      <div className={styles.burger}>
-        <Burger onClick={togglePopapMenu} />
-        {isOpenPopapMenu ? (
-          <div className={styles.popap_menu} onClick={togglePopapMenu}>
-            <ul className={styles.menu_popap}>
-              <li>
-                <NavLink to="/weekendCamps" className={createLinkClassName}>
-                  Кемпы выходного дня
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/longCamps" className={createLinkClassName}>
-                  Недельные кемпы
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/oldCamps" className={createLinkClassName}>
-                  Прошедшие кемпы
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/allCoahes" className={createLinkClassName}>
-                  Тренеры
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/trainingSchedule" className={createLinkClassName}>
-                  Расписание
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/tournaments" className={createLinkClassName}>
-                  Турниры
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/corporates" className={createLinkClassName}>
-                  Корпоративные мероприятия
-                </NavLink>
-              </li>
-            </ul>
-            {isAuth ? (
+  const toggleNotificationModal = () => {
+    if (!isOpenNotif) {
+      const getNotif = async () => {
+        try {
+          const { data } =
+            await api.notification.getNotifications<INotification>();
+
+          if (data?.result !== null) {
+            setNotifications(data.result);
+          }
+        } catch (error) {
+          //
+        }
+      };
+      getNotif();
+    }
+    openNotif((prev) => !prev);
+  };
+
+  return (
+    <>
+      {isOpenNotif ? (
+        <CampsInfo
+          notifications={notifications}
+          toggleNotificationModal={toggleNotificationModal}
+        />
+      ) : null}
+      {isMobile ? (
+        <div className={styles.header_mobile}>
+          <NavLink
+            to="/"
+            className={({ isPending }) =>
+              isPending ? styles.link_pending : ''
+            }
+          >
+            <Logo />
+          </NavLink>
+          <div className={styles.icons_mobile}>
+            <a href={linkVk} target={'_blank'}>
+              <Vk />
+            </a>
+            <a href={createLinkTg(linkTg)} target={'_blank'}>
+              <T />
+            </a>
+            <a href={linkInstagram} target={'_blank'}>
+              <Inst />
+            </a>
+          </div>
+          <div className={styles.burger}>
+            <Burger onClick={togglePopapMenu} />
+            {isOpenPopapMenu ? (
+              <div className={styles.popap_menu} onClick={togglePopapMenu}>
+                <ul className={styles.menu_popap}>
+                  <li>
+                    <NavLink to="/weekendCamps" className={createLinkClassName}>
+                      Кемпы выходного дня
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/longCamps" className={createLinkClassName}>
+                      Недельные кемпы
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/oldCamps" className={createLinkClassName}>
+                      Прошедшие кемпы
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/allCoahes" className={createLinkClassName}>
+                      Тренеры
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/trainingSchedule"
+                      className={createLinkClassName}
+                    >
+                      Расписание
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/childCamps" className={createLinkClassName}>
+                      Детские кэмпы
+                    </NavLink>
+                  </li>
+                </ul>
+                {isAuth ? (
+                  <Link
+                    to={`/user/:${(user as unknown as IUser).id}`}
+                    className={styles.user_avatar}
+                  >
+                    <Avatar />
+                  </Link>
+                ) : (
+                  <button
+                    className={styles.button}
+                    onClick={() => toggleAuthOpen()}
+                  >
+                    {'Войти'}
+                  </button>
+                )}
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.header}>
+          <ul className={styles.menu}>
+            <li>
+              <NavLink to="/" className={createLinkClassName}>
+                <Logo />
+              </NavLink>
+            </li>
+            <li>
+              <div className={styles.dropdown}>
+                <span>Пляжный волейбол</span>
+                <ClosedIcon className={styles.dropdown_closed} />
+                <div className={styles.dropdown_content}>
+                  <ul className={styles.dropdown_menu}>
+                    <li>
+                      <NavLink
+                        to="/weekendCamps"
+                        className={createLinkClassName}
+                      >
+                        Кемпы выходного дня
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/longCamps" className={createLinkClassName}>
+                        Недельные кемпы
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/oldCamps" className={createLinkClassName}>
+                        Прошедшие кемпы
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/beachCoaches"
+                        className={createLinkClassName}
+                      >
+                        Тренеры
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className={styles.dropdown}>
+                <span>Классический волейбол</span>
+                <ClosedIcon className={styles.dropdown_closed} />
+                <div className={styles.dropdown_content}>
+                  <ul className={styles.dropdown_menu}>
+                    <li>
+                      <NavLink
+                        to="/trainingSchedule"
+                        className={createLinkClassName}
+                      >
+                        Расписание
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/classicCoaches"
+                        className={createLinkClassName}
+                      >
+                        Тренеры
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li>
+              <NavLink to="/childCamps" className={createLinkClassName}>
+                Детские кэмпы
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/about" className={createLinkClassName}>
+                О нас
+              </NavLink>
+            </li>
+          </ul>
+          <div className={styles.icons}>
+            <a href={linkVk} target={'_blank'}>
+              <Vk />
+            </a>
+            <a href={createLinkTg(linkTg)} target={'_blank'}>
+              <T />
+            </a>
+            <a href={linkInstagram} target={'_blank'}>
+              <Inst />
+            </a>
+          </div>
+          {isAuth ? (
+            <>
+              {isAdmin ? (
+                <span className={styles.user_bell}>
+                  {count !== 0 ? (
+                    <span className={styles.notifications_count}>{count}</span>
+                  ) : null}
+                  <Bell onClick={toggleNotificationModal} />
+                </span>
+              ) : null}
               <Link
-                to={`/user/:${(user as unknown as IUser).id}`}
-                className={styles.user_avatar}
+                to={`/user/${(user as unknown as IUser).id}`}
+                className={
+                  isAdmin ? styles.user_avatar : styles.user_avatar_without_bell
+                }
               >
                 <Avatar />
               </Link>
-            ) : (
-              <button
-                className={styles.button}
-                onClick={() => toggleAuthOpen()}
-              >
-                {'Войти'}
-              </button>
-            )}
-          </div>
-        ) : null}
-      </div>
-    </div>
-  ) : (
-    <div className={styles.header}>
-      <ul className={styles.menu}>
-        <li>
-          <NavLink to="/" className={createLinkClassName}>
-            <Logo />
-          </NavLink>
-        </li>
-        <li>
-          <div className={styles.dropdown}>
-            <span>Пляжный волейбол</span>
-            <ClosedIcon className={styles.dropdown_closed} />
-            <div className={styles.dropdown_content}>
-              <ul className={styles.dropdown_menu}>
-                <li>
-                  <NavLink to="/weekendCamps" className={createLinkClassName}>
-                    Кемпы выходного дня
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/longCamps" className={createLinkClassName}>
-                    Недельные кемпы
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/oldCamps" className={createLinkClassName}>
-                    Прошедшие кемпы
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/beachCoaches" className={createLinkClassName}>
-                    Тренеры
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className={styles.dropdown}>
-            <span>Классический волейбол</span>
-            <ClosedIcon className={styles.dropdown_closed} />
-            <div className={styles.dropdown_content}>
-              <ul className={styles.dropdown_menu}>
-                <li>
-                  <NavLink
-                    to="/trainingSchedule"
-                    className={createLinkClassName}
-                  >
-                    Расписание
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/tournaments" className={createLinkClassName}>
-                    Турниры
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/corporates" className={createLinkClassName}>
-                    Корпоративные мероприятия
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/classicCoaches" className={createLinkClassName}>
-                    Тренеры
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li>
-          <NavLink to="/about" className={createLinkClassName}>
-            О нас
-          </NavLink>
-        </li>
-      </ul>
-      <div className={styles.icons}>
-        <a href={linkVk} target={'_blank'}>
-          <Vk />
-        </a>
-        <a href={createLinkTg(linkTg)} target={'_blank'}>
-          <T />
-        </a>
-        <a href={linkInstagram} target={'_blank'}>
-          <Inst />
-        </a>
-      </div>
-      {isAuth ? (
-        <Link
-          to={`/user/${(user as unknown as IUser).id}`}
-          className={`${styles.user_avatar} ${styles.auth_block}`}
-        >
-          <Avatar />
-          {isAdmin && count !== 0 ? (
-            <span className={styles.notifications_count}>{count}</span>
-          ) : null}
-        </Link>
-      ) : (
-        <button className={styles.button} onClick={() => toggleAuthOpen()}>
-          {'Войти'}
-        </button>
+            </>
+          ) : (
+            <button className={styles.button} onClick={() => toggleAuthOpen()}>
+              {'Войти'}
+            </button>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
