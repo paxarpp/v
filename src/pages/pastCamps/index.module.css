@@ -58,31 +58,38 @@
   gap: 50px;
 }
 
+.add_camp_content,
 .edit_camp_content {
   position: relative;
   display: flex;
   flex-flow: column nowrap;
   overflow: auto;
-  height: 500px;
   padding: 50px 50px 0 50px;
 }
 
-.profile_camp_modal,
+.edit_camp_content {
+  height: 500px;
+}
+
+.add_camp_modal,
 .edit_camp_modal {
   display: flex;
   flex-flow: column nowrap;
   overflow: hidden;
 }
 
-.profile_camp_modal {
-  width: 420px;
-  height: 768px;
-  background: rgba(136, 136, 136, 1);
-}
-
 .edit_camp_modal {
   width: 1200px;
   height: 768px;
+}
+
+.add_camp_modal {
+  width: 800px;
+  height: 500px;
+}
+
+.selected_camp {
+  background-color: #99660A;
 }
 
 .text_align_l {

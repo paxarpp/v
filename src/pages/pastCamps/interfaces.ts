@@ -6,19 +6,11 @@ export interface ICoach {
   mainImage: IImage | null;
 }
 
-export interface IPackage {
-  packageId: number;
+export interface IGallery {
+  id: string;
   name: string;
-  costNamingLink: string;
-  info: string;
-  totalPrice: number;
-  bookingPrice: number;
-  firstPrice: number;
-  firstLimitation: string;
-  secondPrice: number;
-  secondLimitation: string;
-  thirdPrice: number;
-  thirdLimitation: string;
+  dateString: string;
+  imageCart: IImage | null;
 }
 
 export interface IImage {
@@ -42,7 +34,11 @@ export interface ICampItem {
   countFree: number;
   mainImage: null | IImage;
   imageCart: null | IImage;
-  images: null | IImage[];
-  coaches: ICoach[];
-  packages: IPackage[];
+}
+
+export interface IPostCampItemList {
+  id: string;
+  name: string;
+  dateString: null | string;
+  imageCart: null | IImage;
 }

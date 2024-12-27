@@ -18,6 +18,10 @@ export const CampsList = () => {
     setIsOpen(true);
   };
 
+  const onChangePastCamp = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    //
+  };
+
   return (
     <div className={styles.camp_list}>
       {open ? <CampPastAdd onClose={closeCampAdd} /> : null}
@@ -38,11 +42,7 @@ const CampsTemplate: React.FC<{
         return (
           <div key={camp.id} className={styles.camp_card}>
             <div>
-              <h2>
-                {camp.dateString
-                  ? camp.dateString
-                  : `${camp.dateStart}-${camp.dateEnd}`}
-              </h2>
+              <h2>{camp.dateString}</h2>
               <span>{camp.name}</span>
             </div>
             <div className={styles.camp_image_wrapper}>

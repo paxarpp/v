@@ -26,6 +26,13 @@ export const api = {
       return await instance.post('/users/add-user', data);
     }
   },
+  addCampPast: async (
+    data: string[],
+  ): Promise<{
+    data: { result: boolean; error?: string };
+  }> => {
+    return await instance.post('/camps/past-add', { pastCampIds: data });
+  },
   updateUserReservation: async <T>(data: {
     id?: string | null;
   }): Promise<{
