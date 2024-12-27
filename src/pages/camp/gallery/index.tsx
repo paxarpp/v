@@ -59,7 +59,7 @@ export const Gallery = () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
         api.updateGallery({
-          id: camp?.id as string,
+          ...camp,
           gallery,
         }),
       );
