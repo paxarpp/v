@@ -18,10 +18,6 @@ export const CampsList = () => {
     setIsOpen(true);
   };
 
-  const onChangePastCamp = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //
-  };
-
   return (
     <div className={styles.camp_list}>
       {open ? <CampPastAdd onClose={closeCampAdd} /> : null}
