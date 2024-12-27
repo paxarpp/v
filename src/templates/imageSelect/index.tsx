@@ -187,38 +187,32 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
         />
       </form>
       <div className={styles.images_row}>
-        {images?.length ? (
-          <>
-            {images.map((image) => {
-              return (
-                <div key={image.id} className={styles.images_img_col}>
-                  <span className={styles.image_name}>{image.name}</span>
+        <>
+          {images?.map((image) => {
+            return (
+              <div key={image.id} className={styles.images_img_col}>
+                <span className={styles.image_name}>{image.name}</span>
 
-                  <span className={styles.img_wrapper}>
-                    <img
-                      src={image.url}
-                      alt=""
-                      className={styles.upload_real_img}
-                    />
-                    <Aye
-                      className={styles.aye}
-                      onClick={() => view(image.id)}
-                    />
-                    <BasketIcon
-                      className={styles.trash}
-                      onClick={() => deleteI(image.id)}
-                    />
-                  </span>
-                </div>
-              );
-            })}
-          </>
-        ) : (
-          <div className={styles.images_img_col}>
-            <span className={styles.image_name}>{'Название документа'}</span>
-            <SquareAdd className={styles.stub_img} onClick={onBtnImg} />
-          </div>
-        )}
+                <span className={styles.img_wrapper}>
+                  <img
+                    src={image.url}
+                    alt=""
+                    className={styles.upload_real_img}
+                  />
+                  <Aye className={styles.aye} onClick={() => view(image.id)} />
+                  <BasketIcon
+                    className={styles.trash}
+                    onClick={() => deleteI(image.id)}
+                  />
+                </span>
+              </div>
+            );
+          })}
+        </>
+        <div className={styles.images_img_col}>
+          <span className={styles.image_name}>{'Название документа'}</span>
+          <SquareAdd className={styles.stub_img} onClick={onBtnImg} />
+        </div>
       </div>
     </div>
   );
