@@ -40,10 +40,10 @@ export const pl = {
     }
   },
   getChildCamps: async <T>(): Promise<{
-    data: { result: T | null; error?: string };
+    data: { result: T[] | null; error?: string };
   }> => {
     try {
-      return await instance.get('/childCamps');
+      return await instance.get('/camps/child-all');
     } catch (e: unknown) {
       return { data: { result: null, error: (e as Error).message } };
     }
@@ -117,7 +117,7 @@ export const pl = {
     data: { result: T[] | null; error?: string };
   }> => {
     try {
-      return await instance.get('/camps/past-all');
+      return await instance.get('/past-camps/all');
     } catch (e: unknown) {
       return { data: { result: null, error: (e as Error).message } };
     }

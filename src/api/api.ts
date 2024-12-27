@@ -284,6 +284,17 @@ export const api = {
       return await instance.post('/camps/long', body);
     }
   },
+  updateCampChild: async <T>(
+    body: ICampItem,
+  ): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    if (body.id) {
+      return await instance.put(`/camps/${body.id}`, body);
+    } else {
+      return await instance.post('/camps/child', body);
+    }
+  },
   deleteCamp: async (
     id: string,
   ): Promise<{
