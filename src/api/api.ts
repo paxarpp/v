@@ -1,10 +1,11 @@
+import { instance } from '.';
 import { ICoach } from '../pages/coaches/interfaces';
 import { ICampItem } from '../pages/shortCamps/interfaces';
+import { ICampItem as ICampPastItem } from '../pages/camp/interfaces';
 import { IContactBlock, IMainBlock } from '../pages/main/interfaces';
 import { IUserInfo } from '../pages/user/interfaces';
 import { IPass } from '../pages/user/info/modalPass';
 import { IActivity, IReview } from '../pages/about/interfaces';
-import { instance } from '.';
 import { IPrice, ISheduleGroup } from '../pages/trainingSchedule/interfaces';
 
 export const api = {
@@ -107,9 +108,9 @@ export const api = {
   }> => {
     return await instance.post('/questions', body);
   },
-  updateGallery: async (body: {
-    id: string;
-  }): Promise<{
+  updateGallery: async (
+    body: ICampPastItem,
+  ): Promise<{
     data: { result: boolean; error?: string };
   }> => {
     return await instance.put(`/past-camps/${body.id}`, body);

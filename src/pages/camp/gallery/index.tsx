@@ -50,11 +50,12 @@ export const Gallery = () => {
   };
 
   const openModal = () => {
-    setGallery([...camp.gallery]);
+    setGallery(camp?.gallery ? [...camp.gallery] : []);
     setOpen(true);
   };
 
   const updateGallery = () => {
+    if (!camp) return;
     const updG = async () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
@@ -75,8 +76,10 @@ export const Gallery = () => {
     setGallery((prevG) => prevG.filter((img) => img.id !== id));
   };
   const onChangeImageMass = (img: IImageBase) => {
+    if (!camp) return;
     const newImg = {
       entityId: camp.id,
+      typeEntity: 'CAMP' as const,
       ...img,
     };
     setGallery((prevG) => prevG.concat([newImg]));
@@ -90,7 +93,7 @@ export const Gallery = () => {
           close={closeModal}
           footer={
             <div className={styles.activity_footer}>
-              <button onClick={updateGallery} className={styles.button_save}>
+              <button onClick={updateGallery} className={styles.button}>
                 {'Сохранить'}
               </button>
             </div>
@@ -122,7 +125,7 @@ export const Gallery = () => {
           );
         })}
       {isAdmin ? (
-        <Setting onClick={openModal} className={styles.setting_activity} />
+        <Setting onClick={openModal} className={styles.setting} />
       ) : null}
     </div>
   );
