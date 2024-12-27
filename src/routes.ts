@@ -7,6 +7,7 @@ export default [
   route('/classicCoaches', './pages/coaches/classic.tsx'),
   route('/weekendCamps', './pages/shortCamps/index.tsx'),
   route('/camps/:id', './pages/camp/index.tsx'),
+  route('/camps/past/:id', './pages/camp/past.tsx'),
   route('/longCamps', './pages/longCamps/index.tsx'),
   route('/trainingSchedule', './pages/trainingSchedule/index.tsx'),
   route('/oldCamps', './pages/pastCamps/index.tsx'),

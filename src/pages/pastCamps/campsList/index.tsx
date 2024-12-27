@@ -49,7 +49,7 @@ const CampsTemplate: React.FC<{
               />
             </div>
             <div>
-              <Link to={`/camps/${camp.id}`} className={styles.button_profile}>
+              <Link to={`/camps/past/${camp.id}`} className={styles.button_profile}>
                 Подробнее
               </Link>
             </div>
