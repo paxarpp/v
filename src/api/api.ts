@@ -106,7 +106,9 @@ export const api = {
   ): Promise<{
     data: { result: boolean; error?: string };
   }> => {
-    return await instance.put(`/past-camps/${body.id}`, body);
+    return await instance.put(`/past-camps/${body.id}`, {
+      gallery: body.gallery,
+    });
   },
   updateUser: async <T>(
     body: IUserInfo,
