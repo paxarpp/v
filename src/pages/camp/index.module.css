@@ -323,7 +323,6 @@
   position: relative;
   display: flex;
   flex-flow: row nowrap;
-  width: calc(100% - 0px);
   overflow: auto;
   height: 100%;
   overflow: hidden;
