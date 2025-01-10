@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const env = loadEnv(mode, process.cwd(), '');
-  const isDev = env.NODE_ENV !== 'production';
+  const isDev = env.MODE !== 'production';
 
   const API_URL = env.VITE_API_URL;
   const PORT = env.VITE_PORT;
