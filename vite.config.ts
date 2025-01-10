@@ -11,9 +11,9 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const isDev = mode !== 'production';
 
-  const API_URL = `${env.VITE_API_URL ?? 'http://localhost:8081/'}`;
-  const PORT = `${env.VITE_PORT ?? '3000'}`;
-  const url = `${env.URL_ENTRY_POINT ?? '/'}`;
+  const API_URL = env.VITE_API_URL;
+  const PORT = env.VITE_PORT;
+  const url = env.URL_ENTRY_POINT;
 
   return {
     plugins: [reactRouter(), svgr()],
