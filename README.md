@@ -33,6 +33,9 @@ export default {
 локальная проверка билда
 ```
 npm install serve@14.2.0
+
+терминал открыть в папке client
+
 node /KODING/v/node_modules/serve/build/main -p 8080 -s .
 ```
 собственно после node это путь до этой либы, а точка в конце - текущая директория. В данном случае это build/client где лежит index.html и assets
