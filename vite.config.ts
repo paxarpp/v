@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     plugins: [reactRouter(), svgr()],
     server: {
       proxy: {
-        '/magicvolley': isDev ? 'http://localhost' : API_URL,
+        '/magicvolley': 'API_URL_test',
       },
       port: isDev ? 3000 : Number(PORT),
     },
