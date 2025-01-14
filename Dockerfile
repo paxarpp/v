@@ -1,6 +1,7 @@
 FROM node:20-bookworm-slim AS build
 WORKDIR /build
 COPY . .
+ENV MODE=production
 RUN npm ci && npm run build
 
 FROM node:20-bookworm-slim AS app
