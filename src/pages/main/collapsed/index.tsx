@@ -166,23 +166,18 @@ const QuestionsTemplate: React.FC = () => {
   return (
     <>
       {home?.questions.map((item) => {
+        const isOpenQ = openId === item.id;
         return (
           <div
             key={item.id}
-            className={styles.question}
+            className={`${styles.question} ${isOpenQ ? styles.q_open : styles.q_close}`}
             onClick={onToggle(item.id)}
           >
             <div className={styles.question_name_wrapper}>
               <span className={styles.question_name}>{item.question}</span>
-              <ClosedIcon
-                className={openId === item.id ? styles.rotate_to_open : ''}
-              />
+              <ClosedIcon className={isOpenQ ? styles.rotate_to_open : ''} />
             </div>
-            <div
-              className={
-                openId === item.id ? styles.info_open : styles.info_close
-              }
-            >
+            <div className={isOpenQ ? styles.info_open : styles.info_close}>
               <span className={styles.answer}>{item.answer}</span>
             </div>
           </div>

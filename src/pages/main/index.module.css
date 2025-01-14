@@ -236,6 +236,14 @@
   margin-top: 10px;
 }
 
+.q_open {
+  height: auto;
+}
+
+.q_close {
+  height: 50px;
+}
+
 .question_name_wrapper {
   display: flex;
 }
