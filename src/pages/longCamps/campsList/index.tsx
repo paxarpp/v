@@ -5,6 +5,7 @@ import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
 import { CampEdit } from '../campEdit';
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
@@ -60,7 +61,7 @@ const CampsTemplate: React.FC<{
             </div>
             <div className={styles.camp_image_wrapper}>
               <img
-                src={camp.imageCart?.url}
+                src={createImageUrl(camp.imageCart?.url)}
                 alt={camp.name}
                 className={styles.camp_img}
               />

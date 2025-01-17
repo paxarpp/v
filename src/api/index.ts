@@ -1,8 +1,10 @@
 import axios, { AxiosError } from 'axios';
 
-const BASE_URL = import.meta.env.DEV
-  ? '/magicvolley'
-  : `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_PORT}/magicvolley`;
+export const HOST = import.meta.env.DEV
+  ? ''
+  : `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_PORT}`;
+
+const BASE_URL = `${HOST}/magicvolley`;
 export const instance = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,

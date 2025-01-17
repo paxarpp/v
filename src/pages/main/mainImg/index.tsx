@@ -8,6 +8,7 @@ import { api } from '../../../api/api';
 import { creatorRequest } from '../../../api';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const MainImg: React.FC = () => {
@@ -119,7 +120,7 @@ export const MainImg: React.FC = () => {
           <Setting onClick={openEditMainImg} className={styles.setting} />
         ) : null}
         <img
-          src={home?.mainBlock.mainImage?.url}
+          src={createImageUrl(home?.mainBlock.mainImage?.url)}
           className={styles.main_image}
         />
         <div className={styles.main_title_wrap}>

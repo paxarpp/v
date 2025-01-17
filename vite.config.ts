@@ -11,21 +11,22 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const isDev = mode !== 'production';
 
-
   // все env переменные в файле .env
   const url = env.URL_ENTRY_POINT;
 
-  return isDev ? {
-    plugins: [reactRouter(), svgr()],
-    server: {
-      proxy: {
-        '/magicvolley': 'http://localhost:8081',
-      },
-      port: 3000,
-    },
-    base: url,
-  } : {
-    plugins: [reactRouter(), svgr()],
-    base: url,
-  };
+  return isDev
+    ? {
+        plugins: [reactRouter(), svgr()],
+        server: {
+          proxy: {
+            '/magicvolley': 'http://localhost:8081',
+          },
+          port: 3000,
+        },
+        base: url,
+      }
+    : {
+        plugins: [reactRouter(), svgr()],
+        base: url,
+      };
 });

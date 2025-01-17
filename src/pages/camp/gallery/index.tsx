@@ -10,6 +10,7 @@ import { api } from '../../../api/api';
 import { useUser } from '../../../context';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const Gallery = () => {
@@ -117,7 +118,7 @@ export const Gallery = () => {
           return (
             <div key={image.id} className={styles.image_card}>
               <img
-                src={image.url}
+                src={createImageUrl(image.url)}
                 alt={image.name}
                 className={styles.coach_image}
               />

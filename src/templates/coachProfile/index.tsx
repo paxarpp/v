@@ -1,5 +1,6 @@
 import { Modal } from '../modal';
 import Avatar from '../../assets/avatar.svg?react';
+import { createImageUrl } from '../../constants';
 import styles from './index.module.css';
 
 interface IImage {
@@ -29,7 +30,7 @@ export const CoachProfile: React.FC<{
       <div className={styles.profile_coach_content}>
         {coach.mainImage ? (
           <img
-            src={coach.mainImage.url}
+            src={createImageUrl(coach.mainImage.url)}
             alt=""
             className={styles.profile_coach_img}
           />

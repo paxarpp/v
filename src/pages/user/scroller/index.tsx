@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { ICamp } from '../interfaces';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 interface IProps {
@@ -44,7 +45,7 @@ export const Scroller: React.FC<IProps> = ({ camps = [], title }) => {
                 <p>{item.dateString}</p>
                 <div className={styles.camp_img_wrap}>
                   <img
-                    src={item.imageCart.url}
+                    src={createImageUrl(item.imageCart.url)}
                     alt="картинка кэмпа"
                     className={styles.camp_img}
                   />

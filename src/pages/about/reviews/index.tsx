@@ -12,6 +12,7 @@ import { api } from '../../../api/api';
 import { useUser } from '../../../context';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const Reviews = () => {
@@ -182,7 +183,7 @@ export const Reviews = () => {
             <div key={item.name + indx} className={styles.review_card}>
               <div className={styles.card_row_user}>
                 <img
-                  src={item.image?.url}
+                  src={createImageUrl(item.image?.url)}
                   alt="user"
                   className={styles.review_img}
                 />

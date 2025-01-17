@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ArrowLeft from '../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../assets/arrowRight.svg?react';
+import { createImageUrl } from '../../constants';
 import styles from './index.module.css';
 
 interface IProps {
@@ -68,7 +69,7 @@ export const ImagePack: React.FC<IProps> = ({
     <div className={className}>
       <div className={styles.info_img_wrapper} style={size}>
         <img
-          src={images[currentImage].url}
+          src={createImageUrl(images[currentImage].url)}
           alt={images[currentImage].name}
           className={styles.info_current_img}
         />
@@ -84,7 +85,7 @@ export const ImagePack: React.FC<IProps> = ({
                 style={sizePreviw}
               >
                 <img
-                  src={image.url}
+                  src={createImageUrl(image.url)}
                   alt={image.name}
                   className={
                     indx === currentImage

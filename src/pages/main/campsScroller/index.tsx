@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const CampsScroller: React.FC = () => {
@@ -53,7 +54,7 @@ const CampsTemplate = () => {
               <p>{item.dateString}</p>
               <div className={styles.camp_img_wrap}>
                 <img
-                  src={item.imageCart?.url}
+                  src={createImageUrl(item.imageCart?.url)}
                   alt="картинка кэмпа"
                   className={styles.camp_img}
                 />

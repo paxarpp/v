@@ -13,7 +13,7 @@ import { creatorRequest } from '../../../api';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
-import { createLinkTg } from '../../../constants';
+import { createImageUrl, createLinkTg } from '../../../constants';
 import styles from '../index.module.css';
 
 export const Contacts: React.FC = () => {
@@ -199,7 +199,7 @@ export const Contacts: React.FC = () => {
           <div className={styles.img_wrap}>
             <img
               className={styles.manager}
-              src={home?.contactBlock?.imageAdmin?.url}
+              src={createImageUrl(home?.contactBlock?.imageAdmin?.url)}
               alt="manager"
             />
           </div>

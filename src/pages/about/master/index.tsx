@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const Master = () => {
@@ -11,7 +12,7 @@ export const Master = () => {
       <div className={styles.master_column}>
         <div>
           <img
-            src={about?.master?.image?.url}
+            src={createImageUrl(about?.master?.image?.url)}
             className={styles.master_image}
           />
         </div>

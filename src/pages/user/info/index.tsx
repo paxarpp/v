@@ -6,7 +6,7 @@ import Pencil from '../../../assets/pencil.svg?react';
 import { ModalInfo } from './modalInfo';
 import { ModalPass } from './modalPass';
 import { Route } from '../+types';
-
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const Info = () => {
@@ -42,7 +42,10 @@ export const Info = () => {
       <h2>{'Личный кабинет'}</h2>
       <div className={styles.flex_row}>
         <div className={styles.flex_row_info}>
-          <img src={user?.avatar?.url} className={styles.avatar} />
+          <img
+            src={createImageUrl(user?.avatar?.url)}
+            className={styles.avatar}
+          />
 
           <ul className={styles.user_info}>
             <li>{`Имя: ${user?.fullName}`}</li>

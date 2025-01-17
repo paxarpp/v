@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from 'react-router';
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
@@ -15,7 +16,7 @@ export const CampsList = () => {
             </div>
             <div className={styles.camp_image_wrapper}>
               <img
-                src={camp.imageCart?.url}
+                src={createImageUrl(camp.imageCart?.url)}
                 alt={camp.name}
                 className={styles.camp_img}
               />

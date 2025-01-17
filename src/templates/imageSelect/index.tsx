@@ -2,10 +2,11 @@ import React, { useRef, useState } from 'react';
 import BasketIcon from '../../assets/basket.svg?react';
 import SquareAdd from '../../assets/sqareAdd.svg?react';
 import Aye from '../../assets/aye.svg?react';
-import { creatorRequest } from '../../api';
+import { creatorRequest, HOST } from '../../api';
 import { api } from '../../api/api';
 import { Viewer } from '../modal';
 import { useUser } from '../../context';
+import { createImageUrl } from '../../constants';
 import styles from './index.module.css';
 
 export interface IImageBase {
@@ -77,6 +78,7 @@ export const ImageSelect: React.FC<IProps> = ({
   const view = () => {
     setOpen(true);
   };
+
   return (
     <div className={styles.img_col}>
       {isOpen ? (
@@ -104,7 +106,7 @@ export const ImageSelect: React.FC<IProps> = ({
       {currentImage ? (
         <span className={styles.img_wrapper}>
           <img
-            src={currentImage.url}
+            src={createImageUrl(currentImage.url)}
             alt=""
             className={styles.upload_real_img}
           />
@@ -169,7 +171,11 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
     <div className={styles.img_col}>
       {openId ? (
         <Viewer close={() => setOpen('')}>
-          <img src={images?.find((image) => image.id === openId)?.url} />
+          <img
+            src={createImageUrl(
+              images?.find((image) => image.id === openId)?.url,
+            )}
+          />
         </Viewer>
       ) : null}
       <span className={styles.text_align_l}>
@@ -195,7 +201,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
 
                 <span className={styles.img_wrapper}>
                   <img
-                    src={image.url}
+                    src={createImageUrl(image.url)}
                     alt=""
                     className={styles.upload_real_img}
                   />

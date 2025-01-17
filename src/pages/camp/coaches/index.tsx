@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router';
 import { ICoach } from '../../shortCamps/interfaces';
 import { CoachProfile } from '../../../templates/coachProfile';
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const Coaches = () => {
@@ -26,7 +27,7 @@ export const Coaches = () => {
           return (
             <div key={coach.id} className={styles.coach_card}>
               <img
-                src={coach.mainImage?.url}
+                src={createImageUrl(coach.mainImage?.url)}
                 alt={coach.name}
                 className={styles.coach_img}
               />

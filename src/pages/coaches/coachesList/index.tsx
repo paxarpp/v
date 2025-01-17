@@ -12,6 +12,7 @@ import { CoachProfile } from '../../../templates/coachProfile';
 import { Route } from '../+types';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
@@ -85,7 +86,7 @@ const CoachesTemplate: React.FC<{
           <div key={coach.id} className={styles.coach_card}>
             {coach.mainImage?.url ? (
               <img
-                src={coach.mainImage.url}
+                src={createImageUrl(coach.mainImage.url)}
                 alt={coach.name}
                 className={styles.coach_img}
               />

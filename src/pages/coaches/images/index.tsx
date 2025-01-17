@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
-
 import { Route } from '../+types';
+import { createImageUrl } from '../../../constants';
 import styles from '../index.module.css';
-import { useState } from 'react';
 
 export const ImagesList: React.FC = () => {
   const { images } = useLoaderData<Route.ComponentProps['loaderData']>();
@@ -40,7 +40,7 @@ export const ImagesList: React.FC = () => {
           return (
             <div key={image.id} className={styles.image_card}>
               <img
-                src={image.url}
+                src={createImageUrl(image.url)}
                 alt={image.name}
                 className={styles.coach_image}
               />
