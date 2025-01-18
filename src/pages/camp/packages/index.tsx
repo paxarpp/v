@@ -30,6 +30,7 @@ const getPackImgUrl = (type: IType) => {
 
 export const Packages = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const [rSuccess, setReservationSuccess] = useState(false);
   const { user, logout } = useUser();
   const { toggleAuthOpen } = useAuth();
   const [showPricesInfo, setShowPricesInfo] = useState<Record<string, boolean>>(
@@ -51,7 +52,12 @@ export const Packages = () => {
         const campId = camp.id;
         const userId = user.id;
         const axiosCall = creatorRequest(logout);
-        await axiosCall(api.campReservation(campId, userId));
+        const { result, error } = await axiosCall(
+          api.campReservation(campId, userId),
+        );
+        if (!error && result?.data.result) {
+          setReservationSuccess(true);
+        }
       }
     };
     if (user) {
@@ -134,9 +140,13 @@ export const Packages = () => {
         ))}
       </div>
 
-      <button className={styles.button_profile} onClick={onReservation}>
-        {'Забронировать'}
-      </button>
+      {rSuccess ? (
+        <h3>{'Забронировано'}</h3>
+      ) : (
+        <button className={styles.button_profile} onClick={onReservation}>
+          {'Забронировать'}
+        </button>
+      )}
     </div>
   );
 };
