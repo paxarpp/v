@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { useLoaderData, useParams, useRevalidator } from 'react-router';
 import { useUser } from '../../../context';
 import { api } from '../../../api/api';
 import Pencil from '../../../assets/pencil.svg?react';
@@ -16,6 +16,7 @@ import styles from '../index.module.css';
 
 export const Info = () => {
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { id } = useParams<{ id: string }>();
   const revalidator = useRevalidator();
 
   const [isOpenEd, setOpenEd] = useState(false);
@@ -51,9 +52,7 @@ export const Info = () => {
     if (user?.avatar?.entityId) {
       const userAvatarUpdate = async () => {
         const axiosCall = creatorRequest(logout);
-        const { error } = await axiosCall(
-          api.deleteUserAvatar(user.avatar?.entityId as string),
-        );
+        const { error } = await axiosCall(api.deleteUserAvatar(id as string));
         if (!error) {
           revalidator.revalidate();
         }

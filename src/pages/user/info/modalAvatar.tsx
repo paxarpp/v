@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { useParams, useLoaderData, useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
@@ -13,6 +13,8 @@ export const ModalAvatar: React.FC<{ closeModal: () => void }> = ({
   closeModal,
 }) => {
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { id } = useParams<{ id: string }>();
+
   const revalidator = useRevalidator();
 
   const [currentAvatar, setCurrentAvatar] = useState<IImage | null | undefined>(
@@ -26,7 +28,7 @@ export const ModalAvatar: React.FC<{ closeModal: () => void }> = ({
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
         api.updateUserAvatar({
-          profileId: user?.avatar?.entityId,
+          profileId: id,
           avatar: currentAvatar,
         }),
       );
@@ -45,7 +47,7 @@ export const ModalAvatar: React.FC<{ closeModal: () => void }> = ({
   const onChangeImage = (img: IImageBase) => {
     setCurrentAvatar({
       typeEntity: 'COACH',
-      entityId: user?.avatar?.entityId,
+      entityId: id,
       ...img,
     });
   };

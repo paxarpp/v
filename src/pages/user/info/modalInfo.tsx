@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLoaderData, useRevalidator } from 'react-router';
+import { useLoaderData, useParams, useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
@@ -13,18 +13,19 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
   closeModal,
 }) => {
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { id } = useParams<{ id: string }>();
   const revalidator = useRevalidator();
 
   const [currentInfo, setCurrentInfo] = useState<IUserInfo | null>(user);
 
-  const { logout, user: authUser } = useUser();
+  const { logout } = useUser();
 
   const saveInfo = () => {
     const userInfoUpdate = async () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
         api.updateUser({
-          id: authUser.id,
+          id: id as string,
           email: currentInfo.email,
           telephone: currentInfo.telephone,
           fullName: currentInfo.fullName,

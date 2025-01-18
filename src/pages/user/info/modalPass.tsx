@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useRevalidator } from 'react-router';
+import { useParams, useRevalidator } from 'react-router';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { useUser } from '../../../context';
-import { IUser } from '../interfaces';
 import { InputStyled } from '../../../templates/input';
 import styles from '../index.module.css';
 
@@ -18,7 +17,8 @@ export interface IPass {
 export const ModalPass: React.FC<{ closeModal: () => void }> = ({
   closeModal,
 }) => {
-  const { logout, user } = useUser();
+  const { id } = useParams<{ id: string }>();
+  const { logout } = useUser();
   const revalidator = useRevalidator();
 
   const [currentInfo, setCurrentInfo] = useState<IPass>({
@@ -34,7 +34,7 @@ export const ModalPass: React.FC<{ closeModal: () => void }> = ({
       const { error } = await axiosCall(
         api.updateUserPass({
           ...currentInfo,
-          id: (user as unknown as IUser).id,
+          id: id as string,
         }),
       );
       if (!error) {
