@@ -22,6 +22,7 @@ interface IProps {
   onChangeImage: (img: IImageBase) => void;
   deleteImg: () => void;
   currentImage?: IImageBase | null;
+  className?: string;
 }
 
 interface IMassProps {
@@ -29,6 +30,7 @@ interface IMassProps {
   onChangeImage: (img: IImageBase) => void;
   deleteImg: (id: string) => void;
   images?: IImageBase[] | null;
+  className?: string;
 }
 
 export const ImageSelect: React.FC<IProps> = ({
@@ -36,6 +38,7 @@ export const ImageSelect: React.FC<IProps> = ({
   onChangeImage,
   deleteImg,
   currentImage,
+  className,
 }) => {
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -80,7 +83,7 @@ export const ImageSelect: React.FC<IProps> = ({
   };
 
   return (
-    <div className={styles.img_col}>
+    <div className={`${styles.img_col} ${className ? className : ''}`}>
       {isOpen ? (
         <Viewer close={() => setOpen(false)}>
           <img src={currentImage?.url} />
@@ -125,6 +128,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
   onChangeImage,
   deleteImg,
   images,
+  className,
 }) => {
   const imageRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -168,7 +172,7 @@ export const ImagesMassSelect: React.FC<IMassProps> = ({
     setOpen(id);
   };
   return (
-    <div className={styles.img_col}>
+    <div className={`${styles.img_col} ${className ? className : ''}`}>
       {openId ? (
         <Viewer close={() => setOpen('')}>
           <img

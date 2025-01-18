@@ -13,6 +13,7 @@ export const Users = () => {
   const revalidator = useRevalidator();
   const { isAdmin, isModerator, logout } = useUser();
   const [isOpen, setOpen] = useState(false);
+  const [count, setCount] = useState(0);
   const [newUser, setNewUser] = useState<{
     id: string | null;
     telephone: string;
@@ -39,7 +40,7 @@ export const Users = () => {
       const campId = camp.id;
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
-        api.campConfirm(campId, user.id, !user.bookingConfirmed),
+        api.campConfirm(campId, user.id, count, !user.bookingConfirmed),
       );
       if (!error) {
         revalidator.revalidate();
@@ -152,7 +153,19 @@ export const Users = () => {
           <tr key={user.id}>
             <td>{user.login}</td>
             <td>{user.telephone}</td>
-            <td>{user.bookingCount}</td>
+            <td>
+              {user.bookingConfirmed ? (
+                user.bookingCount
+              ) : (
+                <input
+                  type={'number'}
+                  value={count}
+                  onChange={(e) =>
+                    setCount(e.target.value ? Number(e.target.value) : 0)
+                  }
+                />
+              )}
+            </td>
             <td>
               <button
                 className={

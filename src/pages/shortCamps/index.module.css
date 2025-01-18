@@ -78,6 +78,7 @@
 }
 
 .textarea_field,
+.input_field_short,
 .input_field {
   height: 64px;
   padding: 20px;
@@ -85,6 +86,10 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+}
+
+.input_field_short {
+  width: 280px;
 }
 
 .textarea_field {
@@ -283,4 +288,8 @@
 
 .date_picker {
   text-align: left;
+}
+
+.margin_24 {
+  margin: 24px 0;
 }

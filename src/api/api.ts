@@ -66,6 +66,7 @@ export const api = {
   campConfirm: async (
     campId: string,
     userId: string | null,
+    count: number,
     isConfirm: boolean,
   ): Promise<{
     data: { result: boolean; error?: string };
@@ -74,6 +75,7 @@ export const api = {
       campId,
       userId,
       isConfirm,
+      count,
     });
   },
   getCoach: async <T>(

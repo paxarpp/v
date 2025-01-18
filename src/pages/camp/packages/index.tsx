@@ -29,6 +29,9 @@ const getPackImgUrl = (type: IType) => {
   }
 };
 
+const divideNumberByPieces = (x: number, delimiter = ' ') =>
+  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delimiter);
+
 export const Packages = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const [rSuccess, setReservationSuccess] = useState(false);
@@ -71,7 +74,7 @@ export const Packages = () => {
   return (
     <div className={styles.column}>
       <h2>{'Что входит в стоимость'}</h2>
-
+      <h4>{`Свободно ${camp?.countFree} мест`}</h4>
       <div className={styles.package_row}>
         {camp?.packages?.map((pack) => (
           <div key={pack.packageId} className={styles.pack_card}>
@@ -80,8 +83,7 @@ export const Packages = () => {
               alt={pack.name}
               className={styles.back_card}
             />
-            {pack.name.toLocaleLowerCase().includes('tur') ||
-            pack.name.toLocaleLowerCase().includes('тур') ? (
+            {pack.type === 'TOUR' ? (
               <Tour className={styles.pack_icon} />
             ) : (
               <People className={styles.pack_icon} />
@@ -101,7 +103,7 @@ export const Packages = () => {
                   <span>
                     <span
                       className={styles.total_price}
-                    >{`${pack.firstPrice} ₽ `}</span>
+                    >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
                     <span
                       className={styles.pack_limit}
                     >{`до ${pack.firstLimitation}`}</span>
@@ -109,7 +111,7 @@ export const Packages = () => {
                   <span>
                     <span
                       className={styles.total_price}
-                    >{`${pack.secondPrice} ₽ `}</span>
+                    >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
                     <span
                       className={styles.pack_limit}
                     >{`до ${pack.secondLimitation}`}</span>
@@ -117,7 +119,7 @@ export const Packages = () => {
                   <span>
                     <span
                       className={styles.total_price}
-                    >{`${pack.thirdPrice} ₽ `}</span>
+                    >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
                     <span
                       className={styles.pack_limit}
                     >{`до ${pack.thirdLimitation}`}</span>
@@ -127,13 +129,13 @@ export const Packages = () => {
                 <>
                   <h4
                     className={styles.total_price}
-                  >{`${pack.totalPrice} ₽*`}</h4>
+                  >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
                   <span
                     className={styles.cost_link}
                   >{`*${pack.costNamingLink}`}</span>
                   <span
                     className={styles.booking_price}
-                  >{`предоплата по спорт пакету - ${pack.bookingPrice} ₽`}</span>
+                  >{`предоплата по спорт пакету - ${divideNumberByPieces(pack.bookingPrice)} ₽`}</span>
                 </>
               )}
             </div>

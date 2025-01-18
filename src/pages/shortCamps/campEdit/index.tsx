@@ -295,6 +295,19 @@ export const CampEdit: React.FC<{
           deleteImg={deleteImgMass}
           onChangeImage={onChangeImageMass}
           images={currentCamp?.images}
+          className={styles.margin_24}
+        />
+        <label>{'Количество мест'}</label>
+        <input
+          type={'number'}
+          value={currentCamp?.countAll !== undefined ? currentCamp.countAll : 0}
+          onChange={(e) => {
+            setCamp((prevCamp) => ({
+              ...(prevCamp as ICampItem),
+              countAll: e.target.value ? Number(e.target.value) : 0,
+            }));
+          }}
+          className={styles.input_field_short}
         />
         <label>{'Выбор пакета'}</label>
         <select
