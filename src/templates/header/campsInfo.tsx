@@ -14,17 +14,22 @@ export const CampsInfo: React.FC<IProps> = ({
 }) => {
   return (
     <Modal close={toggleNotificationModal} isOpen={true} header={<span />}>
-      <div className={styles.column}>
-        <ul>
+      <div>
+        <ul className={styles.notification_list}>
           {notifications?.map((notification) => {
             return (
-              <Link
-                key={notification.campId}
-                to={`/camps/${notification.campId}`}
-                onClick={toggleNotificationModal}
-              >
-                {`"${notification.campName}": ${notification.countNewUsers}`}
-              </Link>
+              <li className={styles.notification_item}>
+                <Link
+                  key={notification.campId}
+                  to={`/camps/${notification.campId}`}
+                  onClick={toggleNotificationModal}
+                  className={styles.notification_link}
+                >
+                  {notification.campName}
+                </Link>
+                <div className={styles.padding} />
+                <span>{notification.countNewUsers}</span>
+              </li>
             );
           })}
           {notifications?.length === 0 ? (
