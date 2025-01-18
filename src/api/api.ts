@@ -117,6 +117,20 @@ export const api = {
   }> => {
     return await instance.put('/profiles', body);
   },
+  updateUserAvatar: async <T>(
+    body: unknown,
+  ): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    return await instance.put('/profiles/update-avatar', body);
+  },
+  deleteUserAvatar: async <T>(
+    id: string,
+  ): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    return await instance.delete(`/profiles/${id}/delete-avatar`);
+  },
   updateUserPass: async <T>(
     body: IPass,
   ): Promise<{

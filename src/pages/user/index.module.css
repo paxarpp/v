@@ -51,9 +51,34 @@
   width: 50%;
 }
 
+.avatar_wrapper {
+  position: relative;
+}
+
+.avatar_reload,
+.avatar_basket {
+  position: absolute;
+  right: 10px;
+}
+
+.avatar_basket {
+  top: 10px;
+  color: #F2DB51;
+}
+
+.avatar_reload {
+  top: 35px;
+}
+
 .avatar {
   width: 270px;
   height: 360px;
+}
+
+.dump_avatar {
+  width: 270px;
+  height: 270px;
+  padding: 50px 0;
 }
 
 .user_info {
