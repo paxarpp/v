@@ -51,7 +51,10 @@ export const Scroller: React.FC<IProps> = ({ camps = [], title }) => {
                   />
                 </div>
                 <div className={styles.camp_info}>
-                  <Link to={`/camps/${item.id}`} className={styles.button_camp}>
+                  <Link
+                    to={`/camps/past/${item.id}`}
+                    className={styles.button_camp}
+                  >
                     Подробнее
                   </Link>
                 </div>
