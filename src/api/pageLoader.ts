@@ -27,7 +27,7 @@ export const pl = {
     data: { result: T | null; error?: string };
   }> => {
     try {
-      return await instance.get(`/camps/past${id}`);
+      return await instance.get(`/past-camps/${id}`);
     } catch (e: unknown) {
       return { data: { result: null, error: (e as Error).message } };
     }
