@@ -25,7 +25,10 @@ export const ModalAvatar: React.FC<{ closeModal: () => void }> = ({
     const userAvatarUpdate = async () => {
       const axiosCall = creatorRequest(logout);
       const { error } = await axiosCall(
-        api.updateUserAvatar({ ...user, avatar: currentAvatar }),
+        api.updateUserAvatar({
+          profileId: user?.avatar?.entityId,
+          avatar: currentAvatar,
+        }),
       );
       if (!error) {
         revalidator.revalidate();
@@ -42,6 +45,7 @@ export const ModalAvatar: React.FC<{ closeModal: () => void }> = ({
   const onChangeImage = (img: IImageBase) => {
     setCurrentAvatar({
       typeEntity: 'COACH',
+      entityId: user?.avatar?.entityId,
       ...img,
     });
   };
