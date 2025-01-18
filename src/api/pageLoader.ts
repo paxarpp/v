@@ -21,6 +21,17 @@ export const pl = {
       return { data: { result: null, error: (e as Error).message } };
     }
   },
+  getPastCamp: async <T>(
+    id: string,
+  ): Promise<{
+    data: { result: T | null; error?: string };
+  }> => {
+    try {
+      return await instance.get(`/camps/past${id}`);
+    } catch (e: unknown) {
+      return { data: { result: null, error: (e as Error).message } };
+    }
+  },
   getBeachCoachesAll: async <T>(): Promise<{
     data: { result: T[] | null; error?: string };
   }> => {

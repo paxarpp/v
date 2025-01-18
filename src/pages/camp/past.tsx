@@ -11,7 +11,7 @@ import { pl } from '../../api/pageLoader';
 export async function clientLoader({ params: { id } }: Route.ClientLoaderArgs) {
   const {
     data: { result, error },
-  } = await pl.getCamp<ICampItem>(id);
+  } = await pl.getPastCamp<ICampItem>(id);
   return { camp: result, error };
 }
 
