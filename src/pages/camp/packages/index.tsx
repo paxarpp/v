@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import People from '../../../assets/people.svg?react';
+import Successfully from '../../../assets/successfully.svg?react';
 import Tour from '../../../assets/tour.svg?react';
 import { Route } from '../+types';
 import { useAuth, useUser } from '../../../context';
@@ -140,8 +141,11 @@ export const Packages = () => {
         ))}
       </div>
 
-      {rSuccess ? (
-        <h3>{'Забронировано'}</h3>
+      {rSuccess && user ? (
+        <div className={styles.success}>
+          <Successfully />
+          <h3>{`${user.username}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
+        </div>
       ) : (
         <button className={styles.button_profile} onClick={onReservation}>
           {'Забронировать'}
