@@ -239,3 +239,27 @@
   overflow: auto;
   padding: 0 20px;
 }
+
+.images_scroller {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  overflow: auto;
+  height: 100%;
+  overflow: hidden;
+  gap: 20px;
+  margin: 150px 75px;
+  box-sizing: border-box;
+  min-height: 160px;
+}
+
+.image_card {
+  width: 420px;
+  height: 370px;
+}
+
+.coach_image {
+  width: inherit;
+    height: inherit;
+    object-fit: cover;
+}

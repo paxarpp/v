@@ -8,7 +8,7 @@ export interface IAbout {
   activities: IActivity[];
   master: IMaster | null;
   reviews: IReview[];
-  videos: IVideo[] | null;
+  gallery: IImage[] | null;
 }
 
 export interface IReview {
@@ -25,13 +25,7 @@ export interface IMaster {
   image: IImage | null;
 }
 
-interface IVideo {
-  id: string;
-  name: string;
-  url: string;
-}
-
-interface IImage {
+export interface IImage {
   id: string;
   entityId: string | null; // в активити, в комментах
   name: string;
