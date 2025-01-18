@@ -6,10 +6,10 @@ import { Route } from '../+types';
 import { useAuth, useUser } from '../../../context';
 import { api } from '../../../api/api';
 import { creatorRequest } from '../../../api';
-import imgUrlPrem from '../../../assets/premium.png';
-import imgUrlGold from '../../../assets/gold.png';
-import imgUrlSilver from '../../../assets/silver.png';
-import imgUrlTour from '../../../assets/tour.png';
+import imgUrlPrem from '../../../assets/premium.jpg';
+import imgUrlGold from '../../../assets/gold.jpg';
+import imgUrlSilver from '../../../assets/silver.jpg';
+import imgUrlTour from '../../../assets/tour.jpg';
 import { IType } from '../interfaces';
 import styles from '../index.module.css';
 

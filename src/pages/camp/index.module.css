@@ -106,7 +106,7 @@
   display: flex;
   flex-flow: row wrap;
   gap: 24px;
-  margin: 0 75px;
+  margin: 0 75px 30px 75px;
 }
 
 .pack_card {
