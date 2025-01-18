@@ -133,6 +133,10 @@
   position: relative;
 }
 
+.card_row_comment {
+  text-align: left;
+}
+
 .review_img {
   width: 100px;
   height: 100px;
