@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Setting from '../../../assets/setting.svg?react';
+import Ball from '../../../assets/ball.svg?react';
 import { Days } from './days';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
@@ -81,7 +82,9 @@ const SheduleeTemplate: React.FC<{
                 </div>
               ) : (
                 <div key={group.id + dayName} className={styles.group_day}>
-                  <div className={styles.empty_day} />
+                  <div className={styles.empty_day}>
+                    <Ball />
+                  </div>
                 </div>
               );
             })}
