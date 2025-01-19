@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
@@ -17,32 +17,35 @@ export const Gallery = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
 
+  const [count, setCount] = useState(0);
+  const divRef = useRef<HTMLDivElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (divRef.current?.clientWidth && cardRef.current?.clientWidth) {
+      const calcCount = Math.floor(
+        divRef.current.clientWidth / cardRef.current.clientWidth,
+      );
+      setCount(calcCount);
+    }
+  }, [divRef.current?.clientWidth, cardRef.current?.clientWidth]);
+
   const { logout, isAdmin } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
-  const [lastIndex, setLastIndex] = useState(2);
   const [gallery, setGallery] = useState<IImage[]>([]);
 
   const onLeft = () => {
     if (!camp?.gallery?.length) return;
-    setStartIndex((prev) => (prev === 0 ? 0 : prev - 1));
-    setLastIndex((prev) => (prev === 2 ? 2 : prev - 1));
+    if (startIndex === 0) return;
+    setStartIndex(startIndex - 1);
   };
+
   const onRight = () => {
     if (!camp?.gallery?.length) return;
-    if (camp?.gallery.length < 2) return;
-    if (camp?.gallery.length - lastIndex !== 1) {
-      setStartIndex((prev) =>
-        prev === (camp.gallery as IImage[]).length
-          ? (camp.gallery as IImage[]).length - 2
-          : prev + 1,
-      );
-      setLastIndex((prev) =>
-        prev === (camp.gallery as IImage[]).length
-          ? (camp.gallery as IImage[]).length
-          : prev + 1,
-      );
-    }
+    if (camp?.gallery.length < count) return;
+    if (startIndex + count === camp.gallery.length) return;
+    setStartIndex(startIndex + 1);
   };
 
   const closeModal = () => {
@@ -113,7 +116,7 @@ export const Gallery = () => {
       <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
       <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
       {camp?.gallery
-        ?.filter((_, i) => i >= startIndex && i <= lastIndex)
+        ?.filter((_, i) => i >= startIndex && i <= startIndex + count)
         .map((image) => {
           return (
             <div key={image.id} className={styles.image_card}>
