@@ -88,7 +88,7 @@ export const Packages = () => {
             ) : (
               <People className={styles.pack_icon} />
             )}
-            <h4 className={styles.pack_title}>{pack.name}</h4>
+            <h4 className={styles.pack_title}>{pack.displayName}</h4>
             <ul className={styles.pack_info}>
               {pack.info
                 .split(';')

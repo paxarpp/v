@@ -19,6 +19,7 @@ export interface ICoach {
 export interface IPackage {
   packageId: number;
   name: string;
+  displayName: string;
   costNamingLink: string;
   info: string;
   totalPrice: number;
