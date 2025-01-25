@@ -90,7 +90,7 @@ export const Gallery = () => {
   };
 
   return (
-    <div className={styles.images_scroller}>
+    <div className={styles.images_scroller} ref={divRef}>
       {isOpen ? (
         <Modal
           isOpen={isOpen}
@@ -119,7 +119,7 @@ export const Gallery = () => {
         ?.filter((_, i) => i >= startIndex && i <= startIndex + count)
         .map((image) => {
           return (
-            <div key={image.id} className={styles.image_card}>
+            <div key={image.id} className={styles.image_card} ref={cardRef}>
               <img
                 src={createImageUrl(image.url)}
                 alt={image.name}
