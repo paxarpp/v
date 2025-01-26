@@ -71,8 +71,7 @@
   flex-flow: column nowrap;
   list-style: none;
   justify-content: space-between;
-  align-items: center;
-  padding-left: 0;
+  align-items: flex-start;
   z-index: 999;
 }
 
@@ -128,13 +127,14 @@
 }
 
 .popap_menu {
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
   background: black;
   width: 300px;
   opacity: 0.9;
+  z-index: 999;
 }
 
 .user_bell {
