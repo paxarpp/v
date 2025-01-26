@@ -14,10 +14,12 @@ import { Modal } from '../../../templates/modal';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
 import { createImageUrl, createLinkTg } from '../../../constants';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const Contacts: React.FC = () => {
   const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isMobile } = useDeviceDetect();
 
   const revalidator = useRevalidator();
   const { isAdmin, logout } = useUser();
@@ -170,8 +172,8 @@ export const Contacts: React.FC = () => {
           <Setting onClick={openEditContact} className={styles.setting_q} />
         ) : null}
       </h3>
-      <div className={styles.flex}>
-        <div className={styles.contact_wrap}>
+      <div className={isMobile ? styles.flex_mobi : styles.flex}>
+        <div className={isMobile ? styles.contact_wrap_mobi : styles.contact_wrap}>
           <div className={styles.contact}>
             <Phone />
             {home?.contactBlock?.contacts}
@@ -195,7 +197,7 @@ export const Contacts: React.FC = () => {
             </a>
           </div>
         </div>
-        <div className={styles.manager_wrap}>
+        <div className={isMobile ? styles.manager_wrap_mobi : styles.manager_wrap}>
           <div className={styles.img_wrap}>
             <img
               className={styles.manager}
