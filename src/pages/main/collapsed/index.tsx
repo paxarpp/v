@@ -10,11 +10,11 @@ import { creatorRequest } from '../../../api';
 import { useUser } from '../../../context';
 import { Route } from '../+types';
 import imgUrl from '../../../assets/asked_questions.jpg';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
   const { isAdmin, logout } = useUser();
-
   const revalidator = useRevalidator();
 
   const [isOpen, openModal] = useState(false);
@@ -156,7 +156,7 @@ export const Collapsed: React.FC = () => {
 
 const QuestionsTemplate: React.FC = () => {
   const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
-
+  const { isMobile } = useDeviceDetect();
   const [openId, setIsOpen] = useState<string | null>(null);
 
   const onToggle = (currentId: string) => () => {
@@ -167,6 +167,7 @@ const QuestionsTemplate: React.FC = () => {
     <>
       {home?.questions.map((item) => {
         const isOpenQ = openId === item.id;
+        const iconCn = `${isMobile ? styles.icon_question_mobi: ''} ${isOpenQ ? styles.rotate_to_open : ''}`;
         return (
           <div
             key={item.id}
@@ -174,11 +175,11 @@ const QuestionsTemplate: React.FC = () => {
             onClick={onToggle(item.id)}
           >
             <div className={styles.question_name_wrapper}>
-              <span className={styles.question_name}>{item.question}</span>
-              <ClosedIcon className={isOpenQ ? styles.rotate_to_open : ''} />
+              <span className={isMobile ? styles.question_name_mobi : styles.question_name}>{item.question}</span>
+              <ClosedIcon className={iconCn} />
             </div>
             <div className={isOpenQ ? styles.info_open : styles.info_close}>
-              <span className={styles.answer}>{item.answer}</span>
+              <span className={isMobile ? styles.answer_mobi : styles.answer}>{item.answer}</span>
             </div>
           </div>
         );
