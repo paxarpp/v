@@ -4,6 +4,7 @@ import T from '../../assets/t.svg?react';
 import Inst from '../../assets/inst.svg?react';
 import { Link } from 'react-router';
 import { createLinkTg } from '../../constants';
+import { useDeviceDetect } from '../../hooks';
 import styles from './index.module.css';
 
 interface IProps {
@@ -13,8 +14,9 @@ interface IProps {
 }
 
 export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
+  const { isMobile } = useDeviceDetect();
   return (
-    <footer className={styles.footer}>
+    <footer className={isMobile ? styles.footer_mobi : styles.footer}>
       <Link to="/">
         <Logo />
       </Link>
