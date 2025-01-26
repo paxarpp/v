@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { InputStyled } from '../input';
+import { useDeviceDetect } from '../../hooks';
+import { Template } from './template';
+import { MobileTemplate } from './mobileTemplate';
 import styles from './index.module.css';
 
 export const CallMe = () => {
+  const { isMobile } = useDeviceDetect();
   const [name, setName] = useState('');
   const [tel, setTel] = useState('');
   const [comment, setComment] = useState('');
@@ -39,37 +42,22 @@ export const CallMe = () => {
       }
     }
   };
+
+  const props = {
+    name,
+    tel,
+    comment,
+    validationError,
+    onChangeTel,
+    onChangeName,
+    onChangeComment,
+    onSend,
+  };
   return (
-    <div className={styles.wrapper}>
+    <div className={isMobile ? styles.wrapper_mobi : styles.wrapper}>
       <h2>Остались вопросы?</h2>
       <p>Оставьте свой номер телефона и мы свяжемся с вами!</p>
-      <div className={styles.col_inputs}>
-        <div className={styles.row_input}>
-          <InputStyled
-            className={styles.modal_input}
-            value={name}
-            onChange={onChangeName}
-            placeholder={'Имя'}
-          />
-          <InputStyled
-            type="tel"
-            className={styles.modal_input}
-            value={tel}
-            onChange={onChangeTel}
-            placeholder={'Телефон'}
-            validationError={validationError}
-          />
-        </div>
-        <InputStyled
-          className={styles.modal_input_long}
-          value={comment}
-          onChange={onChangeComment}
-          placeholder={'Комментарий'}
-        />
-        <button className={styles.button} onClick={onSend}>
-          Отправить
-        </button>
-      </div>
+      {isMobile ? <MobileTemplate {...props} /> : <Template {...props} />}
     </div>
   );
 };
