@@ -15,7 +15,7 @@ export async function clientLoader() {
 export default function childCamps() {
   return (
     <div>
-      <h2>Детские кэмпы</h2>
+      <h2>Детские кемпы</h2>
       <CampInfoIcons />
 
       <CampsList />
