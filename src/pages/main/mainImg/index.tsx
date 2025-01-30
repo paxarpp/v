@@ -16,7 +16,7 @@ export const MainImg: React.FC = () => {
   const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const revalidator = useRevalidator();
-   const { isMobile } = useDeviceDetect();
+  const { isMobile } = useDeviceDetect();
   const { isAdmin, logout } = useUser();
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
@@ -126,8 +126,16 @@ export const MainImg: React.FC = () => {
           className={styles.main_image}
         />
         <div className={styles.main_title_wrap}>
-          <span className={isMobile ? styles.main_title_mobi : styles.main_title}>{home?.mainBlock.title}</span>
-          <span className={isMobile ? styles.main_sub_title_mobi : styles.main_sub_title}>
+          <span
+            className={isMobile ? styles.main_title_mobi : styles.main_title}
+          >
+            {home?.mainBlock.title}
+          </span>
+          <span
+            className={
+              isMobile ? styles.main_sub_title_mobi : styles.main_sub_title
+            }
+          >
             {home?.mainBlock.subtitle}
           </span>
         </div>

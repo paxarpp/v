@@ -15,8 +15,8 @@
   display: flex;
   flex-flow: column nowrap;
   height: 666px;
-  min-width: 420px;
-  max-width: 420px;
+  width: 420px;
+  box-sizing: border-box;
   padding: 14px;
   border-radius: 8px;
   background: rgba(128, 128, 128, 0.2);
@@ -70,6 +70,7 @@
 .button_profile {
   width: 160px;
   height: 41px;
+  box-sizing: border-box;
   padding: 4px 14px;
   border-radius: 8px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);

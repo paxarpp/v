@@ -167,7 +167,7 @@ const QuestionsTemplate: React.FC = () => {
     <>
       {home?.questions.map((item) => {
         const isOpenQ = openId === item.id;
-        const iconCn = `${isMobile ? styles.icon_question_mobi: ''} ${isOpenQ ? styles.rotate_to_open : ''}`;
+        const iconCn = `${isMobile ? styles.icon_question_mobi : ''} ${isOpenQ ? styles.rotate_to_open : ''}`;
         return (
           <div
             key={item.id}
@@ -175,11 +175,19 @@ const QuestionsTemplate: React.FC = () => {
             onClick={onToggle(item.id)}
           >
             <div className={styles.question_name_wrapper}>
-              <span className={isMobile ? styles.question_name_mobi : styles.question_name}>{item.question}</span>
+              <span
+                className={
+                  isMobile ? styles.question_name_mobi : styles.question_name
+                }
+              >
+                {item.question}
+              </span>
               <ClosedIcon className={iconCn} />
             </div>
             <div className={isOpenQ ? styles.info_open : styles.info_close}>
-              <span className={isMobile ? styles.answer_mobi : styles.answer}>{item.answer}</span>
+              <span className={isMobile ? styles.answer_mobi : styles.answer}>
+                {item.answer}
+              </span>
             </div>
           </div>
         );
