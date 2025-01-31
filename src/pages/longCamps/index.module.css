@@ -112,7 +112,6 @@
 .modal_header {
   padding: 30px 50px;
   border-bottom: 2px solid rgba(255, 255, 255, 1);
-  font-family: Open Sans;
   font-size: 40px;
   font-weight: 600;
   line-height: 60px;
@@ -151,7 +150,6 @@
 }
 
 .image_name {
-  font-family: Open Sans;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -247,7 +245,6 @@
 }
 
 .pack_label {
-  font-family: Open Sans;
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;

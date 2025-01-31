@@ -16,6 +16,11 @@
   align-items: center;
   width: 100%;
   max-width: 850px;
+  margin: 8px 0;
+}
+
+.logo_height {
+  height: 64px;
 }
 
 .dropdown_menu {
@@ -148,6 +153,7 @@
   align-items: center;
   margin-left: auto;
 }
+
 .user_avatar {
   display: flex;
   align-items: center;

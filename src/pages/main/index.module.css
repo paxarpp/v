@@ -63,13 +63,31 @@
   line-height: 40px;
 }
 
+.camp_card_mobi,
 .camp_card {
-  width: 569px;
-  height: 100%;
-  padding: 24px;
+  width: 570px;
+  height: 520px;
+  padding: 24px 25px;
   border-radius: 8px;
   background: rgba(128, 128, 128, 0.2);
-  border: 2px solid rgba(255, 255, 255, 1)
+  border: 2px solid rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+}
+
+.camp_card_mobi {
+  width: 100%;
+}
+
+.camp_card_name {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.camp_card_date {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .block_icon_between,
@@ -151,18 +169,19 @@
 .camps_header {
   text-align: center;
   margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 .button_camp {
-  font-family: Open Sans;
   font-size: 22px;
   font-weight: 600;
   line-height: 33px;
   text-align: center;
-
   width: 244px;
   height: 70px;
   padding: 4px 14px;
+  box-sizing: border-box;
   border-radius: 8px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
   color: #152355;
@@ -171,29 +190,41 @@
   align-items: center;
   justify-content: center;
   margin-top: 10px;
+  transition: border 0.2s;
+}
+
+.button_camp:hover {
+  border: 2px solid #FFFFFF;
 }
 
 .camp_img_wrap {
-  width: 521px;
+  width: 520px;
 }
 
-.camp_img_dump,
+.camp_img_wrap_mobi {
+  width: 100%;
+}
+
+.camp_img_mobi,
 .camp_img {
-  width: 521px;
-  height: 273px;
-  min-height: 273px;
-  max-height: 273px;
+  width: 520px;
+  height: 290px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
-.camp_img_dump {
-  background-color: rgba(25, 26, 38, 1);
+.camp_img_mobi {
+  width: 100%;
 }
 
 .camps_wrap {
   padding-bottom: 20px;
   margin-left: 75px;
+}
+
+.camps_wrap_mobi {
+  padding-bottom: 0;
+  margin-left: 0;
 }
 
 .camps_scroller {
@@ -313,6 +344,15 @@
   line-height: 20px;
 }
 
+.contacts_title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 60px;
+  text-align: center;
+  color: #D4D4D4;
+  margin: 150px 75px 0 75px;
+}
+
 .contact_wrap {
   margin-left: 75px;
   min-width: 66%;
@@ -338,8 +378,9 @@
   margin-right: 20px;
 }
 
-.mt_20 {
+.contact_icons {
   margin-top: 20px;
+  text-align: left;
 }
 
 .flex {

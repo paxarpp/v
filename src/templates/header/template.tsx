@@ -31,7 +31,7 @@ export const Template: React.FC<IProps> = ({
   return (
     <div className={styles.header}>
       <ul className={styles.menu}>
-        <li>
+        <li className={styles.logo_height}>
           <NavLink to="/" className={createLinkClassName}>
             <Logo />
           </NavLink>

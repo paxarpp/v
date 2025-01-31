@@ -166,14 +166,16 @@ export const Contacts: React.FC = () => {
           </div>
         )}
       </Modal>
-      <h3>
+      <h3 className={styles.contacts_title}>
         {'Контакты'}
         {isAdmin ? (
           <Setting onClick={openEditContact} className={styles.setting_q} />
         ) : null}
       </h3>
       <div className={isMobile ? styles.flex_mobi : styles.flex}>
-        <div className={isMobile ? styles.contact_wrap_mobi : styles.contact_wrap}>
+        <div
+          className={isMobile ? styles.contact_wrap_mobi : styles.contact_wrap}
+        >
           <div className={styles.contact}>
             <Phone />
             {home?.contactBlock?.contacts}
@@ -182,7 +184,7 @@ export const Contacts: React.FC = () => {
             <Mail />
             {home?.contactBlock?.email}
           </div>
-          <div className={styles.mt_20}>
+          <div className={styles.contact_icons}>
             <a href={home?.contactBlock?.linkVk} target={'_blank'}>
               <Vk />
             </a>
@@ -197,7 +199,9 @@ export const Contacts: React.FC = () => {
             </a>
           </div>
         </div>
-        <div className={isMobile ? styles.manager_wrap_mobi : styles.manager_wrap}>
+        <div
+          className={isMobile ? styles.manager_wrap_mobi : styles.manager_wrap}
+        >
           <div className={styles.img_wrap}>
             <img
               className={styles.manager}

@@ -2,11 +2,23 @@
   width: 242px;
   height: 70px;
   padding: 10px;
+  box-sizing: border-box;
   border-radius: 8px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
   margin-top: 30px;
   color: #152355;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+  text-align: center;
+  transition: border 0.2s;
+  cursor: pointer;
 }
+
+.button:hover {
+  border: 2px solid #FFFFFF;
+}
+
 
 .modal_input {
   width: 412px;

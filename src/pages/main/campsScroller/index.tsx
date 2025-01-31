@@ -4,11 +4,13 @@ import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const CampsScroller: React.FC = () => {
+  const { isMobile } = useDeviceDetect();
   return (
-    <div className={styles.camps_wrap}>
+    <div className={isMobile ? styles.camps_wrap_mobi : styles.camps_wrap}>
       <h2 className={styles.camps_header}>Ближайшие кемпы</h2>
       <div className={styles.camps_scroller}>
         <CampsTemplate />
@@ -19,6 +21,7 @@ export const CampsScroller: React.FC = () => {
 
 const CampsTemplate = () => {
   const { home } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isMobile } = useDeviceDetect();
 
   const [startIndex, setStartIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(2);
@@ -49,14 +52,21 @@ const CampsTemplate = () => {
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item) => {
           return (
-            <div key={item.id} className={styles.camp_card}>
-              <p>{item.name}</p>
-              <p>{item.dateString}</p>
-              <div className={styles.camp_img_wrap}>
+            <div
+              key={item.id}
+              className={isMobile ? styles.camp_card_mobi : styles.camp_card}
+            >
+              <p className={styles.camp_card_name}>{item.name}</p>
+              <p className={styles.camp_card_date}>{item.dateString}</p>
+              <div
+                className={
+                  isMobile ? styles.camp_img_wrap_mobi : styles.camp_img_wrap
+                }
+              >
                 <img
                   src={createImageUrl(item.imageCart?.url)}
                   alt="картинка кэмпа"
-                  className={styles.camp_img}
+                  className={isMobile ? styles.camp_img_mobi : styles.camp_img}
                 />
               </div>
               <div className={styles.camp_info}>
