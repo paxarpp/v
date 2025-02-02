@@ -138,7 +138,7 @@ export const Collapsed: React.FC = () => {
           </div>
         )}
       </Modal>
-      <div className={styles.asked_questions}>
+      <div className={styles.asked_questions} id="questions">
         <img src={imgUrl} alt={''} className={styles.back_questions} />
         <h2>
           {'Часто задаваемые вопросы'}

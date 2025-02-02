@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { CallMe } from '../../templates/callme';
 import { BlockIcons } from './blockIcons';
 import { Collapsed } from './collapsed';
@@ -16,6 +18,16 @@ export async function clientLoader() {
 }
 
 export default function Main() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [hash]);
   return (
     <div>
       <MainImg />

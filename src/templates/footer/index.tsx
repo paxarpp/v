@@ -54,12 +54,22 @@ export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
       <div>
         <span className={styles.menu_title}>О школе</span>
         <ul className={styles.menu}>
-          <li>Отзывы</li>
-          <li>Часто задаваемые вопросы</li>
+          <li>
+            <Link to="/about#reviews">Отзывы</Link>
+          </li>
+          <li>
+            <Link to="/#questions">Часто задаваемые вопросы</Link>
+          </li>
         </ul>
       </div>
       <div>
-        <span className={styles.menu_title}>Детский лагерь</span>
+        <ul className={styles.menu}>
+          <li>
+            <Link to="/childCamps" className={styles.menu_title}>
+              Детский лагерь
+            </Link>
+          </li>
+        </ul>
       </div>
       <div>
         <a href={linkVk} target={'_blank'} className={styles.icon}>

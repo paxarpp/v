@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { Info } from './info';
 import { Activities } from './activities';
 import { Master } from './master';
@@ -15,6 +17,16 @@ export async function clientLoader() {
 }
 
 export default function About() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [hash]);
   return (
     <>
       <Info />

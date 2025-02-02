@@ -124,7 +124,7 @@ export const Reviews = () => {
   };
 
   return (
-    <div className={styles.reviews_block}>
+    <div className={styles.reviews_block} id="reviews">
       {reviewOpen ? (
         <Modal
           isOpen={true}
