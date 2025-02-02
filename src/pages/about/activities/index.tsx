@@ -11,11 +11,12 @@ import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { Route } from '../+types';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const Activities = () => {
   const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
-
+  const { isMobile } = useDeviceDetect();
   const revalidator = useRevalidator();
 
   const { isAdmin, logout } = useUser();
@@ -95,7 +96,9 @@ export const Activities = () => {
   };
 
   return (
-    <div className={styles.row_activities}>
+    <div
+      className={isMobile ? styles.row_activities_mobi : styles.row_activities}
+    >
       {activityAddOpen ? (
         <Modal
           isOpen={true}

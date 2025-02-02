@@ -17,9 +17,7 @@ import styles from '../index.module.css';
 
 export const Reviews = () => {
   const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
-
   const { isMobile } = useDeviceDetect();
-
   const revalidator = useRevalidator();
 
   const { isAdmin, logout } = useUser();
@@ -115,7 +113,9 @@ export const Reviews = () => {
     if (about?.reviews.length < 2) return;
     if (about?.reviews.length - lastIndex !== 1) {
       setStartIndex((prev) =>
-        prev === about?.reviews.length - 2 ? about?.reviews.length - 2 : prev + 1,
+        prev === about?.reviews.length - 2
+          ? about?.reviews.length - 2
+          : prev + 1,
       );
       setLastIndex((prev) =>
         prev === about?.reviews.length ? about?.reviews.length : prev + 1,
@@ -124,7 +124,10 @@ export const Reviews = () => {
   };
 
   return (
-    <div className={styles.reviews_block} id="reviews">
+    <div
+      className={isMobile ? styles.reviews_block_mobi : styles.reviews_block}
+      id="reviews"
+    >
       {reviewOpen ? (
         <Modal
           isOpen={true}
@@ -174,8 +177,18 @@ export const Reviews = () => {
         </Modal>
       ) : null}
 
-      <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-      <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+      <ArrowLeft
+        className={
+          isMobile ? styles.scroll_arrow_left_mobi : styles.scroll_arrow_left
+        }
+        onClick={onLeft}
+      />
+      <ArrowRight
+        className={
+          isMobile ? styles.scroll_arrow_right_mobi : styles.scroll_arrow_right
+        }
+        onClick={onRight}
+      />
       {about?.reviews
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item, indx) => {

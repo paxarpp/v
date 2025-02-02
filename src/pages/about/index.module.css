@@ -29,12 +29,18 @@
   color: #D4D4D4;
 }
 
+.row_activities_mobi,
 .row_activities {
   display: flex;
   flex-flow: row wrap;
   gap: 30px;
   align-items: center;
   justify-content: flex-start;
+  margin: 0 75px;
+}
+
+.row_activities_mobi {
+  margin: 0 0;
 }
 
 .activity_card_add,
@@ -88,6 +94,7 @@
   text-align: left;
 }
 
+.reviews_block_mobi,
 .reviews_block {
   position: relative;
   display: flex;
@@ -96,11 +103,18 @@
   overflow: auto;
   height: 100%;
   overflow: hidden;
-  gap: 20px;
+  gap: 30px;
   background: #21243680;
   padding: 50px 75px;
+  box-sizing: border-box;
 }
 
+.reviews_block_mobi {
+  padding: 30px 0;
+}
+
+.scroll_arrow_right_mobi,
+.scroll_arrow_left_mobi,
 .scroll_arrow_right,
 .scroll_arrow_left {
   position: absolute;
@@ -109,10 +123,18 @@
 }
 
 .scroll_arrow_left {
+  left: 75px;
+}
+
+.scroll_arrow_left_mobi {
   left: 0;
 }
 
 .scroll_arrow_right {
+  right: 75px;
+}
+
+.scroll_arrow_right_mobi {
   right: 0;
 }
 
@@ -240,6 +262,7 @@
   padding: 0 20px;
 }
 
+.images_scroller_mobi,
 .images_scroller {
   position: relative;
   display: flex;
@@ -251,6 +274,10 @@
   margin: 150px 75px;
   box-sizing: border-box;
   min-height: 160px;
+}
+
+.images_scroller_mobi {
+  margin: 50px 0;
 }
 
 .image_card {

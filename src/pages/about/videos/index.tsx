@@ -4,10 +4,12 @@ import ArrowLeft from '../../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const Videos = () => {
   const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isMobile } = useDeviceDetect();
 
   const [count, setCount] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
@@ -35,9 +37,17 @@ export const Videos = () => {
   };
 
   return (
-    <div className={styles.images_scroller} ref={divRef}>
-      <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-      <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+    <div
+      className={
+        isMobile ? styles.images_scroller_mobi : styles.images_scroller
+      }
+      ref={divRef}
+    >
+      <ArrowLeft className={styles.scroll_arrow_left_mobi} onClick={onLeft} />
+      <ArrowRight
+        className={styles.scroll_arrow_right_mobi}
+        onClick={onRight}
+      />
       {about?.gallery
         ?.filter((_, i) => i >= startIndex && i <= startIndex + count)
         .map((image) => {
