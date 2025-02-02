@@ -21,28 +21,45 @@ export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
         <Logo />
       </Link>
       <div>
-        <span className={styles.menu_title}>Кемпы и тренировки</span>
+        <span className={styles.menu_title}>Пляжный волейбол</span>
         <ul className={styles.menu}>
           <li>
-            <Link to="/weekendCamps">Кемпы на выходные</Link>
+            <Link to="/weekendCamps">Кемпы выходного дня</Link>
           </li>
           <li>
-            <Link to="/longCamps">Кемпы длинные</Link>
+            <Link to="/longCamps">Недельные кемпы</Link>
           </li>
           <li>
-            <Link to="/trainingSchedule">Расписание тренировок</Link>
+            <Link to="/oldCamps">Прошедшие кемпы</Link>
+          </li>
+          <li>
+            <Link to="/beachCoaches">Тренеры</Link>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <span className={styles.menu_title}>Классический волейбол</span>
+        <ul className={styles.menu}>
+          <li>
+            <Link to="/trainingSchedule">Расписание</Link>
+          </li>
+          <li>
+            <Link to="/">Турниры</Link>
+          </li>
+          <li>
+            <Link to="/classicCoaches">Тренеры</Link>
           </li>
         </ul>
       </div>
       <div>
         <span className={styles.menu_title}>О школе</span>
         <ul className={styles.menu}>
-          <li>
-            <Link to="/about">О нас</Link>
-          </li>
           <li>Отзывы</li>
           <li>Часто задаваемые вопросы</li>
         </ul>
+      </div>
+      <div>
+        <span className={styles.menu_title}>Детский лагерь</span>
       </div>
       <div>
         <a href={linkVk} target={'_blank'} className={styles.icon}>
