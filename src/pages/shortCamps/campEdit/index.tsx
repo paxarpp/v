@@ -11,6 +11,7 @@ import {
   ImagesMassSelect,
   ImageSelect,
 } from '../../../templates/imageSelect';
+import { ErrorWarn } from '../../../templates/errorWarn';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from '../index.module.css';
@@ -21,6 +22,7 @@ export const CampEdit: React.FC<{
 }> = ({ campId, onClose }) => {
   const { logout } = useUser();
   const [currentCamp, setCamp] = useState<ICampItem | null>(null);
+  const [serverError, setError] = useState<string | null>(null);
   const [packs, setPacks] = useState<IPackage[]>([]);
   const [coachesAll, setCoaches] = useState<ICoach[]>([]);
 
@@ -73,6 +75,7 @@ export const CampEdit: React.FC<{
     getCoachesAll();
     return () => {
       setCamp(null);
+      setError(null);
     };
   }, [campId]);
 
@@ -98,7 +101,9 @@ export const CampEdit: React.FC<{
         const { error } = await axiosCall(
           api.updateCampShort({ ...currentCamp }),
         );
-        if (!error) {
+        if (error) {
+          setError(error);
+        } else {
           onClose();
           revalidator.revalidate();
         }
@@ -218,12 +223,17 @@ export const CampEdit: React.FC<{
       close={onClose}
       footer={
         <div className={styles.modal_footer}>
-          <button onClick={saveCamp} className={styles.button}>
-            {'Сохранить'}
-          </button>
-          <button onClick={deleteCamp} className={styles.button}>
-            {'Удалить карточку кемпа'}
-          </button>
+          <div>
+            <button onClick={saveCamp} className={styles.button}>
+              {'Сохранить'}
+            </button>
+            <ErrorWarn message={serverError} />
+          </div>
+          {campId ? (
+            <button onClick={deleteCamp} className={styles.button}>
+              {'Удалить карточку кемпа'}
+            </button>
+          ) : null}
         </div>
       }
       header={<div className={styles.modal_header}>{'Карточка кемпа'}</div>}
@@ -259,6 +269,8 @@ export const CampEdit: React.FC<{
           <DatePicker
             onChange={(dates) => {
               const [start, end] = dates;
+              start?.setHours(12);
+              end?.setHours(12);
               setCamp((prevCamp) => ({
                 ...(prevCamp as ICampItem),
                 dateStart: start?.toISOString().slice(0, 10) as string,

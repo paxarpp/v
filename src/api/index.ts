@@ -29,8 +29,9 @@ export const creatorRequest =
           }
         }
         return {
-          error:
-            (error.response?.data.message as string) || 'Server Unavailable',
+          error: error.response
+            ? error.response.data.errorMessage || error.response.data.message
+            : 'Server Unavailable',
           result: null,
         };
       }
