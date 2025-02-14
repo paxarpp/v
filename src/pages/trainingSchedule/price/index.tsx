@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import Ball from '../../../assets/ball.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
@@ -53,9 +53,9 @@ const PriceTemplate: React.FC<{
 
   return (
     <div className={styles.price_list}>
-      {prices?.map((pr) => {
+      {prices?.map((pr, i) => {
         return (
-          <div key={pr.id} className={styles.price_item}>
+          <div key={`p-${pr.id}${i}`} className={styles.price_item}>
             <p>
               {pr.name}
               {isAdmin ? (
@@ -68,8 +68,8 @@ const PriceTemplate: React.FC<{
             <div className={styles.price_prices}>
               {pr.prices.map((p, index) => {
                 return (
-                  <>
-                    <div key={`sub-${p.id}`} className={styles.price_card}>
+                  <Fragment key={`sub-${p.id}${index}`}>
+                    <div className={styles.price_card}>
                       <span>{p.title}</span>
                       {p.subTitle ? (
                         <span className={styles.price_message}>
@@ -81,7 +81,7 @@ const PriceTemplate: React.FC<{
                       <span>{p.price}</span>
                     </div>
                     {index === 0 ? <Ball /> : null}
-                  </>
+                  </Fragment>
                 );
               })}
             </div>

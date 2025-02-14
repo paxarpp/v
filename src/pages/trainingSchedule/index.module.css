@@ -229,3 +229,60 @@
   flex-flow: column nowrap;
   width: 50%;
 }
+
+.input_field {
+  height: 64px;
+  padding: 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.edit_camp_content {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: auto;
+  height: 500px;
+  padding: 50px 50px 0 50px;
+}
+
+.modal_header {
+  padding: 30px 50px;
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 60px;
+  text-align: left;
+}
+
+.button {
+  height: 44px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #152355;
+}
+
+.edit_camp_modal {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  width: 1200px;
+  height: 768px;
+}
+
+.modal_footer {
+  padding: 20px 50px 50px 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit_camp_content {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: auto;
+  height: 500px;
+  padding: 50px 50px 0 50px;
+}

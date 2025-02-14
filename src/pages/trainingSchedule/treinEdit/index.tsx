@@ -106,7 +106,7 @@ export const TreinEdit: React.FC<{
         >{`Расписание тренировок ${currentTrein?.name || ''}`}</div>
       }
     >
-      <div className={styles.edit_shedule_content}>
+      <div className={styles.edit_camp_content}>
         <label>{'Название группы'}</label>
         <input
           value={currentTrein?.name}

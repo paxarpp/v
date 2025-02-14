@@ -148,14 +148,13 @@
 
 .camps_wrap {
   padding-bottom: 20px;
-  margin-left: 75px;
+  margin: 0 75px;
 }
 
 .camps_scroller {
   position: relative;
   display: flex;
   flex-flow: row nowrap;
-  width: calc(100% - 0px);
   overflow: auto;
   height: 100%;
   overflow: hidden;

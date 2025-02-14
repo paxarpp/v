@@ -209,6 +209,7 @@
 .camp_img {
   width: 520px;
   height: 290px;
+  min-height: 290px;
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -219,19 +220,18 @@
 
 .camps_wrap {
   padding-bottom: 20px;
-  margin-left: 75px;
+  margin: 0 75px;
 }
 
 .camps_wrap_mobi {
   padding-bottom: 0;
-  margin-left: 0;
+  margin: 0 0;
 }
 
 .camps_scroller {
   position: relative;
   display: flex;
   flex-flow: row nowrap;
-  width: calc(100% - 0px);
   overflow: auto;
   height: 100%;
   overflow: hidden;

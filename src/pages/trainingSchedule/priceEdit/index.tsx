@@ -25,16 +25,19 @@ export const PriceEdit: React.FC<{
     });
     if (priceId) {
       // edit
-      const getP = async (id: string) => {
+      const getP = async () => {
         const axiosCall = creatorRequest(logout);
         const { result, error } = await axiosCall<IPrice[]>(
           pl.getPrice<IPrice>(),
         );
         if (!error && result?.data) {
-          setPrice({ ...result.data.result.find((p) => p.id === id) });
+          const price = result.data.result.find((p) => p.id === priceId);
+          if (price) {
+            setPrice({ ...price });
+          }
         }
       };
-      getP(priceId);
+      getP();
     }
     return () => {
       setPrice(null);
@@ -43,6 +46,7 @@ export const PriceEdit: React.FC<{
 
   const savePrice = () => {
     const saveC = async () => {
+      console.log({ ...currentPrice })
       if (currentPrice) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall(
@@ -115,7 +119,41 @@ export const PriceEdit: React.FC<{
             <input
               value={currentPrice?.prices[0]?.price}
               onChange={(e) => {
-                setPrice((prevPrice) => prevPrice);
+                setPrice((prevPrice) => {
+                  return prevPrice
+                    ? {
+                        ...prevPrice,
+                        prices: [
+                          {
+                            ...prevPrice.prices[0],
+                            price: e.target.value
+                              ? Number(e.target.value)
+                              : undefined,
+                          },
+                          { ...prevPrice.prices[1] },
+                        ],
+                      }
+                    : {
+                        id: null,
+                        name: '',
+                        prices: [
+                          {
+                            id: null,
+                            price: e.target.value
+                              ? Number(e.target.value)
+                              : undefined,
+                            subTitle: '',
+                            title: 'Взрослые',
+                          },
+                          {
+                            id: null,
+                            price: undefined,
+                            subTitle: '',
+                            title: 'Взрослые',
+                          },
+                        ],
+                      };
+                });
               }}
               className={styles.input_field}
             />
@@ -123,7 +161,37 @@ export const PriceEdit: React.FC<{
             <input
               value={currentPrice?.prices[0]?.subTitle}
               onChange={(e) => {
-                setPrice((prevPrice) => prevPrice);
+                setPrice((prevPrice) => {
+                  return prevPrice
+                    ? {
+                        ...prevPrice,
+                        prices: [
+                          {
+                            ...prevPrice.prices[0],
+                            subTitle: e.target.value,
+                          },
+                          prevPrice.prices[1],
+                        ],
+                      }
+                    : {
+                        id: null,
+                        name: '',
+                        prices: [
+                          {
+                            id: null,
+                            price: undefined,
+                            subTitle: e.target.value,
+                            title: 'Взрослые',
+                          },
+                          {
+                            id: null,
+                            price: undefined,
+                            subTitle: '',
+                            title: 'Взрослые',
+                          },
+                        ],
+                      };
+                });
               }}
               className={styles.input_field}
             />
@@ -134,7 +202,41 @@ export const PriceEdit: React.FC<{
             <input
               value={currentPrice?.prices[1]?.price}
               onChange={(e) => {
-                setPrice((prevPrice) => prevPrice);
+                setPrice((prevPrice) => {
+                  return prevPrice
+                    ? {
+                        ...prevPrice,
+                        prices: [
+                          { ...prevPrice.prices[0] },
+                          {
+                            ...prevPrice.prices[1],
+                            price: e.target.value
+                              ? Number(e.target.value)
+                              : undefined,
+                          },
+                        ],
+                      }
+                    : {
+                        id: null,
+                        name: '',
+                        prices: [
+                          {
+                            id: null,
+                            price: undefined,
+                            subTitle: '',
+                            title: 'Детские',
+                          },
+                          {
+                            id: null,
+                            price: e.target.value
+                              ? Number(e.target.value)
+                              : undefined,
+                            subTitle: '',
+                            title: 'Детские',
+                          },
+                        ],
+                      };
+                });
               }}
               className={styles.input_field}
             />
@@ -142,7 +244,37 @@ export const PriceEdit: React.FC<{
             <input
               value={currentPrice?.prices[1]?.subTitle}
               onChange={(e) => {
-                setPrice((prevPrice) => prevPrice);
+                setPrice((prevPrice) => {
+                  return prevPrice
+                    ? {
+                        ...prevPrice,
+                        prices: [
+                          { ...prevPrice.prices[0] },
+                          {
+                            ...prevPrice.prices[1],
+                            subTitle: e.target.value,
+                          },
+                        ],
+                      }
+                    : {
+                        id: null,
+                        name: '',
+                        prices: [
+                          {
+                            id: null,
+                            price: undefined,
+                            subTitle: '',
+                            title: 'Детские',
+                          },
+                          {
+                            id: null,
+                            price: undefined,
+                            subTitle: e.target.value,
+                            title: 'Детские',
+                          },
+                        ],
+                      };
+                });
               }}
               className={styles.input_field}
             />
