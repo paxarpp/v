@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ArrowLeft from '../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../assets/arrowRight.svg?react';
 import { createImageUrl } from '../../constants';
@@ -22,7 +22,7 @@ interface IProps {
 }
 
 export const ImagePack: React.FC<IProps> = ({
-  images: imgs,
+  images,
   className,
   width = 720,
   height = 480,
@@ -31,9 +31,20 @@ export const ImagePack: React.FC<IProps> = ({
   gapPreview = 30,
   marginPreviewTop = 50,
 }) => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const images = imgs ? imgs : [];
-  const isEmpty = images.length === 0;
+  const [currentImage, setCurrentImage] = useState<
+    {
+      id: string;
+      name: string;
+      url: string;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    if (images?.length) {
+      setCurrentImage(images);
+    }
+  }, [images?.length]);
+  const isEmpty = currentImage.length === 0;
 
   const size = {
     width: `${width}px`,
@@ -53,11 +64,20 @@ export const ImagePack: React.FC<IProps> = ({
   };
 
   const onLeft = () => {
-    setCurrentImage(currentImage === 0 ? images.length - 1 : currentImage - 1);
+    setCurrentImage((prev) => {
+      const [tail, ...arr] = prev;
+      return [...arr, tail];
+    });
   };
   const onRight = () => {
-    setCurrentImage(currentImage === images.length - 1 ? 0 : currentImage + 1);
+    setCurrentImage((prev) => {
+      const prevCopy = [...prev];
+      const tail = prevCopy.pop() as Omit<(typeof prev)[number], 'undefined'>;
+      return [tail, ...prevCopy];
+    });
   };
+  const imageIndx = Math.min(currentImage.length, 1);
+
   return isEmpty ? (
     <div className={className}>
       <div className={styles.info_img_wrapper_stub} style={size}></div>
@@ -69,32 +89,34 @@ export const ImagePack: React.FC<IProps> = ({
     <div className={className}>
       <div className={styles.info_img_wrapper} style={size}>
         <img
-          src={createImageUrl(images[currentImage].url)}
-          alt={images[currentImage].name}
+          src={createImageUrl(currentImage[imageIndx].url)}
+          alt={currentImage[imageIndx].name}
           className={styles.info_current_img}
         />
         <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
         <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
       </div>
       <div className={styles.row_prevew_images} style={sizeRow}>
-        {images
-          ? images.map((image, indx) => (
-              <div
-                className={styles.prevew_img_wrapper}
-                key={image.id}
-                style={sizePreviw}
-              >
-                <img
-                  src={createImageUrl(image.url)}
-                  alt={image.name}
-                  className={
-                    indx === currentImage
-                      ? styles.prevew_img_current
-                      : styles.prevew_img
-                  }
-                />
-              </div>
-            ))
+        {currentImage
+          ? currentImage.map((image, indx) =>
+              indx <= 4 ? (
+                <div
+                  className={styles.prevew_img_wrapper}
+                  key={image.id}
+                  style={sizePreviw}
+                >
+                  <img
+                    src={createImageUrl(image.url)}
+                    alt={image.name}
+                    className={
+                      indx === imageIndx
+                        ? styles.prevew_img_current
+                        : styles.prevew_img
+                    }
+                  />
+                </div>
+              ) : null,
+            )
           : null}
       </div>
     </div>
