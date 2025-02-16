@@ -1,3 +1,13 @@
+.flex {
+  display: flex;
+  gap: 50px;
+}
+
+.flex_column {
+  display: flex;
+  flex-flow: column;
+}
+
 .group {
   display: flex;
   flex-flow: row nowrap;
@@ -233,6 +243,15 @@
 .input_field {
   height: 64px;
   padding: 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.input_field_sm {
+  height: 32px;
+  padding: 4px;
   border-radius: 4px;
   font-size: 16px;
   font-weight: 400;
