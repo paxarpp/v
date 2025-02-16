@@ -8,12 +8,25 @@ import { IPrice } from '../interfaces';
 import { useUser } from '../../../context';
 import styles from '../index.module.css';
 
+const initialPrices = {
+  id: '',
+  price: undefined,
+  title: '',
+  subTitle: '',
+};
+
 export const PriceEdit: React.FC<{
   priceId: string | null;
   onClose: () => void;
 }> = ({ priceId, onClose }) => {
   const { logout } = useUser();
   const [currentPrice, setPrice] = useState<IPrice | null>(null);
+  const [priceOld, setPriceOld] = useState<IPrice['prices'][number] | null>(
+    null,
+  );
+  const [priceChild, setPriceChild] = useState<IPrice['prices'][numerb] | null>(
+    null,
+  );
 
   const revalidator = useRevalidator();
 
@@ -23,6 +36,8 @@ export const PriceEdit: React.FC<{
       name: '',
       prices: [],
     });
+    setPriceOld(initialPrices);
+    setPriceChild(initialPrices);
     if (priceId) {
       // edit
       const getP = async () => {
@@ -33,7 +48,9 @@ export const PriceEdit: React.FC<{
         if (!error && result?.data) {
           const price = result.data.result.find((p) => p.id === priceId);
           if (price) {
-            setPrice({ ...price });
+            setPrice(price);
+            setPriceOld(price.prices[0]);
+            setPriceChild(price.prices[1]);
           }
         }
       };
@@ -46,11 +63,17 @@ export const PriceEdit: React.FC<{
 
   const savePrice = () => {
     const saveC = async () => {
-      console.log({ ...currentPrice })
+      console.log({ ...currentPrice });
       if (currentPrice) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall(
-          api.updateShedulePrice({ ...currentPrice }),
+          api.updateShedulePrice({
+            ...currentPrice,
+            prices: [
+              priceOld as IPrice['prices'][number],
+              priceChild as IPrice['prices'][number],
+            ],
+          }),
         );
         if (!error) {
           onClose();
@@ -112,171 +135,79 @@ export const PriceEdit: React.FC<{
           }}
           className={styles.input_field}
         />
-        <div>
-          <div>
+        <div className={styles.flex}>
+          <div className={styles.flex_column}>
             <h4>{'Взрослые группы'}</h4>
             <label>{'За одну тренировку'}</label>
             <input
-              value={currentPrice?.prices[0]?.price}
+              value={priceOld?.price}
               onChange={(e) => {
-                setPrice((prevPrice) => {
+                setPriceOld((prevPrice) => {
                   return prevPrice
                     ? {
                         ...prevPrice,
-                        prices: [
-                          {
-                            ...prevPrice.prices[0],
-                            price: e.target.value
-                              ? Number(e.target.value)
-                              : undefined,
-                          },
-                          { ...prevPrice.prices[1] },
-                        ],
+                        price: e.target.value
+                          ? isNaN(Number(e.target.value))
+                            ? prevPrice.price
+                            : Number(e.target.value)
+                          : undefined,
                       }
-                    : {
-                        id: null,
-                        name: '',
-                        prices: [
-                          {
-                            id: null,
-                            price: e.target.value
-                              ? Number(e.target.value)
-                              : undefined,
-                            subTitle: '',
-                            title: 'Взрослые',
-                          },
-                          {
-                            id: null,
-                            price: undefined,
-                            subTitle: '',
-                            title: 'Взрослые',
-                          },
-                        ],
-                      };
+                    : initialPrices;
                 });
               }}
-              className={styles.input_field}
+              className={styles.input_field_sm}
             />
             <label>{'За абонемент'}</label>
             <input
-              value={currentPrice?.prices[0]?.subTitle}
+              value={priceOld?.subTitle}
               onChange={(e) => {
-                setPrice((prevPrice) => {
+                setPriceOld((prevPrice) => {
                   return prevPrice
                     ? {
                         ...prevPrice,
-                        prices: [
-                          {
-                            ...prevPrice.prices[0],
-                            subTitle: e.target.value,
-                          },
-                          prevPrice.prices[1],
-                        ],
+                        subTitle: e.target.value,
                       }
-                    : {
-                        id: null,
-                        name: '',
-                        prices: [
-                          {
-                            id: null,
-                            price: undefined,
-                            subTitle: e.target.value,
-                            title: 'Взрослые',
-                          },
-                          {
-                            id: null,
-                            price: undefined,
-                            subTitle: '',
-                            title: 'Взрослые',
-                          },
-                        ],
-                      };
+                    : initialPrices;
                 });
               }}
-              className={styles.input_field}
+              className={styles.input_field_sm}
             />
           </div>
-          <div>
+          <div className={styles.flex_column}>
             <h4>{'Детские группы'}</h4>
             <label>{'За одну тренировку'}</label>
             <input
-              value={currentPrice?.prices[1]?.price}
+              value={priceChild?.price}
               onChange={(e) => {
-                setPrice((prevPrice) => {
+                setPriceChild((prevPrice) => {
                   return prevPrice
                     ? {
                         ...prevPrice,
-                        prices: [
-                          { ...prevPrice.prices[0] },
-                          {
-                            ...prevPrice.prices[1],
-                            price: e.target.value
-                              ? Number(e.target.value)
-                              : undefined,
-                          },
-                        ],
+                        price: e.target.value
+                          ? isNaN(Number(e.target.value))
+                            ? prevPrice.price
+                            : Number(e.target.value)
+                          : undefined,
                       }
-                    : {
-                        id: null,
-                        name: '',
-                        prices: [
-                          {
-                            id: null,
-                            price: undefined,
-                            subTitle: '',
-                            title: 'Детские',
-                          },
-                          {
-                            id: null,
-                            price: e.target.value
-                              ? Number(e.target.value)
-                              : undefined,
-                            subTitle: '',
-                            title: 'Детские',
-                          },
-                        ],
-                      };
+                    : initialPrices;
                 });
               }}
-              className={styles.input_field}
+              className={styles.input_field_sm}
             />
             <label>{'За абонемент'}</label>
             <input
-              value={currentPrice?.prices[1]?.subTitle}
+              value={priceChild?.subTitle}
               onChange={(e) => {
-                setPrice((prevPrice) => {
+                setPriceChild((prevPrice) => {
                   return prevPrice
                     ? {
                         ...prevPrice,
-                        prices: [
-                          { ...prevPrice.prices[0] },
-                          {
-                            ...prevPrice.prices[1],
-                            subTitle: e.target.value,
-                          },
-                        ],
+                        subTitle: e.target.value,
                       }
-                    : {
-                        id: null,
-                        name: '',
-                        prices: [
-                          {
-                            id: null,
-                            price: undefined,
-                            subTitle: '',
-                            title: 'Детские',
-                          },
-                          {
-                            id: null,
-                            price: undefined,
-                            subTitle: e.target.value,
-                            title: 'Детские',
-                          },
-                        ],
-                      };
+                    : initialPrices;
                 });
               }}
-              className={styles.input_field}
+              className={styles.input_field_sm}
             />
           </div>
         </div>
