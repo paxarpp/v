@@ -29,7 +29,7 @@ export default function Main() {
     }
   }, [hash]);
   return (
-    <div>
+    <>
       <MainImg />
 
       <BlockIcons />
@@ -41,6 +41,6 @@ export default function Main() {
       <Contacts />
 
       <CallMe />
-    </div>
+    </>
   );
 }
