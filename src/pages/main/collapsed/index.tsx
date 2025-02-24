@@ -140,7 +140,7 @@ export const Collapsed: React.FC = () => {
       </Modal>
       <div className={styles.asked_questions} id="questions">
         <img src={imgUrl} alt={''} className={styles.back_questions} />
-        <h2>
+        <h2 className={styles.asked_questions_title}>
           {'Часто задаваемые вопросы'}
           {isAdmin ? (
             <Setting onClick={openEditQuestions} className={styles.setting_q} />
