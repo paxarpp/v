@@ -8,12 +8,12 @@ import { IPrice } from '../interfaces';
 import { useUser } from '../../../context';
 import styles from '../index.module.css';
 
-const initialPrices = {
+const initialPrices = (isChild: boolean) => ({
   id: '',
+  title: !isChild ? 'Взрослые' : 'Детские',
   price: undefined,
-  title: '',
   subTitle: '',
-};
+});
 
 export const PriceEdit: React.FC<{
   priceId: string | null;
@@ -24,7 +24,7 @@ export const PriceEdit: React.FC<{
   const [priceOld, setPriceOld] = useState<IPrice['prices'][number] | null>(
     null,
   );
-  const [priceChild, setPriceChild] = useState<IPrice['prices'][numerb] | null>(
+  const [priceChild, setPriceChild] = useState<IPrice['prices'][number] | null>(
     null,
   );
 
@@ -36,8 +36,8 @@ export const PriceEdit: React.FC<{
       name: '',
       prices: [],
     });
-    setPriceOld(initialPrices);
-    setPriceChild(initialPrices);
+    setPriceOld(initialPrices(false));
+    setPriceChild(initialPrices(true));
     if (priceId) {
       // edit
       const getP = async () => {
@@ -140,6 +140,21 @@ export const PriceEdit: React.FC<{
             <h4>{'Взрослые группы'}</h4>
             <label>{'За одну тренировку'}</label>
             <input
+              value={priceOld?.subTitle}
+              onChange={(e) => {
+                setPriceOld((prevPrice) => {
+                  return prevPrice
+                    ? {
+                        ...prevPrice,
+                        subTitle: e.target.value,
+                      }
+                    : initialPrices(false);
+                });
+              }}
+              className={styles.input_field_sm}
+            />
+            <label>{'За абонемент'}</label>
+            <input
               value={priceOld?.price}
               onChange={(e) => {
                 setPriceOld((prevPrice) => {
@@ -152,22 +167,7 @@ export const PriceEdit: React.FC<{
                             : Number(e.target.value)
                           : undefined,
                       }
-                    : initialPrices;
-                });
-              }}
-              className={styles.input_field_sm}
-            />
-            <label>{'За абонемент'}</label>
-            <input
-              value={priceOld?.subTitle}
-              onChange={(e) => {
-                setPriceOld((prevPrice) => {
-                  return prevPrice
-                    ? {
-                        ...prevPrice,
-                        subTitle: e.target.value,
-                      }
-                    : initialPrices;
+                    : initialPrices(false);
                 });
               }}
               className={styles.input_field_sm}
@@ -176,6 +176,21 @@ export const PriceEdit: React.FC<{
           <div className={styles.flex_column}>
             <h4>{'Детские группы'}</h4>
             <label>{'За одну тренировку'}</label>
+            <input
+              value={priceChild?.subTitle}
+              onChange={(e) => {
+                setPriceChild((prevPrice) => {
+                  return prevPrice
+                    ? {
+                        ...prevPrice,
+                        subTitle: e.target.value,
+                      }
+                    : initialPrices(true);
+                });
+              }}
+              className={styles.input_field_sm}
+            />
+            <label>{'За абонемент'}</label>
             <input
               value={priceChild?.price}
               onChange={(e) => {
@@ -189,22 +204,7 @@ export const PriceEdit: React.FC<{
                             : Number(e.target.value)
                           : undefined,
                       }
-                    : initialPrices;
-                });
-              }}
-              className={styles.input_field_sm}
-            />
-            <label>{'За абонемент'}</label>
-            <input
-              value={priceChild?.subTitle}
-              onChange={(e) => {
-                setPriceChild((prevPrice) => {
-                  return prevPrice
-                    ? {
-                        ...prevPrice,
-                        subTitle: e.target.value,
-                      }
-                    : initialPrices;
+                    : initialPrices(true);
                 });
               }}
               className={styles.input_field_sm}
