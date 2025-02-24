@@ -48,9 +48,9 @@
 }
 
 .scroll_arrow_left {
-  left: 0;
+  left: 4px;
 }
 
 .scroll_arrow_right {
-  right: 0;
+  right: 4px;
 }
