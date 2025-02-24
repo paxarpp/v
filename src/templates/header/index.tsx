@@ -122,6 +122,7 @@ export const Header: React.FC<IProps> = (props) => {
         />
       ) : (
         <Template
+          {...props}
           toggleAuthOpen={toggleAuthOpen}
           toggleNotificationModal={toggleNotificationModal}
           count={count}
