@@ -42,22 +42,22 @@ export const Template: React.FC<IProps> = ({
             <ClosedIcon className={styles.dropdown_closed} />
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>
-                <li>
+                <li className={styles.link}>
                   <NavLink to="/weekendCamps" className={createLinkClassName}>
                     Кемпы выходного дня
                   </NavLink>
                 </li>
-                <li>
+                <li className={styles.link}>
                   <NavLink to="/longCamps" className={createLinkClassName}>
                     Недельные кемпы
                   </NavLink>
                 </li>
-                <li>
+                <li className={styles.link}>
                   <NavLink to="/oldCamps" className={createLinkClassName}>
                     Прошедшие кемпы
                   </NavLink>
                 </li>
-                <li>
+                <li className={styles.link}>
                   <NavLink to="/beachCoaches" className={createLinkClassName}>
                     Тренеры
                   </NavLink>
@@ -72,7 +72,7 @@ export const Template: React.FC<IProps> = ({
             <ClosedIcon className={styles.dropdown_closed} />
             <div className={styles.dropdown_content}>
               <ul className={styles.dropdown_menu}>
-                <li>
+                <li className={styles.link}>
                   <NavLink
                     to="/trainingSchedule"
                     className={createLinkClassName}
@@ -80,7 +80,7 @@ export const Template: React.FC<IProps> = ({
                     Расписание
                   </NavLink>
                 </li>
-                <li>
+                <li className={styles.link}>
                   <NavLink to="/classicCoaches" className={createLinkClassName}>
                     Тренеры
                   </NavLink>

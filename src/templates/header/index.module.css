@@ -23,6 +23,22 @@
   height: 64px;
 }
 
+.link {
+  padding: 10px 10px;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.link > a {
+  width: 100%;
+  display: block;
+}
+
+.link:hover {
+  background-color: #8080804D;
+}
+
 .dropdown_menu {
   display: flex;
   flex-flow: column nowrap;
@@ -30,6 +46,7 @@
   justify-content: center;
   align-items: flex-start;
   padding-left: 0;
+  position: relative;
 }
 
 .dropdown {
@@ -41,8 +58,7 @@
   display: none;
   background: #191A26;
   border-radius: 4px;
-  padding: 15px;
-  left: -15px;
+  padding: 5px;
   width: 270px;
 }
 
