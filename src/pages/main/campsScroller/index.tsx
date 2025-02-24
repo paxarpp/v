@@ -65,7 +65,7 @@ const CampsTemplate = () => {
               >
                 <img
                   src={createImageUrl(item.imageCart?.url)}
-                  alt="картинка кэмпа"
+                  alt="картинка кемпа"
                   className={isMobile ? styles.camp_img_mobi : styles.camp_img}
                 />
               </div>

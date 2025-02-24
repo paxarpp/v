@@ -94,7 +94,7 @@ export const MobileTemplate: React.FC<IProps> = ({
             <ul className={styles.menu_popap}>
               <li>
                 <NavLink to="/childCamps" className={createLinkClassName}>
-                  Детские кэмпы
+                  Детские кемпы
                 </NavLink>
               </li>
               <li>

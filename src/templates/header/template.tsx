@@ -91,7 +91,7 @@ export const Template: React.FC<IProps> = ({
         </li>
         <li>
           <NavLink to="/childCamps" className={createLinkClassName}>
-            Детские кэмпы
+            Детские кемпы
           </NavLink>
         </li>
         <li>

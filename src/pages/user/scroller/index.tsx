@@ -46,7 +46,7 @@ export const Scroller: React.FC<IProps> = ({ camps = [], title }) => {
                 <div className={styles.camp_img_wrap}>
                   <img
                     src={createImageUrl(item.imageCart.url)}
-                    alt="картинка кэмпа"
+                    alt="картинка кемпа"
                     className={styles.camp_img}
                   />
                 </div>
