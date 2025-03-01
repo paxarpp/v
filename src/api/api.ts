@@ -9,6 +9,15 @@ import { IActivity, IReview } from '../pages/about/interfaces';
 import { IPrice, ISheduleGroup } from '../pages/trainingSchedule/interfaces';
 
 export const api = {
+  sendQuestion: async (data: {
+    userName: string;
+    telephone: string;
+    answer: string;
+  }): Promise<{
+    data: { result: boolean; error?: string };
+  }> => {
+    return await instance.post('/answer/send', data);
+  },
   updateAbout: async <T>(
     data: unknown,
   ): Promise<{

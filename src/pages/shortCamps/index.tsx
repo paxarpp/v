@@ -3,6 +3,7 @@ import { CampInfoIcons } from './campInfoIcons';
 import { CampsList } from './campsList';
 import { ICampItem } from './interfaces';
 import { pl } from '../../api/pageLoader';
+import styles from './index.module.css';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
@@ -15,7 +16,7 @@ export async function clientLoader() {
 export default function ShortCamps() {
   return (
     <div>
-      <h2>Кемпы выходного дня</h2>
+      <h2 className={styles.title}>Кемпы выходного дня</h2>
       <CampInfoIcons />
 
       <CampsList />

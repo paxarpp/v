@@ -12,14 +12,13 @@
   font-weight: 600;
   line-height: 33px;
   text-align: center;
-  transition: border 0.2s;
   cursor: pointer;
+  border: none;
 }
 
 .button:hover {
   border: 2px solid #FFFFFF;
 }
-
 
 .modal_input {
   width: 412px;

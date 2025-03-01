@@ -52,7 +52,7 @@ const CampsTemplate: React.FC<{
         return (
           <div key={camp.id} className={styles.camp_card}>
             <div>
-              <h2>
+              <h2 className={styles.camp_title}>
                 {camp.dateString
                   ? camp.dateString
                   : `${camp.dateStart}-${camp.dateEnd}`}
