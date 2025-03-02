@@ -35,29 +35,22 @@ export const CallMe = () => {
     setComment(e.target.value);
   };
 
-  const sendQuestion = () => {
-    const sendQ = async () => {
-      const axiosCall = creatorRequest(logout);
-      const { error } = await axiosCall(
-        api.sendQuestion({ userName, telephone, answer }),
-      );
-      if (error) {
-        setValidationError(error);
-      } else {
-        setName('');
-        setComment('');
-        setTel('');
-      }
-    };
-    sendQ();
-  };
-
-  const onSend = () => {
+  const onSend = async () => {
     const pattern =
       /([\+]?[7|8][\s-(]?[9][0-9]{2}[\s-)]?)?([\d]{3})[\s-]?([\d]{2})[\s-]?([\d]{2})/;
     if (telephone && userName) {
       if (pattern.test(telephone)) {
-        sendQuestion();
+        const axiosCall = creatorRequest(logout);
+        const { error } = await axiosCall(
+          api.sendQuestion({ userName, telephone, answer }),
+        );
+        if (error) {
+          setValidationError(error);
+        } else {
+          setName('');
+          setComment('');
+          setTel('');
+        }
       } else {
         setValidationError('Неверный формат телефона');
       }
