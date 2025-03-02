@@ -3,6 +3,7 @@ import { CallMe } from '../../templates/callme';
 import { ICamp } from '../main/interfaces';
 import { CampInfoIcons } from './campInfoIcons';
 import { CampsList } from './campsList';
+import styles from './index.module.css';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
@@ -15,7 +16,7 @@ export async function clientLoader() {
 export default function childCamps() {
   return (
     <div>
-      <h2>Детские кемпы</h2>
+      <h2 className={styles.title}>Детские кемпы</h2>
       <CampInfoIcons />
 
       <CampsList />

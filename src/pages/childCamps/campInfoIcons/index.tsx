@@ -8,15 +8,21 @@ export const CampInfoIcons = () => {
     <div className={styles.info_row}>
       <div className={styles.info_card}>
         <World />
-        <span>На территории собственной базы Пляж House</span>
+        <span className={styles.camp_info}>
+          На территории собственной базы Пляж House
+        </span>
       </div>
       <div className={styles.info_card}>
         <Calendar />
-        <span>Продолжительность кемпа 3-4 дня (Чт/Пт-Вс)</span>
+        <span className={styles.camp_info}>
+          Продолжительность кемпа 3-4 дня (Чт/Пт-Вс)
+        </span>
       </div>
       <div className={styles.info_card}>
         <People />
-        <span>Подходит для игроков любого уровня</span>
+        <span className={styles.camp_info}>
+          Подходит для игроков любого уровня
+        </span>
       </div>
     </div>
   );

@@ -297,3 +297,11 @@
 .date_picker {
   text-align: left;
 }
+
+.title {
+  font-size: 40px;
+}
+
+.camp_info {
+  font-size: 22px;
+}
