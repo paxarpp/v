@@ -293,3 +293,17 @@
 .camp_info {
   font-size: 22px;
 }
+
+.camp_card_title {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.camp_card_subtitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: #FFFFFF;
+}

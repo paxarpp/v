@@ -52,8 +52,8 @@ const CampsTemplate: React.FC<{
         return (
           <div key={camp.id} className={styles.camp_card}>
             <div>
-              <h2>{camp.dateString}</h2>
-              <span>{camp.name}</span>
+              <h2 className={styles.camp_card_title}>{camp.dateString}</h2>
+              <span className={styles.camp_card_subtitle}>{camp.name}</span>
             </div>
             <div className={styles.camp_image_wrapper}>
               <img
