@@ -204,6 +204,7 @@
   min-height: 290px;
   border-radius: 8px;
   box-sizing: border-box;
+  object-fit: cover;
 }
 
 .camp_img_mobi {
