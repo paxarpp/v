@@ -56,8 +56,8 @@ const CampsTemplate = () => {
               key={item.id}
               className={isMobile ? styles.camp_card_mobi : styles.camp_card}
             >
-              <p className={styles.camp_card_name}>{item.name}</p>
-              <p className={styles.camp_card_date}>{item.dateString}</p>
+              <p className={styles.camp_card_name}>{item.dateString}</p>
+              <p className={styles.camp_card_date}>{item.name}</p>
               <div
                 className={
                   isMobile ? styles.camp_img_wrap_mobi : styles.camp_img_wrap
