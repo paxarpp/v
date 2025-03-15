@@ -19,7 +19,7 @@ export const CampInfoIcons = () => {
       <div className={styles.info_card}>
         <People />
         <span className={styles.camp_info}>
-          Подходит для игроков любого уровня
+          Подходит для игроков всех уровней
         </span>
       </div>
     </div>
