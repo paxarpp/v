@@ -76,71 +76,76 @@ export const Packages = () => {
       <h2>{'Что входит в стоимость'}</h2>
       <h4>{`Свободно ${camp?.countFree} мест`}</h4>
       <div className={styles.package_row}>
-        {camp?.packages?.map((pack) => (
-          <div key={pack.packageId} className={styles.pack_card}>
-            <img
-              src={getPackImgUrl(pack.type)}
-              alt={pack.name}
-              className={styles.back_card}
-            />
-            {pack.type === 'TOUR' ? (
-              <Tour className={styles.pack_icon} />
-            ) : (
-              <People className={styles.pack_icon} />
-            )}
-            <h4 className={styles.pack_title}>{pack.displayName}</h4>
-            <ul className={styles.pack_info}>
-              {pack.info
-                .split(';')
-                .filter(Boolean)
-                .map((inf, i) => (
-                  <li key={i + 'pack'}>{inf}</li>
-                ))}
-            </ul>
-            <div onClick={() => togglePricesInfo(pack.packageId)}>
-              {showPricesInfo[pack.packageId] ? (
-                <div className={styles.pack_prices_info}>
-                  <span>
-                    <span
-                      className={styles.total_price}
-                    >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
-                    <span
-                      className={styles.pack_limit}
-                    >{`до ${pack.firstLimitation}`}</span>
-                  </span>
-                  <span>
-                    <span
-                      className={styles.total_price}
-                    >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
-                    <span
-                      className={styles.pack_limit}
-                    >{`до ${pack.secondLimitation}`}</span>
-                  </span>
-                  <span>
-                    <span
-                      className={styles.total_price}
-                    >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
-                    <span
-                      className={styles.pack_limit}
-                    >{`до ${pack.thirdLimitation}`}</span>
-                  </span>
-                </div>
+        {camp?.packages?.map((pack) => {
+          const isTour = pack.type === 'TOUR';
+          return (
+            <div key={pack.packageId} className={styles.pack_card}>
+              <img
+                src={getPackImgUrl(pack.type)}
+                alt={pack.name}
+                className={styles.back_card}
+              />
+              {isTour ? (
+                <Tour className={styles.pack_icon} />
               ) : (
-                <>
-                  <h4
-                    className={styles.total_price}
-                  >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
-                  <span
-                    className={styles.cost_link}
-                  >{`*${pack.costNamingLink}`}</span>
-                  <span
-                    className={styles.booking_price}
-                  >{`предоплата по спорт пакету - ${divideNumberByPieces(pack.bookingPrice)} ₽`}</span>
-                </>
+                <People className={styles.pack_icon} />
               )}
+              <h4 className={styles.pack_title}>{pack.displayName}</h4>
+              <ul className={styles.pack_info}>
+                {pack.info
+                  .split(';')
+                  .filter(Boolean)
+                  .map((inf, i) => (
+                    <li key={i + 'pack'}>{inf}</li>
+                  ))}
+              </ul>
+              <div onClick={() => togglePricesInfo(pack.packageId)}>
+                {showPricesInfo[pack.packageId] ? (
+                  <div className={styles.pack_prices_info}>
+                    <span>
+                      <span
+                        className={styles.total_price}
+                      >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
+                      <span
+                        className={styles.pack_limit}
+                      >{`до ${pack.firstLimitation}`}</span>
+                    </span>
+                    <span>
+                      <span
+                        className={styles.total_price}
+                      >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
+                      <span
+                        className={styles.pack_limit}
+                      >{`до ${pack.secondLimitation}`}</span>
+                    </span>
+                    <span>
+                      <span
+                        className={styles.total_price}
+                      >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
+                      <span
+                        className={styles.pack_limit}
+                      >{`до ${pack.thirdLimitation}`}</span>
+                    </span>
+                  </div>
+                ) : (
+                  <>
+                    <h4
+                      className={styles.total_price}
+                    >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
+                    <span
+                      className={styles.cost_link}
+                    >{`*${pack.costNamingLink}`}</span>
+                    <span className={styles.booking_price}>
+                      {isTour
+                        ? `предоплата по туру - ${divideNumberByPieces(pack.bookingPrice)}`
+                        : `предоплата по спорт пакету - ${divideNumberByPieces(pack.bookingPrice)} ₽`}
+                    </span>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {rSuccess && user ? (
