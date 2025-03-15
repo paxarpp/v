@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import People from '../../../assets/people.svg?react';
 import Successfully from '../../../assets/successfully.svg?react';
@@ -41,12 +41,17 @@ export const Packages = () => {
     {},
   );
 
-  const togglePricesInfo = (packId: number) => {
+  const togglePricesInfo = (e: SyntheticEvent, packId: number) => {
+    e.stopPropagation();
     if (packId in showPricesInfo) {
       setShowPricesInfo((prev) => ({ ...prev, [packId]: !prev[packId] }));
     } else {
       setShowPricesInfo((prev) => ({ ...prev, [packId]: true }));
     }
+  };
+
+  const closePricesInfo = (packId: number) => {
+    setShowPricesInfo((prev) => ({ ...prev, [packId]: false }));
   };
 
   const onReservation = () => {
@@ -79,7 +84,11 @@ export const Packages = () => {
         {camp?.packages?.map((pack) => {
           const isTour = pack.type === 'TOUR';
           return (
-            <div key={pack.packageId} className={styles.pack_card}>
+            <div
+              key={pack.packageId}
+              className={styles.pack_card}
+              onClick={() => closePricesInfo(pack.packageId)}
+            >
               <img
                 src={getPackImgUrl(pack.type)}
                 alt={pack.name}
@@ -99,50 +108,48 @@ export const Packages = () => {
                     <li key={i + 'pack'}>{inf}</li>
                   ))}
               </ul>
-              <div onClick={() => togglePricesInfo(pack.packageId)}>
-                {showPricesInfo[pack.packageId] ? (
-                  <div className={styles.pack_prices_info}>
-                    <span>
-                      <span
-                        className={styles.total_price}
-                      >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
-                      <span
-                        className={styles.pack_limit}
-                      >{`до ${pack.firstLimitation}`}</span>
-                    </span>
-                    <span>
-                      <span
-                        className={styles.total_price}
-                      >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
-                      <span
-                        className={styles.pack_limit}
-                      >{`до ${pack.secondLimitation}`}</span>
-                    </span>
-                    <span>
-                      <span
-                        className={styles.total_price}
-                      >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
-                      <span
-                        className={styles.pack_limit}
-                      >{`до ${pack.thirdLimitation}`}</span>
-                    </span>
-                  </div>
-                ) : (
-                  <>
-                    <h4
-                      className={styles.total_price}
-                    >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
-                    <span
-                      className={styles.cost_link}
-                    >{`*${pack.costNamingLink}`}</span>
-                    <span className={styles.booking_price}>
-                      {isTour
-                        ? `предоплата по туру - ${divideNumberByPieces(pack.bookingPrice)}`
-                        : `предоплата по спорт пакету - ${divideNumberByPieces(pack.bookingPrice)} ₽`}
-                    </span>
-                  </>
-                )}
+              <div>
+                <h4
+                  className={styles.total_price}
+                >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
+                <span
+                  className={styles.cost_link}
+                  onClick={(e) => togglePricesInfo(e, pack.packageId)}
+                >{`*${pack.costNamingLink}`}</span>
+                <span className={styles.booking_price}>
+                  {isTour
+                    ? `предоплата по туру - ${divideNumberByPieces(pack.bookingPrice)}`
+                    : `предоплата по спорт пакету - ${divideNumberByPieces(pack.bookingPrice)} ₽`}
+                </span>
               </div>
+              {showPricesInfo[pack.packageId] ? (
+                <div className={styles.pack_prices_info}>
+                  <span>
+                    <span
+                      className={styles.total_price}
+                    >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
+                    <span
+                      className={styles.pack_limit}
+                    >{`до ${pack.firstLimitation}`}</span>
+                  </span>
+                  <span>
+                    <span
+                      className={styles.total_price}
+                    >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
+                    <span
+                      className={styles.pack_limit}
+                    >{`до ${pack.secondLimitation}`}</span>
+                  </span>
+                  <span>
+                    <span
+                      className={styles.total_price}
+                    >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
+                    <span
+                      className={styles.pack_limit}
+                    >{`до ${pack.thirdLimitation}`}</span>
+                  </span>
+                </div>
+              ) : null}
             </div>
           );
         })}

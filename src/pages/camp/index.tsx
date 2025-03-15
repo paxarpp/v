@@ -23,6 +23,8 @@ export default function Camp() {
 
       <Info />
 
+
+
       <Packages />
 
       <Coaches />

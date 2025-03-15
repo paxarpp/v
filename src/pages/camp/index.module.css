@@ -146,12 +146,12 @@
   font-weight: 600;
   line-height: 33px;
   text-align: center;
-  border-bottom: 1px solid #99660A;
+  border-bottom: 1px solid #F2DB51;
 }
 
 .pack_info {
   padding: 0px 50px;
-  border-bottom: 1px solid #99660A;
+  border-bottom: 1px solid #F2DB51;
   padding-bottom: 8px;
 }
 
@@ -160,7 +160,7 @@
   font-weight: 600;
   line-height: 33px;
   text-align: center;
-  color: #99660A;
+  color: #F2DB51;
 }
 
 .cost_link {
@@ -265,11 +265,16 @@
 .pack_prices_info {
   display: flex;
   flex-flow: column nowrap;
-  padding: 32px 30px;
+  padding: 32px 0 32px 110px;
   border-radius: 8px;
-  border: 1px solid #99660A;
+  border: 1px solid #F2DB51;
   background: #191A26;
-  text-align: center;
+
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .pack_limit {
@@ -277,7 +282,7 @@
   font-weight: 400;
   line-height: 30px;
   text-align: left;
-  color: #FFFFFF;
+  color: #D4D4D4;
 }
 
 .column {
