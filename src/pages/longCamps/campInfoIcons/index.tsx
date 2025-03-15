@@ -13,7 +13,7 @@ export const CampInfoIcons = () => {
       <div className={styles.info_card}>
         <Calendar />
         <span className={styles.camp_info}>
-          Продолжительность кемпа минимум неделя
+          Продолжительность кемпа минимум 7 дней
         </span>
       </div>
       <div className={styles.info_card}>
