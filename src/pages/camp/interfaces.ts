@@ -46,7 +46,7 @@ export interface IImage {
 export interface IProgram {
   campId: string;
   dayOfWeek: string;
-  id: string;
+  id: string | null;
   info: string;
   order: number;
 }

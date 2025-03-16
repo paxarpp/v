@@ -36,6 +36,17 @@ export const api = {
       return await instance.post('/users/add-user', data);
     }
   },
+  updateProgram: async <T>(data: {
+    id?: string | null;
+  }): Promise<{
+    data: { result: T; error?: string };
+  }> => {
+    if (data.id) {
+      return await instance.put('/camp/programs', data);
+    } else {
+      return await instance.post('/camp/programs', data);
+    }
+  },
   updateUserReservation: async <T>(data: {
     id?: string | null;
   }): Promise<{

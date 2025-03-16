@@ -318,6 +318,8 @@
   gap: 20px;
 }
 
+.input_field_area,
+input_field_small,
 .input_field {
   height: 64px;
   padding: 20px;
@@ -325,6 +327,14 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+}
+
+.input_field_area {
+  height: 120px;
+}
+
+.input_field_small {
+  height: 32px;
 }
 
 .button {
@@ -406,6 +416,19 @@
   position: relative;
 }
 
+.program_card_add {
+  width: 420px;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: #8080804D;
+  cursor: pointer;
+}
+
 .program_header {
   text-align: center;
   box-sizing: border-box;
@@ -417,6 +440,7 @@
 }
 
 .programs_wrap {
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
