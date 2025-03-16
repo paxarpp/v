@@ -74,6 +74,10 @@
   box-sizing: border-box;
 }
 
+.camp_card:hover {
+  background: #232020;
+}
+
 .camp_card_mobi {
   width: 100%;
 }
@@ -147,7 +151,7 @@
   display: flex;
   flex-flow: row wrap;
   margin: 150px 75px;
-  gap: 30px;
+  gap: 25px;
   justify-content: center;
 }
 
@@ -215,7 +219,6 @@
 }
 
 .camps_wrap {
-  padding-bottom: 20px;
   margin: 0 75px;
 }
 
@@ -231,7 +234,7 @@
   overflow: auto;
   height: 100%;
   overflow: hidden;
-  gap: 20px
+  gap: 25px;
 }
 
 .camp_info {
@@ -298,6 +301,9 @@
 
 .asked_questions_title {
   font-size: 40px;
+  font-weight: 600;
+  color: #D4D4D4;
+  margin: 50px 0;
 }
 
 .back_questions {
