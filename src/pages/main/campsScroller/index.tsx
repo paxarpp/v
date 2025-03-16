@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import ArrowLeft from '../../../assets/arrowLeft.svg?react';
+import ArrowLeftHover from '../../../assets/arrowLeftHover.svg?react';
 import ArrowRight from '../../../assets/arrowRight.svg?react';
+import ArrowRightHover from '../../../assets/arrowRightHover.svg?react';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
 import { useDeviceDetect } from '../../../hooks';
@@ -46,8 +48,17 @@ const CampsTemplate = () => {
 
   return (
     <>
-      <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-      <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+      <span className={styles.scroll_arrow_left}>
+        <ArrowLeft className={styles.icon_left} onClick={onLeft} />
+        <ArrowLeftHover className={styles.icon_left_hover} onClick={onLeft} />
+      </span>
+      <span className={styles.scroll_arrow_right}>
+        <ArrowRight className={styles.icon_right} onClick={onRight} />
+        <ArrowRightHover
+          className={styles.icon_right_hover}
+          onClick={onRight}
+        />
+      </span>
       {home?.camps
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item) => {

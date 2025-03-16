@@ -148,6 +148,7 @@
   flex-flow: row wrap;
   margin: 150px 75px;
   gap: 30px;
+  justify-content: center;
 }
 
 .block_icons_mobile {
@@ -246,12 +247,44 @@
   cursor: pointer;
 }
 
+.scroll_arrow_left .icon_left {
+  display: block;
+}
+
+.scroll_arrow_left .icon_left_hover {
+  display: none;
+}
+
+.scroll_arrow_left:hover .icon_left {
+  display: none;
+}
+
+.scroll_arrow_left:hover .icon_left_hover {
+  display: block;
+}
+
+.scroll_arrow_right .icon_right {
+  display: block;
+}
+
+.scroll_arrow_right .icon_right_hover {
+  display: none;
+}
+
+.scroll_arrow_right:hover .icon_right {
+  display: none;
+}
+
+.scroll_arrow_right:hover .icon_right_hover {
+  display: block;
+}
+
 .scroll_arrow_left {
-  left: 0;
+  left: 4px;
 }
 
 .scroll_arrow_right {
-  right: 0;
+  right: 4px;
 }
 
 .asked_questions {
