@@ -100,6 +100,7 @@
   position: absolute;
   top: calc(50% - 25px);
   cursor: pointer;
+  z-index: 1;
 }
 
 .scroll_arrow_left {
@@ -392,7 +393,7 @@ input_field_small,
 .camp_card_title {
   font-size: 40px;
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 50px 0;
   color: #FFFFFF;
 }
 
@@ -409,16 +410,18 @@ input_field_small,
 
 .program_card {
   width: 420px;
-  height: 380px;
+  min-width: 420px;
+  height: 300px;
   box-sizing: border-box;
   border-radius: 8px;
   text-align: left;
   position: relative;
+  overflow: hidden;
 }
 
 .program_card_add {
   width: 420px;
-  height: 380px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -436,15 +439,28 @@ input_field_small,
   margin: 0;
   padding: 10px;
   background: #8080804D;
-  border: 1px solid #888888
+  border: 1px solid #888888;
+  color: #FFFFFF;
+  font-size: 22px;
+}
+
+.program_info {
+  font-size: 20px;
+  color: #FFFFFF;
+  margin-bottom: 5px;
+}
+
+.program_info_list {
+  overflow: auto;
+  height: 210px;
 }
 
 .programs_wrap {
   position: relative;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: flex-start;
-  gap: 30px;
+  gap: 25px;
   margin: 0 75px;
 }

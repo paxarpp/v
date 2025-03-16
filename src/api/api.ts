@@ -47,6 +47,13 @@ export const api = {
       return await instance.post('/camp/programs', data);
     }
   },
+  deleteProgram: async (
+    id: string,
+  ): Promise<{
+    data: { result: string; error?: string };
+  }> => {
+    return await instance.delete(`/camp/programs/${id}`);
+  },
   updateUserReservation: async <T>(data: {
     id?: string | null;
   }): Promise<{

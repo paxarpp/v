@@ -67,6 +67,19 @@ export const ProgramCamp = () => {
     updP();
   };
 
+  const deleteProgram = () => {
+    const updP = async () => {
+      const axiosCall = creatorRequest(logout);
+      const { error } = await axiosCall(api.deleteProgram(currentProgram.id));
+      if (!error) {
+        closeModal();
+        revalidator.revalidate();
+        setStartIndex(0);
+      }
+    };
+    updP();
+  };
+
   return (
     <div>
       {isOpen ? (
@@ -79,6 +92,11 @@ export const ProgramCamp = () => {
               <button onClick={updateProgram} className={styles.button}>
                 {'Сохранить'}
               </button>
+              {currentProgram?.id ? (
+                <button onClick={deleteProgram} className={styles.button}>
+                  {'Удалить карточку'}
+                </button>
+              ) : null}
             </div>
           }
         >
@@ -115,32 +133,38 @@ export const ProgramCamp = () => {
           <>
             <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
             <ArrowRight
-              className={styles.scroll_arrow_right}
               onClick={onRight}
+              className={styles.scroll_arrow_right}
             />
           </>
         ) : null}
-        {camp?.program?.programs?.map((program, i) => {
-          return i < startIndex || i > startIndex + 4 ? null : (
-            <div key={program.id} className={styles.program_card}>
-              <img src={imgUrlBack} className={styles.back_card} />
-              <h4 className={styles.program_header}>
-                {program.dayOfWeek}
-                {isAdmin ? (
-                  <Setting
-                    onClick={() => openModal(program)}
-                    className={styles.setting}
-                  />
-                ) : null}
-              </h4>
-              <ul>
-                {program.info.split(';').map((p) => {
-                  return <li>{p}</li>;
-                })}
-              </ul>
-            </div>
-          );
-        })}
+        {camp?.program?.programs
+          ?.filter((_, i) => i >= startIndex && i + 1 <= startIndex + 4)
+          .map((program) => {
+            return (
+              <div key={program.id} className={styles.program_card}>
+                <img src={imgUrlBack} className={styles.back_card} />
+                <h4 className={styles.program_header}>
+                  {program.dayOfWeek}
+                  {isAdmin ? (
+                    <Setting
+                      onClick={() => openModal(program)}
+                      className={styles.setting}
+                    />
+                  ) : null}
+                </h4>
+                <ul className={styles.program_info_list}>
+                  {program.info.split(';').map((p, i) => {
+                    return (
+                      <li key={i} className={styles.program_info}>
+                        {p}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
         {isAdmin ? (
           <div className={styles.program_card_add}>
             <RoundAdd onClick={() => openModal()} />
