@@ -43,6 +43,14 @@ export interface IImage {
   url: string;
 }
 
+export interface IProgram {
+  campId: string;
+  dayOfWeek: string;
+  id: string;
+  info: string;
+  order: number;
+}
+
 export interface ICampItem {
   id: string;
   name: string;
@@ -59,4 +67,7 @@ export interface ICampItem {
   packages: IPackage[];
   users: IUser[];
   gallery: null | IImage[];
+  program: {
+    programs: IProgram[];
+  };
 }

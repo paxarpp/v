@@ -41,7 +41,12 @@
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
+}
+
+.info_wrap {
   margin: 150px 75px;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .info_img_wrapper {
@@ -371,4 +376,51 @@
   position: absolute;
   right: 5px;
   top: 5px;
+}
+
+.camp_info_title,
+.camp_card_title {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.camp_info_title {
+  margin: 0 0 50px 0;
+}
+
+.camp_card_subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 10px 0;
+  color: #FFFFFF;
+}
+
+.program_card {
+  width: 420px;
+  height: 380px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: left;
+  position: relative;
+}
+
+.program_header {
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin: 0;
+  padding: 10px;
+  background: #8080804D;
+  border: 1px solid #888888
+}
+
+.programs_wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  margin: 0 75px;
 }

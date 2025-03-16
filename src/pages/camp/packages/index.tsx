@@ -78,8 +78,10 @@ export const Packages = () => {
 
   return (
     <div className={styles.column}>
-      <h2>{'Что входит в стоимость'}</h2>
-      <h4>{`Свободно ${camp?.countFree} мест`}</h4>
+      <h2 className={styles.camp_card_title}>{'Что входит в стоимость'}</h2>
+      <h4
+        className={styles.camp_card_subtitle}
+      >{`Свободно ${camp?.countFree} мест`}</h4>
       <div className={styles.package_row}>
         {camp?.packages?.map((pack) => {
           const isTour = pack.type === 'TOUR';

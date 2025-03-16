@@ -4,6 +4,7 @@ import { Info } from './info';
 import { Packages } from './packages';
 import { Coaches } from './coaches';
 import { Users } from './users';
+import { ProgramCamp } from './programCamp';
 import { Route } from './+types';
 import { ICampItem } from './interfaces';
 import { pl } from '../../api/pageLoader';
@@ -23,7 +24,7 @@ export default function Camp() {
 
       <Info />
 
-
+      <ProgramCamp />
 
       <Packages />
 
