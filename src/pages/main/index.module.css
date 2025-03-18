@@ -390,7 +390,7 @@
   line-height: 60px;
   text-align: center;
   color: #D4D4D4;
-  margin: 150px 75px 0 75px;
+  margin: 150px 75px 50px 75px;
 }
 
 .contact_wrap {
@@ -515,4 +515,15 @@
 .rotate_to_open {
   transform-origin: center;
   transform: rotate(180deg);
+}
+
+.text {
+  font-size: 20px;
+  color: #D4D4D4;
+}
+
+.text_manager {
+  font-size: 20px;
+  color: #D4D4D4;
+  margin-top: 10px;
 }

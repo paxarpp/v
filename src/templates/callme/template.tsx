@@ -22,6 +22,7 @@ export const Template: React.FC<IProps> = ({
   validationError,
   tel,
 }) => {
+  const disabled = !name || !tel || !comment;
   return (
     <div className={styles.col_inputs}>
       <div className={styles.row_input}>
@@ -32,7 +33,8 @@ export const Template: React.FC<IProps> = ({
           placeholder={'Имя'}
         />
         <InputStyled
-          type="tel"
+          type={'tel'}
+          pattern={'[0-9]{3}-[0-9]{3}-[0-9]{4}'}
           className={styles.modal_input}
           value={tel}
           onChange={onChangeTel}
@@ -46,7 +48,10 @@ export const Template: React.FC<IProps> = ({
         onChange={onChangeComment}
         placeholder={'Комментарий'}
       />
-      <button className={styles.button} onClick={onSend}>
+      <button
+        className={disabled ? styles.button_disabled : styles.button}
+        onClick={disabled ? null : onSend}
+      >
         Отправить
       </button>
     </div>

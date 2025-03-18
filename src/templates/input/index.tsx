@@ -9,6 +9,7 @@ interface IProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
+  pattern?: string;
 }
 
 /** нужна флексовая обертка */
@@ -19,11 +20,13 @@ export const InputStyled: React.FC<IProps> = ({
   onChange,
   className,
   type = 'text',
+  pattern,
 }) => {
   return (
     <span className={styles.input_wrapper}>
       <input
         type={type}
+        pattern={pattern}
         className={`${styles.input} ${validationError ? styles.input_validation_error : ''} ${className ? className : ''}`}
         value={value}
         onChange={onChange}

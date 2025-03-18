@@ -7,10 +7,12 @@
   width: 100%;
   border-radius: 8px;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 33px;
   background-color: #ECECEC;
   color: #152355;
+  border: none;
+  padding: 0 16px;
 }
 
 .placeholder_with_val,
@@ -22,7 +24,7 @@
   color: rgba(136, 136, 136, 1);
   transition-duration: 0.2s;
   top: 16px;
-  left: 16px;
+  left: 24px;
 }
 
 .placeholder_with_val {

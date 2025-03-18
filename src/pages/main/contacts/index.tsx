@@ -178,11 +178,11 @@ export const Contacts: React.FC = () => {
         >
           <div className={styles.contact}>
             <Phone />
-            {home?.contactBlock?.contacts}
+            <span className={styles.text}>{home?.contactBlock?.contacts}</span>
           </div>
           <div className={styles.contact}>
             <Mail />
-            {home?.contactBlock?.email}
+            <span className={styles.text}>{home?.contactBlock?.email}</span>
           </div>
           <div className={styles.contact_icons}>
             <a href={home?.contactBlock?.linkVk} target={'_blank'}>
@@ -209,7 +209,9 @@ export const Contacts: React.FC = () => {
               alt="manager"
             />
           </div>
-          <span>{home?.contactBlock?.textUnderImage}</span>
+          <span className={styles.text_manager}>
+            {home?.contactBlock?.textUnderImage}
+          </span>
         </div>
       </div>
     </div>

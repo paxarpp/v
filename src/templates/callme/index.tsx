@@ -7,6 +7,9 @@ import { MobileTemplate } from './mobileTemplate';
 import { Template } from './template';
 import styles from './index.module.css';
 
+const pattern =
+  /([\+]?[7|8][\s-(]?[9][0-9]{2}[\s-)]?)?([\d]{3})[\s-]?([\d]{2})[\s-]?([\d]{2})/;
+
 export const CallMe = () => {
   const { logout } = useUser();
   const { isMobile } = useDeviceDetect();
@@ -16,11 +19,10 @@ export const CallMe = () => {
   const [validationError, setValidationError] = useState('');
 
   const onChangeTel = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (
-      e.target.value &&
-      /^\+?|[0-9]|[\(][0-9]|[0-9][|)]/g.test(e.target.value)
-    ) {
-      setTel(e.target.value);
+    if (e.target.value) {
+      const onlyNumbers = e.target.value.replace(/[^\d]/g, '');
+      const limitToEight = onlyNumbers.slice(0, 11);
+      setTel(limitToEight);
     } else if (!e.target.value) {
       setTel('');
     }
@@ -36,8 +38,6 @@ export const CallMe = () => {
   };
 
   const onSend = async () => {
-    const pattern =
-      /([\+]?[7|8][\s-(]?[9][0-9]{2}[\s-)]?)?([\d]{3})[\s-]?([\d]{2})[\s-]?([\d]{2})/;
     if (telephone && userName) {
       if (pattern.test(telephone)) {
         const axiosCall = creatorRequest(logout);
