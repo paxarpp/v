@@ -84,7 +84,7 @@
 }
 
 .dropdown:has(.link_active) {
-  color: #99660A !important;
+  color: #F2DB51 !important;
 }
 
 .menu_popap {
@@ -188,7 +188,7 @@
 }
 
 .link_active {
-  color: #99660A !important;
+  color: #F2DB51 !important;
 }
 
 .user_bell {

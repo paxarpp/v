@@ -43,9 +43,16 @@ export const Videos = () => {
       }
       ref={divRef}
     >
-      <ArrowLeft className={styles.scroll_arrow_left_mobi} onClick={onLeft} />
+      <ArrowLeft
+        className={
+          isMobile ? styles.scroll_arrow_left_mobi : styles.scroll_arrow_left
+        }
+        onClick={onLeft}
+      />
       <ArrowRight
-        className={styles.scroll_arrow_right_mobi}
+        className={
+          isMobile ? styles.scroll_arrow_right_mobi : styles.scroll_arrow_right
+        }
         onClick={onRight}
       />
       {about?.gallery

@@ -4,6 +4,7 @@
   gap: 30px;
   align-items: center;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .row_info_mobile {
@@ -36,7 +37,7 @@
   gap: 30px;
   align-items: center;
   justify-content: flex-start;
-  margin: 0 75px;
+  margin: 150px 75px 0 75px;
 }
 
 .row_activities_mobi {
@@ -47,7 +48,7 @@
 .activity_card {
   width: 420px;
   height: 386px;
-  border-top: 1px solid #99660A;
+  border-top: 1px solid #F2DB51;
 }
 
 .review_card_add,
@@ -65,8 +66,16 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 50px;
+  gap: 25px;
   position: relative;
+  font-size: 22px;
+  font-weight: 600;
+  color: #D4D4D4;
+  height: 66px;
+}
+
+.ball {
+  min-width: 50px
 }
 
 .master_block {
@@ -76,6 +85,8 @@
   justify-content: center;
   padding: 50px 0;
   gap: 150px;
+  position: relative;
+  margin-top: 150px;
 }
 
 .master_column {
@@ -89,9 +100,23 @@
   object-fit: cover;
 }
 
+.master {
+  font-size: 40px;
+  font-weight: 600;
+  color: #D4D4D4;
+  margin-bottom: 16px;
+}
+
 .master_infos {
-  border-top: 1px solid #99660A;
+  border-top: 1px solid #F2DB51;
   text-align: left;
+  font-size: 22px;
+  color: #D4D4D4;
+  margin-top: 0;
+}
+
+.master_infos > li {
+  margin-top: 8px;
 }
 
 .reviews_block_mobi,
@@ -99,13 +124,12 @@
   position: relative;
   display: flex;
   flex-flow: row nowrap;
-  width: 100%;
   overflow: auto;
   height: 100%;
   overflow: hidden;
   gap: 30px;
   background: #21243680;
-  padding: 50px 75px;
+  margin: 150px 75px;
   box-sizing: border-box;
 }
 
@@ -123,7 +147,7 @@
 }
 
 .scroll_arrow_left {
-  left: 79px;
+  left: 4px;
 }
 
 .scroll_arrow_left_mobi {
@@ -131,7 +155,7 @@
 }
 
 .scroll_arrow_right {
-  right: 79px;
+  right: 4px;
 }
 
 .scroll_arrow_right_mobi {
@@ -289,4 +313,29 @@
   width: inherit;
     height: inherit;
     object-fit: cover;
+}
+
+.page_title {
+  font-size: 40px;
+  font-weight: 600;
+  color: #D4D4D4;
+  margin: 50px 0 0 0;
+}
+
+.page_sub_title {
+  font-size: 22px;
+  font-weight: 400;
+  color: #D4D4D4;
+  margin: 10px 0 0 0;
+}
+
+.back_master {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .3;
+  z-index: -1;
 }

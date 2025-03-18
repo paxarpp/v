@@ -199,15 +199,15 @@ export const Info = () => {
           </div>
         </Modal>
       ) : null}
-      <h2>
+      <h2 className={styles.page_title}>
         {'О нас'}
         {isAdmin ? (
           <Setting onClick={openEdit} className={styles.setting_about} />
         ) : null}
       </h2>
-      <h2>{about?.title}</h2>
-      <h3>{about?.subTitleFirst}</h3>
-      <h3>{about?.subTitleSecond}</h3>
+      <h2 className={styles.page_title}>{about?.title}</h2>
+      <h3 className={styles.page_sub_title}>{about?.subTitleFirst}</h3>
+      <h3 className={styles.page_sub_title}>{about?.subTitleSecond}</h3>
       <div className={isMobile ? styles.row_info_mobile : styles.row_info}>
         <div className={styles.block}>
           <span className={styles.sub_title}>

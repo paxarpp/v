@@ -137,7 +137,7 @@ export const Activities = () => {
         return (
           <div className={styles.activity_card} key={act.id}>
             <span className={styles.activity_title}>
-              <Ball />
+              <Ball className={styles.ball} />
               {act.name}
               {isAdmin ? (
                 <Setting
@@ -153,7 +153,7 @@ export const Activities = () => {
               widthPreview={74}
               heightPreview={50}
               gapPreview={13}
-              marginPreviewTop={20}
+              marginPreviewTop={8}
             />
           </div>
         );
