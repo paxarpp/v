@@ -82,3 +82,18 @@
   margin-top: 0;
   margin-bottom: 50px;
 }
+
+.message_agreement,
+.message_agreement_link {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.message_agreement {
+  color: #D4D4D4;
+}
+
+.message_agreement_link {
+  color: #F2DB51
+}

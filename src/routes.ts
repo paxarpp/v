@@ -13,4 +13,5 @@ export default [
   route('/oldCamps', './pages/pastCamps/index.tsx'),
   route('/childCamps', './pages/childCamps/index.tsx'),
   route('/user/:id', './pages/user/index.tsx'),
+  route('/agreement', './pages/agreement/index.tsx'),
 ] satisfies RouteConfig;

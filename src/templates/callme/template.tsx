@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { InputStyled } from '../input';
 import styles from './index.module.css';
 
@@ -54,6 +55,12 @@ export const Template: React.FC<IProps> = ({
       >
         Отправить
       </button>
+      <span className={styles.message_agreement}>
+        {'Нажимая на кнопку,  вы принимаете условия '}
+        <Link to={'/agreement'} className={styles.message_agreement_link}>
+          {'пользовательского соглашения'}
+        </Link>
+      </span>
     </div>
   );
 };
