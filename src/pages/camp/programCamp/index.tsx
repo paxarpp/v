@@ -128,7 +128,7 @@ export const ProgramCamp = () => {
 
       <h2 className={styles.camp_card_title}>Программа кемпа</h2>
       <div className={styles.programs_wrap}>
-        <Control show={programsLength > 4} onLeft={onLeft} onRight={onRight} /
+        <Control show={programsLength > 4} onLeft={onLeft} onRight={onRight} />
         {camp?.program?.programs
           ?.filter((_, i) => i >= startIndex && i + 1 <= startIndex + 4)
           .map((program) => {

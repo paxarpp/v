@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
 import { IReview } from '../interfaces';
-import ArrowLeft from '../../../assets/arrowLeft.svg?react';
-import ArrowRight from '../../../assets/arrowRight.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { Modal } from '../../../templates/modal';
@@ -13,6 +11,7 @@ import { useUser } from '../../../context';
 import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
+import { Control } from '../../../templates/controlArrow';
 import styles from '../index.module.css';
 
 export const Reviews = () => {
@@ -177,17 +176,10 @@ export const Reviews = () => {
         </Modal>
       ) : null}
 
-      <ArrowLeft
-        className={
-          isMobile ? styles.scroll_arrow_left_mobi : styles.scroll_arrow_left
-        }
-        onClick={onLeft}
-      />
-      <ArrowRight
-        className={
-          isMobile ? styles.scroll_arrow_right_mobi : styles.scroll_arrow_right
-        }
-        onClick={onRight}
+      <Control
+        onLeft={onLeft}
+        onRight={onRight}
+        show={!!about?.reviews.length}
       />
       {about?.reviews
         .filter((_, i) => i >= startIndex && i <= lastIndex)

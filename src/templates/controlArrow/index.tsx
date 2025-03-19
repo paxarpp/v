@@ -1,7 +1,7 @@
-import ArrowLeft from '../../../assets/arrowLeft.svg?react';
-import ArrowLeftHover from '../../../assets/arrowLeftHover.svg?react';
-import ArrowRight from '../../../assets/arrowRight.svg?react';
-import ArrowRightHover from '../../../assets/arrowRightHover.svg?react';
+import ArrowLeft from '../../assets/arrowLeft.svg?react';
+import ArrowLeftHover from '../../assets/arrowLeftHover.svg?react';
+import ArrowRight from '../../assets/arrowRight.svg?react';
+import ArrowRightHover from '../../assets/arrowRightHover.svg?react';
 import styles from './index.module.css';
 
 interface IProps {

@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLoaderData } from 'react-router';
-import ArrowLeft from '../../../assets/arrowLeft.svg?react';
-import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
 import { useDeviceDetect } from '../../../hooks';
+import { Control } from '../../../templates/controlArrow';
 import styles from '../index.module.css';
 
 export const Videos = () => {
@@ -43,17 +42,10 @@ export const Videos = () => {
       }
       ref={divRef}
     >
-      <ArrowLeft
-        className={
-          isMobile ? styles.scroll_arrow_left_mobi : styles.scroll_arrow_left
-        }
-        onClick={onLeft}
-      />
-      <ArrowRight
-        className={
-          isMobile ? styles.scroll_arrow_right_mobi : styles.scroll_arrow_right
-        }
-        onClick={onRight}
+      <Control
+        onLeft={onLeft}
+        onRight={onRight}
+        show={!!about?.gallery?.length}
       />
       {about?.gallery
         ?.filter((_, i) => i >= startIndex && i <= startIndex + count)
