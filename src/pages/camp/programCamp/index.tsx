@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import { Route } from '../+types';
 import imgUrlBack from '../../../assets/program_camp.jpg';
-import ArrowLeft from '../../../assets/arrowLeft.svg?react';
-import ArrowRight from '../../../assets/arrowRight.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
@@ -12,6 +10,7 @@ import { IProgram } from '../interfaces';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import styles from '../index.module.css';
+import { Control } from '../../../templates/controlArrow';
 
 export const ProgramCamp = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
@@ -129,15 +128,7 @@ export const ProgramCamp = () => {
 
       <h2 className={styles.camp_card_title}>Программа кемпа</h2>
       <div className={styles.programs_wrap}>
-        {programsLength > 4 ? (
-          <>
-            <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-            <ArrowRight
-              onClick={onRight}
-              className={styles.scroll_arrow_right}
-            />
-          </>
-        ) : null}
+        <Control show={programsLength > 4} onLeft={onLeft} onRight={onRight} /
         {camp?.program?.programs
           ?.filter((_, i) => i >= startIndex && i + 1 <= startIndex + 4)
           .map((program) => {

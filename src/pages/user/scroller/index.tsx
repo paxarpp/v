@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import ArrowLeft from '../../../assets/arrowLeft.svg?react';
-import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { ICamp } from '../interfaces';
 import { createImageUrl } from '../../../constants';
+import { Control } from '../../../templates/controlArrow';
 import styles from '../index.module.css';
 
 interface IProps {
@@ -34,8 +33,7 @@ export const Scroller: React.FC<IProps> = ({ camps = [], title }) => {
     <div className={styles.camps_wrap}>
       <h2>{title}</h2>
       <div className={styles.camps_scroller}>
-        <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-        <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+        <Control onLeft={onLeft} onRight={onRight} show={!!camps.length} />
         {camps
           .filter((_, i) => i >= startIndex && i <= lastIndex)
           .map((item) => {

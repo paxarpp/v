@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
-import ArrowLeft from '../../../assets/arrowLeft.svg?react';
-import ArrowRight from '../../../assets/arrowRight.svg?react';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
+import { Control } from '../../../templates/controlArrow';
 import styles from '../index.module.css';
 
 export const ImagesList: React.FC = () => {
@@ -32,8 +31,7 @@ export const ImagesList: React.FC = () => {
 
   return (
     <div className={styles.images_scroller}>
-      <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-      <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+      <Control show={!!images?.length} onLeft={onLeft} onRight={onRight} />
       {images
         ?.filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((image) => {

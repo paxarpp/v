@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
-import ArrowLeft from '../../../assets/arrowLeft.svg?react';
-import ArrowRight from '../../../assets/arrowRight.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { Route } from '../+types';
 import { IImage } from '../interfaces';
@@ -11,6 +9,7 @@ import { useUser } from '../../../context';
 import { Modal } from '../../../templates/modal';
 import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
 import { createImageUrl } from '../../../constants';
+import { Control } from '../../../templates/controlArrow';
 import styles from '../index.module.css';
 
 export const Gallery = () => {
@@ -113,8 +112,11 @@ export const Gallery = () => {
           </div>
         </Modal>
       ) : null}
-      <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-      <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+      <Control
+        onLeft={onLeft}
+        onRight={onRight}
+        show={!!camp?.gallery?.length}
+      />
       {camp?.gallery
         ?.filter((_, i) => i >= startIndex && i <= startIndex + count)
         .map((image) => {

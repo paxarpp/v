@@ -3,6 +3,7 @@ import ArrowLeft from '../../assets/arrowLeft.svg?react';
 import ArrowRight from '../../assets/arrowRight.svg?react';
 import { createImageUrl } from '../../constants';
 import styles from './index.module.css';
+import { Control } from '../controlArrow';
 
 interface IProps {
   images?:
@@ -93,8 +94,11 @@ export const ImagePack: React.FC<IProps> = ({
           alt={currentImage[imageIndx].name}
           className={styles.info_current_img}
         />
-        <ArrowLeft className={styles.scroll_arrow_left} onClick={onLeft} />
-        <ArrowRight className={styles.scroll_arrow_right} onClick={onRight} />
+        <Control
+          onLeft={onLeft}
+          onRight={onRight}
+          show={!!currentImage.length}
+        />
       </div>
       <div className={styles.row_prevew_images} style={sizeRow}>
         {currentImage
