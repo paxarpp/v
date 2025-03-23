@@ -11,6 +11,7 @@
   flex-flow: row nowrap;
   gap: 20px;
   justify-content: center;
+  margin-bottom: 150px;
 }
 
 .camp_card_add,
@@ -249,10 +250,14 @@
 
 .title {
   font-size: 40px;
+  font-weight: 600;
+  margin: 50px 0;
 }
 
 .camp_info {
   font-size: 22px;
+  font-weight: 600;
+  color: #FFFFFF;
 }
 
 .camp_card_title {
