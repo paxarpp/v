@@ -19,9 +19,9 @@ export async function clientLoader() {
 export default function Coaches() {
   return (
     <div>
-      <h1 className={styles.title}>
+      <h2 className={styles.title}>
         Тренерский состав в школе волейбола Magic Volley
-      </h1>
+      </h2>
       <CoachesList />
 
       <ImagesList />

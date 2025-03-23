@@ -93,19 +93,19 @@ const CoachesTemplate: React.FC<{
             ) : (
               <Avatar className={styles.coach_img} />
             )}
-            <h2>{coach.name}</h2>
+            <p className={styles.coach_name}>{coach.name}</p>
             <ul className={styles.coach_infos}>
               {coach.infos.map((info) => (
-                <li key={info}>{info}</li>
+                <li key={info} className={styles.coach_info_item}>{info}</li>
               ))}
             </ul>
             <div className={styles.coach_card_footer}>
-              <button
-                className={styles.button_profile}
+              <span
+                className={styles.message_profile}
                 onClick={() => openProfile(coach)}
               >
                 Профайл
-              </button>
+              </span>
               {isAdmin ? (
                 <>
                   {coach.isVisible ? (

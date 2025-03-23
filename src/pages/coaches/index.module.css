@@ -1,5 +1,9 @@
 .title {
   text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  color: #D4D4D4;
+  margin-top: 50px;
 }
 
 .coach_img {
@@ -33,18 +37,6 @@
   align-items: center;
 }
 
-.coach_add {
-  display: inline-block;
-  text-align: center;
-  line-height: 135px;
-  width: 154px;
-  height: 154px;
-  background: rgba(217, 217, 217, 1);
-  border-radius: 50%;
-  color: rgba(136, 136, 136, 1);
-  font-size: 88px;
-}
-
 .coaches_list {
   display: flex;
   flex-flow: row wrap;
@@ -67,14 +59,14 @@
   justify-content: space-between;
 }
 
-.button_profile {
-  width: 160px;
-  height: 41px;
-  box-sizing: border-box;
-  padding: 4px 14px;
-  border-radius: 8px;
-  background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
-  color: #152355;
+.message_profile {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  text-align: center;
+  color: #F2DB51;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 .profile_coach_modal,
@@ -262,4 +254,21 @@
   margin-left: auto;
   margin-right: 30px;
   opacity: 1;
+}
+
+.coach_name {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 150%;
+  color: #D4D4D4;
+  margin: 10px 0;
+  text-align: start;
+}
+
+.coach_info_item {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  color: #D4D4D4;
+  margin-top: 4px;
 }
