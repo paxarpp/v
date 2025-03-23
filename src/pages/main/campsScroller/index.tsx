@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Link, useLoaderData } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { Route } from '../+types';
-import { createImageUrl } from '../../../constants';
 import { useDeviceDetect } from '../../../hooks';
 import { Control } from '../../../templates/controlArrow';
+import { CampCard } from '../../../templates/CampCard';
 import styles from '../index.module.css';
 
 export const CampsScroller: React.FC = () => {
@@ -50,29 +50,14 @@ const CampsTemplate = () => {
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item) => {
           return (
-            <div
+            <CampCard
               key={item.id}
-              className={isMobile ? styles.camp_card_mobi : styles.camp_card}
-            >
-              <p className={styles.camp_card_title}>{item.dateString}</p>
-              <p className={styles.camp_card_subtitle}>{item.name}</p>
-              <div
-                className={
-                  isMobile ? styles.camp_img_wrap_mobi : styles.camp_img_wrap
-                }
-              >
-                <img
-                  src={createImageUrl(item.imageCart?.url)}
-                  alt="картинка кемпа"
-                  className={isMobile ? styles.camp_img_mobi : styles.camp_img}
-                />
-              </div>
-              <div className={styles.camp_info}>
-                <Link to={`/camps/${item.id}`} className={styles.button_camp}>
-                  Подробнее
-                </Link>
-              </div>
-            </div>
+              id={item.id}
+              name={item.name}
+              dateString={item.dateString}
+              url={item.imageCart?.url}
+              isMobile={isMobile}
+            />
           );
         })}
     </>

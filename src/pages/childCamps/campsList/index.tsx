@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Link, useLoaderData } from 'react-router';
-import Setting from '../../../assets/setting.svg?react';
+import { useLoaderData } from 'react-router';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
 import { CampEdit } from '../campEdit';
 import { Route } from '../+types';
-import { createImageUrl } from '../../../constants';
+import { CampCard } from '../../../templates/CampCard';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
@@ -48,32 +47,17 @@ const CampsTemplate: React.FC<{
 
   return (
     <>
-      {childCamps?.map((camp) => {
+      {childCamps?.map((item) => {
         return (
-          <div key={camp.id} className={styles.camp_card}>
-            <div>
-              <h2 className={styles.camp_card_title}>{camp.dateString}</h2>
-              <span className={styles.camp_card_subtitle}>{camp.name}</span>
-            </div>
-            <div className={styles.camp_image_wrapper}>
-              <img
-                src={createImageUrl(camp.imageCart?.url)}
-                alt={camp.name}
-                className={styles.camp_img}
-              />
-            </div>
-            <div>
-              <Link to={`/camps/${camp.id}`} className={styles.button_profile}>
-                Подробнее
-              </Link>
-              {isAdmin ? (
-                <Setting
-                  onClick={() => openEditCamp(camp.id)}
-                  className={styles.setting_camp}
-                />
-              ) : null}
-            </div>
-          </div>
+          <CampCard
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            dateString={item.dateString || ''}
+            url={item.imageCart?.url}
+            isAdmin={isAdmin}
+            openEditCamp={openEditCamp}
+          />
         );
       })}
       {isAdmin ? (

@@ -14,8 +14,7 @@
   margin-bottom: 150px;
 }
 
-.camp_card_add,
-.camp_card {
+.camp_card_add {
   display: flex;
   flex-flow: column nowrap;
   height: 520px;
@@ -31,10 +30,7 @@
   color: rgba(212, 212, 212, 1);
   overflow: hidden;
   position: relative;
-}
 
-.camp_card_add {
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -56,20 +52,11 @@
   padding: 50px 50px 0 50px;
 }
 
-.profile_camp_modal,
 .edit_camp_modal {
   display: flex;
   flex-flow: column nowrap;
   overflow: hidden;
-}
 
-.profile_camp_modal {
-  width: 420px;
-  height: 768px;
-  background: rgba(136, 136, 136, 1);
-}
-
-.edit_camp_modal {
   width: 1200px;
   height: 768px;
 }
@@ -113,19 +100,6 @@
   justify-content: space-between;
 }
 
-.setting_camp,
-.setting {
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
-}
-
-.setting_camp {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-}
-
 .img_label {
   margin-right: 20px;
 }
@@ -136,64 +110,6 @@
   padding: 10px 20px;
   border-radius: 8px;
   color: #152355;
-}
-
-.image_name {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  text-align: left;
-}
-
-.input_image {
-  display: none;
-}
-
-.upload_coach_img {
-  height: 120px;
-  width: 120px;
-}
-
-.stub_img {
-  height: 120px;
-  min-height: 120px;
-  max-height: 120px;
-  width: 120px;
-  background: #D4D4D4;
-  font-size: 56px;
-  color: #152355;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.camp_image_wrapper {
-  width: 100%;
-  height: 290px;
-}
-
-.camp_img {
-  width: inherit;
-  min-height: inherit;
-  max-height: inherit;
-  height: inherit;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.button_profile {
-  width: 244px;
-  height: 70px;
-  box-sizing: border-box;
-  padding: 4px 14px;
-  border-radius: 8px;
-  background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
-  color: #152355;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
 }
 
 .package_card {
@@ -296,19 +212,5 @@
 .camp_info {
   font-size: 22px;
   font-weight: 600;
-  color: #FFFFFF;
-}
-
-.camp_card_title {
-  font-size: 40px;
-  font-weight: 600;
-  margin: 0;
-  color: #FFFFFF;
-}
-
-.camp_card_subtitle {
-  font-size: 22px;
-  font-weight: 600;
-  margin: 0 0 10px 0;
   color: #FFFFFF;
 }
