@@ -123,95 +123,100 @@ export const Reviews = () => {
   };
 
   return (
-    <div
-      className={isMobile ? styles.reviews_block_mobi : styles.reviews_block}
-      id="reviews"
-    >
-      {reviewOpen ? (
-        <Modal
-          isOpen={true}
-          header={<h2>{'Карточка отзыва'}</h2>}
-          footer={
-            <div className={styles.activity_footer}>
-              <button onClick={saveActivity} className={styles.button_save}>
-                {'Сохранить'}
-              </button>
-              {currentReview?.id ? (
-                <button onClick={deleteActivity} className={styles.button_save}>
-                  {'Удалить'}
+    <div className={styles.review_wrapper}>
+      <div
+        className={isMobile ? styles.reviews_block_mobi : styles.reviews_block}
+        id="reviews"
+      >
+        {reviewOpen ? (
+          <Modal
+            isOpen={true}
+            header={<h2>{'Карточка отзыва'}</h2>}
+            footer={
+              <div className={styles.activity_footer}>
+                <button onClick={saveActivity} className={styles.button_save}>
+                  {'Сохранить'}
                 </button>
-              ) : null}
-            </div>
-          }
-          close={onClose}
-        >
-          <div className={styles.review_modal_content}>
-            <div className={styles.row}>
-              <div className={styles.col}>
-                <label>{'Автор отзыва'}</label>
-                <input value={currentReview?.name} onChange={onChangeName} />
-              </div>
-              <div className={styles.col}>
-                <label>{'Дата отзыва'}</label>
-                <input
-                  type={'date'}
-                  value={currentReview?.date}
-                  onChange={onChangeDate}
-                />
-              </div>
-            </div>
-            <ImageSelect
-              label={'Фотография автора'}
-              deleteImg={deleteImg}
-              onChangeImage={onChangeImage}
-              currentImage={currentReview?.image}
-            />
-            <label>{'Комментарий'}</label>
-            <textarea
-              value={currentReview?.comment}
-              onChange={onChangeComment}
-              className={styles.textarea_field}
-            />
-          </div>
-        </Modal>
-      ) : null}
-
-      <Control
-        onLeft={onLeft}
-        onRight={onRight}
-        show={!!about?.reviews.length}
-      />
-      {about?.reviews
-        .filter((_, i) => i >= startIndex && i <= lastIndex)
-        .map((item, indx) => {
-          return (
-            <div key={item.name + indx} className={styles.review_card}>
-              <div className={styles.card_row_user}>
-                <img
-                  src={createImageUrl(item.image?.url)}
-                  alt="user"
-                  className={styles.review_img}
-                />
-                <div className={styles.reviewer}>
-                  <span>{item.name}</span>
-                  <span>{item.date}</span>
-                </div>
-                {isAdmin ? (
-                  <Setting
-                    onClick={() => openEditReview(item.image?.entityId)}
-                    className={styles.setting_review}
-                  />
+                {currentReview?.id ? (
+                  <button
+                    onClick={deleteActivity}
+                    className={styles.button_save}
+                  >
+                    {'Удалить'}
+                  </button>
                 ) : null}
               </div>
-              <div className={styles.card_row_comment}>{item.comment}</div>
+            }
+            close={onClose}
+          >
+            <div className={styles.review_modal_content}>
+              <div className={styles.row}>
+                <div className={styles.col}>
+                  <label>{'Автор отзыва'}</label>
+                  <input value={currentReview?.name} onChange={onChangeName} />
+                </div>
+                <div className={styles.col}>
+                  <label>{'Дата отзыва'}</label>
+                  <input
+                    type={'date'}
+                    value={currentReview?.date}
+                    onChange={onChangeDate}
+                  />
+                </div>
+              </div>
+              <ImageSelect
+                label={'Фотография автора'}
+                deleteImg={deleteImg}
+                onChangeImage={onChangeImage}
+                currentImage={currentReview?.image}
+              />
+              <label>{'Комментарий'}</label>
+              <textarea
+                value={currentReview?.comment}
+                onChange={onChangeComment}
+                className={styles.textarea_field}
+              />
             </div>
-          );
-        })}
-      {isAdmin ? (
-        <div className={styles.review_card_add} onClick={addReview}>
-          <RoundAdd />
-        </div>
-      ) : null}
+          </Modal>
+        ) : null}
+
+        <Control
+          onLeft={onLeft}
+          onRight={onRight}
+          show={!!about?.reviews.length}
+        />
+        {about?.reviews
+          .filter((_, i) => i >= startIndex && i <= lastIndex)
+          .map((item, indx) => {
+            return (
+              <div key={item.name + indx} className={styles.review_card}>
+                <div className={styles.card_row_user}>
+                  <img
+                    src={createImageUrl(item.image?.url)}
+                    alt="user"
+                    className={styles.review_img}
+                  />
+                  <div className={styles.reviewer}>
+                    <span>{item.name}</span>
+                    <span>{item.date}</span>
+                  </div>
+                  {isAdmin ? (
+                    <Setting
+                      onClick={() => openEditReview(item.image?.entityId)}
+                      className={styles.setting_review}
+                    />
+                  ) : null}
+                </div>
+                <div className={styles.card_row_comment}>{item.comment}</div>
+              </div>
+            );
+          })}
+        {isAdmin ? (
+          <div className={styles.review_card_add} onClick={addReview}>
+            <RoundAdd />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
