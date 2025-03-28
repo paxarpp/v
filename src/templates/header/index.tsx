@@ -33,6 +33,7 @@ export const Header: React.FC<IProps> = (props) => {
   const [isOpenNotif, openNotif] = useState(false);
   const [notifications, setNotifications] = useState<INotification[]>([]);
   const [count, setCount] = useState<number>(0);
+  const [showCookiesUsage, setShowCookiesUsage] = useState(false);
 
   const tN = useRef<number | undefined>(undefined);
 
@@ -80,6 +81,23 @@ export const Header: React.FC<IProps> = (props) => {
     };
   }, [isAdmin]);
 
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      try {
+        const show = window.localStorage.getItem('mv-cookies-usage');
+        if (!show) {
+          setShowCookiesUsage(true);
+          window.localStorage.setItem('mv-cookies-usage', 'true');
+        }
+      } catch (e) {
+        setShowCookiesUsage(true);
+      }
+    }, 5000);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, []);
+
   const togglePopapMenu = () => {
     openPopapMenu((prev) => !prev);
   };
@@ -103,8 +121,27 @@ export const Header: React.FC<IProps> = (props) => {
     openNotif((prev) => !prev);
   };
 
+  const onClose = () => {
+    setShowCookiesUsage(false);
+  };
+
   return (
     <>
+      {showCookiesUsage ? (
+        <div className={styles.dialog_cooki}>
+          Наш сайт использует cookies для улучшения вашего опыта взаимодействия.
+          Cookies помогают нам запоминать ваши предпочтения, улучшать
+          производительность сайта и предоставлять вам персонализированный
+          контент. Используя этот сайт, вы соглашаетесь с использованием
+          cookies. Если вы хотите узнать больше о нашей политике
+          конфиденциальности или изменить настройки cookie, пожалуйста, посетите
+          нашу страницу с политикой конфиденциальности.
+          <button onClick={onClose} className={styles.button_cooki}>
+            Закрыть
+          </button>
+        </div>
+      ) : null}
+
       {isOpenNotif ? (
         <CampsInfo
           notifications={notifications}

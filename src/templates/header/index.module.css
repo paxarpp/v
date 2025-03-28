@@ -229,3 +229,32 @@
 .padding {
   width: 20px;
 }
+
+.dialog_cooki {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  width: 350px;
+  font-size: 12px;
+  background-color: #9E9E9E;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 9;
+}
+
+.button_cooki {
+  background-color: #F2DB51;
+  padding: 8px 16px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.button_cooki:hover {
+  border: 1px solid white;
+}
