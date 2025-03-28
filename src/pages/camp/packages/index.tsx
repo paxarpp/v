@@ -132,7 +132,7 @@ export const Packages = () => {
                     >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
                     <span
                       className={styles.pack_limit}
-                    >{`до ${pack.firstLimitation}`}</span>
+                    >{`до ${pack.firstLimitationString}`}</span>
                   </span>
                   <span>
                     <span
@@ -140,7 +140,7 @@ export const Packages = () => {
                     >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
                     <span
                       className={styles.pack_limit}
-                    >{`до ${pack.secondLimitation}`}</span>
+                    >{`до ${pack.secondLimitationString}`}</span>
                   </span>
                   <span>
                     <span
@@ -148,7 +148,7 @@ export const Packages = () => {
                     >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
                     <span
                       className={styles.pack_limit}
-                    >{`до ${pack.thirdLimitation}`}</span>
+                    >{`до ${pack.thirdLimitationString}`}</span>
                   </span>
                 </div>
               ) : null}
