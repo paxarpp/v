@@ -72,6 +72,7 @@
   background: rgba(128, 128, 128, 0.2);
   border: 2px solid rgba(255, 255, 255, 1);
   box-sizing: border-box;
+  position: relative;
 }
 
 .camp_card:hover {

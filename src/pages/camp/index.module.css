@@ -443,6 +443,7 @@ input_field_small,
   border: 1px solid #888888;
   color: #FFFFFF;
   font-size: 22px;
+  font-weight: 400;
 }
 
 .program_info {
