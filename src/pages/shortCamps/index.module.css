@@ -8,7 +8,7 @@
 
 .info_row {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   gap: 20px;
   justify-content: center;
   margin-bottom: 150px;
@@ -195,10 +195,12 @@
   font-size: 40px;
   font-weight: 600;
   margin: 50px 0;
+  color: #D4D4D4;
 }
 
 .camp_info {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   color: #FFFFFF;
+  width: 570px;
 }
