@@ -5,6 +5,11 @@
   padding: 35px 75px;
 }
 
+.footer_col {
+  display: flex;
+  gap: 50px;
+}
+
 .footer_mobi {
   background: rgba(38, 38, 38, 1);
   display: flex;
