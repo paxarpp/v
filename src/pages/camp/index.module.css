@@ -100,22 +100,6 @@
   opacity: .4;
 }
 
-.scroll_arrow_right,
-.scroll_arrow_left {
-  position: absolute;
-  top: calc(50% - 25px);
-  cursor: pointer;
-  z-index: 1;
-}
-
-.scroll_arrow_left {
-  left: 0;
-}
-
-.scroll_arrow_right {
-  right: 0;
-}
-
 .success {
   display: flex;
   flex-flow: column nowrap;
@@ -154,21 +138,23 @@
 
 .pack_title {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 33px;
   text-align: center;
   border-bottom: 1px solid #F2DB51;
+  color: #FFFFFF;
 }
 
 .pack_info {
   padding: 0px 50px;
   border-bottom: 1px solid #F2DB51;
   padding-bottom: 8px;
+  color: #FFFFFF;
 }
 
 .total_price {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 33px;
   text-align: center;
   color: #F2DB51;
@@ -405,7 +391,7 @@ input_field_small,
 .camp_card_subtitle {
   font-size: 20px;
   font-weight: 400;
-  margin: 0 0 10px 0;
+  margin: 0 0 50px 0;
   color: #FFFFFF;
 }
 

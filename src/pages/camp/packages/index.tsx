@@ -126,30 +126,36 @@ export const Packages = () => {
               </div>
               {showPricesInfo[pack.packageId] ? (
                 <div className={styles.pack_prices_info}>
-                  <span>
-                    <span
-                      className={styles.total_price}
-                    >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
-                    <span
-                      className={styles.pack_limit}
-                    >{`до ${pack.firstLimitationString}`}</span>
-                  </span>
-                  <span>
-                    <span
-                      className={styles.total_price}
-                    >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
-                    <span
-                      className={styles.pack_limit}
-                    >{`до ${pack.secondLimitationString}`}</span>
-                  </span>
-                  <span>
-                    <span
-                      className={styles.total_price}
-                    >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
-                    <span
-                      className={styles.pack_limit}
-                    >{`до ${pack.thirdLimitationString}`}</span>
-                  </span>
+                  {pack.firstPrice ? (
+                    <span>
+                      <span
+                        className={styles.total_price}
+                      >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
+                      <span
+                        className={styles.pack_limit}
+                      >{`до ${pack.firstLimitationString}`}</span>
+                    </span>
+                  ) : null}
+                  {pack.secondPrice ? (
+                    <span>
+                      <span
+                        className={styles.total_price}
+                      >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
+                      <span
+                        className={styles.pack_limit}
+                      >{`до ${pack.secondLimitationString}`}</span>
+                    </span>
+                  ) : null}
+                  {pack.thirdPrice ? (
+                    <span>
+                      <span
+                        className={styles.total_price}
+                      >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
+                      <span
+                        className={styles.pack_limit}
+                      >{`до ${pack.thirdLimitationString}`}</span>
+                    </span>
+                  ) : null}
                 </div>
               ) : null}
             </div>

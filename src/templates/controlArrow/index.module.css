@@ -3,6 +3,7 @@
   position: absolute;
   top: calc(50% - 25px);
   cursor: pointer;
+  z-index: 1;
 }
 
 .scroll_arrow_left .icon_left {

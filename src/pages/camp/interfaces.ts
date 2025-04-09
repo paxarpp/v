@@ -24,13 +24,13 @@ export interface IPackage {
   info: string;
   totalPrice: number;
   bookingPrice: number;
-  firstPrice: number;
+  firstPrice: number | null;
   firstLimitation: string;
   firstLimitationString: string;
-  secondPrice: number;
+  secondPrice: number | null;
   secondLimitation: string;
   secondLimitationString: string;
-  thirdPrice: number;
+  thirdPrice: number | null;
   thirdLimitation: string;
   thirdLimitationString: string;
   type: IType;

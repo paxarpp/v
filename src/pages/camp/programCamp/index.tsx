@@ -9,8 +9,8 @@ import { Modal } from '../../../templates/modal';
 import { IProgram } from '../interfaces';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
-import styles from '../index.module.css';
 import { Control } from '../../../templates/controlArrow';
+import styles from '../index.module.css';
 
 export const ProgramCamp = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
