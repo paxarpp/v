@@ -21,7 +21,7 @@ export const Coaches = () => {
   return (
     <div className={styles.column}>
       <CoachProfile coach={coachProfile} onClose={closeCoach} />
-      <h2 className={styles.camp_card_title}>Тренерский состав кемпа</h2>
+      <h2 className={styles.camp_info_title}>Тренерский состав кемпа</h2>
       <div className={styles.package_row}>
         {camp?.coaches.map((coach) => {
           return (

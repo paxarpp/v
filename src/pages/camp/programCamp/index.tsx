@@ -126,7 +126,7 @@ export const ProgramCamp = () => {
         </Modal>
       ) : null}
 
-      <h2 className={styles.camp_card_title}>Программа кемпа</h2>
+      <h2 className={styles.camp_info_title}>Программа кемпа</h2>
       <div className={styles.programs_wrap}>
         <Control show={programsLength > 4} onLeft={onLeft} onRight={onRight} />
         {camp?.program?.programs

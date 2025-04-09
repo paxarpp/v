@@ -15,7 +15,11 @@ export const Info = () => {
           {camp?.info
             ?.split(';')
             .filter(Boolean)
-            .map((inf, i) => <li key={i + 'info'}>{inf}</li>)}
+            .map((inf, i) => (
+              <li key={i + 'info'} className={styles.info_item}>
+                {inf}
+              </li>
+            ))}
         </ul>
       </div>
     </div>

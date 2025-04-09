@@ -78,7 +78,7 @@ export const Packages = () => {
 
   return (
     <div className={styles.column}>
-      <h2 className={styles.camp_card_title}>{'Что входит в стоимость'}</h2>
+      <h2 className={styles.camp_info_title}>{'Что входит в стоимость'}</h2>
       <h4
         className={styles.camp_card_subtitle}
       >{`Свободно ${camp?.countFree} мест`}</h4>

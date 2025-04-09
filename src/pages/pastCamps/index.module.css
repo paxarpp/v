@@ -5,3 +5,10 @@
   margin: 150px 75px;
   gap: 30px;
 }
+
+.title {
+  font-size: 40px;
+  font-weight: 600;
+  margin: 50px 0;
+  color: #D4D4D4;
+}
