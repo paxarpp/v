@@ -72,15 +72,15 @@ export const Footer: React.FC<IProps> = ({ linkTg, linkInstagram, linkVk }) => {
               <Link to="/#questions">Часто задаваемые вопросы</Link>
             </li>
             <li>
-              <Link to="/agreement">Политика обработки персональных данных</Link>
+              <Link to="/persanal">Политика обработки персональных данных</Link>
             </li>
             <li>
               <Link to="/agreement">Публичная оферта</Link>
             </li>
           </ul>
         </div>
-        </div>
-        <div>
+      </div>
+      <div>
         <a href={linkVk} target={'_blank'} className={styles.icon}>
           <Vk />
         </a>
