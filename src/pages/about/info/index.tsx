@@ -117,6 +117,17 @@ export const Info = () => {
                 }));
               }}
             />
+            <label>{'Подзаголовок 3'}</label>
+            <input
+              value={currentAbout?.subTitleThird}
+              className={styles.input_field}
+              onChange={(e) => {
+                setAbout((prevAbout) => ({
+                  ...(prevAbout as IAbout),
+                  subTitleThird: e.target.value,
+                }));
+              }}
+            />
             <label>{'Количество тренировок'}</label>
             <input
               value={currentAbout?.numberOfWorkouts}
@@ -208,6 +219,7 @@ export const Info = () => {
       <h2 className={styles.page_title}>{about?.title}</h2>
       <h3 className={styles.page_sub_title}>{about?.subTitleFirst}</h3>
       <h3 className={styles.page_sub_title}>{about?.subTitleSecond}</h3>
+      <h3 className={styles.page_sub_title}>{about?.subTitleThird}</h3>
       <div className={isMobile ? styles.row_info_mobile : styles.row_info}>
         <div className={styles.block}>
           <span className={styles.sub_title}>

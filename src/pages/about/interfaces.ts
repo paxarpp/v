@@ -2,6 +2,7 @@ export interface IAbout {
   title: string;
   subTitleFirst: string;
   subTitleSecond: string;
+  subTitleThird: string;
   numberOfStudents: number;
   numberOfWorkouts: number;
   numberOfCamps: number;
