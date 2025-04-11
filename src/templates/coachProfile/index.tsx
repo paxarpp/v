@@ -1,4 +1,3 @@
-import { Modal } from '../modal';
 import Avatar from '../../assets/avatar.svg?react';
 import { createImageUrl } from '../../constants';
 import styles from './index.module.css';
@@ -22,24 +21,18 @@ export const CoachProfile: React.FC<{
   onClose: () => void;
 }> = ({ coach, onClose }) => {
   return coach ? (
-    <Modal
-      isOpen={!!coach}
-      close={onClose}
-      classNameModal={styles.profile_coach_modal}
-    >
-      <div className={styles.profile_coach_content}>
-        {coach.mainImage ? (
-          <img
-            src={createImageUrl(coach.mainImage.url)}
-            alt=""
-            className={styles.profile_coach_img}
-          />
-        ) : (
-          <Avatar className={styles.profile_stub_img} />
-        )}
-        <span className={styles.profile_name}>{coach.name}</span>
-        <span className={styles.promo_area}>{coach.promo}</span>
-      </div>
-    </Modal>
+    <div className={styles.profile_coach_content} onClick={onClose}>
+      {coach.mainImage ? (
+        <img
+          src={createImageUrl(coach.mainImage.url)}
+          alt=""
+          className={styles.profile_coach_img}
+        />
+      ) : (
+        <Avatar className={styles.profile_stub_img} />
+      )}
+      <span className={styles.profile_name}>{coach.name}</span>
+      <span className={styles.promo_area}>{coach.promo}</span>
+    </div>
   ) : null;
 };

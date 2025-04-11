@@ -81,7 +81,10 @@ const SheduleeTemplate: React.FC<{
                   <span>{day.address}</span>
                 </div>
               ) : (
-                <div key={group.id + dayName} className={styles.group_day}>
+                <div
+                  key={group.id + dayName}
+                  className={styles.group_day_empty}
+                >
                   <div className={styles.empty_day}>
                     <Ball />
                   </div>

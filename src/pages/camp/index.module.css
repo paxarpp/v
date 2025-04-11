@@ -245,8 +245,7 @@
   justify-content: space-between;
 }
 
-.button_confirmed,
-.button_profile {
+.button_confirmed {
   width: 160px;
   height: 41px;
   padding: 4px 14px;
@@ -257,6 +256,23 @@
 
 .button_confirmed {
   background: #888888;
+}
+
+.button_profile {
+  width: 400px;
+  height: 70px;
+  padding: 4px 14px;
+  border-radius: 8px;
+  background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
+  color: #152355;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.button_profile:hover {
+  border: 2px solid #FFFFFF;
 }
 
 .pack_prices_info {

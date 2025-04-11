@@ -44,11 +44,12 @@
   }
 }
 
+.group_day_empty,
 .group_day {
   width: 180px;
   height: 88px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 1);
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -67,6 +68,10 @@
   }
 }
 
+.group_day_empty {
+  background-color: transparent;
+}
+
 .empty_day {
   width: 100%;
   height: 100%;
@@ -79,7 +84,9 @@
 
 .title {
   text-align: center;
-  color: rgba(212, 212, 212, 1);
+  color: #D4D4D4;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 .day_name {
@@ -117,7 +124,7 @@
 .price_ball {
   margin-top: 150px;
   position: relative;
-  padding: 0 45px 50px 75px;
+  padding: 50px 45px 50px 75px;
 }
 
 .price_back {
@@ -133,6 +140,7 @@
 .price_title {
   color: rgba(212, 212, 212, 1);
   text-align: center;
+  margin: 0 0 50px 0;
 }
 
 .price_item {
@@ -190,6 +198,7 @@
   line-height: 16px;
   text-align: left;
   padding-left: 10px;
+  margin-top: 16px;
 }
 
 .price_card_add {

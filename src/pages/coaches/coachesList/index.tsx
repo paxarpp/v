@@ -45,13 +45,14 @@ export const CoachesList: React.FC = () => {
   return (
     <div className={styles.coaches_list}>
       <CoachEdit coachId={editCoachId} onClose={closeCoachEdit} open={open} />
-      <CoachProfile coach={coachProfile} onClose={closeCoach} />
       <CoachesTemplate
         isAdmin={isAdmin}
         setCoach={setCoach}
         setEditCoachId={setEditCoachId}
         setIsOpen={setIsOpen}
         toggleVisible={toggleVisible}
+        coachProfile={coachProfile}
+        closeCoach={closeCoach}
       />
     </div>
   );
@@ -63,7 +64,9 @@ const CoachesTemplate: React.FC<{
   setEditCoachId: (id: string) => void;
   setIsOpen: (open: boolean) => void;
   toggleVisible: (coach: ICoach) => void;
-}> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen, toggleVisible }) => {
+  coachProfile?: ICoach;
+  closeCoach: () => void;
+}> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen, toggleVisible, coachProfile, closeCoach }) => {
   const { coaches } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openProfile = (coach: ICoach) => {
@@ -82,7 +85,11 @@ const CoachesTemplate: React.FC<{
   return (
     <>
       {coaches?.map((coach) => {
-        return (
+        return coachProfile?.id === coach.id ? (
+          <div key={coach.id} className={styles.coach_card}>
+            <CoachProfile coach={coachProfile} onClose={closeCoach} />
+          </div>
+        ) : ( 
           <div key={coach.id} className={styles.coach_card}>
             {coach.mainImage?.url ? (
               <img
