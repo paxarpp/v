@@ -13,6 +13,7 @@
   color: #152355;
   border: none;
   padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .placeholder_with_val,

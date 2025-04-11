@@ -115,74 +115,83 @@ export const Auth: React.FC<{
           </span>
         </div>
       }
-      footer={
-        <button className={styles.auth_button} onClick={onEnter}>
-          {tab === 1
-            ? 'Войти'
-            : campId
-              ? 'Забронировать'
-              : 'Зарегистрироваться'}
-        </button>
-      }
     >
       <div className={styles.tab_login}>
         {tab === 1 ? (
-          <div className={styles.input_wrap}>
-            <InputStyled
-              placeholder={'Логин'}
-              value={username}
-              onChange={onChange}
-            />
-            <InputStyled
-              placeholder={'Пароль'}
-              type="password"
-              value={password}
-              onChange={onChangePass}
-            />
-          </div>
+          <>
+            <div className={styles.input_wrap}>
+              <InputStyled
+                placeholder={'Логин'}
+                value={username}
+                onChange={onChange}
+                className={styles.w_420}
+              />
+              <InputStyled
+                placeholder={'Пароль'}
+                type="password"
+                value={password}
+                onChange={onChangePass}
+                className={styles.w_420}
+              />
+            </div>
+            <button className={styles.auth_button} onClick={onEnter}>
+              'Войти'
+            </button>
+          </>
         ) : null}
       </div>
       <div className={styles.tab_registration}>
         {tab !== 1 ? (
-          campId ? (
-            <div className={styles.input_wrap}>
-              <InputStyled
-                placeholder={'Имя'}
-                value={username}
-                onChange={onChange}
-              />
-              <InputStyled
-                placeholder={'Телефон'}
-                value={telephone}
-                onChange={onChangeTelephone}
-              />
-            </div>
-          ) : (
-            <div className={styles.input_wrap}>
-              <InputStyled
-                placeholder={'Имя'}
-                value={username}
-                onChange={onChange}
-              />
-              <InputStyled
-                placeholder={'Телефон'}
-                value={telephone}
-                onChange={onChangeTelephone}
-              />
-              <InputStyled
-                placeholder={'Пароль'}
-                value={password}
-                onChange={onChangePass}
-                type="password"
-              />
-              <InputStyled
-                placeholder={'Подтверждение пароля'}
-                value={confirmPassword}
-                onChange={onChangeConfPass}
-                type="password"
-              />
-            </div>
-          )
+          <>
+            {campId ? (
+              <div className={styles.input_wrap}>
+                <InputStyled
+                  placeholder={'Имя'}
+                  value={username}
+                  onChange={onChange}
+                  className={styles.w_420}
+                />
+                <InputStyled
+                  placeholder={'Телефон'}
+                  value={telephone}
+                  onChange={onChangeTelephone}
+                  className={styles.w_420}
+                />
+              </div>
+            ) : (
+              <div className={styles.input_wrap}>
+                <InputStyled
+                  placeholder={'Имя'}
+                  value={username}
+                  onChange={onChange}
+                  className={styles.w_420}
+                />
+                <InputStyled
+                  placeholder={'Телефон'}
+                  value={telephone}
+                  onChange={onChangeTelephone}
+                  className={styles.w_420}
+                />
+                <InputStyled
+                  placeholder={'Пароль'}
+                  value={password}
+                  onChange={onChangePass}
+                  type="password"
+                  className={styles.w_420}
+                />
+                <InputStyled
+                  placeholder={'Подтверждение пароля'}
+                  value={confirmPassword}
+                  onChange={onChangeConfPass}
+                  type="password"
+                  className={styles.w_420}
+                />
+              </div>
+            )}
+            <button className={styles.auth_button} onClick={onEnter}>
+              {campId ? 'Забронировать' : 'Зарегистрироваться'}
+            </button>
+          </>
         ) : null}
       </div>
     </Modal>

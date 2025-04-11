@@ -4,7 +4,7 @@
   padding: 10px;
   border-radius: 8px;
   background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
-  margin-top: 30px;
+  margin: 6px 0 50px 65px;
 }
 
 .modal_wrap {
@@ -38,17 +38,6 @@
   z-index: 900;
   background-color: #333333;
   opacity: 0.5;
-}
-
-.modal_title {
-  display: inline-block;
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 33px;
-  text-align: left;
-  margin-bottom: 40px;
-
-  border-bottom: 1px solid rgba(212, 212, 212, 1)
 }
 
 .modal_input {
@@ -94,6 +83,7 @@
   flex-flow: row nowrap;
   justify-content: space-around;
   width: 1040px;
+  margin-top: 50px;
 }
 
 .header > span {
@@ -103,3 +93,12 @@
 .current_header {
   border-bottom: 1px solid #D4D4D4;
 }
+
+.w_420 {
+  width: 420px !important;
+}
+
+/* .auth_footer {
+  display: flex;
+justify-content: flex-end;
+} */

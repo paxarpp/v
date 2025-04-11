@@ -78,7 +78,7 @@ const PriceTemplate: React.FC<{
                       ) : (
                         <span className={styles.price_message_empty} />
                       )}
-                      <span>{p.price}</span>
+                      <span>{p.price}{' '}₽</span>
                     </div>
                     {index === 0 ? <Ball /> : null}
                   </Fragment>

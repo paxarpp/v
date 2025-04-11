@@ -28,7 +28,7 @@
   align-items: center;
   padding: 0 10px;
   border-radius: 8px;
-  border-bottom: 1px solid #99660A;
+  border-bottom: 1px solid #F2DB51;
   margin: 0 30px 30px 0;
   color: rgba(212, 212, 212, 1);
   background-color: #8080804D;
@@ -98,7 +98,7 @@
   width: 180px;
   height: 80px;
   border-radius: 8px;
-  border-bottom: 1px solid #99660A;
+  border-bottom: 1px solid #F2DB51;
   font-size: 22px;
   font-weight: 600;
   line-height: 33px;
@@ -144,9 +144,11 @@
 }
 
 .price_title {
-  color: rgba(212, 212, 212, 1);
+  color: #D4D4D4;
   text-align: center;
   margin: 0 0 50px 0;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 .price_item {
