@@ -4,25 +4,28 @@ import styles from './index.module.css';
 
 interface IProps {
   onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeTel: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeComment: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSend: () => void;
   name: string;
   tel: string;
   comment: string;
   validationError: string;
+  displayValueTel: string;
 }
 
 export const MobileTemplate: React.FC<IProps> = ({
   onChangeName,
-  onChangeTel,
+  handlePhoneChange,
   onSend,
   onChangeComment,
   name,
   comment,
   validationError,
   tel,
+  displayValueTel,
 }) => {
+  const disabled = !name || !tel || !comment;
   return (
     <div className={styles.col_inputs}>
       <InputStyled
@@ -34,8 +37,8 @@ export const MobileTemplate: React.FC<IProps> = ({
       <InputStyled
         type="tel"
         className={styles.modal_input_mobi}
-        value={tel}
-        onChange={onChangeTel}
+        value={displayValueTel}
+        onChange={handlePhoneChange}
         placeholder={'Телефон'}
         validationError={validationError}
       />
@@ -45,7 +48,10 @@ export const MobileTemplate: React.FC<IProps> = ({
         onChange={onChangeComment}
         placeholder={'Комментарий'}
       />
-      <button className={styles.button} onClick={onSend}>
+      <button
+        className={disabled ? styles.button_disabled : styles.button}
+        onClick={disabled ? undefined : onSend}
+      >
         Отправить
       </button>
       <span className={styles.message_agreement}>

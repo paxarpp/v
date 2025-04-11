@@ -10,6 +10,23 @@ import styles from './index.module.css';
 const pattern =
   /([\+]?[7|8][\s-(]?[9][0-9]{2}[\s-)]?)?([\d]{3})[\s-]?([\d]{2})[\s-]?([\d]{2})/;
 
+const PHONE_MASK = '+7(XXX)-XXX-XX-XX';
+
+const applyMask = (numbers: string): string => {
+  let formatted = PHONE_MASK;
+  for (let i = 0; i < numbers.length && i < 10; i++) {
+    const digit = numbers[i];
+    const position = formatted.indexOf('X');
+    if (position !== -1) {
+      formatted =
+        formatted.substring(0, position) +
+        digit +
+        formatted.substring(position + 1);
+    }
+  }
+  return formatted;
+};
+
 export const CallMe = () => {
   const { logout } = useUser();
   const { isMobile } = useDeviceDetect();
@@ -18,16 +35,27 @@ export const CallMe = () => {
   const [answer, setComment] = useState('');
   const [validationError, setValidationError] = useState('');
 
-  const onChangeTel = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      const onlyNumbers = e.target.value.replace(/[^\d]/g, '');
-      const limitToEight = onlyNumbers.slice(0, 11);
-      setTel(limitToEight);
-    } else if (!e.target.value) {
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (!inputValue || inputValue === PHONE_MASK) {
       setTel('');
+      setValidationError('');
+      return;
     }
+    const newNumbers = inputValue.replace(/\D/g, '');
+    const numbersWith7 = newNumbers.startsWith('7')
+      ? newNumbers
+      : '7' + newNumbers;
+    const limitedNumbers = numbersWith7.slice(0, 11);
+    e.target.value = limitedNumbers;
+    setTel(e.target.value);
     setValidationError('');
   };
+
+  // Отображаем маску только если есть введенные цифры
+  const displayValueTel = telephone
+    ? applyMask(telephone.slice(1))
+    : PHONE_MASK;
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -58,11 +86,12 @@ export const CallMe = () => {
   };
 
   const props = {
+    displayValueTel,
     name: userName,
     tel: telephone,
     comment: answer,
     validationError,
-    onChangeTel,
+    handlePhoneChange,
     onChangeName,
     onChangeComment,
     onSend,
