@@ -47,6 +47,7 @@
 
 .group_day_empty,
 .group_day {
+  position: relative;
   width: 180px;
   height: 88px;
   border-radius: 8px;
@@ -81,6 +82,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.tg_link {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .title {

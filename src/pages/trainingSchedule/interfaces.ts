@@ -8,6 +8,7 @@ export interface ISheduleGroup {
   id: string | null;
   name: string;
   days: ISheduleItem[];
+  link: string;
 }
 
 export type IShedule = ISheduleGroup[];

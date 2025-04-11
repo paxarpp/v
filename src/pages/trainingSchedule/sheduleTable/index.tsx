@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useLoaderData } from 'react-router';
 import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Setting from '../../../assets/setting.svg?react';
+import TGLink from '../../../assets/tgLink.svg?react';
 import Ball from '../../../assets/ball.svg?react';
 import { Days } from './days';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
 import { TreinEdit } from '../treinEdit';
 import styles from '../index.module.css';
+import { createLinkTg } from '../../../constants';
 
 export const weekDays = [
   'MONDAY',
@@ -79,6 +81,9 @@ const SheduleeTemplate: React.FC<{
                 <div key={group.id + day.id} className={styles.group_day}>
                   <span>{day.time}</span>
                   <span>{day.address}</span>
+                  <a href={createLinkTg(group.link)} target={'_blank'}>
+                    <TGLink className={styles.tg_link} />
+                  </a>
                 </div>
               ) : (
                 <div

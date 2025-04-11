@@ -13,7 +13,7 @@ export const nameDay: Record<(typeof weekDays)['number'], string> = {
   TUESDAY: 'Вторник',
   WEDNESDAY: 'Среда',
   THURSDAY: 'Четверг',
-  FRIDAY: 'Пяятница',
+  FRIDAY: 'Пятница',
 };
 
 export const TreinEdit: React.FC<{
@@ -29,6 +29,7 @@ export const TreinEdit: React.FC<{
     setTrein({
       id: '',
       name: '',
+      link: '',
       days: weekDays.map((id) => ({
         id,
         time: '',
@@ -107,21 +108,42 @@ export const TreinEdit: React.FC<{
       }
     >
       <div className={styles.edit_camp_content}>
-        <label>{'Название группы'}</label>
-        <input
-          value={currentTrein?.name}
-          onChange={(e) => {
-            setTrein((prevTrein) =>
-              prevTrein
-                ? {
-                    ...prevTrein,
-                    name: e.target.value,
-                  }
-                : { name: e.target.value, id: null, days: [] },
-            );
-          }}
-          className={styles.input_field}
-        />
+        <div className={styles.row_day}>
+          <div className={styles.col_day}>
+            <label>{'Название группы'}</label>
+            <input
+              value={currentTrein?.name}
+              onChange={(e) => {
+                setTrein((prevTrein) =>
+                  prevTrein
+                    ? {
+                        ...prevTrein,
+                        name: e.target.value,
+                      }
+                    : { name: e.target.value, link: '', id: null, days: [] },
+                );
+              }}
+              className={styles.input_field_sm}
+            />
+          </div>
+          <div className={styles.col_day}>
+            <label>{'Ссылка на группу телеграмм'}</label>
+            <input
+              value={currentTrein?.link}
+              onChange={(e) => {
+                setTrein((prevTrein) =>
+                  prevTrein
+                    ? {
+                        ...prevTrein,
+                        link: e.target.value,
+                      }
+                    : { link: e.target.value, name: '', id: null, days: [] },
+                );
+              }}
+              className={styles.input_field_sm}
+            />
+          </div>
+        </div>
         {weekDays.map((dayName) => {
           const hasDay = !!currentTrein?.days.some((d) => d.id === dayName);
           return (
@@ -157,6 +179,7 @@ export const TreinEdit: React.FC<{
                             }
                           : {
                               name: '',
+                              link: '',
                               id: null,
                               days: [
                                 {
@@ -168,7 +191,7 @@ export const TreinEdit: React.FC<{
                             },
                       );
                     }}
-                    className={styles.field_day}
+                    className={styles.input_field_sm}
                   />
                 </div>
                 <div className={styles.col_day}>
@@ -200,6 +223,7 @@ export const TreinEdit: React.FC<{
                             }
                           : {
                               name: '',
+                              link: '',
                               id: null,
                               days: [
                                 {
@@ -211,7 +235,7 @@ export const TreinEdit: React.FC<{
                             },
                       );
                     }}
-                    className={styles.field_day}
+                    className={styles.input_field_sm}
                   />
                 </div>
               </div>
