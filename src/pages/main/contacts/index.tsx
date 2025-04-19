@@ -177,34 +177,36 @@ export const Contacts: React.FC = () => {
           className={isMobile ? styles.contact_wrap_mobi : styles.contact_wrap}
         >
           <div className={styles.contact}>
-            <Phone />
-            <span className={styles.text}>{home?.contactBlock?.contacts}</span>
+            <Phone className={isMobile ? styles.icon_contact_mobi : ''} />
+            <span className={isMobile ? styles.text_mobi : styles.text}>{home?.contactBlock?.contacts}</span>
           </div>
           <div className={styles.contact}>
-            <Mail />
-            <span className={styles.text}>{home?.contactBlock?.email}</span>
+            <Mail className={isMobile ? styles.icon_contact_mobi : ''} />
+            <span className={isMobile ? styles.text_mobi : styles.text}>{home?.contactBlock?.email}</span>
           </div>
-          <div className={styles.contact_icons}>
-            <a href={home?.contactBlock?.linkVk} target={'_blank'}>
-              <Vk />
-            </a>
-            <a
-              href={createLinkTg(home?.contactBlock?.lingTg)}
-              target={'_blank'}
-            >
-              <T className={styles.contact_icon} />
-            </a>
-            <a href={home?.contactBlock?.linkInstagram} target={'_blank'}>
-              <Inst />
-            </a>
-          </div>
+          {!isMobile ? (
+            <div className={styles.contact_icons}>
+              <a href={home?.contactBlock?.linkVk} target={'_blank'}>
+                <Vk />
+              </a>
+              <a
+                href={createLinkTg(home?.contactBlock?.lingTg)}
+                target={'_blank'}
+              >
+                <T className={styles.contact_icon} />
+              </a>
+              <a href={home?.contactBlock?.linkInstagram} target={'_blank'}>
+                <Inst />
+              </a>
+            </div>
+          ) : null}
         </div>
         <div
           className={isMobile ? styles.manager_wrap_mobi : styles.manager_wrap}
         >
-          <div className={styles.img_wrap}>
+          <div className={isMobile ? styles.img_wrap_mobi : styles.img_wrap}>
             <img
-              className={styles.manager}
+              className={isMobile ? styles.manager_mobi : styles.manager}
               src={createImageUrl(home?.contactBlock?.imageAdmin?.url)}
               alt="manager"
             />

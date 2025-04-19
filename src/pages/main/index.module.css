@@ -305,7 +305,9 @@
 
 .contact_wrap_mobi {
   margin-left: 20px;
+  margin-right: 20px;
   min-width: 90%;
+  text-align: left;
 }
 
 .contact {
@@ -326,6 +328,12 @@
 .contact_icons {
   margin-top: 20px;
   text-align: left;
+}
+
+.icon_contact_mobi {
+  min-width: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .flex {
@@ -400,10 +408,11 @@
 }
 
 .manager_wrap_mobi {
-  margin-right: 0;
-  align-items: center;
+  margin: 20px 20px;
+  align-items: flex-start;
 }
 
+.img_wrap_mobi,
 .img_wrap {
   border-radius: 50%;
   background-size: contain;
@@ -412,9 +421,19 @@
   overflow: hidden;
 }
 
+.img_wrap_mobi {
+  width: 64px;
+  height: 64px;
+}
+
 .manager {
   width: 200px;
   margin-right: auto;
+}
+
+.manager_mobi {
+  width: 64px;
+  height: 64px;
 }
 
 .rotate_to_open {
@@ -425,6 +444,13 @@
 .text {
   font-size: 20px;
   color: #D4D4D4;
+}
+
+.text_mobi {
+  font-size: 14px;
+  font-weight: 400;
+  color: #D4D4D4;
+  line-height: 150%;
 }
 
 .text_manager {
