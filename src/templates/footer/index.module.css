@@ -14,13 +14,18 @@
   background: rgba(38, 38, 38, 1);
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 35px 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px 20px;
 }
 
 .icon {
   cursor: pointer;
+}
+
+.mlr_10 {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .mlr_20 {
@@ -71,6 +76,34 @@
   text-decoration: none;
 }
 
+.menu_title_mobi {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  color: #F2DB51;
+  text-decoration: none;
+}
+
 .mt_50 {
   margin-top: 50px;
+}
+
+.icons_mobi {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo_mobi {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+.icon_mobi {
+  width: 25px;
+  height: 25px;
 }
