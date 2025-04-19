@@ -54,9 +54,9 @@ export const MobileTemplate: React.FC<IProps> = ({
       >
         Отправить
       </button>
-      <span className={styles.message_agreement}>
+      <span className={styles.message_agreement_mobi}>
         {'Нажимая на кнопку,  вы принимаете условия '}
-        <Link to={'/agreement'} className={styles.message_agreement_link}>
+        <Link to={'/agreement'} className={styles.message_agreement_link_mobi}>
           {'пользовательского соглашения'}
         </Link>
       </span>

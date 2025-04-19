@@ -98,8 +98,10 @@ export const CallMe = () => {
   };
   return (
     <div className={isMobile ? styles.wrapper_mobi : styles.wrapper}>
-      <h2 className={styles.title}>Остались вопросы?</h2>
-      <p className={styles.sub_title}>
+      <h2 className={isMobile ? styles.title_mobi : styles.title}>
+        Остались вопросы?
+      </h2>
+      <p className={isMobile ? styles.sub_title_mobi : styles.sub_title}>
         Оставьте свой номер телефона и мы свяжемся с вами!
       </p>
       {isMobile ? <MobileTemplate {...props} /> : <Template {...props} />}
