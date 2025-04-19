@@ -116,7 +116,7 @@ export const MobileTemplate: React.FC<IProps> = ({
                   </span>
                 ) : null}
                 <Link
-                  to={`/user/:${(user as unknown as IUser).id}`}
+                  to={`/user/${(user as unknown as IUser).id}`}
                   className={styles.user_avatar}
                 >
                   <Avatar />

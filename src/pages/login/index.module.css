@@ -1,0 +1,30 @@
+.auth_button {
+  width: 172px;
+  height: 53px;
+  padding: 10px;
+  border-radius: 8px;
+  background: linear-gradient(96.57deg, #99660A 2.74%, #F2DB51 23.52%, #F2DB51 67.51%, #99660A 104.15%);
+}
+
+.row_buttons {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.wrap_sigin {
+  height: 200px;
+}
+
+.page_login {
+  height: 570px;
+}
+
+.text_signin {
+  opacity: .4;
+  float: left;
+  margin-left: 20px;
+  margin-right: -50px;
+}

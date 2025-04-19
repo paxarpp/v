@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import styles from './index.module.css';
+import { Navigate } from 'react-router';
 import { Modal } from '../templates/modal';
 import { api } from '../api/api';
 import { IUser } from './interface';
 import { useUser } from '../context';
-import { InputStyled } from '../templates/input';
+import { useDeviceDetect } from '../hooks';
+import styles from './index.module.css';
+import { TemplateSiginP } from './templateSignInP';
+import { TemplateSiginT } from './templateSignInT';
+import { TemplateLogin } from './templateLogin';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
@@ -12,6 +16,7 @@ export const Auth: React.FC<{
   campId?: string;
 }> = ({ onCloseAuth, toggleAuthOpen, campId }) => {
   const { signin } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [tab, setTab] = useState(1);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -95,6 +100,10 @@ export const Auth: React.FC<{
     }
   };
 
+  if (isMobile) {
+    return <Navigate to="/login" replace />;
+  }
+
   return (
     <Modal
       isOpen={true}
@@ -119,23 +128,14 @@ export const Auth: React.FC<{
       <div className={styles.tab_login}>
         {tab === 1 ? (
           <>
-            <div className={styles.input_wrap}>
-              <InputStyled
-                placeholder={'Логин'}
-                value={username}
-                onChange={onChange}
-                className={styles.w_420}
-              />
-              <InputStyled
-                placeholder={'Пароль'}
-                type="password"
-                value={password}
-                onChange={onChangePass}
-                className={styles.w_420}
-              />
-            </div>
+            <TemplateSiginP
+              onChange={onChange}
+              onChangePassword={onChangePass}
+              username={username}
+              password={password}
+            />
             <button className={styles.auth_button} onClick={onEnter}>
-              'Войти'
+              Войти
             </button>
           </>
         ) : null}
@@ -144,49 +144,23 @@ export const Auth: React.FC<{
         {tab !== 1 ? (
           <>
             {campId ? (
-              <div className={styles.input_wrap}>
-                <InputStyled
-                  placeholder={'Имя'}
-                  value={username}
-                  onChange={onChange}
-                  className={styles.w_420}
-                />
-                <InputStyled
-                  placeholder={'Телефон'}
-                  value={telephone}
-                  onChange={onChangeTelephone}
-                  className={styles.w_420}
-                />
-              </div>
+              <TemplateSiginT
+                onChange={onChange}
+                onChangeTelephone={onChangeTelephone}
+                username={username}
+                telephone={telephone}
+              />
             ) : (
-              <div className={styles.input_wrap}>
-                <InputStyled
-                  placeholder={'Имя'}
-                  value={username}
-                  onChange={onChange}
-                  className={styles.w_420}
-                />
-                <InputStyled
-                  placeholder={'Телефон'}
-                  value={telephone}
-                  onChange={onChangeTelephone}
-                  className={styles.w_420}
-                />
-                <InputStyled
-                  placeholder={'Пароль'}
-                  value={password}
-                  onChange={onChangePass}
-                  type="password"
-                  className={styles.w_420}
-                />
-                <InputStyled
-                  placeholder={'Подтверждение пароля'}
-                  value={confirmPassword}
-                  onChange={onChangeConfPass}
-                  type="password"
-                  className={styles.w_420}
-                />
-              </div>
+              <TemplateLogin
+                onChange={onChange}
+                onChangeTelephone={onChangeTelephone}
+                username={username}
+                telephone={telephone}
+                onChangePass={onChangePass}
+                onChangeConfPass={onChangeConfPass}
+                password={password}
+                confirmPassword={confirmPassword}
+              />
             )}
             <button className={styles.auth_button} onClick={onEnter}>
               {campId ? 'Забронировать' : 'Зарегистрироваться'}
