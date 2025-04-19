@@ -289,6 +289,7 @@
   line-height: 20px;
 }
 
+.contacts_title_mobi,
 .contacts_title {
   font-size: 40px;
   font-weight: 600;
@@ -296,6 +297,12 @@
   text-align: center;
   color: #D4D4D4;
   margin: 150px 75px 50px 75px;
+}
+
+.contacts_title_mobi {
+  font-size: 20px;
+  line-height: 150%;
+  margin: 50px 20px 20px 20px;
 }
 
 .contact_wrap {
@@ -457,4 +464,11 @@
   font-size: 20px;
   color: #D4D4D4;
   margin-top: 10px;
+}
+.text_manager_mobi {
+  font-size: 14px;
+  color: #D4D4D4;
+  line-height: 150%;
+  margin-top: 10px;
+  font-weight: 400;
 }

@@ -166,7 +166,11 @@ export const Contacts: React.FC = () => {
           </div>
         )}
       </Modal>
-      <h3 className={styles.contacts_title}>
+      <h3
+        className={
+          isMobile ? styles.contacts_title_mobi : styles.contacts_title
+        }
+      >
         {'Контакты'}
         {isAdmin ? (
           <Setting onClick={openEditContact} className={styles.setting_q} />
@@ -178,11 +182,15 @@ export const Contacts: React.FC = () => {
         >
           <div className={styles.contact}>
             <Phone className={isMobile ? styles.icon_contact_mobi : ''} />
-            <span className={isMobile ? styles.text_mobi : styles.text}>{home?.contactBlock?.contacts}</span>
+            <span className={isMobile ? styles.text_mobi : styles.text}>
+              {home?.contactBlock?.contacts}
+            </span>
           </div>
           <div className={styles.contact}>
             <Mail className={isMobile ? styles.icon_contact_mobi : ''} />
-            <span className={isMobile ? styles.text_mobi : styles.text}>{home?.contactBlock?.email}</span>
+            <span className={isMobile ? styles.text_mobi : styles.text}>
+              {home?.contactBlock?.email}
+            </span>
           </div>
           {!isMobile ? (
             <div className={styles.contact_icons}>
@@ -211,7 +219,11 @@ export const Contacts: React.FC = () => {
               alt="manager"
             />
           </div>
-          <span className={styles.text_manager}>
+          <span
+            className={
+              isMobile ? styles.text_manager_mobi : styles.text_manager
+            }
+          >
             {home?.contactBlock?.textUnderImage}
           </span>
         </div>
