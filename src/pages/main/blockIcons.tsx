@@ -9,7 +9,7 @@ export const BlockIcons = () => {
   return (
     <div className={isMobile ? styles.block_icons_mobile : styles.block_icons}>
       <div className={isMobile ? styles.block_icon_mobile : styles.block_icon}>
-        <BestGroup />
+        <BestGroup className={isMobile ? styles.icon_mobi : ''} />
         <span className={isMobile ? styles.icon_title_mobi : styles.icon_title}>
           Лучшая команда
         </span>
@@ -22,7 +22,7 @@ export const BlockIcons = () => {
         </span>
       </div>
       <div className={isMobile ? styles.block_icon_mobile : styles.block_icon}>
-        <RightWay />
+        <RightWay className={isMobile ? styles.icon_mobi : ''} />
         <span className={isMobile ? styles.icon_title_mobi : styles.icon_title}>
           Правильный подход
         </span>
@@ -35,7 +35,7 @@ export const BlockIcons = () => {
         </span>
       </div>
       <div className={isMobile ? styles.block_icon_mobile : styles.block_icon}>
-        <Actions />
+        <Actions className={isMobile ? styles.icon_mobi : ''} />
         <span className={isMobile ? styles.icon_title_mobi : styles.icon_title}>
           Действия, а не слова
         </span>

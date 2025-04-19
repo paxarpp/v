@@ -15,6 +15,7 @@ import styles from '../index.module.css';
 
 export const Collapsed: React.FC = () => {
   const { isAdmin, logout } = useUser();
+  const { isMobile } = useDeviceDetect();
   const revalidator = useRevalidator();
 
   const [isOpen, openModal] = useState(false);
@@ -138,9 +139,20 @@ export const Collapsed: React.FC = () => {
           </div>
         )}
       </Modal>
-      <div className={styles.asked_questions} id="questions">
+      <div
+        className={
+          isMobile ? styles.asked_questions_mobi : styles.asked_questions
+        }
+        id="questions"
+      >
         <img src={imgUrl} alt={''} className={styles.back_questions} />
-        <h2 className={styles.asked_questions_title}>
+        <h2
+          className={
+            isMobile
+              ? styles.asked_questions_title_mobi
+              : styles.asked_questions_title
+          }
+        >
           {'Часто задаваемые вопросы'}
           {isAdmin ? (
             <Setting onClick={openEditQuestions} className={styles.setting_q} />

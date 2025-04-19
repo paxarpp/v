@@ -10,7 +10,9 @@ export const CampsScroller: React.FC = () => {
   const { isMobile } = useDeviceDetect();
   return (
     <div className={isMobile ? styles.camps_wrap_mobi : styles.camps_wrap}>
-      <h2 className={styles.camps_header}>Ближайшие кемпы</h2>
+      <h2 className={isMobile ? styles.camps_header_mobi : styles.camps_header}>
+        Ближайшие кемпы
+      </h2>
       <div className={styles.camps_scroller}>
         <CampsTemplate />
       </div>

@@ -117,7 +117,11 @@ export const MainImg: React.FC = () => {
           </div>
         )}
       </Modal>
-      <div className={styles.main_image_wrap}>
+      <div
+        className={
+          isMobile ? styles.main_image_wrap_mobi : styles.main_image_wrap
+        }
+      >
         {isAdmin ? (
           <Setting onClick={openEditMainImg} className={styles.setting} />
         ) : null}
@@ -125,7 +129,11 @@ export const MainImg: React.FC = () => {
           src={createImageUrl(home?.mainBlock.mainImage?.url)}
           className={styles.main_image}
         />
-        <div className={styles.main_title_wrap}>
+        <div
+          className={
+            isMobile ? styles.main_title_wrap_mobi : styles.main_title_wrap
+          }
+        >
           <span
             className={isMobile ? styles.main_title_mobi : styles.main_title}
           >

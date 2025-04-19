@@ -6,6 +6,7 @@
 
 .header_mobile {
   justify-content: space-between;
+  padding: 0 20px;
 }
 
 .menu {
@@ -115,6 +116,10 @@
   justify-content: space-between;
   cursor: pointer;
   width: 188px;
+}
+
+.icons_mobile {
+  width: 95px;
 }
 
 .icons {
@@ -254,4 +259,12 @@
 
 .button_cooki:hover {
   border: 1px solid white;
+}
+
+.logo_mobile {
+  width: 40px;
+}
+
+.icon_mobile {
+  width: 25px;
 }

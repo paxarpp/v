@@ -1,9 +1,14 @@
+.main_image_wrap_mobi,
 .main_image_wrap {
   width: 100%;
   height: 940px;
   position: relative;
   text-align: center;
   color: white;
+}
+
+.main_image_wrap_mobi {
+  height: 140px;
 }
 
 .main_image {
@@ -28,6 +33,7 @@
   margin: 0 30px;
 }
 
+.main_title_wrap_mobi,
 .main_title_wrap {
   position: absolute;
   top: 130px;
@@ -35,6 +41,10 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
+}
+
+.main_title_wrap_mobi {
+  top: 10px;
 }
 
 .main_title_mobi,
@@ -46,8 +56,8 @@
 }
 
 .main_title_mobi {
-  font-size: 50px;
-  line-height: 100px;
+  font-size: 40px;
+  line-height: 150%;
 }
 
 .main_sub_title_mobi,
@@ -59,8 +69,8 @@
 }
 
 .main_sub_title_mobi {
-  font-size: 20px;
-  line-height: 40px;
+  font-size: 16px;
+  line-height: 150%;
 }
 
 .block_icon {
@@ -93,8 +103,9 @@
 
 .icon_title_mobi {
   height: auto;
-  font-size: 40px;
-  line-height: 60px;
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 600;
 }
 
 .icon_sub_title_mobi,
@@ -110,8 +121,8 @@
 
 .icon_sub_title_mobi {
   height: auto;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 14px;
+  line-height: 150%;
 }
 
 .block_icons {
@@ -125,7 +136,12 @@
 .block_icons_mobile {
   display: flex;
   flex-flow: column nowrap;
-  gap: 30px;
+  margin: 50px 20px;
+  gap: 20px;
+}
+
+.icon_mobi {
+  width: 30px;
 }
 
 .icon_question_mobi {
@@ -137,6 +153,14 @@
   margin-bottom: 50px;
   font-size: 40px;
   font-weight: 600;
+}
+
+.camps_header_mobi {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 150%;
+  margin-bottom: 15px;
 }
 
 .camps_wrap {
@@ -158,6 +182,7 @@
   gap: 25px;
 }
 
+.asked_questions_mobi,
 .asked_questions {
   margin-top: 150px;
   padding-left: 75px;
@@ -167,11 +192,23 @@
   position: relative;
 }
 
+.asked_questions_mobi {
+  margin-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.asked_questions_title_mobi,
 .asked_questions_title {
   font-size: 40px;
   font-weight: 600;
   color: #D4D4D4;
   margin: 50px 0;
+}
+
+.asked_questions_title_mobi {
+  font-size: 20px;
+  margin: 20px 0;
 }
 
 .back_questions {

@@ -38,17 +38,17 @@ export const MobileTemplate: React.FC<IProps> = ({
         to="/"
         className={({ isPending }) => (isPending ? styles.link_pending : '')}
       >
-        <Logo />
+        <Logo className={styles.logo_mobile} />
       </NavLink>
       <div className={styles.icons_mobile}>
         <a href={linkVk} target={'_blank'}>
-          <Vk />
+          <Vk className={styles.icon_mobile} />
         </a>
         <a href={createLinkTg(linkTg)} target={'_blank'}>
-          <T />
+          <T className={styles.icon_mobile} />
         </a>
         <a href={linkInstagram} target={'_blank'}>
-          <Inst />
+          <Inst className={styles.icon_mobile} />
         </a>
       </div>
       <div className={styles.burger}>
