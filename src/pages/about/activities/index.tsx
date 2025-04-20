@@ -135,9 +135,18 @@ export const Activities = () => {
       ) : null}
       {about?.activities?.map((act) => {
         return (
-          <div className={styles.activity_card} key={act.id}>
-            <span className={styles.activity_title}>
-              <Ball className={styles.ball} />
+          <div
+            className={
+              isMobile ? styles.activity_card_mobi : styles.activity_card
+            }
+            key={act.id}
+          >
+            <span
+              className={
+                isMobile ? styles.activity_title_mobi : styles.activity_title
+              }
+            >
+              <Ball className={isMobile ? styles.ball_mobi : styles.ball} />
               {act.name}
               {isAdmin ? (
                 <Setting
@@ -148,10 +157,10 @@ export const Activities = () => {
             </span>
             <ImagePack
               images={act.images}
-              width={420}
-              height={254}
-              widthPreview={74}
-              heightPreview={50}
+              width={isMobile ? 335 : 420}
+              height={isMobile ? 231 : 254}
+              widthPreview={isMobile ? 60 : 74}
+              heightPreview={isMobile ? 41 : 50}
               gapPreview={13}
               marginPreviewTop={8}
             />

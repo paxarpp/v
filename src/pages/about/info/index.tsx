@@ -210,33 +210,53 @@ export const Info = () => {
           </div>
         </Modal>
       ) : null}
-      <h2 className={styles.page_title}>
+      <h2 className={isMobile ? styles.page_title_mobi : styles.page_title}>
         {'О нас'}
         {isAdmin ? (
           <Setting onClick={openEdit} className={styles.setting_about} />
         ) : null}
       </h2>
-      <h2 className={styles.page_title}>{about?.title}</h2>
-      <h3 className={styles.page_sub_title}>{about?.subTitleFirst}</h3>
-      <h3 className={styles.page_sub_title}>{about?.subTitleSecond}</h3>
-      <h3 className={styles.page_sub_title}>{about?.subTitleThird}</h3>
-      <div className={isMobile ? styles.row_info_mobile : styles.row_info}>
-        <div className={styles.block}>
-          <span className={styles.sub_title}>
+      <h2 className={isMobile ? styles.page_title_mobi : styles.page_title}>
+        {about?.title}
+      </h2>
+      <h3
+        className={
+          isMobile ? styles.page_sub_title_mobi : styles.page_sub_title
+        }
+      >
+        {about?.subTitleFirst}
+      </h3>
+      <h3
+        className={
+          isMobile ? styles.page_sub_title_mobi : styles.page_sub_title
+        }
+      >
+        {about?.subTitleSecond}
+      </h3>
+      <h3
+        className={
+          isMobile ? styles.page_sub_title_mobi : styles.page_sub_title
+        }
+      >
+        {about?.subTitleThird}
+      </h3>
+      <div className={isMobile ? styles.row_info_mobi : styles.row_info}>
+        <div className={isMobile ? styles.block_mobi : styles.block}>
+          <span className={isMobile ? styles.sub_title_mobi : styles.sub_title}>
             {about?.numberOfWorkouts
               ? `> ${about.numberOfWorkouts} тренировок`
               : 'считаем тренеровки'}
           </span>
         </div>
-        <div className={styles.block}>
-          <span className={styles.sub_title}>
+        <div className={isMobile ? styles.block_mobi : styles.block}>
+          <span className={isMobile ? styles.sub_title_mobi : styles.sub_title}>
             {about?.numberOfCamps
               ? `> ${about.numberOfCamps} кемпов`
               : 'считаем кемпы'}
           </span>
         </div>
-        <div className={styles.block}>
-          <span className={styles.sub_title}>
+        <div className={isMobile ? styles.block_mobi : styles.block}>
+          <span className={isMobile ? styles.sub_title_mobi : styles.sub_title}>
             {about?.numberOfStudents
               ? `> ${about.numberOfStudents} учеников`
               : 'считаем учеников'}

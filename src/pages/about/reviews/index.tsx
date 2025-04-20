@@ -123,7 +123,9 @@ export const Reviews = () => {
   };
 
   return (
-    <div className={styles.review_wrapper}>
+    <div
+      className={isMobile ? styles.review_wrapper_mobi : styles.review_wrapper}
+    >
       <div
         className={isMobile ? styles.reviews_block_mobi : styles.reviews_block}
         id="reviews"
@@ -189,16 +191,27 @@ export const Reviews = () => {
           .filter((_, i) => i >= startIndex && i <= lastIndex)
           .map((item, indx) => {
             return (
-              <div key={item.name + indx} className={styles.review_card}>
+              <div
+                key={item.name + indx}
+                className={
+                  isMobile ? styles.review_card_mobi : styles.review_card
+                }
+              >
                 <div className={styles.card_row_user}>
                   <img
                     src={createImageUrl(item.image?.url)}
                     alt="user"
-                    className={styles.review_img}
+                    className={
+                      isMobile ? styles.review_img_mobi : styles.review_img
+                    }
                   />
                   <div className={styles.reviewer}>
-                    <span>{item.name}</span>
-                    <span>{item.date}</span>
+                    <span className={isMobile ? styles.reviewer_t : ''}>
+                      {item.name}
+                    </span>
+                    <span className={isMobile ? styles.reviewer_sub_t : ''}>
+                      {item.date}
+                    </span>
                   </div>
                   {isAdmin ? (
                     <Setting
@@ -207,7 +220,15 @@ export const Reviews = () => {
                     />
                   ) : null}
                 </div>
-                <div className={styles.card_row_comment}>{item.comment}</div>
+                <div
+                  className={
+                    isMobile
+                      ? styles.card_row_comment_mobi
+                      : styles.card_row_comment
+                  }
+                >
+                  {item.comment}
+                </div>
               </div>
             );
           })}
