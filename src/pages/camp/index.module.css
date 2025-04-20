@@ -180,6 +180,7 @@
   justify-self: center;
 }
 
+.coach_img_mobi,
 .coach_img {
   width: 100%;
   min-height: 400px;
@@ -188,6 +189,12 @@
   object-fit: cover;
 }
 
+.coach_img_mobi {
+  min-height: 315px;
+  max-height: 315px;
+}
+
+.coach_card_mobi,
 .coach_card_add,
 .coach_card {
   display: flex;
@@ -212,6 +219,12 @@
   align-items: center;
 }
 
+.coach_card_mobi {
+  height: 482px;
+  width: 335px;
+  padding: 10px;
+}
+
 .coach_add {
   display: inline-block;
   text-align: center;
@@ -222,6 +235,20 @@
   border-radius: 50%;
   color: rgba(136, 136, 136, 1);
   font-size: 88px;
+}
+
+.coach_name_mobi,
+.coach_name {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 150%;
+  color: #D4D4D4;
+  margin: 10px 0;
+  text-align: start;
+}
+
+.coach_name_mobi {
+  font-size: 16px;
 }
 
 .coaches_list {
@@ -273,6 +300,21 @@
 
 .button_profile:hover {
   border: 2px solid #FFFFFF;
+}
+
+.message_profile_mobi,
+.message_profile {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  text-align: center;
+  color: #F2DB51;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.message_profile_mobi {
+  font-size: 12px;
 }
 
 .pack_prices_info {
@@ -467,4 +509,17 @@ input_field_small,
   justify-content: flex-start;
   gap: 25px;
   margin: 0 75px;
+}
+
+.coach_info_item_mobi,
+.coach_info_item {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  color: #D4D4D4;
+  margin-top: 4px;
+}
+
+.coach_info_item_mobi {
+  font-size: 14px;
 }

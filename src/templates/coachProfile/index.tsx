@@ -19,20 +19,29 @@ interface ICoach {
 export const CoachProfile: React.FC<{
   coach: ICoach | null;
   onClose: () => void;
-}> = ({ coach, onClose }) => {
+  isMobile: boolean;
+}> = ({ coach, onClose, isMobile }) => {
   return coach ? (
     <div className={styles.profile_coach_content} onClick={onClose}>
       {coach.mainImage ? (
         <img
           src={createImageUrl(coach.mainImage.url)}
           alt=""
-          className={styles.profile_coach_img}
+          className={
+            isMobile ? styles.profile_coach_img_mobi : styles.profile_coach_img
+          }
         />
       ) : (
         <Avatar className={styles.profile_stub_img} />
       )}
-      <span className={styles.profile_name}>{coach.name}</span>
-      <span className={styles.promo_area}>{coach.promo}</span>
+      <span
+        className={isMobile ? styles.profile_name_mobi : styles.profile_name}
+      >
+        {coach.name}
+      </span>
+      <span className={isMobile ? styles.promo_area_mobi : styles.promo_area}>
+        {coach.promo}
+      </span>
     </div>
   ) : null;
 };

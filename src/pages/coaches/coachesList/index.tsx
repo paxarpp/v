@@ -13,10 +13,12 @@ import { Route } from '../+types';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { createImageUrl } from '../../../constants';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
   const { isAdmin, logout } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [coachProfile, setCoach] = useState<ICoach | null>(null);
   const [editCoachId, setEditCoachId] = useState<string | null>(null);
   const [open, setIsOpen] = useState<boolean>(false);
@@ -43,7 +45,7 @@ export const CoachesList: React.FC = () => {
   };
 
   return (
-    <div className={styles.coaches_list}>
+    <div className={isMobile ? styles.coaches_list_mobi : styles.coaches_list}>
       <CoachEdit coachId={editCoachId} onClose={closeCoachEdit} open={open} />
       <CoachesTemplate
         isAdmin={isAdmin}
@@ -53,6 +55,7 @@ export const CoachesList: React.FC = () => {
         toggleVisible={toggleVisible}
         coachProfile={coachProfile}
         closeCoach={closeCoach}
+        isMobile={isMobile}
       />
     </div>
   );
@@ -60,13 +63,23 @@ export const CoachesList: React.FC = () => {
 
 const CoachesTemplate: React.FC<{
   isAdmin: boolean;
+  isMobile: boolean;
   setCoach: (coach: ICoach | null) => void;
   setEditCoachId: (id: string) => void;
   setIsOpen: (open: boolean) => void;
   toggleVisible: (coach: ICoach) => void;
   coachProfile?: ICoach;
   closeCoach: () => void;
-}> = ({ isAdmin, setCoach, setEditCoachId, setIsOpen, toggleVisible, coachProfile, closeCoach }) => {
+}> = ({
+  isAdmin,
+  setCoach,
+  setEditCoachId,
+  setIsOpen,
+  toggleVisible,
+  coachProfile,
+  closeCoach,
+  isMobile,
+}) => {
   const { coaches } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openProfile = (coach: ICoach) => {
@@ -86,29 +99,58 @@ const CoachesTemplate: React.FC<{
     <>
       {coaches?.map((coach) => {
         return coachProfile?.id === coach.id ? (
-          <div key={coach.id} className={styles.coach_card}>
-            <CoachProfile coach={coachProfile} onClose={closeCoach} />
+          <div
+            key={coach.id}
+            className={isMobile ? styles.coach_card_mobi : styles.coach_card}
+          >
+            <CoachProfile
+              coach={coachProfile}
+              onClose={closeCoach}
+              isMobile={isMobile}
+            />
           </div>
-        ) : ( 
-          <div key={coach.id} className={styles.coach_card}>
+        ) : (
+          <div
+            key={coach.id}
+            className={isMobile ? styles.coach_card_mobi : styles.coach_card}
+          >
             {coach.mainImage?.url ? (
               <img
                 src={createImageUrl(coach.mainImage.url)}
                 alt={coach.name}
-                className={styles.coach_img}
+                className={isMobile ? styles.coach_img_mobi : styles.coach_img}
               />
             ) : (
-              <Avatar className={styles.coach_img} />
+              <Avatar
+                className={isMobile ? styles.coach_img_mobi : styles.coach_img}
+              />
             )}
-            <p className={styles.coach_name}>{coach.name}</p>
+            <p
+              className={isMobile ? styles.coach_name_mobi : styles.coach_name}
+            >
+              {coach.name}
+            </p>
             <ul className={styles.coach_infos}>
               {coach.infos.map((info) => (
-                <li key={info} className={styles.coach_info_item}>{info}</li>
+                <li
+                  key={info}
+                  className={
+                    isMobile
+                      ? styles.coach_info_item_mobi
+                      : styles.coach_info_item
+                  }
+                >
+                  {info}
+                </li>
               ))}
             </ul>
             <div className={styles.coach_card_footer}>
               <span
-                className={styles.message_profile}
+                className={
+                  isMobile
+                    ? styles.message_profile_mobi
+                    : styles.message_profile
+                }
                 onClick={() => openProfile(coach)}
               >
                 Профайл

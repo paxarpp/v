@@ -1,12 +1,3 @@
-.profile_coach_modal {
-  display: flex;
-  flex-flow: column nowrap;
-  overflow: hidden;
-  width: 420px;
-  height: 666px;
-  background: rgba(136, 136, 136, 1);
-}
-
 .profile_coach_content {
   overflow: hidden;
 }
@@ -19,6 +10,15 @@
   border-radius: 8px;
 }
 
+.profile_coach_img_mobi {
+  width: 315px;
+  height: 315px;
+  margin: 0 0;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.profile_name_mobi,
 .profile_name {
   width: 400px;
   font-size: 22px;
@@ -29,6 +29,12 @@
   color: rgba(212, 212, 212, 1);
 }
 
+.profile_name_mobi {
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.promo_area_mobi,
 .promo_area {
   display: block;
   background: rgba(212, 212, 212, 1);
@@ -36,4 +42,10 @@
   height: 180px;
   width: 400px;
   border-radius: 8px;
+}
+
+.promo_area_mobi {
+  margin: 0 0;
+  height: 105px;
+  width: 315px;
 }
