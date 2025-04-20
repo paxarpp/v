@@ -27,8 +27,20 @@ export const CampCard: React.FC<IProps> = ({
 }) => {
   return (
     <div className={isMobile ? styles.camp_card_mobi : styles.camp_card}>
-      <p className={styles.camp_card_title}>{dateString}</p>
-      <p className={styles.camp_card_subtitle}>{name}</p>
+      <p
+        className={
+          isMobile ? styles.camp_card_title_mobi : styles.camp_card_title
+        }
+      >
+        {dateString}
+      </p>
+      <p
+        className={
+          isMobile ? styles.camp_card_subtitle_mobi : styles.camp_card_subtitle
+        }
+      >
+        {name}
+      </p>
       <div
         className={isMobile ? styles.camp_img_wrap_mobi : styles.camp_img_wrap}
       >
@@ -39,7 +51,10 @@ export const CampCard: React.FC<IProps> = ({
         />
       </div>
       <div className={styles.camp_info}>
-        <Link to={`${to}${id}`} className={styles.button_camp}>
+        <Link
+          to={`${to}${id}`}
+          className={isMobile ? styles.button_camp_mobi : styles.button_camp}
+        >
           Подробнее
         </Link>
         {isAdmin && openEditCamp ? (

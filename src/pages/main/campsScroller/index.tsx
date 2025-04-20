@@ -13,7 +13,11 @@ export const CampsScroller: React.FC = () => {
       <h2 className={isMobile ? styles.camps_header_mobi : styles.camps_header}>
         Ближайшие кемпы
       </h2>
-      <div className={styles.camps_scroller}>
+      <div
+        className={
+          isMobile ? styles.camps_scroller_mobi : styles.camps_scroller
+        }
+      >
         <CampsTemplate />
       </div>
     </div>
@@ -47,7 +51,11 @@ const CampsTemplate = () => {
 
   return (
     <>
-      <Control onLeft={onLeft} onRight={onRight} show={!!home?.camps.length} />
+      <Control
+        onLeft={onLeft}
+        onRight={onRight}
+        show={!!home?.camps.length && !isMobile}
+      />
       {home?.camps
         .filter((_, i) => i >= startIndex && i <= lastIndex)
         .map((item) => {

@@ -80,7 +80,9 @@
 }
 
 .camp_card_mobi {
-  width: 100%;
+  width: 335px;
+  height: 281px;
+  padding: 0 24px;
 }
 
 .camp_card_title {
@@ -90,11 +92,30 @@
   color: #FFFFFF;
 }
 
+.camp_card_title_mobi {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: #FFFFFF;
+  line-height: 150%;
+}
+
 .camp_card_subtitle {
   font-size: 22px;
   font-weight: 600;
   margin: 0 0 10px 0;
   color: #FFFFFF;
+}
+
+.camp_card_subtitle_mobi {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0;
+  color: #FFFFFF;
+  line-height: 150%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .block_icon {
@@ -173,6 +194,7 @@
   font-weight: 600;
 }
 
+.button_camp_mobi,
 .button_camp {
   font-size: 22px;
   font-weight: 600;
@@ -197,6 +219,13 @@
   border: 2px solid #FFFFFF;
 }
 
+.button_camp_mobi {
+  width: 130px;
+  height: 35px;
+  font-size: 16px;
+  line-height: 150%;
+}
+
 .camp_img_wrap {
   width: 520px;
 }
@@ -216,7 +245,9 @@
 }
 
 .camp_img_mobi {
-  width: 100%;
+  width: 285px;
+  height: 160px;
+  min-height: 160px;
 }
 
 .camps_wrap {
