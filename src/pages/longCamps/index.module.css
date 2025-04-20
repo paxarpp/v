@@ -6,12 +6,22 @@
   border-bottom: 1px solid #D4D4D4;
 }
 
+.info_row_mobi,
 .info_row {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   gap: 20px;
   justify-content: center;
   margin-bottom: 150px;
+}
+
+.info_row_mobi {
+  margin-bottom: 50px;
+}
+
+.info_icon_mobi {
+  width: 30px;
+  height: 30px;
 }
 
 .camp_card_add {
@@ -33,13 +43,18 @@
   justify-content: center;
   align-items: center;
 }
-
+.camp_list_mobi,
 .camp_list {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   margin: 150px 75px;
   gap: 30px;
+}
+
+.camp_list_mobi {
+  margin: 50px 20px;
+  gap: 20px;
 }
 
 .edit_camp_content {
@@ -219,9 +234,25 @@
   color: #D4D4D4;
 }
 
+.title_mobi {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 30px 0;
+  color: #D4D4D4;
+  line-height: 150%;
+}
+
 .camp_info {
   font-size: 22px;
   font-weight: 400;
   color: #FFFFFF;
   width: 570px;
+}
+
+.camp_info_mobi {
+  font-size: 16px;
+  font-weight: 400;
+  color: #FFFFFF;
+  width: 335px;
+  line-height: 150%;
 }

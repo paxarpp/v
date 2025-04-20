@@ -1,24 +1,28 @@
 import World from '../../../assets/world.svg?react';
 import Calendar from '../../../assets/calendar.svg?react';
 import People from '../../../assets/people.svg?react';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const CampInfoIcons = () => {
+  const { isMobile } = useDeviceDetect();
   return (
-    <div className={styles.info_row}>
+    <div className={isMobile ? styles.info_row_mobi : styles.info_row}>
       <div className={styles.info_card}>
-        <World />
-        <span className={styles.camp_info}>По России и всему миру</span>
+        <World className={isMobile ? styles.info_icon_mobi : ''} />
+        <span className={isMobile ? styles.camp_info_mobi : styles.camp_info}>
+          По России и всему миру
+        </span>
       </div>
       <div className={styles.info_card}>
-        <Calendar />
-        <span className={styles.camp_info}>
+        <Calendar className={isMobile ? styles.info_icon_mobi : ''} />
+        <span className={isMobile ? styles.camp_info_mobi : styles.camp_info}>
           Продолжительность кемпа 7-10 дней
         </span>
       </div>
       <div className={styles.info_card}>
-        <People />
-        <span className={styles.camp_info}>
+        <People className={isMobile ? styles.info_icon_mobi : ''} />
+        <span className={isMobile ? styles.camp_info_mobi : styles.camp_info}>
           Подходит для игроков всех уровней
         </span>
       </div>

@@ -5,10 +5,12 @@ import { useUser } from '../../../context';
 import { CampEdit } from '../campEdit';
 import { Route } from '../+types';
 import { CampCard } from '../../../templates/CampCard';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
   const { isAdmin } = useUser();
+    const { isMobile } = useDeviceDetect();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editCampId, setEditCampId] = useState<string | null>(null);
 
@@ -18,12 +20,13 @@ export const CampsList = () => {
   };
 
   return (
-    <div className={styles.camp_list}>
+    <div className={isMobile ? styles.camp_list_mobi : styles.camp_list}>
       {open ? <CampEdit campId={editCampId} onClose={closeCampEdit} /> : null}
       <CampsTemplate
         isAdmin={isAdmin}
         setIsOpen={setIsOpen}
         setEditCampId={setEditCampId}
+        isMobile={isMobile}
       />
     </div>
   );
@@ -31,9 +34,10 @@ export const CampsList = () => {
 
 const CampsTemplate: React.FC<{
   isAdmin: boolean;
+  isMobile: boolean;
   setIsOpen: (open: boolean) => void;
   setEditCampId: (id: string) => void;
-}> = ({ isAdmin, setIsOpen, setEditCampId }) => {
+}> = ({ isAdmin, setIsOpen, setEditCampId, isMobile }) => {
   const { longCamps } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openEditCamp = (id: string) => {
@@ -57,6 +61,7 @@ const CampsTemplate: React.FC<{
             url={item.imageCart?.url}
             isAdmin={isAdmin}
             openEditCamp={openEditCamp}
+            isMobile={isMobile}
           />
         );
       })}
