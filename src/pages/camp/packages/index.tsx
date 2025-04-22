@@ -12,6 +12,7 @@ import imgUrlGold from '../../../assets/gold.jpg';
 import imgUrlSilver from '../../../assets/silver.jpg';
 import imgUrlTour from '../../../assets/tour.jpg';
 import { IType } from '../interfaces';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 const getPackImgUrl = (type: IType) => {
@@ -34,6 +35,7 @@ const divideNumberByPieces = (x: number, delimiter = ' ') =>
 
 export const Packages = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isMobile } = useDeviceDetect();
   const [rSuccess, setReservationSuccess] = useState(false);
   const { user, logout } = useUser();
   const { toggleAuthOpen } = useAuth();
@@ -77,10 +79,18 @@ export const Packages = () => {
   };
 
   return (
-    <div className={styles.column}>
-      <h2 className={styles.camp_info_title}>{'Что входит в стоимость'}</h2>
+    <div className={isMobile ? styles.column_mobi : styles.column}>
+      <h2
+        className={
+          isMobile ? styles.camp_info_title_mobi : styles.camp_info_title
+        }
+      >
+        {'Что входит в стоимость'}
+      </h2>
       <h4
-        className={styles.camp_card_subtitle}
+        className={
+          isMobile ? styles.camp_card_subtitle_mobi : styles.camp_card_subtitle
+        }
       >{`Свободно ${camp?.countFree} мест`}</h4>
       <div className={styles.package_row}>
         {camp?.packages?.map((pack) => {
@@ -169,7 +179,12 @@ export const Packages = () => {
           <h3>{`${user.username}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
         </div>
       ) : (
-        <button className={styles.button_profile} onClick={onReservation}>
+        <button
+          className={
+            isMobile ? styles.button_profile_mobi : styles.button_profile
+          }
+          onClick={onReservation}
+        >
           {'Забронировать'}
         </button>
       )}

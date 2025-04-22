@@ -1,3 +1,4 @@
+.main_img_wrapper_mobi,
 .main_img_wrapper {
   width: 100%;
   height: 920px;
@@ -8,6 +9,13 @@
   z-index: -1;
 }
 
+.main_img_wrapper_mobi {
+  height: 180px;
+  min-height: 180px;
+  max-height: 180px;
+}
+
+.name_mobi,
 .name {
   display: inline-block;
   overflow: hidden;
@@ -24,6 +32,13 @@
   opacity: .8;
 }
 
+.name_mobi {
+  top: 38px;
+  font-size: 40px;
+  line-height: 150%;
+}
+
+.date_mobi,
 .date {
   position: absolute;
   top: 470px;
@@ -32,15 +47,25 @@
   right: 0;
   white-space: nowrap;
   font-weight: 600;
-  line-height: 150px;
+  line-height: 150%;
   color: #FFFFFF;
   opacity: .8;
 }
 
+.date_mobi {
+  top: 99px;
+  font-size: 16px;
+}
+
+.info_row_mobi,
 .info_row {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
+}
+
+.info_row_mobi {
+  flex-flow: column nowrap;
 }
 
 .info_wrap {
@@ -49,28 +74,36 @@
   flex-flow: column nowrap;
 }
 
-.info_img_wrapper {
-  width: 720px;
-  height: 480px;
-  min-height: 480px;
-  max-height: 480px;
-  overflow: hidden;
-  position: relative;
-  z-index: -1;
+.info_wrap_mobi {
+  margin: 30px 20px;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
+.info_list_mobi,
 .info_list {
   width: 720px;
   font-size: 22px;
   font-weight: 400;
-  line-height: 33px;
+  line-height: 150%;
   text-align: left;
   margin: 0 0 0 30px;
   color:#D4D4D4;
 }
 
+.info_list_mobi {
+  width: 335px;
+  font-size: 14px;
+  margin: 20px 0;
+  padding: 0 0 0 20px;
+}
+
 .info_item + .info_item {
   padding-top: 24px;
+}
+
+.info_item_mobi + .info_item_mobi {
+  padding-top: 8px;
 }
 
 .row_prevew_images {
@@ -112,6 +145,13 @@
   flex-flow: row wrap;
   gap: 24px;
   margin: 0 75px 30px 75px;
+}
+
+.package_row_mobi {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px;
+  margin: 0 20px 30px 20px;
 }
 
 .pack_card {
@@ -211,6 +251,7 @@
   line-height: 33px;
   color: rgba(212, 212, 212, 1);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .coach_card_add {
@@ -222,6 +263,8 @@
 .coach_card_mobi {
   height: 482px;
   width: 335px;
+  min-width: 335px;
+  max-width: 335px;
   padding: 10px;
 }
 
@@ -285,6 +328,7 @@
   background: #888888;
 }
 
+.button_profile_mobi,
 .button_profile {
   width: 400px;
   height: 70px;
@@ -296,6 +340,12 @@
   box-sizing: border-box;
   font-weight: 600;
   font-size: 22px;
+}
+
+.button_profile_mobi {
+  width: 190px;
+  height: 45px;
+  font-size: 16px;
 }
 
 .button_profile:hover {
@@ -342,6 +392,10 @@
 
 .column {
   margin-top: 150px;
+}
+
+.column_mobi {
+  margin-top: 50px;
 }
 
 .table {
@@ -438,19 +492,32 @@ input_field_small,
   top: 5px;
 }
 
+.camp_info_title_mobi,
 .camp_info_title {
   font-size: 40px;
   font-weight: 400;
+  line-height: 150%;
   margin: 0 0 50px 0;
   color: #D4D4D4;
-  margin: 0 0 50px 0;
 }
 
+.camp_info_title_mobi {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+}
+
+.camp_card_subtitle_mobi,
 .camp_card_subtitle {
   font-size: 20px;
   font-weight: 400;
+  line-height: 150%;
   margin: 0 0 50px 0;
   color: #FFFFFF;
+}
+
+.camp_card_subtitle_mobi {
+  font-size: 16px;
+  margin: 0 0 30px 0;
 }
 
 .program_card {

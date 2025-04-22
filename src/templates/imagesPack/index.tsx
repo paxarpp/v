@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import ArrowLeft from '../../assets/arrowLeft.svg?react';
-import ArrowRight from '../../assets/arrowRight.svg?react';
 import { createImageUrl } from '../../constants';
 import styles from './index.module.css';
 import { Control } from '../controlArrow';

@@ -22,8 +22,14 @@ export const Coaches = () => {
 
   return (
     <div className={styles.column}>
-      <h2 className={styles.camp_info_title}>Тренерский состав кемпа</h2>
-      <div className={styles.package_row}>
+      <h2
+        className={
+          isMobile ? styles.camp_info_title_mobi : styles.camp_info_title
+        }
+      >
+        Тренерский состав кемпа
+      </h2>
+      <div className={isMobile ? styles.package_row_mobi : styles.package_row}>
         {camp?.coaches.map((coach) => {
           return coachProfile?.id === coach.id ? (
             <div

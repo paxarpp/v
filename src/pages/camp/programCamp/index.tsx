@@ -10,11 +10,13 @@ import { IProgram } from '../interfaces';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { Control } from '../../../templates/controlArrow';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const ProgramCamp = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
+  const { isMobile } = useDeviceDetect();
 
   const { logout, isAdmin } = useUser();
   const [isOpen, setOpen] = useState(false);
@@ -126,7 +128,13 @@ export const ProgramCamp = () => {
         </Modal>
       ) : null}
 
-      <h2 className={styles.camp_info_title}>Программа кемпа</h2>
+      <h2
+        className={
+          isMobile ? styles.camp_info_title_mobi : styles.camp_info_title
+        }
+      >
+        Программа кемпа
+      </h2>
       <div className={styles.programs_wrap}>
         <Control show={programsLength > 4} onLeft={onLeft} onRight={onRight} />
         {camp?.program?.programs
