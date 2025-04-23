@@ -246,6 +246,7 @@
 
 .review_card_mobi {
   width: 335px;
+  min-width: 335px;
   height: 187px;
   padding: 5px 10px;
 }
