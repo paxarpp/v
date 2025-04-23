@@ -7,6 +7,7 @@
 .header_mobile {
   justify-content: space-between;
   padding: 0 20px;
+  height: 53px;
 }
 
 .menu {
@@ -263,6 +264,7 @@
 
 .logo_mobile {
   width: 40px;
+  height: 53px;
 }
 
 .icon_mobile {
