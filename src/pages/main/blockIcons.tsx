@@ -1,6 +1,6 @@
 import BestGroup from '../../assets/bestGroup.svg?react';
-import RightWay from '../../assets/rightWay.svg?react';
-import Actions from '../../assets/actions.svg?react';
+import Hands from '../../assets/hands.svg?react';
+import Result from '../../assets/result.svg?react';
 import { useDeviceDetect } from '../../hooks';
 import styles from './index.module.css';
 
@@ -11,40 +11,40 @@ export const BlockIcons = () => {
       <div className={isMobile ? styles.block_icon_mobile : styles.block_icon}>
         <BestGroup className={isMobile ? styles.icon_mobi : ''} />
         <span className={isMobile ? styles.icon_title_mobi : styles.icon_title}>
-          Лучшая команда
+          Команда профессионалов
         </span>
         <span
           className={
             isMobile ? styles.icon_sub_title_mobi : styles.icon_sub_title
           }
         >
-          Работаем 24/7 для общего результата
+          Работаем 24/7
         </span>
       </div>
       <div className={isMobile ? styles.block_icon_mobile : styles.block_icon}>
-        <RightWay className={isMobile ? styles.icon_mobi : ''} />
+        <Hands className={isMobile ? styles.icon_mobi : ''} />
         <span className={isMobile ? styles.icon_title_mobi : styles.icon_title}>
-          Правильный подход
+          Грамотный подход
         </span>
         <span
           className={
             isMobile ? styles.icon_sub_title_mobi : styles.icon_sub_title
           }
         >
-          Ставим цели и идем вместе к ним
+          Объясняем сложное простыми словами
         </span>
       </div>
       <div className={isMobile ? styles.block_icon_mobile : styles.block_icon}>
-        <Actions className={isMobile ? styles.icon_mobi : ''} />
+        <Result className={isMobile ? styles.icon_mobi : ''} />
         <span className={isMobile ? styles.icon_title_mobi : styles.icon_title}>
-          Действия, а не слова
+          Гарантия результата
         </span>
         <span
           className={
             isMobile ? styles.icon_sub_title_mobi : styles.icon_sub_title
           }
         >
-          Слова ценятся тогда, когда совпадают с действиями
+          Ваш прогресс уже сегодня
         </span>
       </div>
     </div>

@@ -95,7 +95,7 @@
 .camp_card_title_mobi {
   font-size: 20px;
   font-weight: 600;
-  margin: 0;
+  margin: 8px 0 0 0;
   color: #FFFFFF;
   line-height: 150%;
 }
@@ -110,7 +110,7 @@
 .camp_card_subtitle_mobi {
   font-size: 16px;
   font-weight: 600;
-  margin: 0 0;
+  margin: 0 0 8px 0;
   color: #FFFFFF;
   line-height: 150%;
   overflow: hidden;
@@ -224,6 +224,8 @@
   height: 35px;
   font-size: 16px;
   line-height: 150%;
+  border-radius: 4px;
+  margin-top: 6px;
 }
 
 .camp_img_wrap {
@@ -231,7 +233,9 @@
 }
 
 .camp_img_wrap_mobi {
-  width: 100%;
+  width: 285px;
+  height: 160px;
+  min-height: 160px;
 }
 
 .camp_img_mobi,

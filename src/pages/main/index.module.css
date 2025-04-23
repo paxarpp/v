@@ -84,10 +84,13 @@
 }
 
 .block_icon_mobile {
+  max-width: 161px;
+  width: 161px;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   border-bottom: 1px solid rgba(212, 212, 212, 1);
+  box-sizing: border-box;
 }
 
 .icon_title_mobi,
@@ -135,13 +138,15 @@
 
 .block_icons_mobile {
   display: flex;
-  flex-flow: column nowrap;
-  margin: 50px 20px;
+  flex-flow: row wrap;
+  margin: 50px 0;
   gap: 20px;
+  justify-content: center;
 }
 
 .icon_mobi {
   width: 30px;
+  height: 30px;
 }
 
 .icon_question_mobi {
@@ -153,6 +158,7 @@
   margin-bottom: 50px;
   font-size: 40px;
   font-weight: 600;
+  color: #D4D4D4;
 }
 
 .camps_header_mobi {
@@ -161,6 +167,7 @@
   font-weight: 600;
   line-height: 150%;
   margin-bottom: 15px;
+  color: #D4D4D4;
 }
 
 .camps_wrap {
