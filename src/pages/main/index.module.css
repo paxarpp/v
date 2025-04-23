@@ -238,11 +238,11 @@
 }
 
 .info_open {
-  visibility: visible;
+  display: block;
 }
 
 .info_close {
-  visibility: hidden;
+  display: none;
 }
 
 .question {
@@ -262,7 +262,7 @@
 }
 
 .q_close {
-  height: 50px;
+  height: 100%;
 }
 
 .question_name_wrapper {
@@ -284,7 +284,7 @@
 .question_name_mobi {
   font-size: 16px;
   line-height: 20px;
-  width: calc(100% - 20px);
+  width: calc(100% - 24px);
 }
 
 .answer_mobi,
@@ -300,8 +300,8 @@
 }
 
 .answer_mobi {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 150%;
 }
 
 .contacts_title_mobi,
@@ -430,7 +430,7 @@
 }
 
 .manager_wrap_mobi {
-  margin: 20px 20px;
+  margin: 20px 20px 50px 20px;
   align-items: flex-start;
 }
 

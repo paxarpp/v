@@ -53,7 +53,7 @@
 
 .wrapper_mobi {
   margin-top: 0;
-  padding: 30px 0;
+  padding: 4px 0 30px 0;
 }
 
 .col_inputs {
@@ -75,24 +75,28 @@
   margin-top: 0;
   margin-bottom: 30px;
   font-weight: 600;
+  color: #D4D4D4;
 }
 
 .title_mobi {
   font-size: 20px;
   line-height: 150%;
   font-weight: 600;
+  color: #D4D4D4;
 }
 
 .sub_title {
   font-size: 22px;
   margin-top: 0;
   margin-bottom: 50px;
+  color: #D4D4D4;
 }
 
 .sub_title_mobi {
   font-size: 16px;
   font-weight: 600;
   line-height: 150%;
+  color: #D4D4D4;
 }
 
 .message_agreement,
