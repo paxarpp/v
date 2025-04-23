@@ -29,6 +29,9 @@ export const Template: React.FC<IProps> = ({
 
   return (
     <div className={styles.col_inputs}>
+      <p className={styles.sub_title}>
+        Оставьте свой номер телефона и мы свяжемся с вами!
+      </p>
       <div className={styles.row_input}>
         <InputStyled
           className={styles.modal_input}

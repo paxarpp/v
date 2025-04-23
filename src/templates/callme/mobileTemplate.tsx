@@ -27,7 +27,10 @@ export const MobileTemplate: React.FC<IProps> = ({
 }) => {
   const disabled = !name || !tel || !comment;
   return (
-    <div className={styles.col_inputs}>
+    <div className={styles.col_inputs_mobi}>
+      <p className={styles.sub_title_mobi}>
+        Оставьте свой номер телефона и мы свяжемся с вами!
+      </p>
       <InputStyled
         className={styles.modal_input_mobi}
         value={name}
