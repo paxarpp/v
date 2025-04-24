@@ -46,7 +46,7 @@ export const TemplateMobi: React.FC<IProps> = ({
 
       <div>
         <span className={styles.menu_title_mobi}>Пляжный волейбол</span>
-        <ul className={styles.menu}>
+        <ul className={styles.menu_mobi}>
           <li>
             <Link to="/weekendCamps">Кемпы выходного дня</Link>
           </li>
@@ -63,7 +63,7 @@ export const TemplateMobi: React.FC<IProps> = ({
       </div>
       <div>
         <span className={styles.menu_title_mobi}>Классический волейбол</span>
-        <ul className={styles.menu}>
+        <ul className={styles.menu_mobi}>
           <li>
             <Link to="/trainingSchedule">Расписание</Link>
           </li>
@@ -79,7 +79,7 @@ export const TemplateMobi: React.FC<IProps> = ({
       </div>
       <div>
         <span className={styles.menu_title_mobi}>О нас</span>
-        <ul className={styles.menu}>
+        <ul className={styles.menu_mobi}>
           <li>
             <Link to="/about#reviews">Отзывы</Link>
           </li>
