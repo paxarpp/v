@@ -33,26 +33,8 @@ export const MobileTemplate: React.FC<IProps> = ({
   const { user, isAdmin } = useUser();
   const isAuth = !!user;
   return (
-    <div className={styles.header_mobile}>
-      <NavLink
-        to="/"
-        className={({ isPending }) => (isPending ? styles.link_pending : '')}
-      >
-        <Logo className={styles.logo_mobile} />
-      </NavLink>
-      <div className={styles.icons_mobile}>
-        <a href={linkVk} target={'_blank'}>
-          <Vk className={styles.icon_mobile} />
-        </a>
-        <a href={createLinkTg(linkTg)} target={'_blank'}>
-          <T className={styles.icon_mobile} />
-        </a>
-        <a href={linkInstagram} target={'_blank'}>
-          <Inst className={styles.icon_mobile} />
-        </a>
-      </div>
-      <div className={styles.burger}>
-        <Burger onClick={togglePopapMenu} />
+    <>
+      <div className={styles.stub_header_mobile}>
         {isOpenPopapMenu ? (
           <div className={styles.popap_menu} onClick={togglePopapMenu}>
             <span>Пляжный волейбол</span>
@@ -133,6 +115,28 @@ export const MobileTemplate: React.FC<IProps> = ({
           </div>
         ) : null}
       </div>
-    </div>
+      <div className={styles.header_mobile}>
+        <NavLink
+          to="/"
+          className={({ isPending }) => (isPending ? styles.link_pending : '')}
+        >
+          <Logo className={styles.logo_mobile} />
+        </NavLink>
+        <div className={styles.icons_mobile}>
+          <a href={linkVk} target={'_blank'}>
+            <Vk className={styles.icon_mobile} />
+          </a>
+          <a href={createLinkTg(linkTg)} target={'_blank'}>
+            <T className={styles.icon_mobile} />
+          </a>
+          <a href={linkInstagram} target={'_blank'}>
+            <Inst className={styles.icon_mobile} />
+          </a>
+        </div>
+        <div className={styles.burger}>
+          <Burger onClick={togglePopapMenu} />
+        </div>
+      </div>
+    </>
   );
 };

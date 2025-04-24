@@ -1,13 +1,26 @@
-.header_mobile,
 .header {
   display: flex;
   flex-flow: row nowrap;
 }
 
 .header_mobile {
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: space-between;
   padding: 0 20px;
   height: 53px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #191A26;
+}
+
+.stub_header_mobile {
+  height: 53px;
+  width: 100%;
 }
 
 .menu {
@@ -160,7 +173,7 @@
 }
 
 .popap_menu {
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   bottom: 0;
