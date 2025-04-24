@@ -89,6 +89,7 @@
   line-height: 150%;
   font-weight: 600;
   color: #D4D4D4;
+  margin-bottom: 10px;
 }
 
 .sub_title {
@@ -104,6 +105,8 @@
   line-height: 150%;
   color: #D4D4D4;
   max-width: 300px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .message_agreement,
