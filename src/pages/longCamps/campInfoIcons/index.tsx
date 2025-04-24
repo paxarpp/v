@@ -8,19 +8,19 @@ export const CampInfoIcons = () => {
   const { isMobile } = useDeviceDetect();
   return (
     <div className={isMobile ? styles.info_row_mobi : styles.info_row}>
-      <div className={styles.info_card}>
+      <div className={isMobile ? styles.block_icon_mobile : styles.info_card}>
         <World className={isMobile ? styles.info_icon_mobi : ''} />
         <span className={isMobile ? styles.camp_info_mobi : styles.camp_info}>
           По России и всему миру
         </span>
       </div>
-      <div className={styles.info_card}>
+      <div className={isMobile ? styles.block_icon_mobile : styles.info_card}>
         <Calendar className={isMobile ? styles.info_icon_mobi : ''} />
         <span className={isMobile ? styles.camp_info_mobi : styles.camp_info}>
           Продолжительность кемпа 7-10 дней
         </span>
       </div>
-      <div className={styles.info_card}>
+      <div className={isMobile ? styles.block_icon_mobile : styles.info_card}>
         <People className={isMobile ? styles.info_icon_mobi : ''} />
         <span className={isMobile ? styles.camp_info_mobi : styles.camp_info}>
           Подходит для игроков всех уровней
