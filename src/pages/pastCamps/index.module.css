@@ -1,4 +1,3 @@
-.camp_list_mobi,
 .camp_list {
   display: flex;
   flex-flow: row wrap;
@@ -8,7 +7,10 @@
 }
 
 .camp_list_mobi {
-  margin: 50px 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 50px 0;
   gap: 20px;
 }
 
