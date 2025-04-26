@@ -12,8 +12,8 @@ import { api } from '../../../api/api';
 import { Control } from '../../../templates/controlArrow';
 import { useDeviceDetect } from '../../../hooks';
 import { useSwipeable } from 'react-swipeable';
-import styles from '../index.module.css';
 import { Dots } from '../../../templates/Dots';
+import styles from '../index.module.css';
 
 export const ProgramCamp = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();

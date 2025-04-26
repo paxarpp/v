@@ -156,6 +156,7 @@
   align-items: center;
 }
 
+.pack_card_mobi,
 .pack_card {
   width: 420px;
   height: 588px;
@@ -164,6 +165,11 @@
   border-radius: 8px;
   text-align: left;
   position: relative;
+}
+
+.pack_card_mobi {
+  width: 335px;
+  height: 450px;
 }
 
 .back_card {
@@ -178,13 +184,19 @@
   z-index: -1;
 }
 
+.pack_title_mobi,
 .pack_title {
   font-size: 22px;
-  font-weight: 400;
-  line-height: 33px;
+  font-weight: 600;
+  line-height: 150%;
   text-align: center;
   border-bottom: 1px solid #F2DB51;
   color: #FFFFFF;
+}
+
+.pack_title_mobi {
+  font-size: 20px;
+  margin: 8px 0;
 }
 
 .pack_info {
@@ -194,14 +206,31 @@
   color: #FFFFFF;
 }
 
+.pack_info_mobi {
+  padding: 0px 20px;
+  border-bottom: 1px solid #F2DB51;
+  padding-bottom: 8px;
+  color: #FFFFFF;
+  height: 229px;
+  overflow: auto;
+  margin: 8px 0;
+}
+
+.total_price_mobi,
 .total_price {
   font-size: 22px;
   font-weight: 400;
-  line-height: 33px;
+  line-height: 150%;
   text-align: center;
   color: #F2DB51;
 }
 
+.total_price_mobi {
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.cost_link_mobi,
 .cost_link {
   width: 100%;
   display: inline-block;
@@ -210,6 +239,13 @@
   cursor: pointer;
 }
 
+.cost_link_mobi {
+  font-size: 14px;
+  border-bottom: none;
+  font-weight: 400;
+}
+
+.booking_price_mobi,
 .booking_price {
   width: 100%;
   display: inline-block;
@@ -217,9 +253,20 @@
   margin-top: 24px;
 }
 
+.booking_price_mobi {
+  font-size: 14px;
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.pack_icon_mobi,
 .pack_icon {
   display: flex;
   justify-self: center;
+}
+
+.pack_icon_mobi {
+  height: 36px;
 }
 
 .coach_img_mobi,
@@ -342,6 +389,7 @@
   box-sizing: border-box;
   font-weight: 600;
   font-size: 22px;
+  font-family: inherit;
 }
 
 .button_profile_mobi {

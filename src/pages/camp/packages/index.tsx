@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from 'react';
 import { useLoaderData } from 'react-router';
+import { useSwipeable } from 'react-swipeable';
 import People from '../../../assets/people.svg?react';
 import Successfully from '../../../assets/successfully.svg?react';
 import Tour from '../../../assets/tour.svg?react';
@@ -14,6 +15,7 @@ import imgUrlTour from '../../../assets/tour.jpg';
 import { IType } from '../interfaces';
 import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
+import { Dots } from '../../../templates/Dots';
 
 const getPackImgUrl = (type: IType) => {
   switch (type) {
@@ -78,6 +80,26 @@ export const Packages = () => {
     }
   };
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onLeftM = () => {
+    if (!camp?.packages?.length) return;
+    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+  };
+
+  const onRightM = () => {
+    if (!camp?.packages?.length) return;
+    if (currentIndex < camp?.packages?.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: onRightM,
+    onSwipedRight: onLeftM,
+    trackMouse: true,
+  });
+
   return (
     <div className={isMobile ? styles.column_mobi : styles.column}>
       <h2
@@ -92,85 +114,179 @@ export const Packages = () => {
           isMobile ? styles.camp_card_subtitle_mobi : styles.camp_card_subtitle
         }
       >{`Свободно ${camp?.countFree} мест`}</h4>
-      <div className={styles.package_row}>
-        {camp?.packages?.map((pack) => {
-          const isTour = pack.type === 'TOUR';
-          return (
-            <div
-              key={pack.packageId}
-              className={styles.pack_card}
-              onClick={() => closePricesInfo(pack.packageId)}
-            >
-              <img
-                src={getPackImgUrl(pack.type)}
-                alt={pack.name}
-                className={styles.back_card}
-              />
-              {isTour ? (
-                <Tour className={styles.pack_icon} />
-              ) : (
-                <People className={styles.pack_icon} />
-              )}
-              <h4 className={styles.pack_title}>{pack.displayName}</h4>
-              <ul className={styles.pack_info}>
-                {pack.info
-                  .split(';')
-                  .filter(Boolean)
-                  .map((inf, i) => (
-                    <li key={i + 'pack'}>{inf}</li>
-                  ))}
-              </ul>
-              <div>
-                <h4
-                  className={styles.total_price}
-                >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
-                <span
-                  className={styles.cost_link}
-                  onClick={(e) => togglePricesInfo(e, pack.packageId)}
-                >{`*${pack.costNamingLink}`}</span>
-                <span className={styles.booking_price}>
-                  {isTour
-                    ? `предоплата по туру - ${divideNumberByPieces(pack.bookingPrice)}`
-                    : `предоплата по спорт пакету - ${divideNumberByPieces(pack.bookingPrice)} ₽`}
-                </span>
-              </div>
-              {showPricesInfo[pack.packageId] ? (
-                <div className={styles.pack_prices_info}>
-                  {pack.firstPrice ? (
-                    <span>
-                      <span
-                        className={styles.total_price}
-                      >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
-                      <span
-                        className={styles.pack_limit}
-                      >{`до ${pack.firstLimitationString}`}</span>
+      <div className={isMobile ? styles.package_row_mobi : styles.package_row}>
+        {isMobile ? (
+          <div {...swipeHandlers}>
+            {camp?.packages?.length ? (
+              <>
+                <div
+                  key={camp?.packages[currentIndex].packageId}
+                  className={styles.pack_card_mobi}
+                  onClick={() =>
+                    closePricesInfo(camp?.packages[currentIndex].packageId)
+                  }
+                >
+                  <img
+                    src={getPackImgUrl(camp?.packages[currentIndex].type)}
+                    alt={camp?.packages[currentIndex].name}
+                    className={styles.back_card}
+                  />
+                  {camp?.packages[currentIndex].type === 'TOUR' ? (
+                    <Tour className={styles.pack_icon_mobi} />
+                  ) : (
+                    <People className={styles.pack_icon_mobi} />
+                  )}
+                  <h4 className={styles.pack_title_mobi}>
+                    {camp?.packages[currentIndex].displayName}
+                  </h4>
+                  <ul className={styles.pack_info_mobi}>
+                    {camp?.packages[currentIndex].info
+                      .split(';')
+                      .filter(Boolean)
+                      .map((inf, i) => <li key={i + 'pack'}>{inf}</li>)}
+                  </ul>
+                  <div>
+                    <h4
+                      className={styles.total_price_mobi}
+                    >{`${divideNumberByPieces(camp?.packages[currentIndex].totalPrice)} ₽*`}</h4>
+                    <span
+                      className={styles.cost_link_mobi}
+                      onClick={(e) =>
+                        togglePricesInfo(
+                          e,
+                          camp?.packages[currentIndex].packageId,
+                        )
+                      }
+                    >{`*${camp?.packages[currentIndex].costNamingLink}`}</span>
+                    <span className={styles.booking_price_mobi}>
+                      {camp?.packages[currentIndex].type === 'TOUR'
+                        ? `предоплата по туру - ${divideNumberByPieces(camp?.packages[currentIndex].bookingPrice)}`
+                        : `предоплата по спорт пакету - ${divideNumberByPieces(camp?.packages[currentIndex].bookingPrice)} ₽`}
                     </span>
-                  ) : null}
-                  {pack.secondPrice ? (
-                    <span>
-                      <span
-                        className={styles.total_price}
-                      >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
-                      <span
-                        className={styles.pack_limit}
-                      >{`до ${pack.secondLimitationString}`}</span>
-                    </span>
-                  ) : null}
-                  {pack.thirdPrice ? (
-                    <span>
-                      <span
-                        className={styles.total_price}
-                      >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
-                      <span
-                        className={styles.pack_limit}
-                      >{`до ${pack.thirdLimitationString}`}</span>
-                    </span>
+                  </div>
+                  {showPricesInfo[camp?.packages[currentIndex].packageId] ? (
+                    <div className={styles.pack_prices_info}>
+                      {camp?.packages[currentIndex].firstPrice ? (
+                        <span>
+                          <span
+                            className={styles.total_price}
+                          >{`${divideNumberByPieces(camp?.packages[currentIndex].firstPrice)} ₽ `}</span>
+                          <span
+                            className={styles.pack_limit}
+                          >{`до ${camp?.packages[currentIndex].firstLimitationString}`}</span>
+                        </span>
+                      ) : null}
+                      {camp?.packages[currentIndex].secondPrice ? (
+                        <span>
+                          <span
+                            className={styles.total_price}
+                          >{`${divideNumberByPieces(camp?.packages[currentIndex].secondPrice)} ₽ `}</span>
+                          <span
+                            className={styles.pack_limit}
+                          >{`до ${camp?.packages[currentIndex].secondLimitationString}`}</span>
+                        </span>
+                      ) : null}
+                      {camp?.packages[currentIndex].thirdPrice ? (
+                        <span>
+                          <span
+                            className={styles.total_price}
+                          >{`${divideNumberByPieces(camp?.packages[currentIndex].thirdPrice)} ₽ `}</span>
+                          <span
+                            className={styles.pack_limit}
+                          >{`до ${camp?.packages[currentIndex].thirdLimitationString}`}</span>
+                        </span>
+                      ) : null}
+                    </div>
                   ) : null}
                 </div>
-              ) : null}
-            </div>
-          );
-        })}
+
+                <Dots
+                  currentIndex={currentIndex}
+                  listLength={camp?.packages.length}
+                />
+              </>
+            ) : null}
+          </div>
+        ) : (
+          camp?.packages?.map((pack) => {
+            const isTour = pack.type === 'TOUR';
+            return (
+              <div
+                key={pack.packageId}
+                className={styles.pack_card}
+                onClick={() => closePricesInfo(pack.packageId)}
+              >
+                <img
+                  src={getPackImgUrl(pack.type)}
+                  alt={pack.name}
+                  className={styles.back_card}
+                />
+                {isTour ? (
+                  <Tour className={styles.pack_icon} />
+                ) : (
+                  <People className={styles.pack_icon} />
+                )}
+                <h4 className={styles.pack_title}>{pack.displayName}</h4>
+                <ul className={styles.pack_info}>
+                  {pack.info
+                    .split(';')
+                    .filter(Boolean)
+                    .map((inf, i) => (
+                      <li key={i + 'pack'}>{inf}</li>
+                    ))}
+                </ul>
+                <div>
+                  <h4
+                    className={styles.total_price}
+                  >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
+                  <span
+                    className={styles.cost_link}
+                    onClick={(e) => togglePricesInfo(e, pack.packageId)}
+                  >{`*${pack.costNamingLink}`}</span>
+                  <span className={styles.booking_price}>
+                    {isTour
+                      ? `предоплата по туру - ${divideNumberByPieces(pack.bookingPrice)}`
+                      : `предоплата по спорт пакету - ${divideNumberByPieces(pack.bookingPrice)} ₽`}
+                  </span>
+                </div>
+                {showPricesInfo[pack.packageId] ? (
+                  <div className={styles.pack_prices_info}>
+                    {pack.firstPrice ? (
+                      <span>
+                        <span
+                          className={styles.total_price}
+                        >{`${divideNumberByPieces(pack.firstPrice)} ₽ `}</span>
+                        <span
+                          className={styles.pack_limit}
+                        >{`до ${pack.firstLimitationString}`}</span>
+                      </span>
+                    ) : null}
+                    {pack.secondPrice ? (
+                      <span>
+                        <span
+                          className={styles.total_price}
+                        >{`${divideNumberByPieces(pack.secondPrice)} ₽ `}</span>
+                        <span
+                          className={styles.pack_limit}
+                        >{`до ${pack.secondLimitationString}`}</span>
+                      </span>
+                    ) : null}
+                    {pack.thirdPrice ? (
+                      <span>
+                        <span
+                          className={styles.total_price}
+                        >{`${divideNumberByPieces(pack.thirdPrice)} ₽ `}</span>
+                        <span
+                          className={styles.pack_limit}
+                        >{`до ${pack.thirdLimitationString}`}</span>
+                      </span>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })
+        )}
       </div>
 
       {rSuccess && user ? (
