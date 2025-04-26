@@ -332,3 +332,9 @@
 .coach_info_item_mobi {
   font-size: 14px;
 }
+
+.images_scroller_mobi {
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+}

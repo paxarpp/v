@@ -3,10 +3,13 @@ import { useLoaderData } from 'react-router';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
 import { Control } from '../../../templates/controlArrow';
+import { useDeviceDetect } from '../../../hooks';
+import { ImagesMobileScroller } from '../../../templates/ImagesMobileScroller';
 import styles from '../index.module.css';
 
 export const ImagesList: React.FC = () => {
   const { images } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isMobile } = useDeviceDetect();
 
   const [startIndex, setStartIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(2);
@@ -29,7 +32,11 @@ export const ImagesList: React.FC = () => {
     }
   };
 
-  return (
+  return isMobile ? (
+    <div className={styles.images_scroller_mobi}>
+      <ImagesMobileScroller list={images || []} />
+    </div>
+  ) : (
     <div className={styles.images_scroller}>
       <Control show={!!images?.length} onLeft={onLeft} onRight={onRight} />
       {images
