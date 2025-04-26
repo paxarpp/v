@@ -30,7 +30,6 @@
   height: inherit;
   min-height: inherit;
   max-height: inherit;
-  object-fit: cover;
   box-sizing: border-box;
   border: 1px solid transparent;
 }

@@ -162,31 +162,35 @@ export const ProgramCamp = () => {
       >
         {isMobile ? (
           <div {...swipeHandlers}>
-            <div
-              key={camp?.program?.programs?.[currentIndex].id}
-              className={styles.program_card_mobi}
-            >
-              <img src={imgUrlBack} className={styles.back_card} />
-              <h4 className={styles.program_header_mobi}>
-                {camp?.program?.programs?.[currentIndex].dayOfWeek}
-              </h4>
-              <ul className={styles.program_info_list}>
-                {camp?.program?.programs?.[currentIndex].info
-                  .split(';')
-                  .map((p, i) => {
-                    return (
-                      <li key={i} className={styles.program_info_mobi}>
-                        {p}
-                      </li>
-                    );
-                  })}
-              </ul>
-            </div>
+            {camp?.program?.programs?.length ? (
+              <>
+                <div
+                  key={camp.program.programs[currentIndex].id}
+                  className={styles.program_card_mobi}
+                >
+                  <img src={imgUrlBack} className={styles.back_card} />
+                  <h4 className={styles.program_header_mobi}>
+                    {camp.program.programs[currentIndex].dayOfWeek}
+                  </h4>
+                  <ul className={styles.program_info_list}>
+                    {camp.program.programs[currentIndex].info
+                      .split(';')
+                      .map((p, i) => {
+                        return (
+                          <li key={i} className={styles.program_info_mobi}>
+                            {p}
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
 
-            <Dots
-              currentIndex={currentIndex}
-              listLength={camp?.program?.programs?.length || 0}
-            />
+                <Dots
+                  currentIndex={currentIndex}
+                  listLength={camp.program.programs.length}
+                />
+              </>
+            ) : null}
           </div>
         ) : (
           <>

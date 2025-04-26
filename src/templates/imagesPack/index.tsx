@@ -80,7 +80,7 @@ export const ImagePack: React.FC<IProps> = ({
       return [tail, ...prevCopy];
     });
   };
-  const imageIndx = Math.min(currentImage.length, 1);
+  const imageIndx = Math.min(currentImage.length - 1, 1);
 
   const onLeftM = () => {
     if (!currentImage.length) return;
@@ -114,17 +114,17 @@ export const ImagePack: React.FC<IProps> = ({
     <div className={className}>
       <div className={styles.info_img_wrapper} style={size}>
         {isMobile ? (
-          <div {...swipeHandlers}>
+          <div {...swipeHandlers} style={size}>
             <img
-              src={createImageUrl(currentImage[currentIndex].url)}
-              alt={currentImage[currentIndex].name}
+              src={createImageUrl(currentImage[currentIndex]?.url)}
+              alt={currentImage[currentIndex]?.name}
               className={styles.info_current_img}
             />
           </div>
         ) : (
           <img
-            src={createImageUrl(currentImage[imageIndx].url)}
-            alt={currentImage[imageIndx].name}
+            src={createImageUrl(currentImage[imageIndx]?.url)}
+            alt={currentImage[imageIndx]?.name}
             className={styles.info_current_img}
           />
         )}
