@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
-import { useSwipeable } from 'react-swipeable';
 import { Route } from '../+types';
 import { useDeviceDetect } from '../../../hooks';
 import { Control } from '../../../templates/controlArrow';
 import { CampCard } from '../../../templates/CampCard';
+import { CampsMobileScroller } from '../../../templates/CampMobileScroller';
 import styles from '../index.module.css';
 
 export const CampsScroller: React.FC = () => {
@@ -31,8 +31,6 @@ const CampsTemplate = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(2);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const onLeft = () => {
     if (!home?.camps.length) return;
     setStartIndex((prev) => (prev === 0 ? 0 : prev - 1));
@@ -52,24 +50,6 @@ const CampsTemplate = () => {
     }
   };
 
-  const onLeftM = () => {
-    if (!home?.camps.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
-  };
-
-  const onRightM = () => {
-    if (!home?.camps.length) return;
-    if (currentIndex < home.camps.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
-
   if (!home?.camps.length) return null;
 
   return (
@@ -80,35 +60,7 @@ const CampsTemplate = () => {
         show={!!home?.camps.length && !isMobile}
       />
       {isMobile ? (
-        <div {...swipeHandlers}>
-          <CampCard
-            key={home.camps[currentIndex].id}
-            id={home.camps[currentIndex].id}
-            name={home.camps[currentIndex].name}
-            dateString={home.camps[currentIndex].dateString}
-            url={home.camps[currentIndex].imageCart?.url}
-            isMobile={isMobile}
-          />
-          <div className={styles.dots}>
-            <span
-              className={currentIndex === 0 ? styles.dot_active : styles.dot}
-            ></span>
-            <span
-              className={
-                currentIndex != 0 && currentIndex < home.camps.length - 1
-                  ? styles.dot_active
-                  : styles.dot
-              }
-            ></span>
-            <span
-              className={
-                currentIndex === home.camps.length - 1
-                  ? styles.dot_active
-                  : styles.dot
-              }
-            ></span>
-          </div>
-        </div>
+        <CampsMobileScroller list={home?.camps || []} />
       ) : (
         home?.camps
           .filter((_, i) => i >= startIndex && i <= lastIndex)
