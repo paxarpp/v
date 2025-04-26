@@ -487,3 +487,23 @@
   margin-top: 10px;
   font-weight: 400;
 }
+
+.dots {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.dot_active,
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #D4D4D4;
+}
+
+.dot_active {
+  background-color: #888888;
+}
