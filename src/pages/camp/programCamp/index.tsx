@@ -11,7 +11,9 @@ import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { Control } from '../../../templates/controlArrow';
 import { useDeviceDetect } from '../../../hooks';
+import { useSwipeable } from 'react-swipeable';
 import styles from '../index.module.css';
+import { Dots } from '../../../templates/Dots';
 
 export const ProgramCamp = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
@@ -81,6 +83,26 @@ export const ProgramCamp = () => {
     updP();
   };
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onLeftM = () => {
+    if (!camp?.program?.programs?.length) return;
+    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+  };
+
+  const onRightM = () => {
+    if (!camp?.program?.programs?.length) return;
+    if (currentIndex < camp?.program?.programs?.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: onRightM,
+    onSwipedRight: onLeftM,
+    trackMouse: true,
+  });
+
   return (
     <div>
       {isOpen ? (
@@ -135,35 +157,74 @@ export const ProgramCamp = () => {
       >
         Программа кемпа
       </h2>
-      <div className={styles.programs_wrap}>
-        <Control show={programsLength > 4} onLeft={onLeft} onRight={onRight} />
-        {camp?.program?.programs
-          ?.filter((_, i) => i >= startIndex && i + 1 <= startIndex + 4)
-          .map((program) => {
-            return (
-              <div key={program.id} className={styles.program_card}>
-                <img src={imgUrlBack} className={styles.back_card} />
-                <h4 className={styles.program_header}>
-                  {program.dayOfWeek}
-                  {isAdmin ? (
-                    <Setting
-                      onClick={() => openModal(program)}
-                      className={styles.setting}
-                    />
-                  ) : null}
-                </h4>
-                <ul className={styles.program_info_list}>
-                  {program.info.split(';').map((p, i) => {
+      <div
+        className={isMobile ? styles.programs_wrap_mobi : styles.programs_wrap}
+      >
+        {isMobile ? (
+          <div {...swipeHandlers}>
+            <div
+              key={camp?.program?.programs?.[currentIndex].id}
+              className={styles.program_card_mobi}
+            >
+              <img src={imgUrlBack} className={styles.back_card} />
+              <h4 className={styles.program_header_mobi}>
+                {camp?.program?.programs?.[currentIndex].dayOfWeek}
+              </h4>
+              <ul className={styles.program_info_list}>
+                {camp?.program?.programs?.[currentIndex].info
+                  .split(';')
+                  .map((p, i) => {
                     return (
-                      <li key={i} className={styles.program_info}>
+                      <li key={i} className={styles.program_info_mobi}>
                         {p}
                       </li>
                     );
                   })}
-                </ul>
-              </div>
-            );
-          })}
+              </ul>
+            </div>
+
+            <Dots
+              currentIndex={currentIndex}
+              listLength={camp?.program?.programs?.length || 0}
+            />
+          </div>
+        ) : (
+          <>
+            <Control
+              show={programsLength > 4}
+              onLeft={onLeft}
+              onRight={onRight}
+            />
+            {camp?.program?.programs
+              ?.filter((_, i) => i >= startIndex && i + 1 <= startIndex + 4)
+              .map((program) => {
+                return (
+                  <div key={program.id} className={styles.program_card}>
+                    <img src={imgUrlBack} className={styles.back_card} />
+                    <h4 className={styles.program_header}>
+                      {program.dayOfWeek}
+                      {isAdmin ? (
+                        <Setting
+                          onClick={() => openModal(program)}
+                          className={styles.setting}
+                        />
+                      ) : null}
+                    </h4>
+                    <ul className={styles.program_info_list}>
+                      {program.info.split(';').map((p, i) => {
+                        return (
+                          <li key={i} className={styles.program_info}>
+                            {p}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
+          </>
+        )}
+
         {isAdmin ? (
           <div className={styles.program_card_add}>
             <RoundAdd onClick={() => openModal()} />

@@ -522,6 +522,7 @@ input_field_small,
   margin: 0 0 30px 0;
 }
 
+.program_card_mobi,
 .program_card {
   width: 420px;
   min-width: 420px;
@@ -531,6 +532,12 @@ input_field_small,
   text-align: left;
   position: relative;
   overflow: hidden;
+}
+
+.program_card_mobi {
+  width: 335px;
+  min-width: 335px;
+  height: 200px;
 }
 
 .program_card_add {
@@ -546,6 +553,7 @@ input_field_small,
   cursor: pointer;
 }
 
+.program_header_mobi,
 .program_header {
   text-align: center;
   box-sizing: border-box;
@@ -556,20 +564,34 @@ input_field_small,
   border: 1px solid #888888;
   color: #FFFFFF;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
+.program_header_mobi {
+  font-size: 16px;
+  line-height: 150%;
+  padding: 12px;
+}
+
+.program_info_mobi,
 .program_info {
   font-size: 20px;
   color: #FFFFFF;
   margin-bottom: 5px;
 }
 
+.program_info_mobi {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
 .program_info_list {
   overflow: auto;
   height: 210px;
 }
 
+.programs_wrap_mobi,
 .programs_wrap {
   position: relative;
   display: flex;
@@ -578,6 +600,12 @@ input_field_small,
   justify-content: flex-start;
   gap: 25px;
   margin: 0 75px;
+}
+
+.programs_wrap_mobi {
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 0 20px;
 }
 
 .coach_info_item_mobi,
