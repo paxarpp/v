@@ -3,6 +3,7 @@
   overflow: hidden;
   position: relative;
   z-index: 0;
+  background-color: #2e2f38;
 }
 
 .row_prevew_images {
@@ -16,6 +17,7 @@
   min-height: inherit;
   max-height: inherit;
   overflow: hidden;
+  background-color: #2e2f38;
 }
 
 .info_img_wrapper_stub,
@@ -32,6 +34,7 @@
   max-height: inherit;
   box-sizing: border-box;
   border: 1px solid transparent;
+  object-fit: contain;
 }
 
 .prevew_img_current {
