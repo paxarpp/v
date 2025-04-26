@@ -66,6 +66,7 @@
 
 .info_row_mobi {
   flex-flow: column nowrap;
+  align-items: center;
 }
 
 .info_wrap {
@@ -152,6 +153,7 @@
   flex-flow: column nowrap;
   gap: 20px;
   margin: 0 20px 30px 20px;
+  align-items: center;
 }
 
 .pack_card {
