@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import { createImageUrl } from '../../constants';
 import styles from './index.module.css';
 import { Control } from '../controlArrow';
+import { Dots } from '../Dots';
 
 interface IProps {
   images?:
@@ -18,6 +20,7 @@ interface IProps {
   heightPreview?: number;
   gapPreview?: number;
   marginPreviewTop?: number;
+  isMobile?: boolean;
 }
 
 export const ImagePack: React.FC<IProps> = ({
@@ -29,6 +32,7 @@ export const ImagePack: React.FC<IProps> = ({
   heightPreview = 80,
   gapPreview = 30,
   marginPreviewTop = 50,
+  isMobile = false,
 }) => {
   const [currentImage, setCurrentImage] = useState<
     {
@@ -37,6 +41,7 @@ export const ImagePack: React.FC<IProps> = ({
       url: string;
     }[]
   >([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (images?.length) {
@@ -77,9 +82,30 @@ export const ImagePack: React.FC<IProps> = ({
   };
   const imageIndx = Math.min(currentImage.length, 1);
 
+  const onLeftM = () => {
+    if (!currentImage.length) return;
+    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+  };
+
+  const onRightM = () => {
+    if (!currentImage.length) return;
+    if (currentIndex < currentImage.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: onRightM,
+    onSwipedRight: onLeftM,
+    trackMouse: true,
+  });
+
   return isEmpty ? (
     <div className={className}>
-      <div className={styles.info_img_wrapper_stub} style={size}></div>
+      <div className={styles.info_img_wrapper_stub} style={size} />
+      {isMobile ? (
+        <Dots currentIndex={currentIndex} listLength={0} withoutMT={true} />
+      ) : null}
       <div className={styles.row_prevew_images} style={sizeRow}>
         <div className={styles.prevew_img_wrapper_stub} style={sizePreviw} />
       </div>
@@ -87,17 +113,36 @@ export const ImagePack: React.FC<IProps> = ({
   ) : (
     <div className={className}>
       <div className={styles.info_img_wrapper} style={size}>
-        <img
-          src={createImageUrl(currentImage[imageIndx].url)}
-          alt={currentImage[imageIndx].name}
-          className={styles.info_current_img}
-        />
-        <Control
-          onLeft={onLeft}
-          onRight={onRight}
-          show={!!currentImage.length}
-        />
+        {isMobile ? (
+          <div {...swipeHandlers}>
+            <img
+              src={createImageUrl(currentImage[currentIndex].url)}
+              alt={currentImage[currentIndex].name}
+              className={styles.info_current_img}
+            />
+          </div>
+        ) : (
+          <img
+            src={createImageUrl(currentImage[imageIndx].url)}
+            alt={currentImage[imageIndx].name}
+            className={styles.info_current_img}
+          />
+        )}
+        {isMobile ? null : (
+          <Control
+            onLeft={onLeft}
+            onRight={onRight}
+            show={!!currentImage.length}
+          />
+        )}
       </div>
+      {isMobile ? (
+        <Dots
+          currentIndex={currentIndex}
+          listLength={currentImage.length}
+          withoutMT={true}
+        />
+      ) : null}
       <div className={styles.row_prevew_images} style={sizeRow}>
         {currentImage
           ? currentImage.map((image, indx) =>
@@ -111,7 +156,7 @@ export const ImagePack: React.FC<IProps> = ({
                     src={createImageUrl(image.url)}
                     alt={image.name}
                     className={
-                      indx === imageIndx
+                      !isMobile && indx === imageIndx
                         ? styles.prevew_img_current
                         : styles.prevew_img
                     }
