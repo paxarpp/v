@@ -378,7 +378,6 @@
   padding: 0 20px;
 }
 
-.images_scroller_mobi,
 .images_scroller {
   position: relative;
   display: flex;
@@ -393,7 +392,9 @@
 }
 
 .images_scroller_mobi {
-  margin: 50px 0;
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .image_card {

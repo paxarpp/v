@@ -4,6 +4,7 @@ import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
 import { useDeviceDetect } from '../../../hooks';
 import { Control } from '../../../templates/controlArrow';
+import { ImagesMobileScroller } from '../../../templates/ImagesMobileScroller';
 import styles from '../index.module.css';
 
 export const Videos = () => {
@@ -35,13 +36,12 @@ export const Videos = () => {
     setStartIndex(startIndex + 1);
   };
 
-  return (
-    <div
-      className={
-        isMobile ? styles.images_scroller_mobi : styles.images_scroller
-      }
-      ref={divRef}
-    >
+  return isMobile ? (
+    <div className={styles.images_scroller_mobi}>
+      <ImagesMobileScroller list={about?.gallery || []} />
+    </div>
+  ) : (
+    <div className={styles.images_scroller} ref={divRef}>
       <Control
         onLeft={onLeft}
         onRight={onRight}
