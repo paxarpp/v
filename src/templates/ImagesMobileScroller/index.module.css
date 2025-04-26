@@ -17,5 +17,6 @@
 .stub_image {
   width: 100%;
   height: 100%;
-  background-color: #888888;
+  background-color: #2e2f38;
+  border-radius: 2px;
 }
