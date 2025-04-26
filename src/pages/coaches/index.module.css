@@ -86,6 +86,7 @@
 }
 
 .coaches_list_mobi {
+  justify-content: center;
   margin: 50px 20px;
   gap: 20px;
 }
