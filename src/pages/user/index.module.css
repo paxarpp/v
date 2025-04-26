@@ -31,6 +31,7 @@
   padding: 10px;
 }
 
+.flex_row_mobi,
 .flex_row_info,
 .flex_row {
   display: flex;
@@ -41,14 +42,26 @@
   margin: 0 75px;
 }
 
+.flex_row_mobi {
+  margin: 0 20px;
+}
+
 .flex_row_info {
   width: 50%;
 }
+.flex_row_info_mobi {
+  width: 40%;
+}
 
+.flex_col_action_mobi
 .flex_col_action {
   display: flex;
   flex-flow: column nowrap;
   width: 50%;
+}
+
+.flex_col_action_mobi {
+  width: 60%;
 }
 
 .avatar_wrapper {
@@ -61,9 +74,21 @@
   right: 10px;
 }
 
+.avatar_basket_mobi {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+}
+
 .avatar_basket {
   top: 10px;
   color: #F2DB51;
+}
+
+.avatar_reload_mobi {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
 }
 
 .avatar_reload {
@@ -75,15 +100,39 @@
   height: 360px;
 }
 
+.avatar_mobi {
+  width: 103px;
+  height: 103px;
+  border-radius: 50%;
+}
+
 .dump_avatar {
   width: 270px;
   height: 270px;
   padding: 50px 0;
 }
 
+.dump_avatar_mobi {
+  width: 91px;
+  height: 91px;
+  padding: 6px 6px;
+}
+
+.user_info_mobi,
 .user_info {
   text-align: left;
   list-style-type: none;
+}
+
+.user_info_mobi {
+  font-size: 12px;
+  line-height: 150%;
+  font-weight: 600;
+  padding-left: 0;
+}
+
+.user_info_mobi > li + li {
+  margin-top: 2px;
 }
 
 .user_info > li + li {
@@ -92,6 +141,17 @@
 
 .icon_edit_info {
   cursor: pointer;
+}
+
+.icon_edit_info_title_mobi {
+  font-size: 12px;
+  line-height: 150%;
+  font-weight: 600;
+}
+
+.icon_edit_info_mobi {
+  width: 12px;
+  height: 12px;
 }
 
 .scroll_arrow_right,

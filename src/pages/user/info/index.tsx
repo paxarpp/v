@@ -12,12 +12,14 @@ import { ModalAvatar } from './modalAvatar';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
 import { creatorRequest } from '../../../api';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const Info = () => {
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { id } = useParams<{ id: string }>();
   const revalidator = useRevalidator();
+  const { isMobile } = useDeviceDetect();
 
   const [isOpenEd, setOpenEd] = useState(false);
   const [isOpenChP, setOpenChP] = useState(false);
@@ -69,46 +71,107 @@ export const Info = () => {
       {isOpenChP ? <ModalPass closeModal={closeModal} /> : null}
       {isOpenAvatar ? <ModalAvatar closeModal={closeModal} /> : null}
       <h2>{'Личный кабинет'}</h2>
-      <div className={styles.flex_row}>
-        <div className={styles.flex_row_info}>
-          <span className={styles.avatar_wrapper}>
-            {hasAvatar ? (
-              <Basket onClick={deleteAvatar} className={styles.avatar_basket} />
-            ) : null}
-            <Reload onClick={openEditAvatar} className={styles.avatar_reload} />
-            {hasAvatar ? (
-              <img
-                src={createImageUrl(user?.avatar?.url)}
-                className={styles.avatar}
-              />
-            ) : (
-              <Avatar className={styles.dump_avatar} />
-            )}
-          </span>
 
-          <ul className={styles.user_info}>
-            <li>{`Имя: ${user?.fullName}`}</li>
-            <li>{`Дата рождения: ${user?.birthday}`}</li>
-            <li>{`E-mail: ${user?.email}`}</li>
-            <li>
-              {`Телефон: ${user?.telephone}`}
+      {isMobile ? (
+        <div className={styles.flex_row_mobi}>
+          <div className={styles.flex_row_info_mobi}>
+            <span className={styles.avatar_wrapper}>
+              {hasAvatar ? (
+                <Basket
+                  onClick={deleteAvatar}
+                  className={styles.avatar_basket_mobi}
+                />
+              ) : null}
+              <Reload
+                onClick={openEditAvatar}
+                className={styles.avatar_reload_mobi}
+              />
+              {hasAvatar ? (
+                <img
+                  src={createImageUrl(user?.avatar?.url)}
+                  className={styles.avatar_mobi}
+                />
+              ) : (
+                <Avatar className={styles.dump_avatar_mobi} />
+              )}
+            </span>
+            <span className={styles.icon_edit_info_title_mobi}>
+              {'Сменить пароль'}
               <Pencil
-                onClick={openEditInfo}
+                onClick={openEditLogin}
+                className={styles.icon_edit_info_mobi}
+              />
+            </span>
+            <button className={styles.button} onClick={onLogout}>
+              {'Выйти'}
+            </button>
+          </div>
+          <div className={styles.flex_col_action}>
+            <ul className={styles.user_info_mobi}>
+              <li>{`Имя: ${user?.fullName}`}</li>
+              <li>{`Дата рождения: ${user?.birthday}`}</li>
+              <li>{`E-mail: ${user?.email}`}</li>
+              <li>
+                {`Телефон: ${user?.telephone}`}
+                <Pencil
+                  onClick={openEditInfo}
+                  className={styles.icon_edit_info_mobi}
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.flex_row}>
+          <div className={styles.flex_row_info}>
+            <span className={styles.avatar_wrapper}>
+              {hasAvatar ? (
+                <Basket
+                  onClick={deleteAvatar}
+                  className={styles.avatar_basket}
+                />
+              ) : null}
+              <Reload
+                onClick={openEditAvatar}
+                className={styles.avatar_reload}
+              />
+              {hasAvatar ? (
+                <img
+                  src={createImageUrl(user?.avatar?.url)}
+                  className={styles.avatar}
+                />
+              ) : (
+                <Avatar className={styles.dump_avatar} />
+              )}
+            </span>
+
+            <ul className={styles.user_info}>
+              <li>{`Имя: ${user?.fullName}`}</li>
+              <li>{`Дата рождения: ${user?.birthday}`}</li>
+              <li>{`E-mail: ${user?.email}`}</li>
+              <li>
+                {`Телефон: ${user?.telephone}`}
+                <Pencil
+                  onClick={openEditInfo}
+                  className={styles.icon_edit_info}
+                />
+              </li>
+            </ul>
+          </div>
+          <div className={styles.flex_col_action}>
+            <span>
+              {'Сменить пароль'}
+              <Pencil
+                onClick={openEditLogin}
                 className={styles.icon_edit_info}
               />
-            </li>
-          </ul>
+            </span>
+            <button className={styles.button} onClick={onLogout}>
+              {'Выйти'}
+            </button>
+          </div>
         </div>
-        <div className={styles.flex_col_action}>
-          <span>
-            {'Сменить пароль'}
-            <Pencil onClick={openEditLogin} className={styles.icon_edit_info} />
-          </span>
-          <button className={styles.button} onClick={onLogout}>
-            {'Выйти'}
-          </button>
-        </div>
-      </div>
+      )}
     </>
   );
 };
