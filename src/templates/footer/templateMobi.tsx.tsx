@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import { createLinkTg } from '../../constants';
 import { IProps } from '.';
 import styles from './index.module.css';
+import { ScrollUpTo } from '../scrollUpTo';
 
 export const TemplateMobi: React.FC<IProps> = ({
   linkTg,
@@ -45,6 +46,7 @@ export const TemplateMobi: React.FC<IProps> = ({
       </div>
 
       <div>
+        <ScrollUpTo />
         <span className={styles.menu_title_mobi}>Пляжный волейбол</span>
         <ul className={styles.menu_mobi}>
           <li>
