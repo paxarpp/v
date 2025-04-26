@@ -6,12 +6,33 @@
   border-bottom: 1px solid #D4D4D4;
 }
 
+.block_icon_mobile {
+  max-width: 161px;
+  width: 161px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  border-bottom: 1px solid rgba(212, 212, 212, 1);
+  box-sizing: border-box;
+}
+
+.info_row_mobi,
 .info_row {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   gap: 20px;
   justify-content: center;
   margin-bottom: 150px;
+}
+
+
+.info_row_mobi {
+  margin-bottom: 50px;
+}
+
+.info_icon_mobi {
+  width: 30px;
+  height: 30px;
 }
 
 .camp_card_add {
@@ -41,6 +62,14 @@
   justify-content: space-between;
   margin: 150px 75px;
   gap: 30px;
+}
+
+.camp_list_mobi {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 50px 0;
+  gap: 20px;
 }
 
 .edit_camp_content {
@@ -209,8 +238,24 @@
   margin: 50px 0;
 }
 
+.title_mobi {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 30px 0;
+  color: #D4D4D4;
+  line-height: 150%;
+}
+
 .camp_info {
   font-size: 22px;
   font-weight: 600;
   color: #FFFFFF;
+}
+
+.camp_info_mobi {
+  font-size: 16px;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 150%;
+  height: auto;
 }

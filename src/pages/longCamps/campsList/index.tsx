@@ -10,7 +10,7 @@ import styles from '../index.module.css';
 
 export const CampsList = () => {
   const { isAdmin } = useUser();
-    const { isMobile } = useDeviceDetect();
+  const { isMobile } = useDeviceDetect();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editCampId, setEditCampId] = useState<string | null>(null);
 
