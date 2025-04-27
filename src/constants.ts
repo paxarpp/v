@@ -2,7 +2,9 @@ import { HOST } from './api';
 
 export const createLinkTg = (link?: string) => {
   return link
-    ? `tg://resolve?domain=${link[0] === '@' ? link.slice(1) : link}`
+    ? link[0] === '@'
+      ? `tg://resolve?domain=${link.slice(1)}`
+      : link
     : 'https://t.me/magicvolleyrz';
 };
 

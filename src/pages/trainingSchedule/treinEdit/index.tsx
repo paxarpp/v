@@ -141,6 +141,9 @@ export const TreinEdit: React.FC<{
                 );
               }}
               className={styles.input_field_sm}
+              title={
+                'в формате: @имя_поль-я или ссылка на канал: https://t.me/...'
+              }
             />
           </div>
         </div>
