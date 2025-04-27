@@ -5,7 +5,7 @@ import { api } from '../../../api/api';
 import { creatorRequest } from '../../../api';
 import { ISheduleGroup } from '../interfaces';
 import { useUser } from '../../../context';
-import { weekDays } from '../sheduleTable';
+import { weekDays } from '../sheduleTable/const';
 import styles from '../index.module.css';
 
 export const nameDay: Record<(typeof weekDays)['number'], string> = {

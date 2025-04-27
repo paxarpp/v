@@ -2,8 +2,9 @@ import { CallMe } from '../../templates/callme';
 import { Price } from './price';
 import { SheduleTable } from './sheduleTable';
 import { pl } from '../../api/pageLoader';
-import styles from './index.module.css';
 import { IPrice, IShedule } from './interfaces';
+import { useDeviceDetect } from '../../hooks';
+import styles from './index.module.css';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
@@ -17,9 +18,12 @@ export async function clientLoader() {
 }
 
 export default function Shedule() {
+  const { isMobile } = useDeviceDetect();
   return (
     <>
-      <h1 className={styles.title}>Расписание тренировок</h1>
+      <h1 className={isMobile ? styles.title_mobi : styles.title}>
+        Расписание тренировок
+      </h1>
 
       <SheduleTable />
 

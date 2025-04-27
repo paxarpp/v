@@ -8,19 +8,15 @@ import { Days } from './days';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
 import { TreinEdit } from '../treinEdit';
-import styles from '../index.module.css';
 import { createLinkTg } from '../../../constants';
-
-export const weekDays = [
-  'MONDAY',
-  'TUESDAY',
-  'WEDNESDAY',
-  'THURSDAY',
-  'FRIDAY',
-] as const;
+import { MobileTemplate } from './mobileTemplate';
+import { useDeviceDetect } from '../../../hooks';
+import { weekDays } from './const';
+import styles from '../index.module.css';
 
 export const SheduleTable = () => {
   const { isAdmin } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editTreinId, setEditTreinId] = useState<string | null>(null);
 
@@ -29,7 +25,9 @@ export const SheduleTable = () => {
     setIsOpen(false);
   };
 
-  return (
+  return isMobile ? (
+    <MobileTemplate />
+  ) : (
     <div className={styles.shedule_table}>
       <Days />
       {open ? (
