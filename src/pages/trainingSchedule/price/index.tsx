@@ -7,10 +7,12 @@ import { Route } from '../+types';
 import { useUser } from '../../../context';
 import { PriceEdit } from '../priceEdit';
 import imgUrl from '../../../assets/price_ball.jpg';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const Price = () => {
   const { isAdmin } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [open, setIsOpen] = useState<boolean>(false);
   const [editPriceId, setEditPriceId] = useState<string | null>(null);
 
@@ -20,14 +22,17 @@ export const Price = () => {
   };
 
   return (
-    <div className={styles.price_ball}>
-      <h1 className={styles.price_title}>Стоимость тренировок</h1>
-      <img className={styles.price_back} src={imgUrl} />
+    <div className={isMobile ? '' : styles.price_ball}>
+      <h1 className={isMobile ? styles.price_title_mobi : styles.price_title}>
+        Стоимость тренировок
+      </h1>
+      {isMobile ? null : <img className={styles.price_back} src={imgUrl} />}
       {open ? (
         <PriceEdit priceId={editPriceId} onClose={closePriceEdit} />
       ) : null}
       <PriceTemplate
         isAdmin={isAdmin}
+        isMobile={isMobile}
         setIsOpen={setIsOpen}
         setEditPriceId={setEditPriceId}
       />
@@ -37,9 +42,10 @@ export const Price = () => {
 
 const PriceTemplate: React.FC<{
   isAdmin: boolean;
+  isMobile: boolean;
   setIsOpen: (open: boolean) => void;
   setEditPriceId: (id: string) => void;
-}> = ({ isAdmin, setIsOpen, setEditPriceId }) => {
+}> = ({ isAdmin, setIsOpen, setEditPriceId, isMobile }) => {
   const { prices } = useLoaderData<Route.ComponentProps['loaderData']>();
 
   const openEditPrice = (id: string) => {
@@ -52,11 +58,14 @@ const PriceTemplate: React.FC<{
   };
 
   return (
-    <div className={styles.price_list}>
+    <div className={isMobile ? styles.price_list_mobi : styles.price_list}>
       {prices?.map((pr, i) => {
         return (
-          <div key={`p-${pr.id}${i}`} className={styles.price_item}>
-            <p>
+          <div
+            key={`p-${pr.id}${i}`}
+            className={isMobile ? styles.price_item_mobi : styles.price_item}
+          >
+            <p className={isMobile ? styles.price_item_title_mobi : ''}>
               {pr.name}
               {isAdmin ? (
                 <Setting
@@ -65,27 +74,47 @@ const PriceTemplate: React.FC<{
                 />
               ) : null}
             </p>
-            <div className={styles.price_prices}>
+            <div
+              className={
+                isMobile ? styles.price_prices_mobi : styles.price_prices
+              }
+            >
               {pr.prices.map((p, index) => {
                 return (
                   <Fragment key={`sub-${p.id}${index}`}>
                     <div className={styles.price_card}>
-                      <span>{p.title}</span>
+                      <span
+                        className={isMobile ? styles.price_card_title_mobi : ''}
+                      >
+                        {p.title}
+                      </span>
                       {p.subTitle ? (
-                        <span className={styles.price_message}>
+                        <span
+                          className={
+                            isMobile
+                              ? styles.price_message_mobi
+                              : styles.price_message
+                          }
+                        >
                           {p.subTitle}
                         </span>
                       ) : (
-                        <span className={styles.price_message_empty} />
+                        <span
+                          className={
+                            isMobile
+                              ? styles.price_message_empty_mobi
+                              : styles.price_message_empty
+                          }
+                        />
                       )}
-                      <span>{p.price}{' '}₽</span>
+                      <span>{p.price} ₽</span>
                     </div>
                     {index === 0 ? <Ball /> : null}
                   </Fragment>
                 );
               })}
             </div>
-            <div className={styles.sale}>
+            <div className={isMobile ? styles.sale_mobi : styles.sale}>
               <span>{'*студентам очной формы обучения скидка 10 %'}</span>
               <br />
               <span>{'*многодетным семьям скидка 10 %'}</span>
