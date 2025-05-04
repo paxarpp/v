@@ -24,8 +24,8 @@ export const Info = () => {
           height={isMobile ? 231 : undefined}
           widthPreview={isMobile ? 60 : undefined}
           heightPreview={isMobile ? 41 : undefined}
-          gapPreview={isMobile ? 10 : undefined}
-          marginPreviewTop={isMobile ? 8 : undefined}
+          gapPreview={isMobile ? 8 : undefined}
+          marginPreviewTop={isMobile ? 5 : undefined}
           isMobile={isMobile}
         />
         <ul className={isMobile ? styles.info_list_mobi : styles.info_list}>

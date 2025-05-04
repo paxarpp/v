@@ -104,7 +104,11 @@ export const ImagePack: React.FC<IProps> = ({
     <div className={className}>
       <div className={styles.info_img_wrapper_stub} style={size} />
       {isMobile ? (
-        <Dots currentIndex={currentIndex} listLength={0} withoutMT={true} />
+        <Dots
+          currentIndex={currentIndex}
+          listLength={0}
+          className={styles.dots_mt5}
+        />
       ) : null}
       <div className={styles.row_prevew_images} style={sizeRow}>
         <div className={styles.prevew_img_wrapper_stub} style={sizePreviw} />
@@ -140,7 +144,7 @@ export const ImagePack: React.FC<IProps> = ({
         <Dots
           currentIndex={currentIndex}
           listLength={currentImage.length}
-          withoutMT={true}
+          className={styles.dots_mt5}
         />
       ) : null}
       <div className={styles.row_prevew_images} style={sizeRow}>

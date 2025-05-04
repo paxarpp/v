@@ -161,8 +161,8 @@ export const Activities = () => {
               height={isMobile ? 231 : 254}
               widthPreview={isMobile ? 60 : 74}
               heightPreview={isMobile ? 41 : 50}
-              gapPreview={13}
-              marginPreviewTop={2}
+              gapPreview={isMobile ? 8 : 13}
+              marginPreviewTop={isMobile ? 5 : 8}
               isMobile={isMobile}
             />
           </div>

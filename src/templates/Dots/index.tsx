@@ -3,10 +3,10 @@ import styles from './index.module.css';
 export const Dots: React.FC<{
   currentIndex: number;
   listLength: number;
-  withoutMT?: boolean;
-}> = ({ currentIndex, listLength, withoutMT }) => {
+  className?: string;
+}> = ({ currentIndex, listLength, className }) => {
   return (
-    <div className={withoutMT ? styles.dots_mt0 : styles.dots}>
+    <div className={`${styles.dots} ${className ? className : ''}`}>
       <span className={currentIndex === 0 ? styles.dot_active : styles.dot} />
       <span
         className={

@@ -1,14 +1,9 @@
-.dots_mt0,
 .dots {
   display: flex;
   flex-flow: row nowrap;
   gap: 1px;
   margin-top: 15px;
   justify-content: center;
-}
-
-.dots_mt0 {
-  margin-top: 0;
 }
 
 .dot_active,

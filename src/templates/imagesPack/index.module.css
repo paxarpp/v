@@ -56,3 +56,7 @@
 .scroll_arrow_right {
   right: 4px;
 }
+
+.dots_mt5 {
+  margin-top: 5px !important;
+}
