@@ -37,7 +37,7 @@
   display: none;
 }
 
-.group_mobi:hover .group_content_mobi {
+.show_group_content_mobi {
   display: block;
   height: auto;
   position: relative;
