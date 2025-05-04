@@ -165,7 +165,7 @@ export const Packages = () => {
                     </span>
                   </div>
                   {showPricesInfo[camp?.packages[currentIndex].packageId] ? (
-                    <div className={styles.pack_prices_info}>
+                    <div className={styles.pack_prices_info_mobi}>
                       {camp?.packages[currentIndex].firstPrice ? (
                         <span>
                           <span

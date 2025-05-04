@@ -211,7 +211,8 @@
   border-bottom: 1px solid #F2DB51;
   padding-bottom: 8px;
   color: #FFFFFF;
-  height: 229px;
+  max-height: 229px;
+  min-height: 100px;
   overflow: auto;
   margin: 8px 0;
 }
@@ -417,10 +418,11 @@
   font-size: 12px;
 }
 
+.pack_prices_info_mobi,
 .pack_prices_info {
   display: flex;
   flex-flow: column nowrap;
-  padding: 32px 0 32px 110px;
+  padding: 55px 0 55px 110px;
   border-radius: 8px;
   border: 1px solid #F2DB51;
   background: #191A26;
@@ -430,6 +432,10 @@
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.pack_prices_info_mobi {
+  padding: 22px 0 22px 80px;
 }
 
 .pack_limit {
