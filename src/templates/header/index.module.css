@@ -109,6 +109,7 @@
   justify-content: space-between;
   align-items: flex-start;
   z-index: 999;
+  padding-left: 10px;
 }
 
 .menu_popap > li {
@@ -177,10 +178,10 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: black;
+  background: #212436;
   width: 300px;
-  opacity: 0.9;
   z-index: 999;
+  padding: 30px 20px;
 }
 
 .user_bell {
