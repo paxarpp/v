@@ -54,7 +54,8 @@
 }
 
 .row_activities_mobi {
-  margin: 0 20px;
+  margin: 50px 20px 0 20px;
+  gap: 20px;
 }
 
 .activity_card_add,
@@ -98,6 +99,7 @@
   font-size: 16px;
   line-height: 150%;
   gap: 10px;
+  height: 48px;
 }
 
 .ball {
@@ -105,7 +107,8 @@
 }
 
 .ball_mobi {
-  min-width: 30px
+  min-width: 30px;
+  height: 30px;
 }
 
 .master_block_mobi,
