@@ -639,6 +639,11 @@ input_field_small,
   height: 210px;
 }
 
+.program_info_list_mobi {
+  overflow: auto;
+  height: 120px;
+}
+
 .programs_wrap_mobi,
 .programs_wrap {
   position: relative;

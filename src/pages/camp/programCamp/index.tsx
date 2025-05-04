@@ -172,7 +172,7 @@ export const ProgramCamp = () => {
                   <h4 className={styles.program_header_mobi}>
                     {camp.program.programs[currentIndex].dayOfWeek}
                   </h4>
-                  <ul className={styles.program_info_list}>
+                  <ul className={styles.program_info_list_mobi}>
                     {camp.program.programs[currentIndex].info
                       .split(';')
                       .map((p, i) => {
