@@ -395,7 +395,7 @@
 }
 
 .images_scroller_mobi {
-  margin: 0 20px;
+  margin: 50px 20px 0 20px;
   display: flex;
   justify-content: center;
 }
@@ -462,4 +462,8 @@
   font-size: 16px;
   line-height: 150%;
   font-weight: 400;
+}
+
+.dots_mt10 {
+  margin-top: 10px !important;
 }

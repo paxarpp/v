@@ -56,7 +56,11 @@ export const ImagesMobileScroller: React.FC<IProps> = ({ list }) => {
         </div>
       </div>
 
-      <Dots currentIndex={currentIndex} listLength={list.length} />
+      <Dots
+        currentIndex={currentIndex}
+        listLength={list.length}
+        className={styles.dots_mt5}
+      />
     </div>
   );
 };

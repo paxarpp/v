@@ -12,6 +12,8 @@ import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
 import { Control } from '../../../templates/controlArrow';
+import { useSwipeable } from 'react-swipeable';
+import { Dots } from '../../../templates/Dots';
 import styles from '../index.module.css';
 
 export const Reviews = () => {
@@ -22,6 +24,7 @@ export const Reviews = () => {
   const { isAdmin, logout } = useUser();
   const [reviewOpen, setReviewOpen] = useState<boolean>(false);
   const [currentReview, setReview] = useState<IReview | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const openEditReview = (id?: string | null) => {
     if (id) {
@@ -122,6 +125,24 @@ export const Reviews = () => {
     }
   };
 
+  const onLeftM = () => {
+    if (!about?.reviews.length) return;
+    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+  };
+
+  const onRightM = () => {
+    if (!about?.reviews.length) return;
+    if (currentIndex < about?.reviews.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: onRightM,
+    onSwipedRight: onLeftM,
+    trackMouse: true,
+  });
+
   return (
     <div
       className={isMobile ? styles.review_wrapper_mobi : styles.review_wrapper}
@@ -182,56 +203,91 @@ export const Reviews = () => {
           </Modal>
         ) : null}
 
-        <Control
-          onLeft={onLeft}
-          onRight={onRight}
-          show={!!about?.reviews.length}
-        />
-        {about?.reviews
-          .filter((_, i) => i >= startIndex && i <= lastIndex)
-          .map((item, indx) => {
-            return (
-              <div
-                key={item.name + indx}
-                className={
-                  isMobile ? styles.review_card_mobi : styles.review_card
-                }
-              >
-                <div className={styles.card_row_user}>
-                  <img
-                    src={createImageUrl(item.image?.url)}
-                    alt="user"
-                    className={
-                      isMobile ? styles.review_img_mobi : styles.review_img
-                    }
-                  />
-                  <div className={styles.reviewer}>
-                    <span className={isMobile ? styles.reviewer_t : ''}>
-                      {item.name}
-                    </span>
-                    <span className={isMobile ? styles.reviewer_sub_t : ''}>
-                      {item.date}
-                    </span>
-                  </div>
-                  {isAdmin ? (
-                    <Setting
-                      onClick={() => openEditReview(item.image?.entityId)}
-                      className={styles.setting_review}
-                    />
-                  ) : null}
-                </div>
+        {isMobile ? (
+          <div {...swipeHandlers}>
+            {about?.reviews.length ? (
+              <>
                 <div
-                  className={
-                    isMobile
-                      ? styles.card_row_comment_mobi
-                      : styles.card_row_comment
-                  }
+                  key={about?.reviews[currentIndex].id}
+                  className={styles.review_card_mobi}
                 >
-                  {item.comment}
+                  <div className={styles.card_row_user}>
+                    <img
+                      src={createImageUrl(
+                        about?.reviews[currentIndex].image?.url,
+                      )}
+                      alt="user"
+                      className={styles.review_img_mobi}
+                    />
+                    <div className={styles.reviewer}>
+                      <span className={styles.reviewer_t}>
+                        {about?.reviews[currentIndex].name}
+                      </span>
+                      <span className={styles.reviewer_sub_t}>
+                        {about?.reviews[currentIndex].date}
+                      </span>
+                    </div>
+                    {isAdmin ? (
+                      <Setting
+                        onClick={() =>
+                          openEditReview(
+                            about?.reviews[currentIndex].image?.entityId,
+                          )
+                        }
+                        className={styles.setting_review}
+                      />
+                    ) : null}
+                  </div>
+                  <div className={styles.card_row_comment_mobi}>
+                    {about?.reviews[currentIndex].comment}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+
+                <Dots
+                  currentIndex={currentIndex}
+                  listLength={about?.reviews.length}
+                  className={styles.dots_mt10}
+                />
+              </>
+            ) : null}
+          </div>
+        ) : (
+          <>
+            <Control
+              onLeft={onLeft}
+              onRight={onRight}
+              show={!!about?.reviews.length}
+            />
+            {about?.reviews
+              .filter((_, i) => i >= startIndex && i <= lastIndex)
+              .map((item, indx) => {
+                return (
+                  <div key={item.name + indx} className={styles.review_card}>
+                    <div className={styles.card_row_user}>
+                      <img
+                        src={createImageUrl(item.image?.url)}
+                        alt="user"
+                        className={styles.review_img}
+                      />
+                      <div className={styles.reviewer}>
+                        <span>{item.name}</span>
+                        <span>{item.date}</span>
+                      </div>
+                      {isAdmin ? (
+                        <Setting
+                          onClick={() => openEditReview(item.image?.entityId)}
+                          className={styles.setting_review}
+                        />
+                      ) : null}
+                    </div>
+                    <div className={styles.card_row_comment}>
+                      {item.comment}
+                    </div>
+                  </div>
+                );
+              })}
+          </>
+        )}
         {isAdmin ? (
           <div className={styles.review_card_add} onClick={addReview}>
             <RoundAdd />
