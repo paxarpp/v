@@ -21,7 +21,7 @@ export const Coaches = () => {
   };
 
   return (
-    <div className={styles.column}>
+    <div className={isMobile ? styles.column_mobi : styles.column}>
       <h2
         className={
           isMobile ? styles.camp_info_title_mobi : styles.camp_info_title
