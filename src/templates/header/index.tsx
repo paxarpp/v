@@ -8,6 +8,7 @@ import { CampsInfo } from './campsInfo';
 import { INotification } from './interfaces';
 import { Template } from './template';
 import { MobileTemplate } from './mobile.template';
+import { Modal } from '../modal';
 import styles from './index.module.css';
 
 export interface IProps {
@@ -28,7 +29,7 @@ export const Header: React.FC<IProps> = (props) => {
   const { user, isAdmin, signin } = useUser();
   const isAuth = !!user;
   const { isMobile } = useDeviceDetect();
-  const { toggleAuthOpen } = useAuth();
+  const { toggleAuthOpen, image } = useAuth();
   const [isOpenPopapMenu, openPopapMenu] = useState(false);
   const [isOpenNotif, openNotif] = useState(false);
   const [notifications, setNotifications] = useState<INotification[]>([]);
@@ -141,6 +142,15 @@ export const Header: React.FC<IProps> = (props) => {
           </button>
         </div>
       ) : null}
+
+      <Modal isOpen={image.isOpen} close={image.closePreview}>
+        <img
+          src={image.image.src}
+          alt={image.image.alt}
+          onClick={image.closePreview}
+          style={{ maxWidth: '100vw' }}
+        />
+      </Modal>
 
       {isOpenNotif ? (
         <CampsInfo

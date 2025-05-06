@@ -48,7 +48,16 @@ function useUser() {
 }
 
 const AuthOpenContext = createContext<
-  { toggleAuthOpen: (campId?: string) => void } | undefined
+  | {
+      toggleAuthOpen: (campId?: string) => void;
+      image: {
+        onPreview: (src: string, alt?: string) => void;
+        isOpen: boolean;
+        image: { src: string; alt?: string };
+        closePreview: () => void;
+      };
+    }
+  | undefined
 >(undefined);
 
 function useAuth() {

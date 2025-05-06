@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { createImageUrl } from '../../constants';
-import styles from './index.module.css';
 import { Control } from '../controlArrow';
 import { Dots } from '../Dots';
+import styles from './index.module.css';
+import { ImageViewer } from '../imageViewer';
 
 interface IProps {
   images?:
@@ -119,14 +120,14 @@ export const ImagePack: React.FC<IProps> = ({
       <div className={styles.info_img_wrapper} style={size}>
         {isMobile ? (
           <div {...swipeHandlers} style={size}>
-            <img
+            <ImageViewer
               src={createImageUrl(currentImage[currentIndex]?.url)}
               alt={currentImage[currentIndex]?.name}
               className={styles.info_current_img}
             />
           </div>
         ) : (
-          <img
+          <ImageViewer
             src={createImageUrl(currentImage[imageIndx]?.url)}
             alt={currentImage[imageIndx]?.name}
             className={styles.info_current_img}

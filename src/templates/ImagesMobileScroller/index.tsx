@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import styles from './index.module.css';
 import { createImageUrl } from '../../constants';
 import { Dots } from '../Dots';
+import { ImageViewer } from '../imageViewer';
+import styles from './index.module.css';
 
 interface IProps {
   list: {
@@ -39,7 +40,7 @@ export const ImagesMobileScroller: React.FC<IProps> = ({ list }) => {
     <div {...swipeHandlers}>
       <div key={list[currentIndex].id} className={styles.images_container}>
         <div className={styles.stub_image}>
-          <img
+          <ImageViewer
             src={createImageUrl(list[currentIndex].url)}
             alt={list[currentIndex].name}
             className={styles.image}
@@ -47,7 +48,7 @@ export const ImagesMobileScroller: React.FC<IProps> = ({ list }) => {
         </div>
         <div className={styles.stub_image}>
           {list[currentIndex + 1] ? (
-            <img
+            <ImageViewer
               src={createImageUrl(list[currentIndex + 1].url)}
               alt={list[currentIndex + 1].name}
               className={styles.image}

@@ -96,9 +96,32 @@ export default function Root({ loaderData }: Route.ComponentProps) {
     setOpen(false);
     setReserv('');
   };
+
+  const [isOpen, setViewerOpen] = useState(false);
+  const [image, setImage] = useState({ src: '', alt: '' });
+
+  const onPreview = (src: string, alt = '') => {
+    setViewerOpen(true);
+    setImage({ src, alt });
+  };
+
+  const closePreview = () => {
+    setViewerOpen(false);
+  };
+
   return (
     <AuthProvider>
-      <AuthOpenContext.Provider value={{ toggleAuthOpen }}>
+      <AuthOpenContext.Provider
+        value={{
+          toggleAuthOpen,
+          image: {
+            isOpen,
+            image,
+            closePreview,
+            onPreview,
+          },
+        }}
+      >
         <Header {...app} />
         {authOpen ? (
           <Auth
