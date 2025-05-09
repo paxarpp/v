@@ -1,6 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
 import { useLoaderData } from 'react-router';
-import { useSwipeable } from 'react-swipeable';
 import People from '../../../assets/people.svg?react';
 import Successfully from '../../../assets/successfully.svg?react';
 import Tour from '../../../assets/tour.svg?react';
@@ -82,24 +81,6 @@ export const Packages = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const onLeftM = () => {
-    if (!camp?.packages?.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
-  };
-
-  const onRightM = () => {
-    if (!camp?.packages?.length) return;
-    if (currentIndex < camp?.packages?.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
-
   return (
     <div className={isMobile ? styles.column_mobi : styles.column}>
       <h2
@@ -116,7 +97,7 @@ export const Packages = () => {
       >{`Свободно ${camp?.countFree} мест`}</h4>
       <div className={isMobile ? styles.package_row_mobi : styles.package_row}>
         {isMobile ? (
-          <div {...swipeHandlers}>
+          <div>
             {camp?.packages?.length ? (
               <>
                 <div

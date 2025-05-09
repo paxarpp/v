@@ -32,26 +32,13 @@ export const ImagesList: React.FC = () => {
     }
   };
 
-  return isMobile ? (
-    <div className={styles.images_scroller_mobi}>
-      <ImagesMobileScroller list={images || []} />
-    </div>
-  ) : (
-    <div className={styles.images_scroller}>
-      <Control show={!!images?.length} onLeft={onLeft} onRight={onRight} />
-      {images
-        ?.filter((_, i) => i >= startIndex && i <= lastIndex)
-        .map((image) => {
-          return (
-            <div key={image.id} className={styles.image_card}>
-              <img
-                src={createImageUrl(image.url)}
-                alt={image.name}
-                className={styles.coach_image}
-              />
-            </div>
-          );
-        })}
+  return (
+    <div
+      className={
+        isMobile ? styles.images_scroller_mobi : styles.images_scroller
+      }
+    >
+      <ImagesMobileScroller list={images || []} isMobile={isMobile} />
     </div>
   );
 };

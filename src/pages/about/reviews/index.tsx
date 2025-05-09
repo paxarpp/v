@@ -12,7 +12,6 @@ import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
 import { createImageUrl } from '../../../constants';
 import { Control } from '../../../templates/controlArrow';
-import { useSwipeable } from 'react-swipeable';
 import { Dots } from '../../../templates/Dots';
 import styles from '../index.module.css';
 
@@ -125,24 +124,6 @@ export const Reviews = () => {
     }
   };
 
-  const onLeftM = () => {
-    if (!about?.reviews.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
-  };
-
-  const onRightM = () => {
-    if (!about?.reviews.length) return;
-    if (currentIndex < about?.reviews.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
-
   return (
     <div
       className={isMobile ? styles.review_wrapper_mobi : styles.review_wrapper}
@@ -204,7 +185,7 @@ export const Reviews = () => {
         ) : null}
 
         {isMobile ? (
-          <div {...swipeHandlers}>
+          <div>
             {about?.reviews.length ? (
               <>
                 <div

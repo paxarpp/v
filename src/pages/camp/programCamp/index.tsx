@@ -11,7 +11,6 @@ import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { Control } from '../../../templates/controlArrow';
 import { useDeviceDetect } from '../../../hooks';
-import { useSwipeable } from 'react-swipeable';
 import { Dots } from '../../../templates/Dots';
 import styles from '../index.module.css';
 
@@ -85,24 +84,6 @@ export const ProgramCamp = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const onLeftM = () => {
-    if (!camp?.program?.programs?.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
-  };
-
-  const onRightM = () => {
-    if (!camp?.program?.programs?.length) return;
-    if (currentIndex < camp?.program?.programs?.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
-
   return (
     <div>
       {isOpen ? (
@@ -161,7 +142,7 @@ export const ProgramCamp = () => {
         className={isMobile ? styles.programs_wrap_mobi : styles.programs_wrap}
       >
         {isMobile ? (
-          <div {...swipeHandlers}>
+          <div>
             {camp?.program?.programs?.length ? (
               <>
                 <div

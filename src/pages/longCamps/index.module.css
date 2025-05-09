@@ -269,3 +269,18 @@
   line-height: 150%;
   height: auto;
 }
+
+.camps_scroller {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.camps_scroller_mobi {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}

@@ -1,7 +1,12 @@
-import { useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import { useRef, useState } from 'react';
 import { CampCard } from '../../templates/CampCard';
-import { Dots } from '../Dots';
+import { Control } from '../controlArrow';
+import { Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type SwiperInstance from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import styles from './index.module.css';
 
 interface IProps {
   list: {
@@ -10,42 +15,64 @@ interface IProps {
     dateString: string;
     imageCart?: { url: string } | null;
   }[];
+  isMobile?: boolean;
+  isAdmin?: boolean;
+  openEditCamp?: (id: string) => void;
+  to?: string;
 }
 
-export const CampsMobileScroller: React.FC<IProps> = ({ list }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const CampsMobileScroller: React.FC<IProps> = ({
+  list,
+  isMobile,
+  isAdmin,
+  openEditCamp,
+  to,
+}) => {
+  const [swiperIndex, setSwiperIndex] = useState(0);
+  const swiperRef = useRef<{ swiper: SwiperInstance } | null>(null);
 
-  const onLeftM = () => {
-    if (!list.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+  const handlePrev = () => {
+    swiperRef.current?.swiper.slidePrev();
   };
 
-  const onRightM = () => {
-    if (!list.length) return;
-    if (currentIndex < list.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
+  const handleNext = () => {
+    swiperRef.current?.swiper.slideNext();
   };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
 
   if (!list.length) return null;
 
   return (
-    <div {...swipeHandlers}>
-      <CampCard
-        key={list[currentIndex].id}
-        id={list[currentIndex].id}
-        name={list[currentIndex].name}
-        dateString={list[currentIndex].dateString}
-        url={list[currentIndex].imageCart?.url}
-        isMobile={true}
+    <Swiper
+      ref={swiperRef}
+      modules={[Navigation]}
+      slidesPerView={isMobile ? 1 : 3}
+      spaceBetween={isMobile ? 10 : 25}
+      className={styles.cards_container}
+      onRealIndexChange={(swiperCore) => {
+        setSwiperIndex(swiperCore.realIndex);
+      }}
+    >
+      {list.map((card) => (
+        <SwiperSlide key={card.id} className={styles.row_cards}>
+          <CampCard
+            id={card.id}
+            name={card.name}
+            dateString={card.dateString}
+            url={card.imageCart?.url}
+            isMobile={isMobile}
+            isAdmin={isAdmin}
+            openEditCamp={openEditCamp}
+            to={to}
+          />
+        </SwiperSlide>
+      ))}
+      <Control
+        activeIndex={swiperIndex}
+        maxCount={list.length ? list.length - 1 : 0}
+        show={!isMobile && list.length > 3}
+        onLeft={handlePrev}
+        onRight={handleNext}
       />
-      <Dots currentIndex={currentIndex} listLength={list.length} />
-    </div>
+    </Swiper>
   );
 };

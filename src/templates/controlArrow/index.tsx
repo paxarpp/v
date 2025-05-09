@@ -8,22 +8,34 @@ interface IProps {
   show: boolean;
   onLeft: () => void;
   onRight: () => void;
+  activeIndex?: number;
+  maxCount?: number;
 }
 
-export const Control: React.FC<IProps> = ({ show = true, onLeft, onRight }) => {
+export const Control: React.FC<IProps> = ({
+  show = true,
+  onLeft,
+  onRight,
+  activeIndex,
+  maxCount,
+}) => {
   return show ? (
     <>
-      <span className={styles.scroll_arrow_left}>
-        <ArrowLeft className={styles.icon_left} onClick={onLeft} />
-        <ArrowLeftHover className={styles.icon_left_hover} onClick={onLeft} />
-      </span>
-      <span className={styles.scroll_arrow_right}>
-        <ArrowRight className={styles.icon_right} onClick={onRight} />
-        <ArrowRightHover
-          className={styles.icon_right_hover}
-          onClick={onRight}
-        />
-      </span>
+      {activeIndex !== 0 ? (
+        <span className={styles.scroll_arrow_left}>
+          <ArrowLeft className={styles.icon_left} onClick={onLeft} />
+          <ArrowLeftHover className={styles.icon_left_hover} onClick={onLeft} />
+        </span>
+      ) : null}
+      {activeIndex !== maxCount ? (
+        <span className={styles.scroll_arrow_right}>
+          <ArrowRight className={styles.icon_right} onClick={onRight} />
+          <ArrowRightHover
+            className={styles.icon_right_hover}
+            onClick={onRight}
+          />
+        </span>
+      ) : null}
     </>
   ) : null;
 };

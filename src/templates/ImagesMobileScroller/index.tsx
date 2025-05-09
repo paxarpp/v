@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import { useRef, useState } from 'react';
 import { createImageUrl } from '../../constants';
-import { Dots } from '../Dots';
+import { Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type SwiperInstance from 'swiper';
 import { ImageViewer } from '../imageViewer';
+import { Control } from '../controlArrow';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import styles from './index.module.css';
 
 interface IProps {
@@ -11,57 +16,53 @@ interface IProps {
     name: string;
     url: string;
   }[];
+  isMobile: boolean;
 }
 
-export const ImagesMobileScroller: React.FC<IProps> = ({ list }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const ImagesMobileScroller: React.FC<IProps> = ({ list, isMobile }) => {
+  const swiperRef = useRef<{ swiper: SwiperInstance } | null>(null);
+  const [swiperIndex, setSwiperIndex] = useState(0);
 
-  const onLeftM = () => {
-    if (!list.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+  const handlePrev = () => {
+    swiperRef.current?.swiper.slidePrev();
   };
 
-  const onRightM = () => {
-    if (!list.length) return;
-    if (currentIndex < list.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
+  const handleNext = () => {
+    swiperRef.current?.swiper.slideNext();
   };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
 
   if (!list.length) return null;
 
   return (
-    <div {...swipeHandlers}>
-      <div key={list[currentIndex].id} className={styles.images_container}>
-        <div className={styles.stub_image}>
+    <Swiper
+      ref={swiperRef}
+      modules={[Navigation, Pagination]}
+      slidesPerView={isMobile ? 2 : 4}
+      pagination={{ clickable: true }}
+      spaceBetween={isMobile ? 10 : 30}
+      className={
+        isMobile ? styles.images_container_mobi : styles.images_container
+      }
+      onRealIndexChange={(swiperCore) => {
+        setSwiperIndex(swiperCore.realIndex);
+      }}
+    >
+      {list.map((image) => (
+        <SwiperSlide key={image.id} className={styles.stub_image}>
           <ImageViewer
-            src={createImageUrl(list[currentIndex].url)}
-            alt={list[currentIndex].name}
+            src={createImageUrl(image.url)}
+            alt={image.name}
             className={styles.image}
           />
-        </div>
-        <div className={styles.stub_image}>
-          {list[currentIndex + 1] ? (
-            <ImageViewer
-              src={createImageUrl(list[currentIndex + 1].url)}
-              alt={list[currentIndex + 1].name}
-              className={styles.image}
-            />
-          ) : null}
-        </div>
-      </div>
-
-      <Dots
-        currentIndex={currentIndex}
-        listLength={list.length}
-        className={styles.dots_mt5}
+        </SwiperSlide>
+      ))}
+      <Control
+        activeIndex={swiperIndex}
+        maxCount={list.length ? list.length - 1 : 0}
+        show={!isMobile && list.length > 4}
+        onLeft={handlePrev}
+        onRight={handleNext}
       />
-    </div>
+    </Swiper>
   );
 };

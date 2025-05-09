@@ -1,0 +1,9 @@
+.cards_container {
+  width: 100%;
+  position: relative;
+}
+
+.row_cards {
+      display: flex;
+    justify-content: center;
+}

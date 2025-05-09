@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import { useEffect, useState, useRef } from 'react';
 import { createImageUrl } from '../../constants';
 import { Control } from '../controlArrow';
-import { Dots } from '../Dots';
-import styles from './index.module.css';
 import { ImageViewer } from '../imageViewer';
+import { Pagination, Thumbs, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type SwiperInstance from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/thumbs';
+import 'swiper/css/navigation';
+import styles from './index.module.css';
 
 interface IProps {
   images?:
@@ -42,14 +47,23 @@ export const ImagePack: React.FC<IProps> = ({
       url: string;
     }[]
   >([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [swiperIndex, setSwiperIndex] = useState(0);
+  const swiperRef = useRef<{ swiper: SwiperInstance } | null>(null);
 
   useEffect(() => {
     if (images?.length) {
       setCurrentImage(images);
     }
   }, [images?.length]);
-  const isEmpty = currentImage.length === 0;
+
+  const handlePrev = () => {
+    swiperRef.current?.swiper.slidePrev();
+  };
+
+  const handleNext = () => {
+    swiperRef.current?.swiper.slideNext();
+  };
 
   const size = {
     width: `${width}px`,
@@ -61,116 +75,72 @@ export const ImagePack: React.FC<IProps> = ({
     height: `${heightPreview}px`,
     minHeight: `${heightPreview}px`,
     maxHeight: `${heightPreview}px`,
-    gap: `${gapPreview}px`,
     marginTop: `${marginPreviewTop}px`,
+    width: `${width}px`,
   };
   const sizePreviw = {
     width: `${widthPreview}px`,
   };
 
-  const onLeft = () => {
-    setCurrentImage((prev) => {
-      const [tail, ...arr] = prev;
-      return [...arr, tail];
-    });
-  };
-  const onRight = () => {
-    setCurrentImage((prev) => {
-      const prevCopy = [...prev];
-      const tail = prevCopy.pop() as Omit<(typeof prev)[number], 'undefined'>;
-      return [tail, ...prevCopy];
-    });
-  };
-  const imageIndx = Math.min(currentImage.length - 1, 1);
-
-  const onLeftM = () => {
-    if (!currentImage.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
-  };
-
-  const onRightM = () => {
-    if (!currentImage.length) return;
-    if (currentIndex < currentImage.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
-
-  return isEmpty ? (
-    <div className={className}>
-      <div className={styles.info_img_wrapper_stub} style={size} />
-      {isMobile ? (
-        <Dots
-          currentIndex={currentIndex}
-          listLength={0}
-          className={styles.dots_mt5}
-        />
-      ) : null}
-      <div className={styles.row_prevew_images} style={sizeRow}>
-        <div className={styles.prevew_img_wrapper_stub} style={sizePreviw} />
-      </div>
-    </div>
-  ) : (
+  return (
     <div className={className}>
       <div className={styles.info_img_wrapper} style={size}>
-        {isMobile ? (
-          <div {...swipeHandlers} style={size}>
-            <ImageViewer
-              src={createImageUrl(currentImage[currentIndex]?.url)}
-              alt={currentImage[currentIndex]?.name}
-              className={styles.info_current_img}
-            />
-          </div>
-        ) : (
-          <ImageViewer
-            src={createImageUrl(currentImage[imageIndx]?.url)}
-            alt={currentImage[imageIndx]?.name}
-            className={styles.info_current_img}
-          />
-        )}
-        {isMobile ? null : (
-          <Control
-            onLeft={onLeft}
-            onRight={onRight}
-            show={!!currentImage.length}
-          />
-        )}
-      </div>
-      {isMobile ? (
-        <Dots
-          currentIndex={currentIndex}
-          listLength={currentImage.length}
-          className={styles.dots_mt5}
+        <Swiper
+          ref={swiperRef}
+          modules={[Navigation, Pagination, Thumbs]}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          thumbs={{
+            swiper: thumbsSwiper,
+          }}
+          onRealIndexChange={(swiperCore) => {
+            setSwiperIndex(swiperCore.realIndex);
+          }}
+        >
+          {currentImage.map((image) => (
+            <SwiperSlide key={image.id}>
+              <div style={size}>
+                <ImageViewer
+                  src={createImageUrl(image.url)}
+                  alt={image.name}
+                  className={styles.info_current_img}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <Control
+          activeIndex={swiperIndex}
+          maxCount={currentImage.length ? currentImage.length - 1 : 0}
+          show={!isMobile && currentImage.length > 1}
+          onLeft={handlePrev}
+          onRight={handleNext}
         />
-      ) : null}
-      <div className={styles.row_prevew_images} style={sizeRow}>
-        {currentImage
-          ? currentImage.map((image, indx) =>
-              indx <= 4 ? (
-                <div
-                  className={styles.prevew_img_wrapper}
-                  key={image.id}
-                  style={sizePreviw}
-                >
-                  <img
-                    src={createImageUrl(image.url)}
-                    alt={image.name}
-                    className={
-                      !isMobile && indx === imageIndx
-                        ? styles.prevew_img_current
-                        : styles.prevew_img
-                    }
-                  />
-                </div>
-              ) : null,
-            )
-          : null}
       </div>
+
+      <Swiper
+        modules={[Thumbs]}
+        onSwiper={setThumbsSwiper}
+        slidesPerView={5}
+        spaceBetween={gapPreview}
+        style={sizeRow}
+      >
+        {currentImage.map((image, indx) => {
+          return (
+            <SwiperSlide
+              key={image.id}
+              className={`${styles.prevew_img_wrapper} ${swiperIndex === indx ? styles.prevew_img_wrapper_active : ''}`}
+              style={sizePreviw}
+            >
+              <img
+                src={createImageUrl(image.url)}
+                alt={image.name}
+                className={styles.prevew_img}
+              />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </div>
   );
 };
