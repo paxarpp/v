@@ -33,6 +33,8 @@ export const ImagesMobileScroller: React.FC<IProps> = ({ list, isMobile }) => {
 
   if (!list.length) return null;
 
+  console.log('breakpoints')
+
   return (
     <Swiper
       ref={swiperRef}
