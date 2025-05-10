@@ -211,31 +211,6 @@
   padding: 30px 0;
 }
 
-.scroll_arrow_right_mobi,
-.scroll_arrow_left_mobi,
-.scroll_arrow_right,
-.scroll_arrow_left {
-  position: absolute;
-  top: calc(50% - 25px);
-  cursor: pointer;
-}
-
-.scroll_arrow_left {
-  left: 4px;
-}
-
-.scroll_arrow_left_mobi {
-  left: 0;
-}
-
-.scroll_arrow_right {
-  right: 4px;
-}
-
-.scroll_arrow_right_mobi {
-  right: 0;
-}
-
 .review_card_mobi,
 .review_card {
   width: 570px;
@@ -462,8 +437,4 @@
   font-size: 16px;
   line-height: 150%;
   font-weight: 400;
-}
-
-.dots_mt10 {
-  margin-top: 10px !important;
 }

@@ -40,6 +40,20 @@ export const ImagesMobileScroller: React.FC<IProps> = ({ list, isMobile }) => {
       slidesPerView={isMobile ? 2 : 4}
       pagination={{ clickable: true }}
       spaceBetween={isMobile ? 10 : 30}
+      breakpoints={{
+        1024: {
+          slidesPerView: 2,
+        },
+        1280: {
+          slidesPerView: 2,
+        },
+        1600: {
+          slidesPerView: 3,
+        },
+        1920: {
+          slidesPerView: 4,
+        },
+      }}
       className={
         isMobile ? styles.images_container_mobi : styles.images_container
       }
