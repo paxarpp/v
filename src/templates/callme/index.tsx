@@ -5,27 +5,8 @@ import { api } from '../../api/api';
 import { useUser } from '../../context';
 import { MobileTemplate } from './mobileTemplate';
 import { Template } from './template';
+import { applyMask, pattern, PHONE_MASK } from '../../constants';
 import styles from './index.module.css';
-
-const pattern =
-  /([\+]?[7|8][\s-(]?[9][0-9]{2}[\s-)]?)?([\d]{3})[\s-]?([\d]{2})[\s-]?([\d]{2})/;
-
-const PHONE_MASK = '+7(XXX)-XXX-XX-XX';
-
-const applyMask = (numbers: string): string => {
-  let formatted = PHONE_MASK;
-  for (let i = 0; i < numbers.length && i < 10; i++) {
-    const digit = numbers[i];
-    const position = formatted.indexOf('X');
-    if (position !== -1) {
-      formatted =
-        formatted.substring(0, position) +
-        digit +
-        formatted.substring(position + 1);
-    }
-  }
-  return formatted;
-};
 
 export const CallMe = () => {
   const { logout } = useUser();

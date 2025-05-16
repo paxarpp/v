@@ -10,10 +10,13 @@ import { Modal } from '../../../templates/modal';
 import { IImageBase, ImagesMassSelect } from '../../../templates/imageSelect';
 import { createImageUrl } from '../../../constants';
 import { Control } from '../../../templates/controlArrow';
+import { ImagesMobileScroller } from '../../../templates/ImagesMobileScroller';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const Gallery = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isMobile } = useDeviceDetect();
   const revalidator = useRevalidator();
 
   const [count, setCount] = useState(0);
@@ -89,7 +92,7 @@ export const Gallery = () => {
   };
 
   return (
-    <div className={styles.images_scroller} ref={divRef}>
+    <>
       {isOpen ? (
         <Modal
           isOpen={isOpen}
@@ -112,27 +115,35 @@ export const Gallery = () => {
           </div>
         </Modal>
       ) : null}
-      <Control
-        onLeft={onLeft}
-        onRight={onRight}
-        show={!!camp?.gallery?.length}
-      />
-      {camp?.gallery
-        ?.filter((_, i) => i >= startIndex && i <= startIndex + count)
-        .map((image) => {
-          return (
-            <div key={image.id} className={styles.image_card} ref={cardRef}>
-              <img
-                src={createImageUrl(image.url)}
-                alt={image.name}
-                className={styles.coach_image}
-              />
-            </div>
-          );
-        })}
-      {isAdmin ? (
-        <Setting onClick={openModal} className={styles.setting} />
-      ) : null}
-    </div>
+      {isMobile ? (
+        <div className={styles.images_scroller_mobi}>
+          <ImagesMobileScroller list={camp?.gallery || []} />
+        </div>
+      ) : (
+        <div className={styles.images_scroller} ref={divRef}>
+          <Control
+            onLeft={onLeft}
+            onRight={onRight}
+            show={!!camp?.gallery?.length}
+          />
+          {camp?.gallery
+            ?.filter((_, i) => i >= startIndex && i <= startIndex + count)
+            .map((image) => {
+              return (
+                <div key={image.id} className={styles.image_card} ref={cardRef}>
+                  <img
+                    src={createImageUrl(image.url)}
+                    alt={image.name}
+                    className={styles.coach_image}
+                  />
+                </div>
+              );
+            })}
+          {isAdmin ? (
+            <Setting onClick={openModal} className={styles.setting} />
+          ) : null}
+        </div>
+      )}
+    </>
   );
 };

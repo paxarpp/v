@@ -522,6 +522,12 @@ input_field_small,
   min-height: 160px;
 }
 
+.images_scroller_mobi {
+  margin: 50px 20px;
+  display: flex;
+  justify-content: center;
+}
+
 .image_card {
   width: 420px;
   height: 370px;
