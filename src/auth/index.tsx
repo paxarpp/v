@@ -5,10 +5,10 @@ import { api } from '../api/api';
 import { IUser } from './interface';
 import { useUser } from '../context';
 import { useDeviceDetect } from '../hooks';
-import styles from './index.module.css';
-import { TemplateSiginP } from './templateSignInP';
 import { TemplateSiginT } from './templateSignInT';
+import { TemplateSiginN } from './templateSignInN';
 import { TemplateLogin } from './templateLogin';
+import styles from './index.module.css';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
@@ -27,7 +27,7 @@ export const Auth: React.FC<{
     const authLogin = async () => {
       const user = await api.login<{
         data?: IUser & { cookie: string };
-      }>(username, password);
+      }>(telephone, password);
       if (user?.data?.id) {
         signin(user.data);
         toggleAuthOpen();
@@ -128,10 +128,10 @@ export const Auth: React.FC<{
       <div className={styles.tab_login}>
         {tab === 1 ? (
           <>
-            <TemplateSiginP
-              onChange={onChange}
+            <TemplateSiginT
+              onChangeTelephone={onChangeTelephone}
               onChangePassword={onChangePass}
-              username={username}
+              telephone={telephone}
               password={password}
             />
             <button className={styles.auth_button} onClick={onEnter}>
@@ -144,7 +144,7 @@ export const Auth: React.FC<{
         {tab !== 1 ? (
           <>
             {campId ? (
-              <TemplateSiginT
+              <TemplateSiginN
                 onChange={onChange}
                 onChangeTelephone={onChangeTelephone}
                 username={username}
