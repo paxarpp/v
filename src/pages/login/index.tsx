@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router';
 import { api } from '../../api/api';
 import { useUser } from '../../context';
-import { TemplateSiginP } from '../../auth/templateSignInP';
+import { TemplateSiginT } from '../../auth/templateSignInT';
 import { TemplateLogin } from '../../auth/templateLogin';
 import styles from './index.module.css';
+import { applyMask, PHONE_MASK } from '../../constants';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
@@ -19,12 +20,13 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [telephone, setTelephone] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [validationError, setValidationError] = useState('');
 
   const authing = () => {
     const authLogin = async () => {
       const user = await api.login<{
         data?: unknown & { cookie: string };
-      }>(username, password);
+      }>(telephone, password);
       if (user?.data?.id) {
         signin(user.data);
         // toggleAuthOpen();
@@ -59,9 +61,6 @@ export default function Login() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value || '');
   };
-  const onChangeTelephone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTelephone(e.target.value || '');
-  };
 
   const onChangePass = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -71,7 +70,7 @@ export default function Login() {
   };
 
   const onSignin = () => {
-    if (username && password) {
+    if (telephone && password) {
       authing();
     }
   };
@@ -82,15 +81,38 @@ export default function Login() {
     }
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (!inputValue || inputValue === PHONE_MASK) {
+      setTelephone('');
+      setValidationError('');
+      return;
+    }
+    const newNumbers = inputValue.replace(/\D/g, '');
+    const numbersWith7 = newNumbers.startsWith('7')
+      ? newNumbers
+      : '7' + newNumbers;
+    const limitedNumbers = numbersWith7.slice(0, 11);
+    e.target.value = limitedNumbers;
+    setTelephone(e.target.value);
+    setValidationError('');
+  };
+
+  // Отображаем маску только если есть введенные цифры
+  const displayValueTel = telephone
+    ? applyMask(telephone.slice(1))
+    : PHONE_MASK;
+
   return user ? (
     <Navigate to="/" replace />
   ) : tab === 1 ? (
     <div className={styles.page_login}>
       <span>{'Вход в личный кабинет'}</span>
-      <TemplateSiginP
-        onChange={onChange}
+      <TemplateSiginT
         onChangePassword={onChangePass}
-        username={username}
+        handlePhoneChange={handlePhoneChange}
+        displayValueTel={displayValueTel}
+        validationError={validationError}
         password={password}
         className={styles.wrap_sigin}
       />
@@ -111,9 +133,10 @@ export default function Login() {
       <span>Регистрация</span>
       <TemplateLogin
         onChange={onChange}
-        onChangeTelephone={onChangeTelephone}
         username={username}
-        telephone={telephone}
+        handlePhoneChange={handlePhoneChange}
+        displayValueTel={displayValueTel}
+        validationError={validationError}
         onChangePass={onChangePass}
         onChangeConfPass={onChangeConfPass}
         password={password}

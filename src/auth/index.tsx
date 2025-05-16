@@ -8,8 +8,8 @@ import { useDeviceDetect } from '../hooks';
 import { TemplateSiginT } from './templateSignInT';
 import { TemplateSiginN } from './templateSignInN';
 import { TemplateLogin } from './templateLogin';
-import styles from './index.module.css';
 import { applyMask, PHONE_MASK } from '../constants';
+import styles from './index.module.css';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
