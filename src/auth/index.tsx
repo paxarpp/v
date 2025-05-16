@@ -85,7 +85,7 @@ export const Auth: React.FC<{
 
   const onEnter = () => {
     if (tab === 1) {
-      if (username && password) {
+      if (telephone && password) {
         authing();
       }
     } else if (!campId) {
