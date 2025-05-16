@@ -242,7 +242,9 @@ export const Packages = () => {
                   <span
                     className={styles.cost_link}
                     onClick={(e) => togglePricesInfo(e, pack.packageId)}
-                  >{`*${pack.costNamingLink}`}</span>
+                  >
+                    {pack.costNamingLink ? `*${pack.costNamingLink}` : ''}
+                  </span>
                   <span className={styles.booking_price}>
                     {isTour
                       ? `предоплата по туру - ${divideNumberByPieces(pack.bookingPrice)}`

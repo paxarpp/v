@@ -20,7 +20,7 @@ export interface IPackage {
   packageId: number;
   name: string;
   displayName: string;
-  costNamingLink: string;
+  costNamingLink: string | null;
   info: string;
   totalPrice: number;
   bookingPrice: number;
