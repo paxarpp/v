@@ -239,12 +239,16 @@ export const Packages = () => {
                   <h4
                     className={styles.total_price}
                   >{`${divideNumberByPieces(pack.totalPrice)} ₽*`}</h4>
-                  <span
-                    className={styles.cost_link}
-                    onClick={(e) => togglePricesInfo(e, pack.packageId)}
-                  >
-                    {pack.costNamingLink ? `*${pack.costNamingLink}` : ''}
-                  </span>
+                  {pack.costNamingLink ? (
+                    <span
+                      className={styles.cost_link}
+                      onClick={(e) => togglePricesInfo(e, pack.packageId)}
+                    >
+                      {`*${pack.costNamingLink}`}
+                    </span>
+                  ) : (
+                    <span>{` `}</span>
+                  )}
                   <span className={styles.booking_price}>
                     {isTour
                       ? `предоплата по туру - ${divideNumberByPieces(pack.bookingPrice)}`
