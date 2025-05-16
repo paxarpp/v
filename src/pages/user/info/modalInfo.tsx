@@ -7,6 +7,7 @@ import { useUser } from '../../../context';
 import { IUserInfo } from '../interfaces';
 import { InputStyled } from '../../../templates/input';
 import { Route } from '../+types';
+import { applyMask, PHONE_MASK } from '../../../constants';
 import styles from '../index.module.css';
 
 export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
@@ -17,6 +18,7 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
   const revalidator = useRevalidator();
 
   const [currentInfo, setCurrentInfo] = useState<IUserInfo | null>(user);
+  const [validationError, setValidationError] = useState('');
 
   const { logout } = useUser();
 
@@ -38,6 +40,28 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
       }
     };
     userInfoUpdate();
+  };
+
+  // Отображаем маску только если есть введенные цифры
+  const displayValueTel = currentInfo?.telephone
+    ? applyMask(currentInfo.telephone.slice(1))
+    : PHONE_MASK;
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (!inputValue || inputValue === PHONE_MASK) {
+      setCurrentInfo({ ...currentInfo, telephone: '' });
+      setValidationError('');
+      return;
+    }
+    const newNumbers = inputValue.replace(/\D/g, '');
+    const numbersWith7 = newNumbers.startsWith('7')
+      ? newNumbers
+      : '7' + newNumbers;
+    const limitedNumbers = numbersWith7.slice(0, 11);
+    e.target.value = limitedNumbers;
+    setCurrentInfo({ ...currentInfo, telephone: e.target.value });
+    setValidationError('');
   };
 
   return (
@@ -77,11 +101,11 @@ export const ModalInfo: React.FC<{ closeModal: () => void }> = ({
           }
         />
         <InputStyled
+          type="tel"
           placeholder={'Телефон'}
-          value={currentInfo?.telephone}
-          onChange={(e) =>
-            setCurrentInfo({ ...currentInfo, telephone: e.target.value })
-          }
+          value={displayValueTel}
+          onChange={handlePhoneChange}
+          validationError={validationError}
         />
       </div>
     </Modal>

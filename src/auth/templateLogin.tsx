@@ -4,8 +4,9 @@ import styles from './index.module.css';
 interface IProps {
   username: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  telephone: string;
-  onChangeTelephone: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  displayValueTel: string;
+  validationError?: string;
+  handlePhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   password: string;
   onChangePass: (e: React.ChangeEvent<HTMLInputElement>) => void;
   confirmPassword: string;
@@ -16,8 +17,9 @@ interface IProps {
 export const TemplateLogin: React.FC<IProps> = ({
   username,
   onChange,
-  telephone,
-  onChangeTelephone,
+  displayValueTel,
+  handlePhoneChange,
+  validationError,
   password,
   onChangePass,
   confirmPassword,
@@ -28,9 +30,11 @@ export const TemplateLogin: React.FC<IProps> = ({
     <div className={`${styles.input_wrap} ${className ? className : ''}`}>
       <InputStyled placeholder={'Имя'} value={username} onChange={onChange} />
       <InputStyled
+        type="tel"
         placeholder={'Телефон'}
-        value={telephone}
-        onChange={onChangeTelephone}
+        value={displayValueTel}
+        onChange={handlePhoneChange}
+        validationError={validationError}
       />
       <InputStyled
         placeholder={'Пароль'}

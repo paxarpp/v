@@ -9,6 +9,7 @@ import { TemplateSiginT } from './templateSignInT';
 import { TemplateSiginN } from './templateSignInN';
 import { TemplateLogin } from './templateLogin';
 import styles from './index.module.css';
+import { applyMask, PHONE_MASK } from '../constants';
 
 export const Auth: React.FC<{
   onCloseAuth: () => void;
@@ -22,6 +23,7 @@ export const Auth: React.FC<{
   const [password, setPassword] = useState('');
   const [telephone, setTelephone] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [validationError, setValidationError] = useState('');
 
   const authing = () => {
     const authLogin = async () => {
@@ -73,9 +75,6 @@ export const Auth: React.FC<{
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value || '');
   };
-  const onChangeTelephone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTelephone(e.target.value || '');
-  };
 
   const onChangePass = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -99,6 +98,28 @@ export const Auth: React.FC<{
       }
     }
   };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (!inputValue || inputValue === PHONE_MASK) {
+      setTelephone('');
+      setValidationError('');
+      return;
+    }
+    const newNumbers = inputValue.replace(/\D/g, '');
+    const numbersWith7 = newNumbers.startsWith('7')
+      ? newNumbers
+      : '7' + newNumbers;
+    const limitedNumbers = numbersWith7.slice(0, 11);
+    e.target.value = limitedNumbers;
+    setTelephone(e.target.value);
+    setValidationError('');
+  };
+
+  // Отображаем маску только если есть введенные цифры
+  const displayValueTel = telephone
+    ? applyMask(telephone.slice(1))
+    : PHONE_MASK;
 
   if (isMobile) {
     return <Navigate to="/login" replace />;
@@ -129,9 +150,10 @@ export const Auth: React.FC<{
         {tab === 1 ? (
           <>
             <TemplateSiginT
-              onChangeTelephone={onChangeTelephone}
               onChangePassword={onChangePass}
-              telephone={telephone}
+              handlePhoneChange={handlePhoneChange}
+              displayValueTel={displayValueTel}
+              validationError={validationError}
               password={password}
             />
             <button className={styles.auth_button} onClick={onEnter}>
@@ -146,16 +168,18 @@ export const Auth: React.FC<{
             {campId ? (
               <TemplateSiginN
                 onChange={onChange}
-                onChangeTelephone={onChangeTelephone}
                 username={username}
-                telephone={telephone}
+                handlePhoneChange={handlePhoneChange}
+                displayValueTel={displayValueTel}
+                validationError={validationError}
               />
             ) : (
               <TemplateLogin
                 onChange={onChange}
-                onChangeTelephone={onChangeTelephone}
                 username={username}
-                telephone={telephone}
+                handlePhoneChange={handlePhoneChange}
+                displayValueTel={displayValueTel}
+                validationError={validationError}
                 onChangePass={onChangePass}
                 onChangeConfPass={onChangeConfPass}
                 password={password}
