@@ -69,7 +69,7 @@ export const api = {
     campId: string,
     userId: string,
   ): Promise<{
-    data: { result: boolean; error?: string };
+    data: { result: string; error?: string };
   }> => {
     return await instance.post('/camp-user', {
       campId,

@@ -47,27 +47,27 @@
 .row_activities {
   display: flex;
   flex-flow: row wrap;
-  gap: 30px;
+  gap: 25px;
   align-items: center;
   justify-content: flex-start;
   margin: 150px 75px 0 75px;
 }
 
 .row_activities_mobi {
+  flex-flow: column nowrap;
   margin: 50px 20px 0 20px;
+  justify-content: center;
   gap: 20px;
 }
 
 .activity_card_add,
 .activity_card {
   width: 420px;
-  height: 386px;
   border-top: 1px solid #F2DB51;
 }
 
 .activity_card_mobi {
   width: 335px;
-  height: 323px;
   border-top: 1px solid #F2DB51;
 }
 

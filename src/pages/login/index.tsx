@@ -29,7 +29,6 @@ export default function Login() {
       }>(telephone, password);
       if (user?.data?.id) {
         signin(user.data);
-        // toggleAuthOpen();
         try {
           localStorage.setItem('user', JSON.stringify(user.data));
         } catch (e) {
@@ -47,7 +46,6 @@ export default function Login() {
       }>(username, password, telephone, confirmPassword);
       if (user?.data?.id) {
         signin(user.data);
-        // toggleAuthOpen();
         try {
           localStorage.setItem('user', JSON.stringify(user.data));
         } catch (e) {
