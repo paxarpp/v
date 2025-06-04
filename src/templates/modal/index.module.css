@@ -74,3 +74,18 @@
   right: 8px;
   cursor: pointer;
 }
+
+.close_icon_mobi {
+  cursor: pointer;
+}
+
+.close_icon_wrapper_mobi {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 6px 6px;
+  border-radius: 50%;
+  background-color: #888888;
+  opacity: .5;
+  display: flex;
+}

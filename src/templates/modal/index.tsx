@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import Close from '../../assets/close.svg?react';
 import styles from './index.module.css';
+import { useDeviceDetect } from '../../hooks';
 
 interface IProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export const Modal: React.FC<PropsWithChildren<IProps>> = ({
   header,
   classNameModal,
 }) => {
+  const { isMobile } = useDeviceDetect();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -42,7 +44,13 @@ export const Modal: React.FC<PropsWithChildren<IProps>> = ({
         <div className={styles.header}>
           {header ? header : <span className={styles.title}>{title}</span>}
           {close && header ? (
-            <Close onClick={close} className={styles.close_icon} />
+            isMobile ? (
+              <span className={styles.close_icon_wrapper_mobi}>
+                <Close onClick={close} className={styles.close_icon_mobi} />
+              </span>
+            ) : (
+              <Close onClick={close} className={styles.close_icon} />
+            )
           ) : null}
         </div>
         <div className={styles.content}>{children}</div>

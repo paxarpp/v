@@ -143,7 +143,7 @@ export const Header: React.FC<IProps> = (props) => {
         </div>
       ) : null}
 
-      <Modal isOpen={image.isOpen} close={image.closePreview}>
+      <Modal isOpen={image.isOpen} close={image.closePreview} header={<span />}>
         <img
           src={image.image.src}
           alt={image.image.alt}
