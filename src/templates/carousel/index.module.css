@@ -1,0 +1,96 @@
+.container {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+}
+
+.dot_list {
+  position: relative;
+  margin-top: 15px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.dot + .dot {
+  margin-left: 1px;
+}
+
+.dot_active {
+  background-color: #d4d4d4;
+}
+
+.dot_inactive {
+  background-color: #888888;
+}
+
+.scroll_arrow_right,
+.scroll_arrow_left {
+  position: absolute;
+  top: calc(50% - 25px);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.scroll_arrow_left .icon_left {
+  display: block;
+}
+
+.scroll_arrow_left .icon_left_hover {
+  display: none;
+}
+
+.scroll_arrow_left:hover .icon_left {
+  display: none;
+}
+
+.scroll_arrow_left:hover .icon_left_hover {
+  display: block;
+}
+
+.scroll_arrow_right .icon_right {
+  display: block;
+}
+
+.scroll_arrow_right .icon_right_hover {
+  display: none;
+}
+
+.scroll_arrow_right:hover .icon_right {
+  display: none;
+}
+
+.scroll_arrow_right:hover .icon_right_hover {
+  display: block;
+}
+
+.scroll_arrow_left {
+  left: 4px;
+}
+
+.scroll_arrow_right {
+  right: 4px;
+}
+
+.images_scroller {
+  /* display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  gap: 15px;
+  box-sizing: border-box; */
+  margin: 0 75px 150px 75px;
+}
+
+.images_scroller_mobi {
+  margin: 0 20px 50px 20px;
+}

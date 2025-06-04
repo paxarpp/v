@@ -190,11 +190,7 @@
 }
 
 .camps_scroller_mobi {
-  position: relative;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  gap: 20px;
+  margin: 0 20px 50px 20px;
 }
 
 .asked_questions_mobi,

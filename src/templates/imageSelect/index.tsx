@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import BasketIcon from '../../assets/basket.svg?react';
 import SquareAdd from '../../assets/sqareAdd.svg?react';
 import Aye from '../../assets/aye.svg?react';
-import { creatorRequest, HOST } from '../../api';
+import { creatorRequest } from '../../api';
 import { api } from '../../api/api';
 import { Viewer } from '../modal';
 import { useUser } from '../../context';
