@@ -5,12 +5,14 @@ import { useUser } from '../../../context';
 import { api } from '../../../api/api';
 import { creatorRequest } from '../../../api';
 import { Modal } from '../../../templates/modal';
+import { useDeviceDetect } from '../../../hooks';
 import { Route } from '../+types';
 import styles from '../index.module.css';
 
 export const Users = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
+  const { isMobile } = useDeviceDetect();
   const { isAdmin, isModerator, logout } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [count, setCount] = useState(0);
@@ -143,46 +145,55 @@ export const Users = () => {
       <h2>{'Состав участников кемпа'}</h2>
 
       <table className={styles.table}>
-        <tr>
-          <th>Имя</th>
-          <th>Телефон</th>
-          <th>Количество мест</th>
-          <th>Бронь</th>
-        </tr>
-        {camp?.users?.map((user) => (
-          <tr key={user.id}>
-            <td>{user.login}</td>
-            <td>{user.telephone}</td>
-            <td>
-              {user.bookingConfirmed ? (
-                user.bookingCount
-              ) : (
-                <input
-                  type={'number'}
-                  value={count}
-                  onChange={(e) =>
-                    setCount(e.target.value ? Number(e.target.value) : 0)
-                  }
-                />
-              )}
-            </td>
-            <td>
-              <button
-                className={
-                  user.bookingConfirmed
-                    ? styles.button_confirmed
-                    : styles.button_profile
-                }
-                onClick={() => onConfirm(user)}
-              >
-                {user.bookingConfirmed ? 'Забронировано' : 'Подтвердить'}
-              </button>
-            </td>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Количество мест</th>
+            <th>Бронь</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {camp?.users?.map((user) => (
+            <tr key={user.id}>
+              <td>{user.login}</td>
+              <td>{user.telephone}</td>
+              <td>
+                {user.bookingConfirmed ? (
+                  user.bookingCount
+                ) : (
+                  <input
+                    type={'number'}
+                    value={count}
+                    onChange={(e) =>
+                      setCount(e.target.value ? Number(e.target.value) : 0)
+                    }
+                  />
+                )}
+              </td>
+              <td>
+                <button
+                  className={
+                    user.bookingConfirmed
+                      ? styles.button_confirmed
+                      : styles.button_profile
+                  }
+                  onClick={() => onConfirm(user)}
+                >
+                  {user.bookingConfirmed ? 'Забронировано' : 'Подтвердить'}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
       <div className={styles.wrap_user_add}>
-        <button onClick={openModal} className={styles.button_profile}>
+        <button
+          onClick={openModal}
+          className={
+            isMobile ? styles.button_profile_long_mobi : styles.button_profile
+          }
+        >
           {'Добавить участника'}
         </button>
       </div>

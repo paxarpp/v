@@ -13,17 +13,31 @@ interface IProps {
 export const Control: React.FC<IProps> = ({ show = true, onLeft, onRight }) => {
   return show ? (
     <>
-      <span className={styles.scroll_arrow_left}>
-        <ArrowLeft className={styles.icon_left} onClick={onLeft} />
-        <ArrowLeftHover className={styles.icon_left_hover} onClick={onLeft} />
-      </span>
-      <span className={styles.scroll_arrow_right}>
-        <ArrowRight className={styles.icon_right} onClick={onRight} />
-        <ArrowRightHover
-          className={styles.icon_right_hover}
-          onClick={onRight}
-        />
-      </span>
+      <ControlLeft onClick={onLeft} />
+
+      <ControlRight onClick={onRight} />
     </>
   ) : null;
+};
+
+export const ControlLeft: React.FC<{
+  onClick?: () => void;
+}> = ({ onClick }) => {
+  return (
+    <span className={styles.scroll_arrow_left} onClick={onClick}>
+      <ArrowLeft className={styles.icon_left} />
+      <ArrowLeftHover className={styles.icon_left_hover} />
+    </span>
+  );
+};
+
+export const ControlRight: React.FC<{
+  onClick?: () => void;
+}> = ({ onClick }) => {
+  return (
+    <span className={styles.scroll_arrow_right} onClick={onClick}>
+      <ArrowRight className={styles.icon_right} />
+      <ArrowRightHover className={styles.icon_right_hover} />
+    </span>
+  );
 };

@@ -63,7 +63,6 @@ export const PriceEdit: React.FC<{
 
   const savePrice = () => {
     const saveC = async () => {
-      console.log({ ...currentPrice });
       if (currentPrice) {
         const axiosCall = creatorRequest(logout);
         const { error } = await axiosCall(

@@ -190,24 +190,6 @@
   margin: 0 0;
 }
 
-.camps_scroller {
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  overflow: auto;
-  height: 100%;
-  overflow: hidden;
-  gap: 25px;
-}
-
-.camps_scroller_mobi {
-  position: relative;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  gap: 20px;
-}
-
 .asked_questions_mobi,
 .asked_questions {
   margin-top: 150px;

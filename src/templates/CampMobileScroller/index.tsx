@@ -1,51 +1,67 @@
-import { useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
-import { CampCard } from '../../templates/CampCard';
-import { Dots } from '../Dots';
+import Carousel from 'react-multi-carousel';
+import { useDeviceDetect } from '../../hooks';
+import { Dot } from '../Dots';
+import { ControlLeft, ControlRight } from '../controlArrow';
+import 'react-multi-carousel/lib/styles.css';
+import styles from './index.module.css';
 
-interface IProps {
-  list: {
-    id: string;
-    name: string;
-    dateString: string;
-    imageCart?: { url: string } | null;
-  }[];
+interface IProps<T> {
+  list: T[];
+  renderItem: (item: T) => JSX.Element;
+  carouselContainerClassName?: string;
+  dotLiistClassName?: string;
+  itemClassName?: string;
 }
 
-export const CampsMobileScroller: React.FC<IProps> = ({ list }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const responsive = {
+  desktopXXL: {
+    breakpoint: { max: 3000, min: 1680 },
+    items: 3,
+    slidesToSlide: 1,
+  },
+  desktop: {
+    breakpoint: { max: 1680, min: 1320 },
+    items: 2,
+    slidesToSlide: 1,
+  },
+  mobile: {
+    breakpoint: { max: 1320, min: 100 },
+    items: 1,
+    slidesToSlide: 1,
+  },
+};
 
-  const onLeftM = () => {
-    if (!list.length) return;
-    setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
-  };
-
-  const onRightM = () => {
-    if (!list.length) return;
-    if (currentIndex < list.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    }
-  };
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: onRightM,
-    onSwipedRight: onLeftM,
-    trackMouse: true,
-  });
-
+export const CampsMobileScroller = <T extends { id: string }>({
+  list,
+  renderItem,
+  carouselContainerClassName,
+  dotLiistClassName,
+  itemClassName,
+}: IProps<T>) => {
+  const { isMobile } = useDeviceDetect();
   if (!list.length) return null;
 
   return (
-    <div {...swipeHandlers}>
-      <CampCard
-        key={list[currentIndex].id}
-        id={list[currentIndex].id}
-        name={list[currentIndex].name}
-        dateString={list[currentIndex].dateString}
-        url={list[currentIndex].imageCart?.url}
-        isMobile={true}
-      />
-      <Dots currentIndex={currentIndex} listLength={list.length} />
-    </div>
+    <Carousel
+      swipeable={true}
+      draggable={false}
+      showDots={isMobile}
+      responsive={responsive}
+      infinite={true}
+      keyBoardControl={true}
+      containerClass={carouselContainerClassName}
+      deviceType={isMobile ? 'mobile' : 'desktop'}
+      removeArrowOnDeviceType={['mobile']}
+      dotListClass={dotLiistClassName ? dotLiistClassName : styles.dot_list}
+      itemClass={itemClassName ? itemClassName : styles.item}
+      renderDotsOutside={true}
+      customDot={<Dot />}
+      customLeftArrow={<ControlLeft />}
+      customRightArrow={<ControlRight />}
+    >
+      {list.map((item: T) => {
+        return renderItem(item);
+      })}
+    </Carousel>
   );
 };
