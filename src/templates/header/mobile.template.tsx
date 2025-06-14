@@ -86,9 +86,16 @@ export const MobileTemplate: React.FC<IProps> = ({
               </li>
             </ul>
             {isAuth ? (
-              <>
+              <div className={styles.a_b_wrap_mobi}>
+                <Link
+                  to={`/user/${(user as unknown as IUser).id}`}
+                  className={styles.user_avatar_mobi}
+                >
+                  <Avatar />
+                </Link>
+
                 {isAdmin ? (
-                  <span className={styles.user_bell}>
+                  <span className={styles.user_bell_mobi}>
                     {count !== 0 ? (
                       <span className={styles.notifications_count}>
                         {count}
@@ -97,13 +104,7 @@ export const MobileTemplate: React.FC<IProps> = ({
                     <Bell onClick={toggleNotificationModal} />
                   </span>
                 ) : null}
-                <Link
-                  to={`/user/${(user as unknown as IUser).id}`}
-                  className={styles.user_avatar}
-                >
-                  <Avatar />
-                </Link>
-              </>
+              </div>
             ) : (
               <button
                 className={styles.button_mobi}

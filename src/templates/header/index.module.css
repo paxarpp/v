@@ -191,6 +191,7 @@
   padding: 30px 20px;
 }
 
+.user_bell_mobi,
 .user_bell {
   display: flex;
   align-items: center;
@@ -204,10 +205,16 @@
   margin-left: auto;
 }
 
+
+.user_avatar_mobi,
 .user_avatar {
   display: flex;
   align-items: center;
   margin-left: 60px;
+}
+
+.user_avatar_mobi {
+  margin-left: 0;
 }
 
 .link_pending {
@@ -219,17 +226,26 @@
   color: #F2DB51 !important;
 }
 
+.user_bell_mobi .notifications_count,
 .user_bell .notifications_count {
   position: absolute;
   top: 10px;
   right: -8px;
   width: 34px;
-  color: white;
   height: 34px;
+  color: white;
   background: red;
   border-radius: 50%;
   text-align: center;
   font-size: 20px;
+}
+
+.user_bell_mobi .notifications_count {
+  width: 24px;
+  height: 24px;
+  top: 30px;
+  right: -4px;
+  font-size: 14px;
 }
 
 .notification_list {
@@ -290,4 +306,8 @@
 
 .icon_mobile {
   width: 25px;
+}
+
+.a_b_wrap_mobi {
+  display: flex;
 }
