@@ -106,7 +106,7 @@ export const MobileTemplate: React.FC<IProps> = ({
               </>
             ) : (
               <button
-                className={styles.button}
+                className={styles.button_mobi}
                 onClick={() => toggleAuthOpen()}
               >
                 {'Войти'}
