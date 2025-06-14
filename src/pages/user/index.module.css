@@ -265,6 +265,14 @@
   border-spacing: 30px;
 }
 
+.table_mobi {
+   width: 100%;
+  text-align: left;
+  border-spacing: 2px;
+  font-size: 14px;
+}
+
+.table_mobi > tr > th,
 .table > tr > th {
   border-bottom: 1px solid #888888;
 }
@@ -288,17 +296,25 @@
   line-height: 24px;
 }
 
+.add_user_modal_mobi,
 .add_user_modal {
   display: flex;
   flex-flow: column nowrap;
   padding: 20px;
-  height: 400px;
-  width: 500px;
   gap: 20px;
 }
 
+.add_user_modal {
+  height: 400px;
+  width: 500px;
+}
+
 .column {
-  margin-top: 150px;
+  margin: 150px 0 50px 0;
+}
+
+.column_mobi {
+  margin: 50px 0;
 }
 
 .camps_wrap_mobi {
@@ -321,4 +337,16 @@
   flex-flow: column nowrap;
   align-items: center;
   gap: 20px;
+}
+
+.ml_10 {
+  margin-left: 10px;
+}
+
+.modal_users {
+
+}
+
+.modal_users_mobi {
+  width: 100vw;
 }

@@ -9,10 +9,12 @@ import Pencil from '../../../assets/pencil.svg?react';
 import Basket from '../../../assets/basket.svg?react';
 import { IUserItem } from '../interfaces';
 import styles from '../index.module.css';
+import { useDeviceDetect } from '../../../hooks';
 
 export const Users = () => {
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
   const revalidator = useRevalidator();
+  const { isMobile } = useDeviceDetect();
   const { logout } = useUser();
   const [isOpen, setOpen] = useState(false);
   const [newUser, setNewUser] = useState<{
@@ -85,7 +87,7 @@ export const Users = () => {
   };
 
   return user?.isAdmin ? (
-    <div className={styles.column}>
+    <div className={isMobile ? styles.column_mobi : styles.column}>
       {isOpen ? (
         <Modal
           close={closeModal}
@@ -96,8 +98,13 @@ export const Users = () => {
               {newUser?.id ? 'Редактировать' : 'Добавить'}
             </button>
           }
+          classNameModal={isMobile ? styles.modal_users_mobi : ''}
         >
-          <div className={styles.add_user_modal}>
+          <div
+            className={
+              isMobile ? styles.add_user_modal_mobi : styles.add_user_modal
+            }
+          >
             <label>{'Имя'}</label>
             <input
               value={newUser?.username}
@@ -149,13 +156,13 @@ export const Users = () => {
       ) : null}
       <h2>{'Пользователи'}</h2>
 
-      <table className={styles.table}>
+      <table className={isMobile ? styles.table_mobi : styles.table}>
         <thead>
           <tr>
             <th>Имя</th>
-            <th>Телефон</th>
+            <th>{isMobile ? 'Тел.' : 'Телефон'}</th>
             <th>Роль</th>
-            <th>Действия</th>
+            <th>{isMobile ? '' : 'Действия'}</th>
           </tr>
         </thead>
         <tbody>
@@ -164,17 +171,34 @@ export const Users = () => {
               <td>{u.name}</td>
               <td>{u.telephone}</td>
               <td>
-                {u.isUser
-                  ? 'Пользователь'
-                  : u.isAdmin
-                    ? 'Администратор'
-                    : u.isModerator
-                      ? 'Модератор'
-                      : '???'}
+                {u.isUser ? (
+                  isMobile ? (
+                    <strong>П-ль</strong>
+                  ) : (
+                    'Пользователь'
+                  )
+                ) : u.isAdmin ? (
+                  isMobile ? (
+                    <strong>Админ</strong>
+                  ) : (
+                    'Администратор'
+                  )
+                ) : u.isModerator ? (
+                  isMobile ? (
+                    <strong>Мод-р</strong>
+                  ) : (
+                    'Модератор'
+                  )
+                ) : (
+                  '???'
+                )}
               </td>
               <td>
                 <Pencil onClick={() => editUser(u)} />
-                <Basket onClick={() => deleteUser(u.id)} />
+                <Basket
+                  onClick={() => deleteUser(u.id)}
+                  className={styles.ml_10}
+                />
               </td>
             </tr>
           ))}
