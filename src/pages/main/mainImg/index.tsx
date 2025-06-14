@@ -68,9 +68,17 @@ export const MainImg: React.FC = () => {
       <Modal
         isOpen={isOpen}
         close={closeModal}
-        classNameModal={styles.modal_questions}
+        classNameModal={
+          isMobile ? styles.modal_questions_mobi : styles.modal_questions
+        }
         header={
-          <div className={styles.modal_question_header}>
+          <div
+            className={
+              isMobile
+                ? styles.modal_question_header_mobi
+                : styles.modal_question_header
+            }
+          >
             {'Главная страница'}
           </div>
         }
@@ -123,7 +131,10 @@ export const MainImg: React.FC = () => {
         }
       >
         {isAdmin ? (
-          <Setting onClick={openEditMainImg} className={styles.setting} />
+          <Setting
+            onClick={openEditMainImg}
+            className={isMobile ? styles.setting_mobi : styles.setting}
+          />
         ) : null}
         <img
           src={createImageUrl(home?.mainBlock.mainImage?.url)}

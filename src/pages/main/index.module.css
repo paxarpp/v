@@ -23,10 +23,20 @@
 }
 
 .setting_q,
-.setting {
-  margin: 30px;
+.setting,
+.setting_mobi {
+  margin: 0;
   float: right;
   cursor: pointer;
+}
+
+.setting_mobi {
+  width: 24px;
+  margin-right: 20px;
+}
+
+.setting {
+  margin: 30px;
 }
 
 .setting_q {
@@ -41,6 +51,7 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
+  z-index: -1;
 }
 
 .main_title_wrap_mobi {
@@ -374,6 +385,11 @@
   height: 640px;
 }
 
+.modal_questions_mobi {
+  width: 100vw;
+}
+
+.modal_question_header_mobi,
 .modal_question_header {
   font-size: 40px;
   font-weight: 600;
@@ -381,6 +397,11 @@
   text-align: left;
   padding: 30px 50px;
   border-bottom: 2px solid #FFFFFF;
+}
+
+.modal_question_header_mobi {
+   font-size: 20px;
+   padding: 10px 10px;
 }
 
 .modal_question_footer {

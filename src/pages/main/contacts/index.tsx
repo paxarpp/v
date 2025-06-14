@@ -73,9 +73,17 @@ export const Contacts: React.FC = () => {
       <Modal
         isOpen={isOpen}
         close={closeModal}
-        classNameModal={styles.modal_questions}
+        classNameModal={
+          isMobile ? styles.modal_questions_mobi : styles.modal_questions
+        }
         header={
-          <div className={styles.modal_question_header}>
+          <div
+            className={
+              isMobile
+                ? styles.modal_question_header_mobi
+                : styles.modal_question_header
+            }
+          >
             {'Главная страница'}
           </div>
         }
@@ -173,7 +181,10 @@ export const Contacts: React.FC = () => {
       >
         {'Контакты'}
         {isAdmin ? (
-          <Setting onClick={openEditContact} className={styles.setting_q} />
+          <Setting
+            onClick={openEditContact}
+            className={isMobile ? styles.setting_mobi : styles.setting_q}
+          />
         ) : null}
       </h3>
       <div className={isMobile ? styles.flex_mobi : styles.flex}>

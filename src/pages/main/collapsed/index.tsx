@@ -65,9 +65,17 @@ export const Collapsed: React.FC = () => {
       <Modal
         isOpen={isOpen}
         close={closeModal}
-        classNameModal={styles.modal_questions}
+        classNameModal={
+          isMobile ? styles.modal_questions_mobi : styles.modal_questions
+        }
         header={
-          <div className={styles.modal_question_header}>
+          <div
+            className={
+              isMobile
+                ? styles.modal_question_header_mobi
+                : styles.modal_question_header
+            }
+          >
             {'Главная страница'}
           </div>
         }
@@ -155,7 +163,10 @@ export const Collapsed: React.FC = () => {
         >
           {'Часто задаваемые вопросы'}
           {isAdmin ? (
-            <Setting onClick={openEditQuestions} className={styles.setting_q} />
+            <Setting
+              onClick={openEditQuestions}
+              className={isMobile ? styles.setting_mobi : styles.setting_q}
+            />
           ) : null}
         </h2>
         <div>
