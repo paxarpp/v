@@ -1,5 +1,6 @@
 import { useEffect, useState, ChangeEvent } from 'react';
 import { useRevalidator } from 'react-router';
+import DatePicker from 'react-datepicker';
 import { Modal } from '../../../templates/modal';
 import { pl } from '../../../api/pageLoader';
 import { api } from '../../../api/api';
@@ -12,7 +13,7 @@ import {
   ImageSelect,
 } from '../../../templates/imageSelect';
 import { ErrorWarn } from '../../../templates/errorWarn';
-import DatePicker from 'react-datepicker';
+import { useDeviceDetect } from '../../../hooks';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from '../index.module.css';
 
@@ -21,6 +22,7 @@ export const CampEdit: React.FC<{
   onClose: () => void;
 }> = ({ campId, onClose }) => {
   const { logout } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [currentCamp, setCamp] = useState<ICampItem | null>(null);
   const [serverError, setError] = useState<string | null>(null);
   const [packs, setPacks] = useState<IPackage[]>([]);
@@ -218,7 +220,9 @@ export const CampEdit: React.FC<{
 
   return (
     <Modal
-      classNameModal={styles.edit_camp_modal}
+      classNameModal={
+        isMobile ? styles.edit_camp_modal_mobi : styles.edit_camp_modal
+      }
       isOpen={true}
       close={onClose}
       footer={

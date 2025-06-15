@@ -6,6 +6,7 @@ import { pl } from '../../../api/pageLoader';
 import { creatorRequest } from '../../../api';
 import { IPrice } from '../interfaces';
 import { useUser } from '../../../context';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 const initialPrices = (isChild: boolean) => ({
@@ -20,6 +21,7 @@ export const PriceEdit: React.FC<{
   onClose: () => void;
 }> = ({ priceId, onClose }) => {
   const { logout } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [currentPrice, setPrice] = useState<IPrice | null>(null);
   const [priceOld, setPriceOld] = useState<IPrice['prices'][number] | null>(
     null,
@@ -101,7 +103,9 @@ export const PriceEdit: React.FC<{
 
   return (
     <Modal
-      classNameModal={styles.edit_camp_modal}
+      classNameModal={
+        isMobile ? styles.edit_modal_mobi : styles.edit_camp_modal
+      }
       isOpen={true}
       close={onClose}
       footer={
@@ -134,7 +138,7 @@ export const PriceEdit: React.FC<{
           }}
           className={styles.input_field}
         />
-        <div className={styles.flex}>
+        <div className={isMobile ? styles.flex_mobi : styles.flex}>
           <div className={styles.flex_column}>
             <h4>{'Взрослые группы'}</h4>
             <label>{'За одну тренировку'}</label>

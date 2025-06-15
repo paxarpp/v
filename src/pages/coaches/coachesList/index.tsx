@@ -3,7 +3,6 @@ import { useLoaderData, useRevalidator } from 'react-router';
 import { ICoach } from '../interfaces';
 import { useUser } from '../../../context';
 import Setting from '../../../assets/setting.svg?react';
-import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Avatar from '../../../assets/avatar.svg?react';
 import Eye from '../../../assets/eye_enabled.svg?react';
 import EyeDisabled from '../../../assets/eye_disabled.svg?react';
@@ -14,6 +13,7 @@ import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { createImageUrl } from '../../../constants';
 import { useDeviceDetect } from '../../../hooks';
+import { CardAdd } from '../../../templates/CardAdd';
 import styles from '../index.module.css';
 
 export const CoachesList: React.FC = () => {
@@ -177,11 +177,23 @@ const CoachesTemplate: React.FC<{
           </div>
         );
       })}
-      {isAdmin ? (
-        <div className={styles.coach_card_add}>
-          <RoundAdd onClick={addCoach} />
-        </div>
-      ) : null}
+      <CardAdd
+        show={isAdmin}
+        isMobile={isMobile}
+        onClick={addCoach}
+        sizes={sizes}
+      />
     </>
   );
+};
+
+const sizes = {
+  mobile: {
+    height: 482,
+    width: 335,
+  },
+  desktop: {
+    height: 666,
+    width: 420,
+  },
 };

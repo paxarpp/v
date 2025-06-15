@@ -3,6 +3,12 @@
   gap: 50px;
 }
 
+.flex_mobi {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 20px;
+}
+
 .flex_column {
   display: flex;
   flex-flow: column;
@@ -330,15 +336,6 @@
   margin-top: 10px;
 }
 
-.price_card_add {
-  cursor: pointer;
-  width: 570px;
-  padding: 45px 0px;
-  border-radius: 8px;
-  background: #8080804D;
-  z-index: 0;
-}
-
 .setting_price {
   height: 40px;
   width: 40px;
@@ -355,16 +352,6 @@
   position: absolute;
   top: 10px;
   right: 10px;
-}
-
-.shedule_card_add {
-  width: 270px;
-  border-radius: 8px;
-  background: #8080804D;
-}
-
-.shedule_round {
-  width: 36px;
 }
 
 .row_day {
@@ -421,12 +408,18 @@
   color: #152355;
 }
 
+.edit_modal_mobi,
 .edit_camp_modal {
   display: flex;
   flex-flow: column nowrap;
   overflow: hidden;
   width: 1200px;
   height: 768px;
+}
+
+.edit_modal_mobi {
+  width: 100vw;
+  height: auto;
 }
 
 .modal_footer {

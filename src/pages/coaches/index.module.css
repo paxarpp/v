@@ -47,7 +47,6 @@
 }
 
 .coach_card_mobi,
-.coach_card_add,
 .coach_card {
   display: flex;
   flex-flow: column nowrap;
@@ -62,12 +61,6 @@
   line-height: 33px;
   color: rgba(212, 212, 212, 1);
   overflow: hidden;
-}
-
-.coach_card_add {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .coach_card_mobi {
@@ -121,6 +114,7 @@
 }
 
 .profile_coach_modal,
+.edit_modal_mobi,
 .edit_coach_modal {
   display: flex;
   flex-flow: column nowrap;
@@ -136,6 +130,11 @@
 .edit_coach_modal {
   width: 1000px;
   height: 666px;
+}
+
+.edit_modal_mobi {
+  width: 100vw;
+  height: auto;
 }
 
 .edit_coach_content {

@@ -60,26 +60,16 @@
   gap: 20px;
 }
 
-.activity_card_add,
 .activity_card {
   width: 420px;
+  height: 370px;
   border-top: 1px solid #F2DB51;
 }
 
 .activity_card_mobi {
   width: 335px;
+  height: 370px;
   border-top: 1px solid #F2DB51;
-}
-
-.review_card_add,
-.activity_card_add {
-  background: #8080804D;
-  border: 2px solid #FFFFFF;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
 
 .activity_title_mobi,
@@ -315,6 +305,7 @@
   border-radius: 8px;
 }
 
+.modal_content_mobi,
 .review_modal_content,
 .activity_modal_content {
   height: 400px;
@@ -329,6 +320,11 @@
 .review_modal_content {
   width: 800px;
   height: 500px;
+}
+
+.modal_content_mobi {
+  width: calc(100vw - 20px);
+  height: auto;
 }
 
 .textarea_field,
@@ -350,11 +346,6 @@
   display: flex;
   justify-content: space-between;
   padding: 20px;
-}
-
-.review_card_add {
-  width: 570px;
-  height: 420px;
 }
 
 .row {

@@ -10,6 +10,7 @@ import {
   ImageSelect,
   ImagesMassSelect,
 } from '../../../templates/imageSelect';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const CoachEdit: React.FC<{
@@ -18,6 +19,7 @@ export const CoachEdit: React.FC<{
   onClose: () => void;
 }> = ({ open, coachId, onClose }) => {
   const { logout } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [currentCoach, setCoach] = useState<ICoach | null>(null);
 
   const revalidator = useRevalidator();
@@ -112,7 +114,9 @@ export const CoachEdit: React.FC<{
 
   return (
     <Modal
-      classNameModal={styles.edit_coach_modal}
+      classNameModal={
+        isMobile ? styles.edit_modal_mobi : styles.edit_coach_modal
+      }
       isOpen={open}
       close={onClose}
       footer={

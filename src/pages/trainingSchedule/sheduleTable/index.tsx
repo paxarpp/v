@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
-import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import TGLink from '../../../assets/tgLink.svg?react';
 import Ball from '../../../assets/ball.svg?react';
@@ -12,6 +11,7 @@ import { createLinkTg } from '../../../constants';
 import { MobileTemplate } from './mobileTemplate';
 import { useDeviceDetect } from '../../../hooks';
 import { weekDays } from './const';
+import { CardAdd } from '../../../templates/CardAdd';
 import styles from '../index.module.css';
 
 export const SheduleTable = () => {
@@ -49,6 +49,7 @@ const SheduleeTemplate: React.FC<{
 }> = ({ isAdmin, setIsOpen, setEditTreinId }) => {
   const { trainingShedule } =
     useLoaderData<Route.ComponentProps['loaderData']>();
+  const { isMobile } = useDeviceDetect();
 
   const openEditTrein = (id: string) => {
     setEditTreinId(id);
@@ -97,11 +98,23 @@ const SheduleeTemplate: React.FC<{
           </div>
         );
       })}
-      {isAdmin ? (
-        <div className={styles.shedule_card_add}>
-          <RoundAdd onClick={addTrein} className={styles.shedule_round} />
-        </div>
-      ) : null}
+      <CardAdd
+        show={isAdmin}
+        isMobile={isMobile}
+        onClick={addTrein}
+        sizes={sizes}
+      />
     </>
   );
+};
+
+const sizes = {
+  mobile: {
+    height: 163,
+    width: 335,
+  },
+  desktop: {
+    height: 160,
+    width: 270,
+  },
 };

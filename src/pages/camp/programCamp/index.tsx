@@ -3,7 +3,6 @@ import { useLoaderData, useRevalidator } from 'react-router';
 import { Route } from '../+types';
 import imgUrlBack from '../../../assets/program_camp.jpg';
 import Setting from '../../../assets/setting.svg?react';
-import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
 import { Modal } from '../../../templates/modal';
 import { IProgram } from '../interfaces';
@@ -13,6 +12,7 @@ import { Control } from '../../../templates/controlArrow';
 import { useDeviceDetect } from '../../../hooks';
 import { useSwipeable } from 'react-swipeable';
 import { Dots } from '../../../templates/Dots';
+import { CardAdd } from '../../../templates/CardAdd';
 import styles from '../index.module.css';
 
 export const ProgramCamp = () => {
@@ -228,13 +228,24 @@ export const ProgramCamp = () => {
               })}
           </>
         )}
-
-        {isAdmin ? (
-          <div className={styles.program_card_add}>
-            <RoundAdd onClick={() => openModal()} />
-          </div>
-        ) : null}
+        <CardAdd
+          onClick={() => openModal()}
+          isMobile={isMobile}
+          show={isAdmin}
+          sizes={sizes}
+        />
       </div>
     </div>
   );
+};
+
+const sizes = {
+  desktop: {
+    width: 420,
+    height: 300,
+  },
+  mobile: {
+    width: 335,
+    height: 200,
+  },
 };

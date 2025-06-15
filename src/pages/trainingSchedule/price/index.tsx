@@ -1,13 +1,13 @@
 import { Fragment, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import Ball from '../../../assets/ball.svg?react';
-import RoundAdd from '../../../assets/roundAdd.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { Route } from '../+types';
 import { useUser } from '../../../context';
 import { PriceEdit } from '../priceEdit';
 import imgUrl from '../../../assets/price_ball.jpg';
 import { useDeviceDetect } from '../../../hooks';
+import { CardAdd } from '../../../templates/CardAdd';
 import styles from '../index.module.css';
 
 export const Price = () => {
@@ -122,11 +122,22 @@ const PriceTemplate: React.FC<{
           </div>
         );
       })}
-      {isAdmin ? (
-        <div className={styles.price_card_add}>
-          <RoundAdd onClick={addPrice} />
-        </div>
-      ) : null}
+      <CardAdd
+        show={isAdmin}
+        isMobile={isMobile}
+        onClick={addPrice}
+        sizes={sizes}
+      />
     </div>
   );
+};
+
+const sizes = {
+  mobile: {
+    height: 163,
+    width: 335,
+  },
+  desktop: {
+    height: 250,
+  },
 };

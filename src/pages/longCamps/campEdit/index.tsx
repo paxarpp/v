@@ -14,6 +14,7 @@ import {
 import { ErrorWarn } from '../../../templates/errorWarn';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
 export const CampEdit: React.FC<{
@@ -21,6 +22,7 @@ export const CampEdit: React.FC<{
   onClose: () => void;
 }> = ({ campId, onClose }) => {
   const { logout } = useUser();
+  const { isMobile } = useDeviceDetect();
   const [currentCamp, setCamp] = useState<ICampItem | null>(null);
   const [serverError, setError] = useState<string | null>(null);
   const [packs, setPacks] = useState<IPackage[]>([]);
@@ -219,7 +221,9 @@ export const CampEdit: React.FC<{
 
   return (
     <Modal
-      classNameModal={styles.edit_camp_modal}
+      classNameModal={
+        isMobile ? styles.edit_camp_modal_mobi : styles.edit_camp_modal
+      }
       isOpen={true}
       close={onClose}
       footer={

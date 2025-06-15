@@ -671,7 +671,6 @@ input_field_small,
 }
 
 .programs_wrap_mobi {
-  flex-flow: row nowrap;
   justify-content: center;
   margin: 0 20px;
 }

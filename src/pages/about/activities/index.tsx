@@ -3,7 +3,6 @@ import { IActivity } from '../interfaces';
 import { ImagePack } from '../../../templates/imagesPack';
 import Ball from '../../../assets/ball.svg?react';
 import Setting from '../../../assets/setting.svg?react';
-import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
 import { useState } from 'react';
 import { Modal } from '../../../templates/modal';
@@ -12,6 +11,7 @@ import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
 import { Route } from '../+types';
 import { useDeviceDetect } from '../../../hooks';
+import { CardAdd } from '../../../templates/CardAdd';
 import styles from '../index.module.css';
 
 export const Activities = () => {
@@ -117,7 +117,13 @@ export const Activities = () => {
           }
           close={onClose}
         >
-          <div className={styles.activity_modal_content}>
+          <div
+            className={
+              isMobile
+                ? styles.modal_content_mobi
+                : styles.activity_modal_content
+            }
+          >
             <label>{'Название блока'}</label>
             <input
               value={currentActivity?.name}
@@ -168,11 +174,23 @@ export const Activities = () => {
           </div>
         );
       })}
-      {isAdmin ? (
-        <div className={styles.activity_card_add} onClick={addActivity}>
-          <RoundAdd />
-        </div>
-      ) : null}
+      <CardAdd
+        show={isAdmin}
+        isMobile={isMobile}
+        onClick={addActivity}
+        sizes={sizes}
+      />
     </div>
   );
+};
+
+const sizes = {
+  mobi: {
+    width: 335,
+    height: 370,
+  },
+  desktop: {
+    width: 420,
+    height: 370,
+  },
 };

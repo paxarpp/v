@@ -35,27 +35,6 @@
   height: 30px;
 }
 
-.camp_card_add {
-  display: flex;
-  flex-flow: column nowrap;
-  height: 520px;
-  width: 570px;
-  box-sizing: border-box;
-  padding: 14px;
-  border-radius: 8px;
-  background: rgba(128, 128, 128, 0.2);
-  border: 2px solid #FFFFFF;
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 33px;
-  color: rgba(212, 212, 212, 1);
-  overflow: hidden;
-  position: relative;
-
-  justify-content: center;
-  align-items: center;
-}
-
 .camp_list {
   display: flex;
   flex-flow: row wrap;
@@ -81,13 +60,18 @@
   padding: 50px 50px 0 50px;
 }
 
+.edit_camp_modal_mobi,
 .edit_camp_modal {
   display: flex;
   flex-flow: column nowrap;
   overflow: hidden;
-
   width: 1200px;
   height: 768px;
+}
+
+.edit_camp_modal_mobi {
+  width: 100vw;
+  height: auto;
 }
 
 .text_align_l {

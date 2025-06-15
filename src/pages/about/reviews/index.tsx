@@ -3,7 +3,6 @@ import { useLoaderData, useRevalidator } from 'react-router';
 import { useDeviceDetect } from '../../../hooks';
 import { IReview } from '../interfaces';
 import Setting from '../../../assets/setting.svg?react';
-import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { Modal } from '../../../templates/modal';
 import { creatorRequest } from '../../../api';
 import { api } from '../../../api/api';
@@ -15,6 +14,7 @@ import { Control } from '../../../templates/controlArrow';
 import { useSwipeable } from 'react-swipeable';
 import { Dots } from '../../../templates/Dots';
 import styles from '../index.module.css';
+import { CardAdd } from '../../../templates/CardAdd';
 
 export const Reviews = () => {
   const { about } = useLoaderData<Route.ComponentProps['loaderData']>();
@@ -172,7 +172,13 @@ export const Reviews = () => {
             }
             close={onClose}
           >
-            <div className={styles.review_modal_content}>
+            <div
+              className={
+                isMobile
+                  ? styles.modal_content_mobi
+                  : styles.review_modal_content
+              }
+            >
               <div className={styles.row}>
                 <div className={styles.col}>
                   <label>{'Автор отзыва'}</label>
@@ -288,12 +294,18 @@ export const Reviews = () => {
               })}
           </>
         )}
-        {isAdmin ? (
-          <div className={styles.review_card_add} onClick={addReview}>
-            <RoundAdd />
-          </div>
-        ) : null}
       </div>
+      <CardAdd
+        show={isAdmin}
+        isMobile={isMobile}
+        onClick={addReview}
+        sizes={sizes}
+      />
     </div>
   );
+};
+
+const sizes = {
+  mobile: { height: 187 },
+  desktop: { height: 420 },
 };

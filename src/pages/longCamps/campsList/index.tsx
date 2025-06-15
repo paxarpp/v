@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router';
-import RoundAdd from '../../../assets/roundAdd.svg?react';
 import { useUser } from '../../../context';
-import { CampEdit } from '../campEdit';
 import { Route } from '../+types';
 import { CampCard } from '../../../templates/CampCard';
+import { CardAdd } from '../../../templates/CardAdd';
 import { useDeviceDetect } from '../../../hooks';
+import { CampEdit } from '../campEdit';
 import styles from '../index.module.css';
 
 export const CampsList = () => {
@@ -65,11 +65,7 @@ const CampsTemplate: React.FC<{
           />
         );
       })}
-      {isAdmin ? (
-        <div className={styles.camp_card_add}>
-          <RoundAdd onClick={addLongCamp} />
-        </div>
-      ) : null}
+      <CardAdd show={isAdmin} isMobile={isMobile} onClick={addLongCamp} />
     </>
   );
 };
