@@ -31,7 +31,7 @@ const responsive = {
   },
 };
 
-export const CampsMobileScroller = <T extends { id: string }>({
+export const UniversalScroller = <T extends { id: string }>({
   list,
   renderItem,
   carouselContainerClassName,

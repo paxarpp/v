@@ -1,22 +1,35 @@
 import { useLoaderData } from 'react-router';
 import { Route } from '../+types';
-import { Scroller } from '../scroller';
 import { useDeviceDetect } from '../../../hooks';
-import { CampsMobileScroller } from '../../../templates/CampMobileScroller';
+import { UniversalScroller } from '../../../templates/UniversalScroller';
+import { CampCard } from '../../../templates/CampCard';
 import styles from '../index.module.css';
 
 export const PastCamps = () => {
   const { user } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
 
-  return user?.isAdmin ? null : isMobile ? (
-    <div className={styles.camps_wrap_mobi}>
-      <h2 className={styles.camps_header_mobi}>{'Мои прошедшие кемпы'}</h2>
-      <div className={styles.camps_scroller_mobi}>
-        <CampsMobileScroller list={user?.pastCamps || []} />
+  return user?.isAdmin ? null : (
+    <div className={isMobile ? styles.camps_wrap_mobi : styles.camps_wrap}>
+      <h2 className={isMobile ? styles.camps_header_mobi : styles.camps_header}>
+        {'Мои прошедшие кемпы'}
+      </h2>
+      <div>
+        <UniversalScroller
+          list={user?.pastCamps || []}
+          renderItem={(camp) => (
+            <CampCard
+              key={camp.id}
+              id={camp.id}
+              name={camp.name}
+              dateString={camp.dateString}
+              url={camp.imageCart?.url}
+              isMobile={isMobile}
+              to={'/camps/past/'}
+            />
+          )}
+        />
       </div>
     </div>
-  ) : (
-    <Scroller title={'Мои прошедшие кемпы'} camps={user?.pastCamps} />
   );
 };
