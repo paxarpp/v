@@ -9,7 +9,7 @@ interface IProps<T> {
   list: T[];
   renderItem: (item: T) => JSX.Element;
   carouselContainerClassName?: string;
-  dotLiistClassName?: string;
+  dotListClassName?: string;
   itemClassName?: string;
 }
 
@@ -25,7 +25,7 @@ const responsive = {
     slidesToSlide: 1,
   },
   mobile: {
-    breakpoint: { max: 1320, min: 100 },
+    breakpoint: { max: 1320, min: 1 },
     items: 1,
     slidesToSlide: 1,
   },
@@ -35,33 +35,35 @@ export const UniversalScroller = <T extends { id: string }>({
   list,
   renderItem,
   carouselContainerClassName,
-  dotLiistClassName,
+  dotListClassName,
   itemClassName,
 }: IProps<T>) => {
   const { isMobile } = useDeviceDetect();
   if (!list.length) return null;
 
   return (
-    <Carousel
-      swipeable={true}
-      draggable={false}
-      showDots={isMobile}
-      responsive={responsive}
-      infinite={true}
-      keyBoardControl={true}
-      containerClass={carouselContainerClassName}
-      deviceType={isMobile ? 'mobile' : 'desktop'}
-      removeArrowOnDeviceType={['mobile']}
-      dotListClass={dotLiistClassName ? dotLiistClassName : styles.dot_list}
-      itemClass={itemClassName ? itemClassName : styles.item}
-      renderDotsOutside={true}
-      customDot={<Dot />}
-      customLeftArrow={<ControlLeft />}
-      customRightArrow={<ControlRight />}
-    >
-      {list.map((item: T) => {
-        return renderItem(item);
-      })}
-    </Carousel>
+    <div className={styles.container}>
+      <Carousel
+        swipeable={true}
+        draggable={false}
+        showDots={isMobile}
+        responsive={responsive}
+        infinite={true}
+        keyBoardControl={true}
+        containerClass={carouselContainerClassName}
+        deviceType={isMobile ? 'mobile' : 'desktop'}
+        removeArrowOnDeviceType={['mobile']}
+        dotListClass={dotListClassName ? dotListClassName : styles.dot_list}
+        itemClass={itemClassName ? itemClassName : styles.item}
+        renderDotsOutside={true}
+        customDot={<Dot />}
+        customLeftArrow={<ControlLeft />}
+        customRightArrow={<ControlRight />}
+      >
+        {list.map((item: T) => {
+          return renderItem(item);
+        })}
+      </Carousel>
+    </div>
   );
 };

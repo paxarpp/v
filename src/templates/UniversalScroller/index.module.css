@@ -1,8 +1,12 @@
+.container {
+  position: relative;
+}
+
 .item > div {
   margin: 0 auto;
 }
 
 .dot_list {
-  bottom: 15px !important;
+  bottom: -15px !important;
   gap: 1px;
 }

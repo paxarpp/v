@@ -14,22 +14,20 @@ export const PastCamps = () => {
       <h2 className={isMobile ? styles.camps_header_mobi : styles.camps_header}>
         {'Мои прошедшие кемпы'}
       </h2>
-      <div>
-        <UniversalScroller
-          list={user?.pastCamps || []}
-          renderItem={(camp) => (
-            <CampCard
-              key={camp.id}
-              id={camp.id}
-              name={camp.name}
-              dateString={camp.dateString}
-              url={camp.imageCart?.url}
-              isMobile={isMobile}
-              to={'/camps/past/'}
-            />
-          )}
-        />
-      </div>
+      <UniversalScroller
+        list={user?.pastCamps || []}
+        renderItem={(camp) => (
+          <CampCard
+            key={camp.id}
+            id={camp.id}
+            name={camp.name}
+            dateString={camp.dateString}
+            url={camp.imageCart?.url}
+            isMobile={isMobile}
+            to={'/camps/past/'}
+          />
+        )}
+      />
     </div>
   );
 };

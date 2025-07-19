@@ -14,22 +14,20 @@ export const NearestCamps = () => {
       <h2 className={isMobile ? styles.camps_header_mobi : styles.camps_header}>
         {'Мои ближайшие кемпы'}
       </h2>
-      <div>
-        <UniversalScroller
-          list={user?.nearestCamps || []}
-          renderItem={(camp) => (
-            <CampCard
-              key={camp.id}
-              id={camp.id}
-              name={camp.name}
-              dateString={camp.dateString}
-              url={camp.imageCart?.url}
-              isMobile={isMobile}
-              to={'/camps/past/'}
-            />
-          )}
-        />
-      </div>
+      <UniversalScroller
+        list={user?.nearestCamps || []}
+        renderItem={(camp) => (
+          <CampCard
+            key={camp.id}
+            id={camp.id}
+            name={camp.name}
+            dateString={camp.dateString}
+            url={camp.imageCart?.url}
+            isMobile={isMobile}
+            to={'/camps/past/'}
+          />
+        )}
+      />
     </div>
   );
 };

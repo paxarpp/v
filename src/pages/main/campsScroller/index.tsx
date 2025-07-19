@@ -13,21 +13,19 @@ export const CampsScroller: React.FC = () => {
       <h2 className={isMobile ? styles.camps_header_mobi : styles.camps_header}>
         Ближайшие кемпы
       </h2>
-      <div>
-        <UniversalScroller
-          list={home?.camps || []}
-          renderItem={(camp) => (
-            <CampCard
-              key={camp.id}
-              id={camp.id}
-              name={camp.name}
-              dateString={camp.dateString}
-              url={camp.imageCart?.url}
-              isMobile={isMobile}
-            />
-          )}
-        />
-      </div>
+      <UniversalScroller
+        list={home?.camps || []}
+        renderItem={(camp) => (
+          <CampCard
+            key={camp.id}
+            id={camp.id}
+            name={camp.name}
+            dateString={camp.dateString}
+            url={camp.imageCart?.url}
+            isMobile={isMobile}
+          />
+        )}
+      />
     </div>
   );
 };
