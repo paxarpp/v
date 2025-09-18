@@ -128,7 +128,7 @@
   align-items: center;
   flex-flow: row nowrap;
   list-style: none;
-  justify-content: space-between;
+  justify-content: space-evenly;
   cursor: pointer;
   width: 188px;
 }

@@ -3,7 +3,6 @@ import Logo from '../../assets/logo.svg?react';
 import ClosedIcon from '../../assets/closed.svg?react';
 import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
-import Inst from '../../assets/inst.svg?react';
 import Avatar from '../../assets/avatar.svg?react';
 import Bell from '../../assets/bell.svg?react';
 import { useUser } from '../../context';
@@ -19,7 +18,6 @@ interface IProps extends IPropsBase {
 }
 
 export const Template: React.FC<IProps> = ({
-  linkInstagram,
   linkTg,
   linkVk,
   toggleAuthOpen,
@@ -106,9 +104,6 @@ export const Template: React.FC<IProps> = ({
         </a>
         <a href={createLinkTg(linkTg)} target={'_blank'}>
           <T />
-        </a>
-        <a href={linkInstagram} target={'_blank'}>
-          <Inst />
         </a>
       </div>
       {isAuth ? (

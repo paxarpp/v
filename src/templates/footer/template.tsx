@@ -1,7 +1,6 @@
 import Logo from '../../assets/logo.svg?react';
 import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
-import Inst from '../../assets/inst.svg?react';
 import { Link } from 'react-router';
 import { createLinkTg } from '../../constants';
 import { IProps } from '.';
@@ -9,7 +8,6 @@ import styles from './index.module.css';
 
 export const Template: React.FC<IProps> = ({
   linkTg,
-  linkInstagram,
   linkVk,
 }) => {
   return (
@@ -77,7 +75,7 @@ export const Template: React.FC<IProps> = ({
           </ul>
         </div>
       </div>
-      <div>
+      <div className={styles.flex}>
         <a href={linkVk} target={'_blank'} className={styles.icon}>
           <Vk />
         </a>
@@ -87,9 +85,6 @@ export const Template: React.FC<IProps> = ({
           className={`${styles.icon} ${styles.mlr_20}`}
         >
           <T />
-        </a>
-        <a href={linkInstagram} target={'_blank'} className={styles.icon}>
-          <Inst />
         </a>
       </div>
     </footer>

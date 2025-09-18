@@ -4,7 +4,6 @@ import { TemplateMobi } from './templateMobi.tsx';
 
 export interface IProps {
   linkTg?: string;
-  linkInstagram?: string;
   linkVk?: string;
 }
 

@@ -4,7 +4,6 @@ import Phone from '../../../assets/phone.svg?react';
 import Mail from '../../../assets/mail.svg?react';
 import Vk from '../../../assets/vk.svg?react';
 import T from '../../../assets/t.svg?react';
-import Inst from '../../../assets/inst.svg?react';
 import Setting from '../../../assets/setting.svg?react';
 import { useUser } from '../../../context';
 import { IContactBlock } from '../interfaces';
@@ -143,17 +142,6 @@ export const Contacts: React.FC = () => {
               }}
               className={styles.question_field}
             />
-            <label>{'Ссылка Инстаграмм'}</label>
-            <input
-              value={contact?.linkInstagram}
-              onChange={(e) => {
-                setContact((prevC) => ({
-                  ...(prevC as IContactBlock),
-                  linkInstagram: e.target.value,
-                }));
-              }}
-              className={styles.question_field}
-            />
             <ImageSelect
               label={'Фотография менеджера'}
               currentImage={contact?.imageAdmin}
@@ -213,9 +201,6 @@ export const Contacts: React.FC = () => {
                 target={'_blank'}
               >
                 <T className={styles.contact_icon} />
-              </a>
-              <a href={home?.contactBlock?.linkInstagram} target={'_blank'}>
-                <Inst />
               </a>
             </div>
           ) : null}

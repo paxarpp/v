@@ -13,7 +13,6 @@ import styles from './index.module.css';
 
 export interface IProps {
   linkTg?: string;
-  linkInstagram?: string;
   linkVk?: string;
 }
 

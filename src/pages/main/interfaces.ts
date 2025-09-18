@@ -41,7 +41,6 @@ export interface IContactBlock {
   textUnderImage: string;
   linkVk: string;
   lingTg: string;
-  linkInstagram: string;
   email: string;
   contacts: string;
 }

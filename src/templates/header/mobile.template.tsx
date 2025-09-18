@@ -3,7 +3,6 @@ import Logo from '../../assets/logo.svg?react';
 import Burger from '../../assets/burger.svg?react';
 import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
-import Inst from '../../assets/inst.svg?react';
 import Avatar from '../../assets/avatar.svg?react';
 import Bell from '../../assets/bell.svg?react';
 import { useUser } from '../../context';
@@ -21,7 +20,6 @@ interface IProps extends IPropsBase {
 }
 
 export const MobileTemplate: React.FC<IProps> = ({
-  linkInstagram,
   linkTg,
   linkVk,
   togglePopapMenu,
@@ -129,9 +127,6 @@ export const MobileTemplate: React.FC<IProps> = ({
           </a>
           <a href={createLinkTg(linkTg)} target={'_blank'}>
             <T className={styles.icon_mobile} />
-          </a>
-          <a href={linkInstagram} target={'_blank'}>
-            <Inst className={styles.icon_mobile} />
           </a>
         </div>
         <div className={styles.burger}>

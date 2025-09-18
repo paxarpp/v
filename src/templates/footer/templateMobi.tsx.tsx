@@ -1,7 +1,6 @@
 import Logo from '../../assets/logo.svg?react';
 import Vk from '../../assets/vk.svg?react';
 import T from '../../assets/t.svg?react';
-import Inst from '../../assets/inst.svg?react';
 import { Link } from 'react-router';
 import { createLinkTg } from '../../constants';
 import { IProps } from '.';
@@ -10,7 +9,6 @@ import { ScrollUpTo } from '../scrollUpTo';
 
 export const TemplateMobi: React.FC<IProps> = ({
   linkTg,
-  linkInstagram,
   linkVk,
 }) => {
   return (
@@ -30,9 +28,6 @@ export const TemplateMobi: React.FC<IProps> = ({
             className={`${styles.icon} ${styles.mlr_10}`}
           >
             <T className={styles.icon_mobi} />
-          </a>
-          <a href={linkInstagram} target={'_blank'} className={styles.icon}>
-            <Inst className={styles.icon_mobi} />
           </a>
         </div>
       </div>
