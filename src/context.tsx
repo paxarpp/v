@@ -56,6 +56,11 @@ const AuthOpenContext = createContext<
         image: { src: string; alt?: string };
         closePreview: () => void;
       };
+      reservation: {
+        name: string;
+        campId: string | null;
+        setName: (name: string) => void;
+      };
     }
   | undefined
 >(undefined);

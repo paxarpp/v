@@ -38,9 +38,8 @@ const divideNumberByPieces = (x: number, delimiter = ' ') =>
 export const Packages = () => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
-  const [rSuccess, setReservationSuccess] = useState('');
   const { user, logout } = useUser();
-  const { toggleAuthOpen } = useAuth();
+  const { toggleAuthOpen, reservation: reservationContext } = useAuth();
   const [showPricesInfo, setShowPricesInfo] = useState<Record<string, boolean>>(
     {},
   );
@@ -69,7 +68,7 @@ export const Packages = () => {
           api.campReservation(campId, userId),
         );
         if (!error && result?.data.result) {
-          setReservationSuccess(result.data.result);
+          reservationContext.setName(result.data.result);
         }
       }
     };
@@ -295,10 +294,10 @@ export const Packages = () => {
         )}
       </div>
 
-      {rSuccess ? (
+      {reservationContext.name ? (
         <div className={styles.success}>
           <Successfully />
-          <h3>{`${rSuccess}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
+          <h3>{`${reservationContext.name}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
         </div>
       ) : (
         <button

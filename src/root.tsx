@@ -99,6 +99,7 @@ export default function Root({ loaderData }: Route.ComponentProps) {
 
   const [isOpen, setViewerOpen] = useState(false);
   const [image, setImage] = useState({ src: '', alt: '' });
+  const [name, setName] = useState('');
 
   const onPreview = (src: string, alt = '') => {
     setViewerOpen(true);
@@ -120,6 +121,7 @@ export default function Root({ loaderData }: Route.ComponentProps) {
             closePreview,
             onPreview,
           },
+          reservation: { name, setName, campId },
         }}
       >
         <Header {...app} />

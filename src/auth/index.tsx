@@ -3,7 +3,7 @@ import { Navigate } from 'react-router';
 import { Modal } from '../templates/modal';
 import { api } from '../api/api';
 import { IUser } from './interface';
-import { useUser } from '../context';
+import { useUser, useAuth } from '../context';
 import { useDeviceDetect } from '../hooks';
 import { TemplateSiginT } from './templateSignInT';
 import { TemplateSiginN } from './templateSignInN';
@@ -18,6 +18,7 @@ export const Auth: React.FC<{
   campId?: string;
 }> = ({ onCloseAuth, toggleAuthOpen, campId }) => {
   const { signin } = useUser();
+  const { reservation } = useAuth();
   const { isMobile } = useDeviceDetect();
   const [tab, setTab] = useState(1);
   const [username, setUsername] = useState('');
@@ -25,7 +26,6 @@ export const Auth: React.FC<{
   const [telephone, setTelephone] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [validationError, setValidationError] = useState('');
-  const [rSuccess, setReservationSuccess] = useState('');
 
   const authing = () => {
     const authLogin = async () => {
@@ -71,7 +71,7 @@ export const Auth: React.FC<{
         telephone,
       );
       if (data.result) {
-        setReservationSuccess(data.result);
+        reservation.setName(data.result);
       }
     };
     reserved();
@@ -168,10 +168,10 @@ export const Auth: React.FC<{
         ) : null}
       </div>
       <div className={styles.tab_registration}>
-        {rSuccess ? (
+        {reservation.name ? (
           <div className={styles.success}>
             <Successfully />
-            <h3>{`${rSuccess}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
+            <h3>{`${reservation.name}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
           </div>
         ) : tab !== 1 ? (
           <>

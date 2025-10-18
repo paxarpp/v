@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router';
 import { api } from '../../api/api';
-import { useUser } from '../../context';
+import { useUser, useAuth } from '../../context';
 import { TemplateSiginT } from '../../auth/templateSignInT';
+import { TemplateSiginN } from '../../auth/templateSignInN';
 import { TemplateLogin } from '../../auth/templateLogin';
-import styles from './index.module.css';
 import { applyMask, PHONE_MASK } from '../../constants';
+import Successfully from '../../assets/successfully.svg?react';
+import styles from './index.module.css';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader() {
@@ -14,6 +16,7 @@ export async function clientLoader() {
 
 export default function Login() {
   const { signin, user } = useUser();
+  const { reservation } = useAuth();
 
   const [tab, setTab] = useState(1);
   const [username, setUsername] = useState('');
@@ -79,6 +82,22 @@ export default function Login() {
     }
   };
 
+  const reserv = () => {
+    const reserved = async () => {
+      const { data } = await api.campReservationWithoutUser(
+        reservation.campId as string,
+        username,
+        telephone,
+      );
+      if (data.result) {
+        reservation.setName(data.result);
+      }
+    };
+    if (telephone && username) {
+      reserved();
+    }
+  };
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (!inputValue || inputValue === PHONE_MASK) {
@@ -103,24 +122,47 @@ export default function Login() {
 
   return user ? (
     <Navigate to="/" replace />
+  ) : reservation.name ? (
+    <div>
+      <Successfully />
+      <h3>{`${reservation.name}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
+    </div>
   ) : tab === 1 ? (
     <div className={styles.page_login}>
       <span>{'Вход в личный кабинет'}</span>
-      <TemplateSiginT
-        onChangePassword={onChangePass}
-        handlePhoneChange={handlePhoneChange}
-        displayValueTel={displayValueTel}
-        validationError={validationError}
-        password={password}
-        className={styles.wrap_sigin}
-      />
+      {reservation.campId ? (
+        <TemplateSiginN
+          onChange={onChange}
+          username={username}
+          handlePhoneChange={handlePhoneChange}
+          displayValueTel={displayValueTel}
+          validationError={validationError}
+        />
+      ) : (
+        <TemplateSiginT
+          onChangePassword={onChangePass}
+          handlePhoneChange={handlePhoneChange}
+          displayValueTel={displayValueTel}
+          validationError={validationError}
+          password={password}
+          className={styles.wrap_sigin}
+        />
+      )}
       <div className={styles.row_buttons}>
-        <button className={styles.auth_button} onClick={onSignin}>
-          Войти
-        </button>
-        <button className={styles.auth_button} onClick={() => setTab(2)}>
-          Регистрация
-        </button>
+        {reservation.campId ? (
+          <button className={styles.auth_button} onClick={reserv}>
+            Забронировать
+          </button>
+        ) : (
+          <>
+            <button className={styles.auth_button} onClick={onSignin}>
+              Войти
+            </button>
+            <button className={styles.auth_button} onClick={() => setTab(2)}>
+              Регистрация
+            </button>
+          </>
+        )}
       </div>
     </div>
   ) : (
