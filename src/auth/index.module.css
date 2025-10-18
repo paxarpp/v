@@ -94,3 +94,11 @@
 .current_header {
   border-bottom: 1px solid #D4D4D4;
 }
+
+.success {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px;
+}

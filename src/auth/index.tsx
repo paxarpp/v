@@ -9,6 +9,7 @@ import { TemplateSiginT } from './templateSignInT';
 import { TemplateSiginN } from './templateSignInN';
 import { TemplateLogin } from './templateLogin';
 import { applyMask, PHONE_MASK } from '../constants';
+import Successfully from '../assets/successfully.svg?react';
 import styles from './index.module.css';
 
 export const Auth: React.FC<{
@@ -24,6 +25,7 @@ export const Auth: React.FC<{
   const [telephone, setTelephone] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [validationError, setValidationError] = useState('');
+  const [rSuccess, setReservationSuccess] = useState('');
 
   const authing = () => {
     const authLogin = async () => {
@@ -63,11 +65,14 @@ export const Auth: React.FC<{
 
   const reserv = () => {
     const reserved = async () => {
-      await api.campReservationWithoutUser(
+      const { data } = await api.campReservationWithoutUser(
         campId as string,
         username,
         telephone,
       );
+      if (data.result) {
+        setReservationSuccess(data.result);
+      }
     };
     reserved();
   };
@@ -163,7 +168,12 @@ export const Auth: React.FC<{
         ) : null}
       </div>
       <div className={styles.tab_registration}>
-        {tab !== 1 ? (
+        {rSuccess ? (
+          <div className={styles.success}>
+            <Successfully />
+            <h3>{`${rSuccess}, ваша бронь принята. В ближайшее время мы свяжемся с вами!`}</h3>
+          </div>
+        ) : tab !== 1 ? (
           <>
             {campId ? (
               <TemplateSiginN
