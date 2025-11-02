@@ -72,6 +72,7 @@ export const Auth: React.FC<{
       );
       if (data.result) {
         reservation.setName(data.result);
+        onCloseAuth();
       }
     };
     reserved();

@@ -32,17 +32,26 @@ export interface IMainBlock {
     | null;
 }
 
-export interface IContactBlock {
-  imageAdmin:
-    | (IImage & {
-        entityId: string;
-      })
-    | null;
+export interface IManager {
+  imageAdmin: {
+      id: string | null;
+      entityId: string | null;
+      name: string | null;
+      contentType: string | null;
+      size: number | null;
+      typeEntity: ITypeEntity | null;
+      data: string | null;
+      url: string | null;
+  };
   textUnderImage: string;
+}
+
+export interface IContactBlock {
   linkVk: string;
-  lingTg: string;
+  linkTg: string;
   email: string;
   contacts: string;
+  managers: IManager[];
 }
 
 export interface IHome {

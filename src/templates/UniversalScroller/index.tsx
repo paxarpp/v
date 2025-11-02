@@ -11,9 +11,10 @@ interface IProps<T> {
   carouselContainerClassName?: string;
   dotListClassName?: string;
   itemClassName?: string;
+  responsive?: typeof responsiveBase;
 }
 
-const responsive = {
+const responsiveBase = {
   desktopXXL: {
     breakpoint: { max: 3000, min: 1680 },
     items: 3,
@@ -37,6 +38,7 @@ export const UniversalScroller = <T extends { id: string }>({
   carouselContainerClassName,
   dotListClassName,
   itemClassName,
+  responsive = responsiveBase,
 }: IProps<T>) => {
   const { isMobile } = useDeviceDetect();
   if (!list.length) return null;

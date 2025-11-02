@@ -411,12 +411,17 @@
   width: 100%;
 }
 
+.mng_button,
 .question_button {
   width: 176px;
   height: 44px;
   padding: 10px 20px;
   border-radius: 8px;
 }
+.mng_button {
+  width: 250px;
+}
+
 
 .question_field {
   height: 68px;
@@ -427,9 +432,8 @@
 .manager_wrap_mobi,
 .manager_wrap {
   margin-right: 75px;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
+  width: 180px;
+  height: 100%;
 }
 
 .manager_wrap_mobi {
@@ -489,4 +493,11 @@
   line-height: 150%;
   margin-top: 10px;
   font-weight: 400;
+}
+
+.manager_form {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 20px;
+    border: 1px solid gray;
 }

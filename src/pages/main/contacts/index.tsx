@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import Phone from '../../../assets/phone.svg?react';
 import Mail from '../../../assets/mail.svg?react';
 import Vk from '../../../assets/vk.svg?react';
 import T from '../../../assets/t.svg?react';
 import Setting from '../../../assets/setting.svg?react';
+import Basket from '../../../assets/basket.svg?react';
 import { useUser } from '../../../context';
-import { IContactBlock } from '../interfaces';
+import { IContactBlock, IManager } from '../interfaces';
 import { api } from '../../../api/api';
 import { creatorRequest } from '../../../api';
 import { Modal } from '../../../templates/modal';
@@ -14,6 +15,7 @@ import { IImageBase, ImageSelect } from '../../../templates/imageSelect';
 import { Route } from '../+types';
 import { createImageUrl, createLinkTg } from '../../../constants';
 import { useDeviceDetect } from '../../../hooks';
+import { UniversalScroller } from '../../../templates/UniversalScroller';
 import styles from '../index.module.css';
 
 export const Contacts: React.FC = () => {
@@ -52,18 +54,61 @@ export const Contacts: React.FC = () => {
     }
   };
 
-  const deleteImg = () => {
-    setContact((prevC) => ({ ...(prevC as IContactBlock), imageAdmin: null }));
-  };
-
-  const onChangeImage = (img: IImageBase) => {
+  const deleteImg = (indx: number) => {
     setContact((prevC) => ({
       ...(prevC as IContactBlock),
-      imageAdmin: {
-        entityId: home.id,
-        typeEntity: 'PAGE_HOME' as const,
-        ...img,
-      },
+      managers: (prevC as IContactBlock).managers.map((m, i) => {
+        if (i === indx) {
+          return {
+            ...m,
+            imageAdmin: {
+              id: null,
+              url: '',
+            },
+          };
+        }
+        return m;
+      }),
+    }));
+  };
+
+  const onChangeImage = (img: IImageBase, indx: number) => {
+    setContact((prevC) => ({
+      ...(prevC as IContactBlock),
+      managers: (prevC as IContactBlock).managers.map((m, i) => {
+        if (i === indx) {
+          return {
+            ...(m as IManager),
+            imageAdmin: {
+              ...img,
+              entityId: home.id,
+              typeEntity: 'PAGE_HOME' as const,
+            },
+          };
+        }
+        return m;
+      }),
+    }));
+  };
+
+  const addManager = () => {
+    setContact((prevC) => ({
+      ...(prevC as IContactBlock),
+      managers: (prevC as IContactBlock).managers.concat([
+        {
+          imageAdmin: {
+            id: null,
+          },
+          textUnderImage: '',
+        },
+      ]),
+    }));
+  };
+
+  const deleteManager = (indx: number) => {
+    setContact((prevC) => ({
+      ...(prevC as IContactBlock),
+      managers: (prevC as IContactBlock).managers.filter((_, i) => i !== indx),
     }));
   };
 
@@ -133,32 +178,45 @@ export const Contacts: React.FC = () => {
             />
             <label>{'Ссылка Телеграмм'}</label>
             <input
-              value={contact?.lingTg}
+              value={contact?.linkTg}
               onChange={(e) => {
                 setContact((prevC) => ({
                   ...(prevC as IContactBlock),
-                  lingTg: e.target.value,
+                  linkTg: e.target.value,
                 }));
               }}
               className={styles.question_field}
             />
-            <ImageSelect
-              label={'Фотография менеджера'}
-              currentImage={contact?.imageAdmin}
-              deleteImg={deleteImg}
-              onChangeImage={onChangeImage}
-            />
-            <label>{'Текст под фото'}</label>
-            <input
-              value={contact?.textUnderImage}
-              onChange={(e) => {
-                setContact((prevC) => ({
-                  ...(prevC as IContactBlock),
-                  textUnderImage: e.target.value,
-                }));
-              }}
-              className={styles.question_field}
-            />
+            <button onClick={addManager} className={styles.mng_button}>
+              {'Добавить манеджера'}
+            </button>
+            {contact?.managers.map((manager, index) => {
+              return (
+                <div
+                  key={`${manager.imageAdmin.id}-${index}`}
+                  className={styles.manager_form}
+                >
+                  <Basket onClick={() => deleteManager(index)} />
+                  <ImageSelect
+                    label={'Фотография менеджера'}
+                    currentImage={manager.imageAdmin}
+                    deleteImg={() => deleteImg(index)}
+                    onChangeImage={(m) => onChangeImage(m, index)}
+                  />
+                  <label>{'Текст под фото'}</label>
+                  <input
+                    value={manager.textUnderImage}
+                    onChange={(e) => {
+                      setContact((prevC) => ({
+                        ...(prevC as IContactBlock),
+                        textUnderImage: e.target.value,
+                      }));
+                    }}
+                    className={styles.question_field}
+                  />
+                </div>
+              );
+            })}
           </div>
         )}
       </Modal>
@@ -197,7 +255,7 @@ export const Contacts: React.FC = () => {
                 <Vk />
               </a>
               <a
-                href={createLinkTg(home?.contactBlock?.lingTg)}
+                href={createLinkTg(home?.contactBlock?.linkTg)}
                 target={'_blank'}
               >
                 <T className={styles.contact_icon} />
@@ -208,20 +266,42 @@ export const Contacts: React.FC = () => {
         <div
           className={isMobile ? styles.manager_wrap_mobi : styles.manager_wrap}
         >
-          <div className={isMobile ? styles.img_wrap_mobi : styles.img_wrap}>
-            <img
-              className={isMobile ? styles.manager_mobi : styles.manager}
-              src={createImageUrl(home?.contactBlock?.imageAdmin?.url)}
-              alt="manager"
-            />
-          </div>
-          <span
-            className={
-              isMobile ? styles.text_manager_mobi : styles.text_manager
-            }
-          >
-            {home?.contactBlock?.textUnderImage}
-          </span>
+          <UniversalScroller<IManager>
+            responsive={{
+              desktopXXL: {
+                breakpoint: { max: 3000, min: 1 },
+                items: 1,
+                slidesToSlide: 1,
+              },
+            }}
+            list={home?.contactBlock.managers || []}
+            renderItem={(m) => {
+              return (
+                <div key={m.imageAdmin.id}>
+                  <div
+                    className={
+                      isMobile ? styles.img_wrap_mobi : styles.img_wrap
+                    }
+                  >
+                    <img
+                      className={
+                        isMobile ? styles.manager_mobi : styles.manager
+                      }
+                      src={createImageUrl(m.imageAdmin.url)}
+                      alt="manager"
+                    />
+                  </div>
+                  <span
+                    className={
+                      isMobile ? styles.text_manager_mobi : styles.text_manager
+                    }
+                  >
+                    {m.textUnderImage}
+                  </span>
+                </div>
+              );
+            }}
+          />
         </div>
       </div>
     </div>
