@@ -51,8 +51,6 @@ export interface IManager {
 export interface IContactBlock {
   linkVk: string;
   linkTg: string;
-  email: string;
-  contacts: string;
   managers: IManager[];
 }
 

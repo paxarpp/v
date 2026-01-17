@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLoaderData, useRevalidator } from 'react-router';
 import Phone from '../../../assets/phone.svg?react';
 import Mail from '../../../assets/mail.svg?react';
@@ -27,6 +27,7 @@ export const Contacts: React.FC = () => {
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [contact, setContact] = useState<IContactBlock | null>(null);
+  const refMangers = useRef<IManager | null>(null);
 
   const openEditContact = () => {
     if (home) {
@@ -100,6 +101,8 @@ export const Contacts: React.FC = () => {
             id: null,
           },
           textUnderImage: '',
+          email: '',
+          contacts: '',
         },
       ]),
     }));
@@ -143,28 +146,6 @@ export const Contacts: React.FC = () => {
           error
         ) : (
           <div className={styles.form_question}>
-            <label>{'Контакты'}</label>
-            <input
-              value={contact?.contacts}
-              onChange={(e) => {
-                setContact((prevC) => ({
-                  ...(prevC as IContactBlock),
-                  contacts: e.target.value,
-                }));
-              }}
-              className={styles.question_field}
-            />
-            <label>{'Электронная почта'}</label>
-            <input
-              value={contact?.email}
-              onChange={(e) => {
-                setContact((prevC) => ({
-                  ...(prevC as IContactBlock),
-                  email: e.target.value,
-                }));
-              }}
-              className={styles.question_field}
-            />
             <label>{'Ссылка Вконтакте'}</label>
             <input
               value={contact?.linkVk}
@@ -209,18 +190,38 @@ export const Contacts: React.FC = () => {
                     onChange={(e) => {
                       setContact((prevC) => ({
                         ...(prevC as IContactBlock),
-                        textUnderImage: e.target.value,
+                        managers: (prevC as IContactBlock).managers.map(
+                          (m, i) => {
+                            if (i === index) {
+                              return {
+                                ...(m as IManager),
+                                textUnderImage: e.target.value,
+                              };
+                            }
+                            return m;
+                          },
+                        ),
                       }));
                     }}
                     className={styles.question_field}
                   />
-                  <label>{'Email'}</label>
+                  <label>{'Электронная почта'}</label>
                   <input
                     value={manager.email}
                     onChange={(e) => {
                       setContact((prevC) => ({
                         ...(prevC as IContactBlock),
-                        email: e.target.value,
+                        managers: (prevC as IContactBlock).managers.map(
+                          (m, i) => {
+                            if (i === index) {
+                              return {
+                                ...(m as IManager),
+                                email: e.target.value,
+                              };
+                            }
+                            return m;
+                          },
+                        ),
                       }));
                     }}
                     className={styles.question_field}
@@ -231,7 +232,17 @@ export const Contacts: React.FC = () => {
                     onChange={(e) => {
                       setContact((prevC) => ({
                         ...(prevC as IContactBlock),
-                        contacts: e.target.value,
+                        managers: (prevC as IContactBlock).managers.map(
+                          (m, i) => {
+                            if (i === index) {
+                              return {
+                                ...(m as IManager),
+                                contacts: e.target.value,
+                              };
+                            }
+                            return m;
+                          },
+                        ),
                       }));
                     }}
                     className={styles.question_field}
@@ -262,13 +273,13 @@ export const Contacts: React.FC = () => {
           <div className={styles.contact}>
             <Phone className={isMobile ? styles.icon_contact_mobi : ''} />
             <span className={isMobile ? styles.text_mobi : styles.text}>
-              {home?.contactBlock?.contacts}
+              {refMangers.current?.contacts}
             </span>
           </div>
           <div className={styles.contact}>
             <Mail className={isMobile ? styles.icon_contact_mobi : ''} />
             <span className={isMobile ? styles.text_mobi : styles.text}>
-              {home?.contactBlock?.email}
+              {refMangers.current?.email}
             </span>
           </div>
           {!isMobile ? (
@@ -298,6 +309,7 @@ export const Contacts: React.FC = () => {
             }}
             list={home?.contactBlock.managers || []}
             renderItem={(m) => {
+              refMangers.current = m;
               return (
                 <div key={m.imageAdmin.id}>
                   <div
@@ -319,20 +331,6 @@ export const Contacts: React.FC = () => {
                     }
                   >
                     {m.textUnderImage}
-                  </span>
-                  <span
-                    className={
-                      isMobile ? styles.text_manager_mobi : styles.text_manager
-                    }
-                  >
-                    {m.contacts}
-                  </span>
-                  <span
-                    className={
-                      isMobile ? styles.text_manager_mobi : styles.text_manager
-                    }
-                  >
-                    {m.email}
                   </span>
                 </div>
               );
