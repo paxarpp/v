@@ -12,6 +12,7 @@ interface IProps<T> {
   dotListClassName?: string;
   itemClassName?: string;
   responsive?: typeof responsiveBase;
+  sizeControl?: 'sm' | 'lg';
 }
 
 const responsiveBase = {
@@ -39,6 +40,7 @@ export const UniversalScroller = <T extends { id: string }>({
   dotListClassName,
   itemClassName,
   responsive = responsiveBase,
+  sizeControl = 'lg',
 }: IProps<T>) => {
   const { isMobile } = useDeviceDetect();
   if (!list.length) return null;
@@ -59,8 +61,8 @@ export const UniversalScroller = <T extends { id: string }>({
         itemClass={itemClassName ? itemClassName : styles.item}
         renderDotsOutside={true}
         customDot={<Dot />}
-        customLeftArrow={<ControlLeft />}
-        customRightArrow={<ControlRight />}
+        customLeftArrow={<ControlLeft size={sizeControl} />}
+        customRightArrow={<ControlRight size={sizeControl} />}
       >
         {list.map((item: T) => {
           return renderItem(item);

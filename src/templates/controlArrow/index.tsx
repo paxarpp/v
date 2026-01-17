@@ -22,22 +22,38 @@ export const Control: React.FC<IProps> = ({ show = true, onLeft, onRight }) => {
 
 export const ControlLeft: React.FC<{
   onClick?: () => void;
-}> = ({ onClick }) => {
+  size?: 'sm' | 'lg';
+}> = ({ onClick, size = 'lg' }) => {
   return (
-    <span className={styles.scroll_arrow_left} onClick={onClick}>
-      <ArrowLeft className={styles.icon_left} />
-      <ArrowLeftHover className={styles.icon_left_hover} />
+    <span
+      className={`${styles.scroll_arrow_left} ${size === 'sm' ? styles.scroll_sm : ''}`}
+      onClick={onClick}
+    >
+      <ArrowLeft
+        className={`${styles.icon_left} ${size === 'sm' ? styles.iconsm : ''}`}
+      />
+      <ArrowLeftHover
+        className={`${styles.icon_left_hover} ${size === 'sm' ? styles.iconsm : ''}`}
+      />
     </span>
   );
 };
 
 export const ControlRight: React.FC<{
   onClick?: () => void;
-}> = ({ onClick }) => {
+  size?: 'sm' | 'lg';
+}> = ({ onClick, size = 'lg' }) => {
   return (
-    <span className={styles.scroll_arrow_right} onClick={onClick}>
-      <ArrowRight className={styles.icon_right} />
-      <ArrowRightHover className={styles.icon_right_hover} />
+    <span
+      className={`${styles.scroll_arrow_right} ${size === 'sm' ? styles.scroll_sm : ''}`}
+      onClick={onClick}
+    >
+      <ArrowRight
+        className={`${styles.icon_right} ${size === 'sm' ? styles.iconsm : ''}`}
+      />
+      <ArrowRightHover
+        className={`${styles.icon_right_hover} ${size === 'sm' ? styles.iconsm : ''}`}
+      />
     </span>
   );
 };

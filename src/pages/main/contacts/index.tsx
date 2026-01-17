@@ -311,6 +311,7 @@ export const Contacts: React.FC = () => {
                 </div>
               );
             }}
+            sizeControl={'sm'}
           />
         </div>
       </div>

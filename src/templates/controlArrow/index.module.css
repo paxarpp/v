@@ -6,6 +6,15 @@
   z-index: 1;
 }
 
+.scroll_sm {
+  top: calc(50% - 45px);
+}
+
+.iconsm {
+  width: 25px;
+  height: 25px;
+}
+
 .scroll_arrow_left .icon_left {
   display: block;
 }
