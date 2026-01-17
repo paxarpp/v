@@ -214,6 +214,28 @@ export const Contacts: React.FC = () => {
                     }}
                     className={styles.question_field}
                   />
+                  <label>{'Email'}</label>
+                  <input
+                    value={manager.email}
+                    onChange={(e) => {
+                      setContact((prevC) => ({
+                        ...(prevC as IContactBlock),
+                        email: e.target.value,
+                      }));
+                    }}
+                    className={styles.question_field}
+                  />
+                  <label>{'Контакты'}</label>
+                  <input
+                    value={manager.contacts}
+                    onChange={(e) => {
+                      setContact((prevC) => ({
+                        ...(prevC as IContactBlock),
+                        contacts: e.target.value,
+                      }));
+                    }}
+                    className={styles.question_field}
+                  />
                 </div>
               );
             })}
@@ -297,6 +319,20 @@ export const Contacts: React.FC = () => {
                     }
                   >
                     {m.textUnderImage}
+                  </span>
+                  <span
+                    className={
+                      isMobile ? styles.text_manager_mobi : styles.text_manager
+                    }
+                  >
+                    {m.contacts}
+                  </span>
+                  <span
+                    className={
+                      isMobile ? styles.text_manager_mobi : styles.text_manager
+                    }
+                  >
+                    {m.email}
                   </span>
                 </div>
               );

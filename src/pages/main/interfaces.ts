@@ -44,6 +44,8 @@ export interface IManager {
       url: string | null;
   };
   textUnderImage: string;
+  email:  string;
+  contacts: string;
 }
 
 export interface IContactBlock {
