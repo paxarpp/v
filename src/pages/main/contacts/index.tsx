@@ -27,7 +27,6 @@ export const Contacts: React.FC = () => {
   const [isOpen, openModal] = useState(false);
   const [error, setError] = useState('');
   const [contact, setContact] = useState<IContactBlock | null>(null);
-  const refMangers = useRef<IManager | null>(null);
 
   const openEditContact = () => {
     if (home) {
@@ -101,8 +100,6 @@ export const Contacts: React.FC = () => {
             id: null,
           },
           textUnderImage: '',
-          email: '',
-          contacts: '',
         },
       ]),
     }));
@@ -168,6 +165,28 @@ export const Contacts: React.FC = () => {
               }}
               className={styles.question_field}
             />
+            <label>{'Электронная почта'}</label>
+            <input
+              value={contact?.email}
+              onChange={(e) => {
+                setContact((prevC) => ({
+                  ...(prevC as IContactBlock),
+                  email: e.target.value,
+                }));
+              }}
+              className={styles.question_field}
+            />
+            <label>{'Контакты'}</label>
+            <input
+              value={contact?.contacts}
+              onChange={(e) => {
+                setContact((prevC) => ({
+                  ...(prevC as IContactBlock),
+                  contacts: e.target.value,
+                }));
+              }}
+              className={styles.question_field}
+            />
             <button onClick={addManager} className={styles.mng_button}>
               {'Добавить манеджера'}
             </button>
@@ -205,48 +224,6 @@ export const Contacts: React.FC = () => {
                     }}
                     className={styles.question_field}
                   />
-                  <label>{'Электронная почта'}</label>
-                  <input
-                    value={manager.email}
-                    onChange={(e) => {
-                      setContact((prevC) => ({
-                        ...(prevC as IContactBlock),
-                        managers: (prevC as IContactBlock).managers.map(
-                          (m, i) => {
-                            if (i === index) {
-                              return {
-                                ...(m as IManager),
-                                email: e.target.value,
-                              };
-                            }
-                            return m;
-                          },
-                        ),
-                      }));
-                    }}
-                    className={styles.question_field}
-                  />
-                  <label>{'Контакты'}</label>
-                  <input
-                    value={manager.contacts}
-                    onChange={(e) => {
-                      setContact((prevC) => ({
-                        ...(prevC as IContactBlock),
-                        managers: (prevC as IContactBlock).managers.map(
-                          (m, i) => {
-                            if (i === index) {
-                              return {
-                                ...(m as IManager),
-                                contacts: e.target.value,
-                              };
-                            }
-                            return m;
-                          },
-                        ),
-                      }));
-                    }}
-                    className={styles.question_field}
-                  />
                 </div>
               );
             })}
@@ -273,13 +250,13 @@ export const Contacts: React.FC = () => {
           <div className={styles.contact}>
             <Phone className={isMobile ? styles.icon_contact_mobi : ''} />
             <span className={isMobile ? styles.text_mobi : styles.text}>
-              {refMangers.current?.contacts}
+              {home?.contactBlock?.contacts}
             </span>
           </div>
           <div className={styles.contact}>
             <Mail className={isMobile ? styles.icon_contact_mobi : ''} />
             <span className={isMobile ? styles.text_mobi : styles.text}>
-              {refMangers.current?.email}
+              {home?.contactBlock?.email}
             </span>
           </div>
           {!isMobile ? (
@@ -309,7 +286,6 @@ export const Contacts: React.FC = () => {
             }}
             list={home?.contactBlock.managers || []}
             renderItem={(m) => {
-              refMangers.current = m;
               return (
                 <div key={m.imageAdmin.id}>
                   <div

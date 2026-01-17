@@ -44,14 +44,14 @@ export interface IManager {
       url: string | null;
   };
   textUnderImage: string;
-  email:  string;
-  contacts: string;
 }
 
 export interface IContactBlock {
   linkVk: string;
   linkTg: string;
   managers: IManager[];
+  email:  string;
+  contacts: string;
 }
 
 export interface IHome {
