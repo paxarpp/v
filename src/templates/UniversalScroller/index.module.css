@@ -10,3 +10,8 @@
   bottom: -15px !important;
   gap: 1px;
 }
+
+/* Блокирует вертикальный скролл при горизонтальном свайпе на iOS */
+.carousel__container {
+  touch-action: pan-x;
+}
