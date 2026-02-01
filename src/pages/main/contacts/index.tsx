@@ -287,7 +287,10 @@ export const Contacts: React.FC = () => {
             list={home?.contactBlock.managers || []}
             renderItem={(m) => {
               return (
-                <div key={m.imageAdmin.id}>
+                <div
+                  key={m.imageAdmin.id}
+                  className={isMobile ? styles.manager_list_wrap : ''}
+                >
                   <div
                     className={
                       isMobile ? styles.img_wrap_mobi : styles.img_wrap

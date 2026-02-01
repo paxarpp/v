@@ -496,6 +496,7 @@
   margin-top: 10px;
   font-weight: 400;
   display: inline-block;
+  width: 120px;
 }
 
 .manager_form {
@@ -503,4 +504,11 @@
     flex-flow: column nowrap;
     padding: 20px;
     border: 1px solid gray;
+}
+
+.manager_list_wrap {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
