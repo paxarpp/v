@@ -1,17 +1,41 @@
 .container {
   position: relative;
+  /* Предотвращает сдвиг контента при скролле на iOS (address bar) */
+  min-height: 0;
 }
 
 .item > div {
   margin: 0 auto;
 }
 
+.item {
+  /* iOS: flex-элементы иначе считают размеры без min-width */
+  min-width: 0;
+}
+
 .dot_list {
   bottom: -15px !important;
   gap: 1px;
+  /* Учёт safe area внизу на iPhone с вырезом */
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 /* Блокирует вертикальный скролл при горизонтальном свайпе на iOS */
 .carousel__container {
   touch-action: pan-x;
+  /* Убирает серую подсветку тапа на iOS */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Трек карусели: стабильный рендер на iOS */
+.carousel__container :global(.react-multi-carousel-track) {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Элементы карусели: предотвращение артефактов при свайпе на iOS */
+.carousel__container :global(.react-multi-carousel-item) {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  min-width: 0;
 }
