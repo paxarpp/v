@@ -47,4 +47,5 @@ export interface ICampItem {
   images: null | IImage[];
   coaches: ICoach[];
   packages: IPackage[];
+  gallery: null | IImage[];
 }

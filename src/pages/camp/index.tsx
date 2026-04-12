@@ -8,6 +8,7 @@ import { ProgramCamp } from './programCamp';
 import { Route } from './+types';
 import { ICampItem } from './interfaces';
 import { pl } from '../../api/pageLoader';
+import { Gallery } from './gallery';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function clientLoader({ params: { id } }: Route.ClientLoaderArgs) {
@@ -31,6 +32,8 @@ export default function Camp() {
       <Coaches />
 
       <Users />
+
+      <Gallery isActualCamp={true} />
 
       <CallMe />
     </>

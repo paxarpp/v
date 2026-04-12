@@ -14,7 +14,9 @@ import { ImagesMobileScroller } from '../../../templates/ImagesMobileScroller';
 import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
 
-export const Gallery = () => {
+export const Gallery: React.FC<{ isActualCamp?: boolean }> = ({
+  isActualCamp,
+}) => {
   const { camp } = useLoaderData<Route.ComponentProps['loaderData']>();
   const { isMobile } = useDeviceDetect();
   const revalidator = useRevalidator();
@@ -93,7 +95,7 @@ export const Gallery = () => {
 
   return (
     <>
-      {isOpen ? (
+      {isOpen && !isActualCamp ? (
         <Modal
           isOpen={isOpen}
           close={closeModal}
@@ -139,7 +141,7 @@ export const Gallery = () => {
                 </div>
               );
             })}
-          {isAdmin ? (
+          {isAdmin && !isActualCamp ? (
             <Setting onClick={openModal} className={styles.setting} />
           ) : null}
         </div>

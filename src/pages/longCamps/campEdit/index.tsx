@@ -61,6 +61,7 @@ export const CampEdit: React.FC<{
       images: [] as IImage[],
       coaches: [] as ICoach[],
       packages: [] as IPackage[],
+      gallery: [] as IImage[],
     });
     if (campId) {
       // edit
@@ -91,6 +92,14 @@ export const CampEdit: React.FC<{
       ...(prevCamp as ICampItem),
       images: prevCamp?.images
         ? prevCamp.images.filter((img) => img.id !== id)
+        : [],
+    }));
+  };
+  const deleteGalleryMass = (id: string) => {
+    setCamp((prevCamp) => ({
+      ...(prevCamp as ICampItem),
+      gallery: prevCamp?.gallery
+        ? prevCamp.gallery.filter((img) => img.id !== id)
         : [],
     }));
   };
@@ -153,6 +162,16 @@ export const CampEdit: React.FC<{
     setCamp((prevCamp) => ({
       ...(prevCamp as ICampItem),
       images: prevCamp?.images ? prevCamp.images.concat([newImg]) : [newImg],
+    }));
+  };
+  const onChangeGalleryMass = (img: IImageBase) => {
+    const newImg = {
+      typeEntity: 'CAMP' as const,
+      ...img,
+    };
+    setCamp((prevCamp) => ({
+      ...(prevCamp as ICampItem),
+      gallery: prevCamp?.gallery ? prevCamp.gallery.concat([newImg]) : [newImg],
     }));
   };
 
@@ -517,6 +536,15 @@ export const CampEdit: React.FC<{
             return <li key={coach.id}>{coach.name}</li>;
           })}
         </ul>
+
+        <div>
+          <ImagesMassSelect
+            label={'Фотогалерея'}
+            deleteImg={deleteGalleryMass}
+            onChangeImage={onChangeGalleryMass}
+            images={currentCamp?.gallery}
+          />
+        </div>
       </div>
     </Modal>
   );
