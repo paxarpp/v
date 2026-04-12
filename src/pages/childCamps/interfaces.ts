@@ -15,10 +15,15 @@ export interface IPackage {
   bookingPrice: number;
   firstPrice: number;
   firstLimitation: string;
+  firstLimitationString: string;
   secondPrice: number;
   secondLimitation: string;
+  secondLimitationString: string;
   thirdPrice: number;
   thirdLimitation: string;
+  thirdLimitationString: string;
+  type: string;
+  displayName: string;
 }
 
 export interface IImage {

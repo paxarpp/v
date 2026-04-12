@@ -14,6 +14,7 @@ export interface IPackage {
   totalPrice: number;
   bookingPrice: number;
   firstPrice: number;
+  firstLimitation: string;
   firstLimitationString: string;
   secondPrice: number;
   secondLimitation: string;
@@ -21,6 +22,8 @@ export interface IPackage {
   thirdPrice: number;
   thirdLimitation: string;
   thirdLimitationString: string;
+  type: string;
+  displayName: string;
 }
 
 export interface IImage {

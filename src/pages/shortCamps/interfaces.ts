@@ -22,6 +22,8 @@ export interface IPackage {
   thirdPrice: number;
   thirdLimitation: string;
   thirdLimitationString: string;
+  type: string;
+  displayName: string;
 }
 
 export interface IImage {
