@@ -39,3 +39,88 @@
   backface-visibility: hidden;
   min-width: 0;
 }
+
+/* Оболочка, которая перекрывает весь сайт */
+.fullscreenOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000; /* Очень высокий, чтобы быть над Header/Footer */
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Сама карусель внутри оверлея */
+.carouselFullscreen {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Чтобы трек карусели центрировался по вертикали */
+.carouselFullscreen :global(.react-multi-carousel-track) {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Обертка каждого слайда в фулскрине */
+.slideFull {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Кнопка закрытия */
+.closeButton {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Стили для CampCard в фулскрине */
+.fullScreenCard {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+.fullScreenImgWrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.fullScreenImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

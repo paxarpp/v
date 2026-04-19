@@ -51,10 +51,14 @@ const AuthOpenContext = createContext<
   | {
       toggleAuthOpen: (campId?: string) => void;
       image: {
-        onPreview: (src: string, alt?: string) => void;
+        onPreview: (
+          data: { src: string; alt: string; id?: string }[],
+          currentImage: string,
+        ) => void;
         isOpen: boolean;
-        image: { src: string; alt?: string };
+        images: { src: string; alt?: string; id?: string }[];
         closePreview: () => void;
+        currentImg: string;
       };
       reservation: {
         name: string;

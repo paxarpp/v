@@ -98,12 +98,14 @@ export default function Root({ loaderData }: Route.ComponentProps) {
   };
 
   const [isOpen, setViewerOpen] = useState(false);
-  const [image, setImage] = useState({ src: '', alt: '' });
+  const [images, setImages] = useState<{ src: string, alt: string }[]>([]);
   const [name, setName] = useState('');
+  const [currentImg, setCurrentImg] = useState('');
 
-  const onPreview = (src: string, alt = '') => {
+  const onPreview = (data: { src: string; alt: string }[], curImg: string) => {
     setViewerOpen(true);
-    setImage({ src, alt });
+    setImages(data);
+    setCurrentImg(curImg);
   };
 
   const closePreview = () => {
@@ -117,9 +119,10 @@ export default function Root({ loaderData }: Route.ComponentProps) {
           toggleAuthOpen,
           image: {
             isOpen,
-            image,
+            images,
             closePreview,
             onPreview,
+            currentImg,
           },
           reservation: { name, setName, campId },
         }}

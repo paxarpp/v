@@ -122,15 +122,27 @@ export const ImagePack: React.FC<IProps> = ({
           <div {...swipeHandlers} style={size}>
             <ImageViewer
               src={createImageUrl(currentImage[currentIndex]?.url)}
+              id={currentImage[imageIndx]?.id}
               alt={currentImage[currentIndex]?.name}
               className={styles.info_current_img}
+              images={currentImage.map((item) => ({
+                src: createImageUrl(item.url),
+                alt: item.name,
+                id: item.id,
+              }))}
             />
           </div>
         ) : (
           <ImageViewer
             src={createImageUrl(currentImage[imageIndx]?.url)}
+            id={currentImage[imageIndx]?.id}
             alt={currentImage[imageIndx]?.name}
             className={styles.info_current_img}
+            images={currentImage.map((item) => ({
+              src: createImageUrl(item.url),
+              alt: item.name,
+              id: item.id,
+            }))}
           />
         )}
         {isMobile ? null : (

@@ -42,16 +42,28 @@ export const ImagesMobileScroller: React.FC<IProps> = ({ list }) => {
         <div className={styles.stub_image}>
           <ImageViewer
             src={createImageUrl(list[currentIndex].url)}
+            id={list[currentIndex].id}
             alt={list[currentIndex].name}
             className={styles.image}
+            images={list.map((item) => ({
+              src: createImageUrl(item.url),
+              alt: item.name,
+              id: item.id,
+            }))}
           />
         </div>
         <div className={styles.stub_image}>
           {list[currentIndex + 1] ? (
             <ImageViewer
               src={createImageUrl(list[currentIndex + 1].url)}
+              id={list[currentIndex + 1].id}
               alt={list[currentIndex + 1].name}
               className={styles.image}
+              images={list.map((item) => ({
+                src: createImageUrl(item.url),
+                alt: item.name,
+                id: item.id,
+              }))}
             />
           ) : null}
         </div>
