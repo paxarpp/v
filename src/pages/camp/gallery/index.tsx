@@ -13,6 +13,7 @@ import { Control } from '../../../templates/controlArrow';
 import { ImagesMobileScroller } from '../../../templates/ImagesMobileScroller';
 import { useDeviceDetect } from '../../../hooks';
 import styles from '../index.module.css';
+import { ImageViewer } from '../../../templates/imageViewer';
 
 export const Gallery: React.FC<{ isActualCamp?: boolean }> = ({
   isActualCamp,
@@ -133,10 +134,16 @@ export const Gallery: React.FC<{ isActualCamp?: boolean }> = ({
             .map((image) => {
               return (
                 <div key={image.id} className={styles.image_card} ref={cardRef}>
-                  <img
+                  <ImageViewer
                     src={createImageUrl(image.url)}
+                    id={image.id}
                     alt={image.name}
                     className={styles.coach_image}
+                    images={camp.gallery?.map((item) => ({
+                      src: createImageUrl(item.url),
+                      alt: item.name,
+                      id: item.id,
+                    }))}
                   />
                 </div>
               );

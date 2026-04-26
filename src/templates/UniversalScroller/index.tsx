@@ -58,13 +58,11 @@ export const UniversalScroller = <T extends { id: string }>({
   useEffect(() => {
     if (isFullscreen) {
       document.body.style.overflow = 'hidden';
-
       const index = list.findIndex((item) => item.id === image.currentImg);
-      console.log(list)
-      console.log(index)
       setTimeout(() => {
         if (carouselRef.current && index !== -1) {
-          carouselRef.current.goToSlide(index, true);
+          // +2 так открывается тот по которому кликнули
+          carouselRef.current.goToSlide(index + 2, true);
         }
       }, 100);
 

@@ -8,7 +8,6 @@ import { CampsInfo } from './campsInfo';
 import { INotification } from './interfaces';
 import { Template } from './template';
 import { MobileTemplate } from './mobile.template';
-import { Modal } from '../modal';
 import styles from './index.module.css';
 import { UniversalScroller } from '../UniversalScroller';
 
@@ -143,30 +142,11 @@ export const Header: React.FC<IProps> = (props) => {
         </div>
       ) : null}
 
-      {/* <Modal isOpen={image.isOpen} close={image.closePreview} header={<span />}>
-        <img
-          src={image.image.src}
-          alt={image.image.alt}
-          onClick={image.closePreview}
-          style={{ maxWidth: '100vw' }}
-        />
-      </Modal> */}
       {image.isOpen ? (
         <UniversalScroller
           list={image.images.map((i) => ({ ...i, id: i.id ? i.id : i.src }))}
           renderItem={(curImg, toggleFS) => {
-            console.log(curImg)
             return (
-              // <CampCard
-              //   key={camp.id}
-              //   id={camp.id}
-              //   name={camp.name}
-              //   dateString={camp.dateString}
-              //   url={camp.imageCart?.url}
-              //   isMobile={isMobile}
-              //   isFullscreen={isFullscreen}
-              //   toggleFullScreen={toggleFS}
-              // />
               <img
                 src={curImg.src}
                 alt={curImg.alt}
