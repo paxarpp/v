@@ -15,7 +15,7 @@ export const CampsScroller: React.FC = () => {
       </h2>
       <UniversalScroller
         list={home?.camps || []}
-        renderItem={(camp, toggleFS, isFullscreen) => (
+        renderItem={(camp) => (
           <CampCard
             key={camp.id}
             id={camp.id}
@@ -23,8 +23,6 @@ export const CampsScroller: React.FC = () => {
             dateString={camp.dateString}
             url={camp.imageCart?.url}
             isMobile={isMobile}
-            isFullscreen={isFullscreen}
-            toggleFullScreen={toggleFS}
           />
         )}
       />

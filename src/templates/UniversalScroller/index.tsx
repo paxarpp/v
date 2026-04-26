@@ -11,7 +11,7 @@ interface IProps<T> {
   list: T[];
   renderItem: (
     item: T,
-    toggleFullScreen: () => void,
+    closeFullScreen: () => void,
     isFullscreen: boolean,
   ) => JSX.Element;
   carouselContainerClassName?: string;
