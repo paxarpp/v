@@ -105,6 +105,9 @@
   font-weight: 600;
   margin: 0 0 10px 0;
   color: #FFFFFF;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .camp_card_subtitle_mobi {
